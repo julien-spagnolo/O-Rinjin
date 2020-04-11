@@ -61,12 +61,12 @@ class User implements UserInterface
     private $city;
 
     /**
-     * @ORM\Column(type="decimal", precision=15, scale=15)
+     * @ORM\Column(type="decimal", precision=10, scale=8)
      */
     private $latitude;
 
     /**
-     * @ORM\Column(type="decimal", precision=15, scale=15)
+     * @ORM\Column(type="decimal", precision=11, scale=8)
      */
     private $longitude;
 
