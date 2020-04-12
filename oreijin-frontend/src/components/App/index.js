@@ -1,17 +1,34 @@
 // == Import npm
 import React from 'react';
+// == Import components from react-router
+import { Switch, Route } from 'react-router-dom';
 
-// == Import
-import Counter from 'src/containers/Counter';
-import reactLogo from './react-logo.svg';
-import './styles.css';
+// == Import components
+import Header from '../Header';
+import Footer from '../Layout/Footer';
+import HomeVisitor from '../Main/HomeVisitor';
+import Connexion from '../Visitor/Connexion';
+import Register from '../Visitor/Register';
+import Team from '../Layout/Team';
+import LegalMentions from '../Layout/LegalMentions';
 
-// == Composant
+// == Import styles and assets
+import './styles.scss';
+
+// == Component
 const App = () => (
   <div className="app">
-    <img src={reactLogo} alt="react logo" />
-    <h1>Composant : App</h1>
-    <Counter />
+    <Header />
+    {/* Switch component: renders the first <Route> that matches the location  */}
+    <Switch>
+      {/* Render a component when its path matches the current URL */}
+      <Route exact path="/" component={HomeVisitor} />
+      <Route exact path="/login" component={Connexion} />
+      <Route exact path="/register" component={Register} />
+      <Route exact path="/team" component={Team} />
+      <Route exact path="/legal-mentions" component={LegalMentions} />
+    </Switch>
+    <Footer />
   </div>
 );
 
