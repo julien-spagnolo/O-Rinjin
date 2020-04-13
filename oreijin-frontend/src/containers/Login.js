@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Connexion from '../components/Visitor/Connexion';
+import Login from '../components/Visitor/Login';
 
 import { changeLoginField } from '../actions/user';
 
@@ -15,4 +15,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Connexion);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
