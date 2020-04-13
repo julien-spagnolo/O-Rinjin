@@ -209,6 +209,7 @@ Pour la gestion des rôle, le bundle Voter sera également utilisé.
 |Route|Method|Controller|Description|Response|
 |-|-|-|-|-|
 |/api/login|POST|SecurityController|Envoi les informations de connexion à l'API|201|
+|/api/users|GET|UserController|Retourne la liste de tout les utilisateurs|201|
 |/api/users|POST|UserController|Envoi vers l'api, les données pour la création de l'utilisateur|201|
 |/api/users/{user}|GET|UserController|Retourne un JSON du compte utilisateur sélectionné|200|
 |/api/users/{user}|PUT|UserController|Envoi les information de modification d'un utilisateur vers l'API|200|
