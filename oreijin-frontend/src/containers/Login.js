@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Login from '../components/Visitor/Login';
 
-import { changeLoginField } from '../actions/user';
+import { changeLoginField, login, logout } from '../actions/user';
 
 const mapStateToProps = (state) => ({
   email: state.user.form.email,
@@ -12,6 +12,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeField: (value, name) => {
     dispatch(changeLoginField(value, name));
+  },
+  handleLogin: () => {
+    dispatch(login());
+  },
+  handleLogout: () => {
+    dispatch(logout());
   },
 });
 

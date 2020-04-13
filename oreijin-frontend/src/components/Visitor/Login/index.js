@@ -7,6 +7,8 @@ import './styles.scss';
 
 const Login = ({
   changeField,
+  handleLogin,
+  handleLogout,
   email,
   password,
   isLogged,
@@ -14,6 +16,7 @@ const Login = ({
   const handleSubmit = () => {
     console.log(`email: ${email}`);
     console.log(`password: ${password}`);
+    handleLogin();
   };
 
   return (
@@ -53,6 +56,8 @@ Login.propTypes = {
   password: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
   changeField: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  handleLogout: PropTypes.func.isRequired,
 };
 
 export default Login;
