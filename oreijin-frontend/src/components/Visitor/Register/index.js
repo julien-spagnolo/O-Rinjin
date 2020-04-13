@@ -10,7 +10,9 @@ import {
 import './styles.scss';
 
 // == Composant
-const Register = ({ form, onChangeField }) => (
+const Register = ({
+  form, isTCChecked, onChangeField, onToggleTC,
+}) => (
   <Container>
     <Segment raised>
       <Header as="h1" dividing textAlign="center">Inscription</Header>
@@ -118,7 +120,12 @@ const Register = ({ form, onChangeField }) => (
           }}
         />
         <Form.Field>
-          <Form.Checkbox required label="I agree to the Terms and Conditions" />
+          <Form.Checkbox
+            required
+            label="I agree to the Terms and Conditions"
+            onChange={onToggleTC}
+            checked={isTCChecked}
+          />
         </Form.Field>
         <Form.Button type="submit">Soumettre</Form.Button>
       </Form>
@@ -135,7 +142,9 @@ Register.propTypes = {
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
   }).isRequired,
+  isTCChecked: PropTypes.bool.isRequired,
   onChangeField: PropTypes.func.isRequired,
+  onToggleTC: PropTypes.func.isRequired,
 };
 // == Export
 export default Register;
