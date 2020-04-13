@@ -8,7 +8,7 @@ import Header from '../Header';
 import Footer from '../Layout/Footer';
 import HomeVisitor from '../Main/HomeVisitor';
 import Connexion from '../Visitor/Connexion';
-import Register from '../Visitor/Register';
+import Register from '../../containers/Register';
 import Team from '../Layout/Team';
 import LegalMentions from '../Layout/LegalMentions';
 
