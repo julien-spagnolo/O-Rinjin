@@ -7,7 +7,6 @@ const initialState = {
   form: {
     first_name: 'toto',
     last_name: 'toto',
-    pseudo: 'toto',
     birth_date: '2020-01-01',
     email: 'toto@toto',
     password: 'toto',
