@@ -325,7 +325,7 @@ Pour la gestion des rôle, le bundle Voter sera également utilisé.
 |body|TEXT|NOT NULL|Description du service|
 |type|INT|NOT NULL|Indique si c'est une demande de service(0) ou une proposition de service(1)|
 |image|VARCHAR 100|NULL|Image liée au service|
-|active|TINYINT|NOT NULL|le service est ouvert ou clos (false, true || 1, 0)|
+|active|TINYINT|NOT NULL|le service est ouvert ou clos (false, true) || 1, 0)|
 |user_id|TINYINT|FOREIGN_KEY, NOT NULL|Clef étrangère de la table user|
 |service_category_id|TINYINT|FOREIGN_KEY, NOT NULL|Clef étrangère de la table service_category|
 |created_at|DATE|NOT NULL|Date de création du service|
@@ -384,7 +384,7 @@ Pour la gestion des rôle, le bundle Voter sera également utilisé.
 |body|TEXT|NOT NULL|Description du service|
 |type|TINYINT|NOT NULL|Indique si c'est une demande de service(0) ou une proposition de service(1)|
 |image|VARCHAR 100|NULL|Image liée au service|
-|active|TINYINT|NOT NULL|le service est ouvert ou clos (false, true || 1, 0)|
+|active|TINYINT|NOT NULL|le service est ouvert ou clos (false, true) || 1, 0)|
 |user_id|INT|FOREIGN_KEY, NOT NULL|Clef étrangère de la table user|
 |service_category_id|INT|FOREIGN_KEY, NOT NULL|Clef étrangère de la table service_category|
 |created_at|DATETIME|NOT NULL|Date de création du service|
