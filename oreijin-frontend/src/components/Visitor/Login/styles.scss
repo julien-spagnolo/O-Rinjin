@@ -2,12 +2,11 @@
   width: 65%;
   text-align: center;
   margin: 2em auto;
-  //background-color: #775e07;
-
-  &__button {
-    color: #775e07;
-  }
 };
+
+.container {
+  margin-top: 2em;
+}
 
 .ui.button.login__form__button {
   background-color: #423E37;
