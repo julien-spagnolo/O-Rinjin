@@ -1,4 +1,4 @@
-import { ON_INPUT_CHANGE, ON_TOGGLE_TC } from '../actions/register';
+import { ON_CHANGE_FIELD, ON_TOGGLE_TC, ON_CHANGE_FIELD_LOCATION } from '../actions/register';
 
 const initialState = {
   form: {
@@ -8,18 +8,34 @@ const initialState = {
     birth_date: '',
     email: '',
     password: '',
-    location: {},
+    location: {
+      street: '',
+      city: '',
+      postal_code: '',
+    },
   },
   isTCChecked: false,
 };
 
 const register = (state = initialState, action = {}) => {
   switch (action.type) {
-    case ON_INPUT_CHANGE:
+    case ON_CHANGE_FIELD:
       return {
+        ...state,
         form: {
           ...state.form,
           ...action.payload,
+        },
+      };
+    case ON_CHANGE_FIELD_LOCATION:
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          location: {
+            ...state.form.location,
+            ...action.payload,
+          },
         },
       };
     case ON_TOGGLE_TC:

@@ -1,17 +1,15 @@
 // == Import npm
 import React from 'react';
 import PropTypes from 'prop-types';
-import Geocoder from 'react-mapbox-gl-geocoder';
 import {
   Header, Container, Segment, Form,
 } from 'semantic-ui-react';
 // == Import
-
 import './styles.scss';
 
 // == Composant
 const Register = ({
-  form, isTCChecked, onChangeField, onToggleTC,
+  form, isTCChecked, onChangeField, onChangeFieldLocation, onToggleTC,
 }) => (
   <Container>
     <Segment raised>
@@ -107,18 +105,47 @@ const Register = ({
             type="password"
           />
         </Form.Field>
-        <Form.Field
-          required
-          name="location"
-          control={Geocoder}
-          label="Adresse Postale"
-          viewport={{}}
-          mapboxApiAccessToken="pk.eyJ1Ijoibm91Z2F6YWtpIiwiYSI6ImNrOG9uaG90NjA0MWEzZ242OWY5Z3o2ZGoifQ.lMw3p6r7TW0oBoxfMrzpFA"
-          onSelected={(viewport, item) => {
-            console.log(viewport, item);
-            console.log(form);
-          }}
-        />
+        <Form.Group>
+          <Form.Field width="8">
+            <Form.Input
+              label="Rue"
+              placeholder="4 rue ..."
+              type="text"
+              name="street"
+              onChange={(evt) => {
+                onChangeFieldLocation(evt.target.name, evt.target.value);
+              }}
+              value={form.location.street}
+            />
+          </Form.Field>
+          <Form.Field width="4">
+            <Form.Input
+              required
+              label="Ville"
+              placeholder="Ville"
+              type="text"
+              name="city"
+              onChange={(evt) => {
+                onChangeFieldLocation(evt.target.name, evt.target.value);
+              }}
+              value={form.location.city}
+            />
+          </Form.Field>
+          <Form.Field width="4">
+            <Form.Input
+              required
+              maxLength={5}
+              label="Code Postal"
+              placeholder="Code Postal"
+              type="text"
+              name="postal_code"
+              onChange={(evt) => {
+                onChangeFieldLocation(evt.target.name, evt.target.value);
+              }}
+              value={form.location.postal_code}
+            />
+          </Form.Field>
+        </Form.Group>
         <Form.Field>
           <Form.Checkbox
             required
@@ -141,10 +168,16 @@ Register.propTypes = {
     birth_date: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      street: PropTypes.string,
+      city: PropTypes.string.isRequired,
+      postal_code: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
   isTCChecked: PropTypes.bool.isRequired,
   onChangeField: PropTypes.func.isRequired,
   onToggleTC: PropTypes.func.isRequired,
+  onChangeFieldLocation: PropTypes.func.isRequired,
 };
 // == Export
 export default Register;
