@@ -1,5 +1,6 @@
 const initialState = {
-  form: {},
+  form: {
+  },
 };
 
 const register = (state = initialState, action = {}) => {
