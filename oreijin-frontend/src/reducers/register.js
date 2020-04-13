@@ -1,17 +1,20 @@
-import { ON_CHANGE_FIELD, ON_TOGGLE_TC, ON_CHANGE_FIELD_LOCATION } from '../actions/register';
+import {
+  ON_CHANGE_FIELD, ON_TOGGLE_TC, ON_CHANGE_FIELD_LOCATION,
+  UPDATE_LOCATION,
+} from '../actions/register';
 
 const initialState = {
   form: {
-    first_name: '',
-    last_name: '',
-    pseudo: '',
-    birth_date: '',
-    email: '',
-    password: '',
+    first_name: 'toto',
+    last_name: 'toto',
+    pseudo: 'toto',
+    birth_date: '2020-01-01',
+    email: 'toto@toto',
+    password: 'toto',
     location: {
-      street: '',
-      city: '',
-      postal_code: '',
+      address: '',
+      city: 'toto',
+      postal_code: '93800',
     },
   },
   isTCChecked: false,
@@ -42,6 +45,17 @@ const register = (state = initialState, action = {}) => {
       return {
         ...state,
         isTCChecked: !state.isTCChecked,
+      };
+    case UPDATE_LOCATION:
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          location: {
+            ...state.form.location,
+            ...action.payload,
+          },
+        },
       };
     default:
       return state;

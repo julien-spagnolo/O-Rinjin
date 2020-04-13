@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import Register from '../components/Visitor/Register';
 
-import { onChangeField, onToggleTC, onChangeFieldLocation } from '../actions/register';
+import {
+  onChangeField, onToggleTC, onChangeFieldLocation, handleSubmit,
+} from '../actions/register';
 
 const mapStateToProps = (state) => ({
   form: state.register.form,
@@ -17,6 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
     [inputName]: inputValue,
   })),
   onToggleTC: () => dispatch(onToggleTC()),
+  handleSubmit: () => dispatch(handleSubmit()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
