@@ -49,6 +49,7 @@ const Register = ({
           </Form.Field>
         </Form.Group>
         <Form.Group>
+<<<<<<< HEAD
           <Form.Field required width={10}>
             <Form.Input
               required
@@ -60,6 +61,19 @@ const Register = ({
                 onChangeField(evt.target.name, evt.target.value);
               }}
               value={form.email}
+=======
+          <Form.Field width={10}>
+            <Form.Input
+              required
+              label="Pseudo"
+              placeholder="Pseudo"
+              type="text"
+              name="pseudo"
+              onChange={(evt) => {
+                onChangeField(evt.target.name, evt.target.value);
+              }}
+              value={form.pseudo}
+>>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
             />
           </Form.Field>
           <Form.Field required width={6}>
@@ -79,6 +93,22 @@ const Register = ({
         <Form.Field>
           <Form.Input
             required
+<<<<<<< HEAD
+=======
+            label="Email"
+            placeholder="Email"
+            type="email"
+            name="email"
+            onChange={(evt) => {
+              onChangeField(evt.target.name, evt.target.value);
+            }}
+            value={form.email}
+          />
+        </Form.Field>
+        <Form.Field>
+          <Form.Input
+            required
+>>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
             label="Mot de passe"
             placeholder="Mot de passe"
             type="password"
@@ -100,7 +130,10 @@ const Register = ({
         <Form.Group>
           <Form.Field width="8">
             <Form.Input
+<<<<<<< HEAD
               required
+=======
+>>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
               label="Rue"
               placeholder="4 rue ..."
               type="text"
@@ -145,10 +178,16 @@ const Register = ({
             label="I agree to the Terms and Conditions"
             onChange={onToggleTC}
             checked={isTCChecked}
+<<<<<<< HEAD
             
           />
         </Form.Field>
         <Form.Button type="submit" className="register__form__button">Soumettre</Form.Button>
+=======
+          />
+        </Form.Field>
+        <Form.Button type="submit">Soumettre</Form.Button>
+>>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
       </Form>
     </Segment>
   </Container>
@@ -158,6 +197,10 @@ Register.propTypes = {
   form: PropTypes.shape({
     first_name: PropTypes.string.isRequired,
     last_name: PropTypes.string.isRequired,
+<<<<<<< HEAD
+=======
+    pseudo: PropTypes.string.isRequired,
+>>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
     birth_date: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,

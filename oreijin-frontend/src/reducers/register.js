@@ -7,6 +7,10 @@ const initialState = {
   form: {
     first_name: 'toto',
     last_name: 'toto',
+<<<<<<< HEAD
+=======
+    pseudo: 'toto',
+>>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
     birth_date: '2020-01-01',
     email: 'toto@toto',
     password: 'toto',
