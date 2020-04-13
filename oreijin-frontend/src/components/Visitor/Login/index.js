@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Container } from 'semantic-ui-react';
 
 import './styles.scss';
 
@@ -11,33 +11,39 @@ const Login = ({
   password,
   isLogged,
 }) => {
-  console.log(isLogged);
+  const handleSubmit = () => {
+    console.log(`email: ${email}`);
+    console.log(`password: ${password}`);
+  };
+
   return (
-    <Form success>
-      <Form.Input
-        type="email"
-        name="email"
-        label="Email"
-        placeholder="Entrez votre adresse mail"
-        value={email}
-        onChange={(event) => {
-          console.log(event.target.value, event.target.name);
-          changeField(event.target.value, event.target.name);
-        }}
-      />
-      <Form.Input
-        type="password"
-        name="password"
-        label="Mot de passe"
-        placeholder="Entrez votre mot de passe"
-        value={password}
-        onChange={(event) => {
-          console.log(event.target.value, event.target.name);
-          changeField(event.target.value, event.target.name);
-        }}
-      />
-      <Button>Connexion</Button>
-    </Form>
+    <Container>
+      <Form className="login__form" onSubmit={handleSubmit}>
+        <Form.Input
+          className="login__form__input"
+          type="email"
+          name="email"
+          label="Email"
+          placeholder="Entrez votre adresse mail"
+          value={email}
+          onChange={(event) => {
+            changeField(event.target.value, event.target.name);
+          }}
+        />
+        <Form.Input
+          className="login__form__input"
+          type="password"
+          name="password"
+          label="Mot de passe"
+          placeholder="Entrez votre mot de passe"
+          value={password}
+          onChange={(event) => {
+            changeField(event.target.value, event.target.name);
+          }}
+        />
+        <Button className="login__form__button">Connexion</Button>
+      </Form>
+    </Container>
   );
 };
 
