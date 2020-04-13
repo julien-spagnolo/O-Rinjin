@@ -1,4 +1,4 @@
-import { ON_INPUT_CHANGE } from '../actions/register';
+import { ON_INPUT_CHANGE, ON_TOGGLE_TC } from '../actions/register';
 
 const initialState = {
   form: {
@@ -10,6 +10,7 @@ const initialState = {
     password: '',
     location: {},
   },
+  isTCChecked: false,
 };
 
 const register = (state = initialState, action = {}) => {
@@ -20,6 +21,11 @@ const register = (state = initialState, action = {}) => {
           ...state.form,
           ...action.payload,
         },
+      };
+    case ON_TOGGLE_TC:
+      return {
+        ...state,
+        isTCChecked: !state.isTCChecked,
       };
     default:
       return state;
