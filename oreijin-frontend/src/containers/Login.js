@@ -4,7 +4,7 @@ import Login from '../components/Visitor/Login';
 import { changeLoginField, login, logout } from '../actions/user';
 
 const mapStateToProps = (state) => ({
-  email: state.user.form.email,
+  username: state.user.form.username,
   password: state.user.form.password,
   isLogged: state.user.isLogged,
 });

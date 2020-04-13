@@ -2,7 +2,7 @@ import { CHANGE_LOGIN_FIELD } from '../actions/user';
 
 const initialState = {
   form: {
-    email: '',
+    username: '',
     password: '',
   },
   isLogged: false,

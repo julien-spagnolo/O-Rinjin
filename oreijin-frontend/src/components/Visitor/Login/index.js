@@ -9,12 +9,12 @@ const Login = ({
   changeField,
   handleLogin,
   handleLogout,
-  email,
+  username,
   password,
   isLogged,
 }) => {
   const handleSubmit = () => {
-    console.log(`email: ${email}`);
+    console.log(`username: ${username}`);
     console.log(`password: ${password}`);
     handleLogin();
   };
@@ -24,17 +24,19 @@ const Login = ({
       <Form className="login__form" onSubmit={handleSubmit}>
         <Form.Input
           className="login__form__input"
+          required
           type="email"
-          name="email"
+          name="username"
           label="Email"
           placeholder="Entrez votre adresse mail"
-          value={email}
+          value={username}
           onChange={(event) => {
             changeField(event.target.value, event.target.name);
           }}
         />
         <Form.Input
           className="login__form__input"
+          required
           type="password"
           name="password"
           label="Mot de passe"
@@ -52,7 +54,7 @@ const Login = ({
 
 
 Login.propTypes = {
-  email: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
   changeField: PropTypes.func.isRequired,
