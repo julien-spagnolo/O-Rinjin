@@ -9,12 +9,17 @@ import './styles.scss';
 
 // == Composant
 const Register = ({
-  form, isTCChecked, onChangeField, onChangeFieldLocation, onToggleTC,
+  form, isTCChecked, onChangeField, onChangeFieldLocation, onToggleTC, handleSubmit,
 }) => (
   <Container>
     <Segment raised>
       <Header as="h1" dividing textAlign="center">Inscription</Header>
-      <Form>
+      <Form
+        onSubmit={(evt) => {
+          evt.preventDefault();
+          handleSubmit();
+        }}
+      >
         <Form.Group>
           <Form.Field width={8}>
             <Form.Input
@@ -111,11 +116,11 @@ const Register = ({
               label="Rue"
               placeholder="4 rue ..."
               type="text"
-              name="street"
+              name="address"
               onChange={(evt) => {
                 onChangeFieldLocation(evt.target.name, evt.target.value);
               }}
-              value={form.location.street}
+              value={form.location.address}
             />
           </Form.Field>
           <Form.Field width="4">
@@ -169,7 +174,7 @@ Register.propTypes = {
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     location: PropTypes.shape({
-      street: PropTypes.string,
+      address: PropTypes.string,
       city: PropTypes.string.isRequired,
       postal_code: PropTypes.string.isRequired,
     }).isRequired,
@@ -178,6 +183,7 @@ Register.propTypes = {
   onChangeField: PropTypes.func.isRequired,
   onToggleTC: PropTypes.func.isRequired,
   onChangeFieldLocation: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 // == Export
 export default Register;
