@@ -38,7 +38,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $firtName;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -104,6 +104,7 @@ class User implements UserInterface
     {
         $this->service = new ArrayCollection();
         $this->comment = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -184,14 +185,14 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getFirtName(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->firtName;
+        return $this->firstName;
     }
 
-    public function setFirtName(string $firtName): self
+    public function setFirstName(string $firstName): self
     {
-        $this->firtName = $firtName;
+        $this->firstName = $firstName;
 
         return $this;
     }
