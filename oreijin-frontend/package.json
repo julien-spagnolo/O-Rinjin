@@ -60,6 +60,8 @@
     "react": "*",
     "react-dom": "*",
     "react-redux": "*",
-    "redux": "*"
+    "react-router-dom": "^5.1.2",
+    "redux": "*",
+    "semantic-ui-react": "^0.88.2"
   }
 }
