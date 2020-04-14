@@ -1,8 +1,8 @@
 // == Import npm
-import React, { Children } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Header, Container, Segment, Form, Input
+  Header, Container, Segment, Form, Button
 } from 'semantic-ui-react';
 // == Import
 import './styles.scss';
@@ -147,7 +147,7 @@ const Register = ({
             checked={isTCChecked}
           />
         </Form.Field>
-        <Form.Button type="submit" className="register__form__button">Soumettre</Form.Button>
+        <Button type="submit" className="register__form__button">Soumettre</Button>
       </Form>
     </Segment>
   </Container>

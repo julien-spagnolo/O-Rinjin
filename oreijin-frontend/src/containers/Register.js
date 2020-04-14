@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Register from '../components/Visitor/Register';
 
 import {
-  onChangeField, onToggleTC, onChangeFieldLocation, handleSubmit,
+  onChangeField, onToggleTC, handleSubmit,
 } from '../actions/register';
 
 const mapStateToProps = (state) => ({
@@ -13,9 +13,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeField: (inputName, inputValue) => dispatch(onChangeField({
-    [inputName]: inputValue,
-  })),
-  onChangeFieldLocation: (inputName, inputValue) => dispatch(onChangeFieldLocation({
     [inputName]: inputValue,
   })),
   onToggleTC: () => dispatch(onToggleTC()),
