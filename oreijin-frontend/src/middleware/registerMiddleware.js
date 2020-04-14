@@ -1,14 +1,14 @@
 /* eslint-disable camelcase */
 import axios from 'axios';
 import slugify from 'slugify';
-import { HANDLE_SUBMIT, updateLocation } from '../actions/register';
+import { HANDLE_SUBMIT, updateLocation, updateLocationError } from '../actions/register';
 
 const mapboxApiToken = 'pk.eyJ1Ijoibm91Z2F6YWtpIiwiYSI6ImNrOG9uaG90NjA0MWEzZ242OWY5Z3o2ZGoifQ.lMw3p6r7TW0oBoxfMrzpFA';
 
 const registerMiddleware = (store) => (next) => (action) => {
   const { address, city, postalcode } = store.getState().register.form;
   const query = slugify(`${address} ${city}`, '%20');
-  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+
   switch (action.type) {
     case HANDLE_SUBMIT:
       axios({
@@ -28,6 +28,7 @@ const registerMiddleware = (store) => (next) => (action) => {
             method: 'post',
             data: {
               ...store.getState().register.form,
+              avatar: "",
             },
           })
             .then((response) => {
@@ -38,7 +39,7 @@ const registerMiddleware = (store) => (next) => (action) => {
             });
         })
         .catch(() => {
-          console.log("Error mapbox API");
+          store.dispatch(updateLocationError());
         });
 
       return next(action);

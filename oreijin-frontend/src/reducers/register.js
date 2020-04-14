@@ -1,6 +1,6 @@
 import {
   ON_CHANGE_FIELD, ON_TOGGLE_TC, ON_CHANGE_FIELD_LOCATION,
-  UPDATE_LOCATION,
+  UPDATE_LOCATION, UPDATE_LOCATION_ERROR
 } from '../actions/register';
 
 const initialState = {
@@ -10,11 +10,12 @@ const initialState = {
     birthdate: '2020-01-01',
     email: 'toto@toto',
     password: 'toto',
-    address: '',
-    city: 'toto',
-    postalcode: '93800',
+    address: '5 rue pasteur',
+    city: 'Paris',
+    postalcode: '71000',
   },
   isTCChecked: false,
+  errors: []
 };
 
 const register = (state = initialState, action = {}) => {
@@ -39,6 +40,14 @@ const register = (state = initialState, action = {}) => {
           ...state.form,
           ...action.payload,
         }
+      };
+    case UPDATE_LOCATION_ERROR:
+      return {
+        ...state,
+        form: {...state.form},
+        errors: {
+          address: "Adresse introuvable, veuillez réessayer !",
+        },
       };
     default:
       return state;
