@@ -7,6 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import Header from '../Header';
 import Footer from '../Layout/Footer';
 import HomeVisitor from '../Main/HomeVisitor';
+// import HomeConnected from '../Main/HomeConnected';
 import Connexion from '../../containers/Login';
 import Register from '../../containers/Register';
 
@@ -24,6 +25,7 @@ const App = () => (
     <Switch>
       {/* Render a component when its path matches the current URL */}
       <Route exact path="/" component={HomeVisitor} />
+      {/* <Route exact path="/" component={HomeConnected} /> */}
       <Route exact path="/login" component={Connexion} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/team" component={Team} />

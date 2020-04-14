@@ -24,15 +24,15 @@ const registerMiddleware = (store) => (next) => (action) => {
           }));
 
           axios({
-            url: "http://localhost:8001/register",
+            url: 'http://localhost:8001/register',
             method: 'post',
             data: {
               ...store.getState().register.form,
-              avatar: "",
+              avatar: '',
             },
           })
-            .then((response) => {
-              console.log(response.data);
+            .then((res) => {
+              console.log(res.data);
             })
             .catch((err) => {
               console.log(err);
