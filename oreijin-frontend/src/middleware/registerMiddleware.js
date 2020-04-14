@@ -24,7 +24,7 @@ const registerMiddleware = (store) => (next) => (action) => {
           }));
 
           axios({
-            url: "http://localhost:8001/register",
+            url: "https://localhost:8001/register",
             method: 'post',
             data: {
               ...store.getState().register.form,
