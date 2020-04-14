@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { LOGIN, LOGOUT } from '../actions/user';
+import { LOGIN, LOGOUT, loginSuccess } from '../actions/user';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
@@ -16,6 +16,7 @@ export default (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response.data);
+          store.dispatch(loginSuccess(response.data.info));
         })
         .catch((error) => {
           console.log(error);

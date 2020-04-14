@@ -1,6 +1,8 @@
 export const CHANGE_LOGIN_FIELD = 'CHANGE_LOGIN_FIELD';
 
 export const LOGIN = 'LOGIN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
 
 export const LOGOUT = 'LOGOUT';
 
@@ -14,6 +16,16 @@ export const changeLoginField = (value, name) => ({
 export const login = () => ({
   type: LOGIN,
 });
+
+export const loginSuccess = (payload) => ({
+  type: LOGIN_SUCCESS,
+  payload,
+});
+
+export const loginError = () => ({
+  type: LOGIN_ERROR,
+});
+
 
 export const logout = () => ({
   type: LOGOUT,

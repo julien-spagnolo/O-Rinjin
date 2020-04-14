@@ -1,4 +1,4 @@
-import { CHANGE_LOGIN_FIELD } from '../actions/user';
+import { CHANGE_LOGIN_FIELD, LOGIN_SUCCESS } from '../actions/user';
 
 const initialState = {
   form: {
@@ -15,6 +15,14 @@ export default (state = initialState, action = {}) => {
         ...state,
         form: {
           ...state.form,
+          ...action.payload,
+        },
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLogged: true,
+        userInfos: {
           ...action.payload,
         },
       };

@@ -6,8 +6,8 @@ import { Switch, Route } from 'react-router-dom';
 // == Import components
 import Header from '../Header';
 import Footer from '../Layout/Footer';
-import HomeVisitor from '../Main/HomeVisitor';
-// import HomeConnected from '../Main/HomeConnected';
+import Home from '../../containers/Home';
+import HomeConnected from '../Home/HomeConnected';
 import Connexion from '../../containers/Login';
 import Register from '../../containers/Register';
 
@@ -24,8 +24,8 @@ const App = () => (
     {/* Switch component: renders the first <Route> that matches the location  */}
     <Switch>
       {/* Render a component when its path matches the current URL */}
-      <Route exact path="/" component={HomeVisitor} />
-      {/* <Route exact path="/" component={HomeConnected} /> */}
+      <Route exact path="/" component={Home} />
+      <Route exact path="/home" component={HomeConnected} />
       <Route exact path="/login" component={Connexion} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/team" component={Team} />
@@ -34,6 +34,7 @@ const App = () => (
     <Footer />
   </div>
 );
+
 
 // == Export
 export default App;
