@@ -1,16 +1,24 @@
+import { CHANGE_LOGIN_FIELD } from '../actions/user';
+
 const initialState = {
   form: {
-    email: '',
+    username: '',
     password: '',
   },
   isLogged: false,
 };
 
-const user = (state = initialState, action = {}) => {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
+    case CHANGE_LOGIN_FIELD:
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          ...action.payload,
+        },
+      };
     default:
       return state;
   }
 };
-
-export default user;

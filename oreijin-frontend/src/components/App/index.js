@@ -7,7 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import Header from '../Header';
 import Footer from '../Layout/Footer';
 import HomeVisitor from '../Main/HomeVisitor';
-import Connexion from '../Visitor/Connexion';
+import Connexion from '../../containers/Login';
 import Register from '../Visitor/Register';
 import Team from '../Layout/Team';
 import LegalMentions from '../Layout/LegalMentions';
