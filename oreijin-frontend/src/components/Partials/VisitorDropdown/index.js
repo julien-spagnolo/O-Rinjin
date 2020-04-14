@@ -8,13 +8,13 @@ import './styles.scss';
 
 const VisitorMenu = () => (
   <Dropdown direction="left" text="Menu">
-  <Dropdown.Menu>
+    <Dropdown.Menu>
       <Dropdown.Item as={Link} to="/" text="Accueil" />
       <Dropdown.Divider />
       <Dropdown.Item as={Link} to="/login" text="Connexion" />
       <Dropdown.Divider />
       <Dropdown.Item as={Link} to="/register" text="Inscription" />
-  </Dropdown.Menu>
+    </Dropdown.Menu>
   </Dropdown>
 );
 

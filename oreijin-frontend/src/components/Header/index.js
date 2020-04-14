@@ -1,13 +1,18 @@
 import React from 'react';
 
 import { Responsive, Menu, Image } from 'semantic-ui-react';
+
+import PropTypes from 'prop-types';
+
 import VisitorDropdown from '../Partials/VisitorDropdown';
+import ConnectedDropdown from '../Partials/ConnectedDropdown';
 import VisitorMenu from '../Partials/VisitorMenu';
+import ConnectedMenu from '../Partials/ConnectedMenu';
 
 import logo from '../../assets/images/logo.png';
 import './styles.scss';
 
-const Header = () => (
+const Header = ({ isLogged }) => (
   // == Icon and burger menu for mobile navbar, using Semantic-UI-React
   <>
     {/* Menu display for mobile screens  */}
@@ -18,20 +23,24 @@ const Header = () => (
         <Menu.Item href="https://www.youtube.com" target="_blank" icon="youtube" />
         {/* <Menu.Item position="right" icon="bars" /> */}
         <Menu.Item position="right">
-          <VisitorDropdown />
+          {/* A changer !!!! !isLogged -> isLogged  */}
+          {!isLogged ? <ConnectedDropdown /> : <VisitorDropdown />}
         </Menu.Item>
       </Menu>
       <div className="header__container">
         <Image className="header__logo__mobile" src={logo} centered size="small" />
       </div>
     </Responsive>
-
     {/* Menu display for tablet and desktop screens */}
     <Responsive minWidth={500}>
-      {/* INSERT MENU  */}
-      <VisitorMenu />
+      {/* A changer !!!! !isLogged -> isLogged  */}
+      {!isLogged ? <ConnectedMenu /> : <VisitorMenu />}
     </Responsive>
   </>
 );
+
+Header.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+};
 
 export default Header;
