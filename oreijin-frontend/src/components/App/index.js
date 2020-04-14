@@ -4,7 +4,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 // == Import components
-import Header from '../Header';
+import Header from '../../containers/Header';
 import Footer from '../Layout/Footer';
 import Home from '../../containers/Home';
 import HomeConnected from '../Home/HomeConnected';

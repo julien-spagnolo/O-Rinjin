@@ -1,0 +1,31 @@
+.header__container {
+    background-color: #fff;
+    margin-bottom: 1.5rem;
+    
+    &__desktop{
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+  .ui.button.desktop__header__button {
+    height:35%;
+    margin: 0 1em;
+    top: 3.125rem;
+    background-color: #f2c00f;
+  }
+  
+  .header__logo {
+    &__desktop{
+      border-left: 2px solid #423E37;
+      border-right: 2px solid #423E37;
+    }
+  
+    &__mobile{
+      margin-top: 2.919rem;
+    }
+  }
+  
+  
