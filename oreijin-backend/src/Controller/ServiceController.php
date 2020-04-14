@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ServiceController extends AbstractController
 {
     /**
-     * @Route("/services", name="services")
+     * @Route("/api/services", name="services")
      */
     public function browseServices(ServiceRepository $ServiceRepository, SerializerInterface $serializer)
     {
