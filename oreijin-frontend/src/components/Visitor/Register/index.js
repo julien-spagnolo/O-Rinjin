@@ -1,15 +1,15 @@
 // == Import npm
-import React from 'react';
+import React, { Children } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Header, Container, Segment, Form,
+  Header, Container, Segment, Form, Input
 } from 'semantic-ui-react';
 // == Import
 import './styles.scss';
 
 // == Composant
 const Register = ({
-  form, isTCChecked, onChangeField, onChangeFieldLocation, onToggleTC, handleSubmit,
+  form, isTCChecked, onChangeField, onToggleTC, handleSubmit,
 }) => (
   <Container>
     <Segment raised>
@@ -27,11 +27,11 @@ const Register = ({
               label="Prénom"
               placeholder="Prénom"
               type="text"
-              name="first_name"
+              name="firstname"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
               }}
-              value={form.first_name}
+              value={form.firstname}
             />
           </Form.Field>
           <Form.Field width={8}>
@@ -40,16 +40,15 @@ const Register = ({
               label="Nom"
               placeholder="Nom"
               type="text"
-              name="last_name"
+              name="lastname"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
               }}
-              value={form.last_name}
+              value={form.lastname}
             />
           </Form.Field>
         </Form.Group>
         <Form.Group>
-<<<<<<< HEAD
           <Form.Field required width={10}>
             <Form.Input
               required
@@ -61,19 +60,6 @@ const Register = ({
                 onChangeField(evt.target.name, evt.target.value);
               }}
               value={form.email}
-=======
-          <Form.Field width={10}>
-            <Form.Input
-              required
-              label="Pseudo"
-              placeholder="Pseudo"
-              type="text"
-              name="pseudo"
-              onChange={(evt) => {
-                onChangeField(evt.target.name, evt.target.value);
-              }}
-              value={form.pseudo}
->>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
             />
           </Form.Field>
           <Form.Field required width={6}>
@@ -82,33 +68,17 @@ const Register = ({
               label="Date de naissance"
               placeholder="Date de naissance"
               type="date"
-              name="birth_date"
+              name="birthdate"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
               }}
-              value={form.birth_date}
+              value={form.birthdate}
             />
           </Form.Field>
         </Form.Group>
         <Form.Field>
           <Form.Input
             required
-<<<<<<< HEAD
-=======
-            label="Email"
-            placeholder="Email"
-            type="email"
-            name="email"
-            onChange={(evt) => {
-              onChangeField(evt.target.name, evt.target.value);
-            }}
-            value={form.email}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Form.Input
-            required
->>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
             label="Mot de passe"
             placeholder="Mot de passe"
             type="password"
@@ -130,18 +100,15 @@ const Register = ({
         <Form.Group>
           <Form.Field width="8">
             <Form.Input
-<<<<<<< HEAD
               required
-=======
->>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
               label="Rue"
               placeholder="4 rue ..."
               type="text"
               name="address"
               onChange={(evt) => {
-                onChangeFieldLocation(evt.target.name, evt.target.value);
+                onChangeField(evt.target.name, evt.target.value);
               }}
-              value={form.location.address}
+              value={form.address}
             />
           </Form.Field>
           <Form.Field width="4">
@@ -152,9 +119,9 @@ const Register = ({
               type="text"
               name="city"
               onChange={(evt) => {
-                onChangeFieldLocation(evt.target.name, evt.target.value);
+                onChangeField(evt.target.name, evt.target.value);
               }}
-              value={form.location.city}
+              value={form.city}
             />
           </Form.Field>
           <Form.Field width="4">
@@ -164,11 +131,11 @@ const Register = ({
               label="Code Postal"
               placeholder="Code Postal"
               type="text"
-              name="postal_code"
+              name="postalcode"
               onChange={(evt) => {
-                onChangeFieldLocation(evt.target.name, evt.target.value);
+                onChangeField(evt.target.name, evt.target.value);
               }}
-              value={form.location.postal_code}
+              value={form.postalcode}
             />
           </Form.Field>
         </Form.Group>
@@ -178,16 +145,9 @@ const Register = ({
             label="I agree to the Terms and Conditions"
             onChange={onToggleTC}
             checked={isTCChecked}
-<<<<<<< HEAD
-            
           />
         </Form.Field>
         <Form.Button type="submit" className="register__form__button">Soumettre</Form.Button>
-=======
-          />
-        </Form.Field>
-        <Form.Button type="submit">Soumettre</Form.Button>
->>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
       </Form>
     </Segment>
   </Container>
@@ -195,25 +155,18 @@ const Register = ({
 
 Register.propTypes = {
   form: PropTypes.shape({
-    first_name: PropTypes.string.isRequired,
-    last_name: PropTypes.string.isRequired,
-<<<<<<< HEAD
-=======
-    pseudo: PropTypes.string.isRequired,
->>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
-    birth_date: PropTypes.string.isRequired,
+    firstname: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
+    birthdate: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      address: PropTypes.string,
-      city: PropTypes.string.isRequired,
-      postal_code: PropTypes.string.isRequired,
-    }).isRequired,
+    address: PropTypes.string,
+    city: PropTypes.string.isRequired,
+    postalcode: PropTypes.string.isRequired,
   }).isRequired,
   isTCChecked: PropTypes.bool.isRequired,
   onChangeField: PropTypes.func.isRequired,
   onToggleTC: PropTypes.func.isRequired,
-  onChangeFieldLocation: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
 // == Export

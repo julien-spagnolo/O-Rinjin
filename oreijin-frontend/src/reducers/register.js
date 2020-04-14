@@ -5,20 +5,14 @@ import {
 
 const initialState = {
   form: {
-    first_name: 'toto',
-    last_name: 'toto',
-<<<<<<< HEAD
-=======
-    pseudo: 'toto',
->>>>>>> 2bc09f8a904678fe7ab8550989dadbb7d4d9569f
-    birth_date: '2020-01-01',
+    firstname: 'toto',
+    lastname: 'toto',
+    birthdate: '2020-01-01',
     email: 'toto@toto',
     password: 'toto',
-    location: {
-      address: '',
-      city: 'toto',
-      postal_code: '93800',
-    },
+    address: '',
+    city: 'toto',
+    postalcode: '93800',
   },
   isTCChecked: false,
 };
@@ -33,17 +27,6 @@ const register = (state = initialState, action = {}) => {
           ...action.payload,
         },
       };
-    case ON_CHANGE_FIELD_LOCATION:
-      return {
-        ...state,
-        form: {
-          ...state.form,
-          location: {
-            ...state.form.location,
-            ...action.payload,
-          },
-        },
-      };
     case ON_TOGGLE_TC:
       return {
         ...state,
@@ -54,11 +37,8 @@ const register = (state = initialState, action = {}) => {
         ...state,
         form: {
           ...state.form,
-          location: {
-            ...state.form.location,
-            ...action.payload,
-          },
-        },
+          ...action.payload,
+        }
       };
     default:
       return state;
