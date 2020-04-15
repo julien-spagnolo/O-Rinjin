@@ -3,7 +3,7 @@ import React from 'react';
 // == Import components that we need to use from Semantic-UI-React
 import { Grid, Segment, Header } from 'semantic-ui-react';
 
-import Service from '../../Partials/Service';
+import Service from '../../../containers/Service';
 import services from '../../../services';
 import Map from '../../Partials/Map';
 
@@ -21,8 +21,8 @@ const HomeConnected = () => (
           <Segment style={{ height: '100vh', overflowY: 'scroll' }}>
             {
               // Render a Service component for each service in data
-              services.map(({ title, description, type }) => (
-                <Service key={title} title={title} description={description} type={type} />
+              services.map((service) => (
+                <Service key={service.title} {...service} />
               ))
             }
           </Segment>

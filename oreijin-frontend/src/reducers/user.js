@@ -26,7 +26,7 @@ export default (state = initialState, action = {}) => {
           ...action.payload,
         },
       };
-      case LOGOUT_SUCCESS:
+    case LOGOUT_SUCCESS:
       return {
         ...state,
         isLogged: false,
