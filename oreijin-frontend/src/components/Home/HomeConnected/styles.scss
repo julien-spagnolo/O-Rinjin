@@ -2,23 +2,28 @@
   margin-top: 1em;
 }
 
-.ui.grid>.column:not(.row) {
-  // padding: 0 2em 0 2em;
+.ui.segment.home__connected__services {
+  margin: 0.5em 1.8em;
+}
+
+.ui.segment.home__connected__map {
+  margin: 0.5em 1.8em;
 }
 
 .home__connected {
 
   &__services {
 
-    border-radius: 1em;
-    background-color: #fff;
+    &__body {
+      overflow-y: auto;
+    }
 
     &__filter {
       background-color: #ccc;
+      margin-bottom: 1.5rem;
     }
 
     &__title {
-      background-color: #aaa;
     }
 
     &__add {
