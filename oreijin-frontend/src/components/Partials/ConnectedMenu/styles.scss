@@ -1,8 +1,3 @@
-.active {
-  color: red;
-  font-weight: bold;
-}
-
 .header {
   &__container__connected{
     background-color: #fff;
@@ -13,6 +8,12 @@
 
   &__navlink {
     margin-right: 0.9rem;
+    color: #423E37;
+
+    &:hover, &.active {
+      color: #f2c00f;
+      font-weight: bold;
+    }
   }
 }
   

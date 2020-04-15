@@ -10,9 +10,9 @@ const ConnectedMenu = () => (
   <Grid columns={3} className="header__container__connected">
     <Grid.Row>
       <Grid.Column width="6" className="header__navlink__group" verticalAlign="middle" textAlign="right">
-        <NavLink to="/home" activeStyle={{ color: 'red' }} className="header__navlink">Accueil</NavLink>
-        <NavLink to="/login" activeStyle={{ color: 'red' }} className="header__navlink">Profil</NavLink>
-        <NavLink to="/register" activeStyle={{ color: 'red' }} className="header__navlink">Mes services</NavLink>
+        <NavLink to="/home" activeClassName="active" className="header__navlink">Accueil</NavLink>
+        <NavLink to="/login" activeClassName="active" className="header__navlink">Profil</NavLink>
+        <NavLink to="/register" activeClassName="active" className="header__navlink">Mes services</NavLink>
       </Grid.Column>
       
       <Grid.Column width="4" className="header__logo__connected" textAlign="center">

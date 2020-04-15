@@ -7,7 +7,7 @@ export default (store) => (next) => (action) => {
     case LOGIN:
       axios({
         method: 'post',
-        url: 'http://localhost:8001/api/login_check',
+        url: 'http://localhost:8000/api/login_check',
         withCredentials: true,
         data: {
           username: store.getState().user.form.username,
