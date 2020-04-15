@@ -8,6 +8,8 @@ export const LOGOUT = 'LOGOUT';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_ERROR = 'LOGOUT_ERROR';
 
+export const CHECK_AUTH = 'CHECK_AUTH';
+
 export const changeLoginField = (value, name) => ({
   type: CHANGE_LOGIN_FIELD,
   payload: {
@@ -35,4 +37,8 @@ export const logout = () => ({
 
 export const logoutSuccess = () => ({
   type: LOGOUT_SUCCESS,
+});
+
+export const checkAuth = () => ({
+  type: CHECK_AUTH,
 });

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { LOGIN, LOGOUT, loginSuccess, logoutSuccess } from '../actions/user';
+import { LOGIN, LOGOUT, loginSuccess, logoutSuccess, CHECK_AUTH } from '../actions/user';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
@@ -35,6 +35,13 @@ export default (store) => (next) => (action) => {
       document.cookie = `token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT`;
       store.dispatch(logoutSuccess());
       break;
+    case CHECK_AUTH:
+      // Check if the cookie exists
+      // source: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+      if (document.cookie.split(';').some((item) => item.trim().startsWith('token='))) {
+        store.dispatch(loginSuccess({}));
+      }
+      else return next(action);
     default:
       next(action);
   }
