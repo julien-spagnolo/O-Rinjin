@@ -1,11 +1,30 @@
 .ui.home__connected {
+  margin-top: 1em;
+}
+
+.ui.grid>.column:not(.row) {
+  // padding: 0 2em 0 2em;
+}
+
+.home__connected {
 
   &__services {
 
+    border-radius: 1em;
+    background-color: #fff;
 
     &__filter {
       background-color: #ccc;
     }
+
+    &__title {
+      background-color: #aaa;
+    }
+
+    &__add {
+      background-color: #777;
+    }
+
   }
 
 }

@@ -1,13 +1,15 @@
 import axios from 'axios';
-
-import { LOGIN, LOGOUT, loginSuccess, logoutSuccess, CHECK_AUTH } from '../actions/user';
+import {
+  LOGIN, LOGOUT, CHECK_AUTH,
+  loginSuccess, logoutSuccess,
+} from '../actions/user';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
     case LOGIN:
       axios({
         method: 'post',
-        url: 'http://localhost:8000/api/login_check',
+        url: 'http://localhost:8001/api/login_check',
         withCredentials: true,
         data: {
           username: store.getState().user.form.username,
@@ -32,7 +34,7 @@ export default (store) => (next) => (action) => {
       break;
     case LOGOUT:
       // set an expiration date to delete
-      document.cookie = `token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT`;
+      document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
       store.dispatch(logoutSuccess());
       break;
     case CHECK_AUTH:
@@ -42,6 +44,7 @@ export default (store) => (next) => (action) => {
         store.dispatch(loginSuccess({}));
       }
       else return next(action);
+      break;
     default:
       next(action);
   }

@@ -7,7 +7,7 @@ import HomeVisitor from '../Home/HomeVisitor';
 import './styles.scss';
 
 const Home = ({ isLogged }) => (
-  <div>
+  <div className="home">
     {/* A changer !!!! !isLogged -> isLogged  */}
     {isLogged ? <Redirect to="/home" /> : <HomeVisitor />}
   </div>
