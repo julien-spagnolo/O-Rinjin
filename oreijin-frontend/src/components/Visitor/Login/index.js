@@ -13,7 +13,6 @@ const Login = ({
   handleLogin,
   username,
   password,
-  isLogged,
 }) => {
   const history = useHistory();
   const handleSubmit = () => {
@@ -22,7 +21,7 @@ const Login = ({
     handleLogin();
 
     // Redirect to page '/home' after submit
-    if (isLogged) history.push('/home');
+    history.push('/home');
   };
 
   return (
@@ -67,7 +66,6 @@ Login.propTypes = {
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  isLogged: PropTypes.bool.isRequired,
 };
 
 export default Login;

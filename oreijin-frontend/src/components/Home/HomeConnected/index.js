@@ -5,6 +5,7 @@ import { Grid, Card, Container } from 'semantic-ui-react';
 
 import Service from '../../Partials/Service';
 import services from '../../../services';
+import Map from '../../Partials/Map';
 
 // == Import styles and assets
 import './styles.scss';
@@ -15,7 +16,6 @@ const HomeConnected = () => (
     <Grid.Column className="home__connected__services" textAlign="center" mobile={16} tablet={9} computer={9}>
       <h2 className="home__connected__services__title">ANNONCES</h2>
       <div className="home__connected__services__filter">Emplacement des filtres</div>
-      <div className="home__connected__services__add">Emplacement des différentes annonces</div>
       <Card.Group itemsPerRow="1">
         {
           // Render a Service component for each service in data
@@ -26,11 +26,9 @@ const HomeConnected = () => (
       </Card.Group>
     </Grid.Column>
     <Grid.Column className="home__connected__map" textAlign="center" mobile={16} tablet={7} computer={7}>
-      <h2>MAP</h2>
-      <div>Emplacement de la map</div>
+      <Map />
     </Grid.Column>
   </Grid>
-
 );
 
 // == Export
