@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import VisitorDropdown from '../Partials/VisitorDropdown';
 import ConnectedDropdown from '../Partials/ConnectedDropdown';
 import VisitorMenu from '../Partials/VisitorMenu';
-import ConnectedMenu from '../Partials/ConnectedMenu';
+import ConnectedMenu from '../../containers/ConnectedMenu';
 
 import logo from '../../assets/images/logo.png';
 import './styles.scss';
@@ -24,7 +24,7 @@ const Header = ({ isLogged }) => (
         {/* <Menu.Item position="right" icon="bars" /> */}
         <Menu.Item position="right">
           {/* A changer !!!! !isLogged -> isLogged  */}
-          {!isLogged ? <ConnectedDropdown /> : <VisitorDropdown />}
+          {isLogged ? <ConnectedDropdown /> : <VisitorDropdown />}
         </Menu.Item>
       </Menu>
       <div className="header__container">
@@ -34,7 +34,7 @@ const Header = ({ isLogged }) => (
     {/* Menu display for tablet and desktop screens */}
     <Responsive minWidth={500}>
       {/* A changer !!!! !isLogged -> isLogged  */}
-      {!isLogged ? <ConnectedMenu /> : <VisitorMenu />}
+      {isLogged ? <ConnectedMenu /> : <VisitorMenu />}
     </Responsive>
   </>
 );

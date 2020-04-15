@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Button, Image, Grid, Icon } from 'semantic-ui-react';
 import { NavLink, Link } from 'react-router-dom';
@@ -6,7 +7,7 @@ import { NavLink, Link } from 'react-router-dom';
 import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
-const ConnectedMenu = () => (
+const ConnectedMenu = ({ logout }) => (
   <Grid columns={3} className="header__container__connected">
     <Grid.Row>
       <Grid.Column width="6" className="header__navlink__group" verticalAlign="middle" textAlign="right">
@@ -23,7 +24,14 @@ const ConnectedMenu = () => (
         <Button as={Link} to="/login" className="header__button__connected" size="small">
           <Button.Content>Créer un service</Button.Content>
         </Button>
-        <Button as={Link} to="/register" className="header__button__connected" size="small" icon>
+        <Button
+          as={Link}
+          to="/"
+          className="header__button__connected"
+          size="small"
+          icon
+          onClick={logout}
+        >
           {/* <Button.Content icon="log out" visible></Button.Content> */}
             <Icon name="log out"/>
         </Button>
@@ -31,5 +39,9 @@ const ConnectedMenu = () => (
     </Grid.Row>
   </Grid>
 );
+
+ConnectedMenu.propTypes = {
+  logout: PropTypes.func.isRequired,
+};
 
 export default ConnectedMenu;

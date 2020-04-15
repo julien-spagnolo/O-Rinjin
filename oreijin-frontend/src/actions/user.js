@@ -5,6 +5,8 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 
 export const LOGOUT = 'LOGOUT';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_ERROR = 'LOGOUT_ERROR';
 
 export const changeLoginField = (value, name) => ({
   type: CHANGE_LOGIN_FIELD,
@@ -29,4 +31,8 @@ export const loginError = () => ({
 
 export const logout = () => ({
   type: LOGOUT,
+});
+
+export const logoutSuccess = () => ({
+  type: LOGOUT_SUCCESS,
 });

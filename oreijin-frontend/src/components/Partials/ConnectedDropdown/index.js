@@ -15,7 +15,7 @@ const ConnectedDropdown = () => (
       <Dropdown.Divider />
       <Dropdown.Item as={Link} to="" text="Créer un service" />
       <Dropdown.Divider />
-      <Dropdown.Item as={Link} to="" text="Se déconnecter" />
+      <Dropdown.Item as={Link} to="/" text="Se déconnecter" />
     </Dropdown.Menu>
   </Dropdown>
 );

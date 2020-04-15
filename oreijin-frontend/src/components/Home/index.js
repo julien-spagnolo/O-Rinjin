@@ -9,7 +9,7 @@ import './styles.scss';
 const Home = ({ isLogged }) => (
   <div>
     {/* A changer !!!! !isLogged -> isLogged  */}
-    {!isLogged ? <Redirect to="/home" /> : <HomeVisitor />}
+    {isLogged ? <Redirect to="/home" /> : <HomeVisitor />}
   </div>
 );
 
