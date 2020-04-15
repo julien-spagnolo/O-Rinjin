@@ -16,69 +16,69 @@ class Service
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("service")
+     * @Groups("services")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=60)
-     * @Groups("service")
+     * @Groups("services")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("service")
+     * @Groups("services")
      */
     private $body;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups("service")
+     * @Groups("services")
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Groups("service")
+     * @Groups("services")
      */
     private $image;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups("service")
+     * @Groups("services")
      */
     private $active;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups("service")
+     * @Groups("services")
      */
     private $createdAT;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups("service")
+     * @Groups("services")
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="service")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("service")
+     * @Groups("services")
      */
     private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="service", orphanRemoval=true)
-     * @Groups("service")
+     * @Groups("services")
      */
     private $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ServiceCategory", inversedBy="services")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("service")
+     * @Groups("services")
      */
     private $serviceCategory;
 
