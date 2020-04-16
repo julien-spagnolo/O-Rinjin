@@ -17,102 +17,104 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("users")
+     * @Groups("users-list")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups("users")
+     * @Groups("users-list")
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups("users")
+     * @Groups("users-list")
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Groups("users")
+     * @Groups("users-list")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups("users")
+     * @Groups({"users-list","user-profile"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups("users")
+     * @Groups({"users-list","user-profile"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=70)
-     * @Groups("users")
+     * @Groups({"users-list","user-profile"})
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Groups("users")
+     * @Groups({"users-list","user-profile"})
      */
     private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups("users")
+     * @Groups({"users-list","user-profile"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=8)
-     * @Groups("users")
+     * @Groups({"users-list","user-profile"})
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="decimal", precision=11, scale=8)
-     * @Groups("users")
+     * @Groups({"users-list","user-profile"})
      */
     private $longitude;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups("users")
+     * @Groups({"users-list","user-profile"})
      */
     private $birthDate;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Groups("users")
+     * @Groups({"users-list","user-profile"})
      */
     private $avatar;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups("users")
+     * @Groups("users-list")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups("users")
+     * @Groups("users-list")
      */
     private $updatedAT;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="user", orphanRemoval=true)
+     * @Groups({"users-list","user-profile"})
      */
     private $service;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
+     * @Groups({"users-list","user-profile"})
      */
     private $comment;
 

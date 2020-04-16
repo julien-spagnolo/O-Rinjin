@@ -8,17 +8,18 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * @Route("/api", name="user_")
+ * @Route("/api", name="api_user_")
  */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/users", name="list",  methods={"GET"})
+     * @Route("/users", name="browse",  methods={"GET"})
      * @param UserRepository $userRepository
      * @param Serializer $serializer
      * @return void
@@ -26,9 +27,24 @@ class UserController extends AbstractController
     public function browse(UserRepository $userRepository, SerializerInterface $serializer)
     {
         $users = $userRepository->findAll();
-    
-        $data = $serializer->normalize($users, null, ['groups' => 'users']);
-    
+
+        $data = $serializer->normalize($users, null, ['groups' => 'users-list']);
+
+        return $this->json($data);
+    }
+
+    /**
+     * @Route("/users/{id}", name="read",  methods={"GET"}, requirements={"id"="\d+"})
+     * @param SerializerInterface $serializer
+     * @param UserRepository $userRepository
+     * @return void
+     */
+    public function read(UserRepository $userRepository, SerializerInterface $serializer, $id = null)
+    {
+        $user = $userRepository->find($id);
+
+        $data = $serializer->normalize($user, null, ['groups' => 'user-profile']);
+
         return $this->json($data);
     }
 
@@ -74,10 +90,9 @@ class UserController extends AbstractController
             ->setBirthDate(new \DateTime($birthDate))
             ->setAvatar($avatar);
 
-            $em->persist($user);
-            $em->flush();
+        $em->persist($user);
+        $em->flush();
 
-        return new JsonResponse(["success" => $user->getFirstName() . " has been registered!"], 200);
+        return new JsonResponse(["success" => $user->getFirstName() . " has been registered!"], Response::HTTP_CREATED);
     }
-
 }
