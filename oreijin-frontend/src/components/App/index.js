@@ -9,8 +9,8 @@ import { Switch, Route } from 'react-router-dom';
 import Header from '../../containers/Header';
 import Footer from '../Layout/Footer';
 import Home from '../../containers/Home';
-import HomeConnected from '../Home/HomeConnected';
-import Connexion from '../../containers/Login';
+import HomeConnected from '../../containers/HomeConnected';
+import Login from '../../containers/Login';
 import Register from '../../containers/Register';
 
 import Team from '../Layout/Team';
@@ -33,7 +33,7 @@ const App = ({ checkAuth }) => {
         {/* Render a component when its path matches the current URL */}
         <Route exact path="/" component={Home} />
         <Route exact path="/home" component={HomeConnected} />
-        <Route exact path="/login" component={Connexion} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/team" component={Team} />
         <Route exact path="/legal-mentions" component={LegalMentions} />

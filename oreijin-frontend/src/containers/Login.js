@@ -7,6 +7,7 @@ const mapStateToProps = (state) => ({
   username: state.user.form.username,
   password: state.user.form.password,
   isLogged: state.user.isLogged,
+  loading: state.user.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

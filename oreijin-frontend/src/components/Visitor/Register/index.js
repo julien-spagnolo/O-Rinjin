@@ -2,14 +2,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Header, Container, Segment, Form, Button
+  Header, Container, Segment, Form, Button, Message,
 } from 'semantic-ui-react';
 // == Import
 import './styles.scss';
 
 // == Composant
 const Register = ({
-  form, isTCChecked, onChangeField, onToggleTC, handleSubmit,
+  form, isTCChecked, onChangeField, onToggleTC, handleSubmit, loading, isSuccess, isError,
 }) => (
   <Container>
     <Segment raised>
@@ -19,7 +19,21 @@ const Register = ({
           evt.preventDefault();
           handleSubmit();
         }}
+        success
+        error
       >
+        <Message 
+          success
+          hidden={!isSuccess}
+          header="Inscription réussi !"
+          content="Allez sur la page de connexion !"
+        />
+        <Message 
+          error
+          hidden={!isError}
+          header="L'inscription a échoué !"
+          content="Veuillez remplir à nouveau le formulaire"
+        />
         <Form.Group>
           <Form.Field width={8}>
             <Form.Input
@@ -147,7 +161,7 @@ const Register = ({
             checked={isTCChecked}
           />
         </Form.Field>
-        <Button type="submit" className="register__form__button">Soumettre</Button>
+        <Button loading={loading} type="submit" className="register__form__button">Soumettre</Button>
       </Form>
     </Segment>
   </Container>
@@ -168,6 +182,9 @@ Register.propTypes = {
   onChangeField: PropTypes.func.isRequired,
   onToggleTC: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  isSuccess: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
 };
 // == Export
 export default Register;

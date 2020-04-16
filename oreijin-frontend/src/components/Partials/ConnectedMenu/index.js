@@ -8,7 +8,7 @@ import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
 const ConnectedMenu = ({ logout }) => (
-  <Grid columns={3} className="header__container__connected">
+  <Grid columns={3} style={{ marginBottom: '1.5rem' }} className="header__container__connected">
     <Grid.Row>
       <Grid.Column width="6" className="header__navlink__group" verticalAlign="middle" textAlign="right">
         <NavLink to="/home" activeClassName="active" className="header__navlink">Accueil</NavLink>

@@ -1,15 +1,18 @@
 import axios from 'axios';
+import jwt from 'jwt-decode';
 import {
   LOGIN, LOGOUT, CHECK_AUTH,
-  loginSuccess, logoutSuccess,
+  loginSuccess, logoutSuccess, loading
 } from '../actions/user';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
     case LOGIN:
+      store.dispatch(loading());
+      
       axios({
         method: 'post',
-        url: 'https://localhost:8001/api/login_check',
+        url: 'http://localhost:8000/api/login_check',
         withCredentials: true,
         data: {
           username: store.getState().user.form.username,
@@ -20,11 +23,20 @@ export default (store) => (next) => (action) => {
           console.log(response.data);
           // create a cookie for token
           // TODO set an expiration date
-          document.cookie = `token=${response.data.token}`;
-
-          store.dispatch(loginSuccess({
-            [response.data.token]: response.data.token,
+          
+          // decoding JWT token
+          const userInfos = jwt(response.data.token);
+          console.log(userInfos);
+          
+          store.dispatch(loginSuccess({    
+            roles: [...userInfos.roles],
+            email: userInfos.username,
+            id: userInfos.id,
+            firstname: userInfos.firstname,
+            lastname: userInfos.lastname,
           }));
+
+          document.cookie = `token=${response.data.token}`;
         })
         .catch((error) => {
           console.log(error);

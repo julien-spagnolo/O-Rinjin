@@ -1,11 +1,13 @@
-import { CHANGE_LOGIN_FIELD, LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/user';
+import { CHANGE_LOGIN_FIELD, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOADING } from '../actions/user';
 
 const initialState = {
   form: {
     username: '',
     password: '',
   },
+  infos: {},
   isLogged: false,
+  loading: false,
 };
 
 export default (state = initialState, action = {}) => {
@@ -20,18 +22,27 @@ export default (state = initialState, action = {}) => {
       };
     case LOGIN_SUCCESS:
       return {
-        ...state,
-        isLogged: true,
-        userInfos: {
+        form: {
+          username: '',
+          password: '',
+        },
+        infos: {
           ...action.payload,
         },
+        isLogged: true,
+        loading: false,
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
         isLogged: false,
-        userInfos: {},
+        infos: {},
       };
+    case LOADING:
+      return {
+        ...state,
+        loading: true,
+      }
     default:
       return state;
   }

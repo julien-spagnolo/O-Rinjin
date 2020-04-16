@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -13,16 +13,20 @@ const Login = ({
   handleLogin,
   username,
   password,
+  isLogged,
+  loading,
 }) => {
   const history = useHistory();
   const handleSubmit = () => {
-    console.log(`username: ${username}`);
-    console.log(`password: ${password}`);
     handleLogin();
-
-    // Redirect to page '/home' after submit
-    history.push('/home');
   };
+
+  // Called everytime 'isLogged' changes
+  useEffect(() => {
+    // Redirect to page '/home' after submit
+    // We redirect to /home only if isLogged is true
+    if(isLogged) history.push('/home');
+  }, [isLogged]);
 
   return (
     <Container>
@@ -53,7 +57,7 @@ const Login = ({
               changeField(event.target.value, event.target.name);
             }}
           />
-          <Button className="login__form__button">Connexion</Button>
+          <Button loading={loading} className="login__form__button">Connexion</Button>
         </Form>
       </Segment>
     </Container>
@@ -66,6 +70,8 @@ Login.propTypes = {
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default Login;

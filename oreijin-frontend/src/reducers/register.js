@@ -1,21 +1,23 @@
 import {
-  ON_CHANGE_FIELD, ON_TOGGLE_TC, ON_CHANGE_FIELD_LOCATION,
-  UPDATE_LOCATION, UPDATE_LOCATION_ERROR
+  ON_CHANGE_FIELD, ON_TOGGLE_TC, LOADING,
+  UPDATE_LOCATION, UPDATE_LOCATION_ERROR, HANDLE_SUBMIT_SUCCESS,
 } from '../actions/register';
 
 const initialState = {
   form: {
-    firstname: 'toto',
-    lastname: 'toto',
-    birthdate: '2020-01-01',
-    email: 'toto@toto',
-    password: 'toto',
-    address: '5 rue pasteur',
-    city: 'Paris',
-    postalcode: '71000',
+    firstname: '',
+    lastname: '',
+    birthdate: '',
+    email: '',
+    password: '',
+    address: '',
+    city: '',
+    postalcode: '',
   },
   isTCChecked: false,
-  errors: []
+  isSuccess: false,
+  isError: false,
+  loading: false,
 };
 
 const register = (state = initialState, action = {}) => {
@@ -45,9 +47,18 @@ const register = (state = initialState, action = {}) => {
       return {
         ...state,
         form: {...state.form},
-        errors: {
-          address: "Adresse introuvable, veuillez réessayer !",
-        },
+        isError: true,
+      };
+    case LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case HANDLE_SUBMIT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isSuccess: true,
       };
     default:
       return state;

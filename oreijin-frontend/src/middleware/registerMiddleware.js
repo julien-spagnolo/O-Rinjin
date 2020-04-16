@@ -1,7 +1,10 @@
 /* eslint-disable camelcase */
 import axios from 'axios';
 import slugify from 'slugify';
-import { HANDLE_SUBMIT, updateLocation, updateLocationError } from '../actions/register';
+import {
+  HANDLE_SUBMIT, loading, handleSubmitSuccess,
+  updateLocation, updateLocationError,
+} from '../actions/register';
 
 const mapboxApiToken = 'pk.eyJ1Ijoibm91Z2F6YWtpIiwiYSI6ImNrOG9uaG90NjA0MWEzZ242OWY5Z3o2ZGoifQ.lMw3p6r7TW0oBoxfMrzpFA';
 
@@ -11,6 +14,8 @@ const registerMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
     case HANDLE_SUBMIT:
+      store.dispatch(loading());
+
       axios({
         url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?&country=FR&postcode=${postalcode}&access_token=${mapboxApiToken}`,
         method: 'get',
@@ -24,7 +29,7 @@ const registerMiddleware = (store) => (next) => (action) => {
           }));
 
           axios({
-            url: "https://localhost:8001/register",
+            url: "http://localhost:8000/register",
             method: 'post',
             data: {
               ...store.getState().register.form,
@@ -32,7 +37,8 @@ const registerMiddleware = (store) => (next) => (action) => {
             },
           })
             .then((res) => {
-              console.log(res.data);
+              store.dispatch(handleSubmitSuccess());
+              
             })
             .catch((err) => {
               console.log(err);

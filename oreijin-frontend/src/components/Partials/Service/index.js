@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 // == Component
-const Service = ({ isLogged, title, description, type, category, pc, created_by }) => (
+const Service = ({ isLogged, title, body, type, createdAT }) => (
   <Feed as={Segment}>
     <Feed.Event
       as={Link}
@@ -22,13 +22,13 @@ const Service = ({ isLogged, title, description, type, category, pc, created_by 
           {/* <Feed.User>{` - ${created_by}`}</Feed.User> */}
         </Feed.Summary>
         <Feed.Extra text className="service__category">
-          {type} - {category}
+          {type ? 'Demande' : 'Proposition'} - Catégorie
         </Feed.Extra>
         <Feed.Extra text>
-          {description}
+          {body}
         </Feed.Extra>
         <Feed.Meta>
-          <Icon name="map marker alternate" />{pc}
+          <Icon name="map marker alternate" />69440 - créée le {createdAT}
         </Feed.Meta>
       </Feed.Content>
     </Feed.Event>
@@ -38,11 +38,11 @@ const Service = ({ isLogged, title, description, type, category, pc, created_by 
 // == Props types validation
 Service.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  pc: PropTypes.string.isRequired,
-  created_by: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  type: PropTypes.bool.isRequired,
+  // category: PropTypes.string.isRequired,
+  // pc: PropTypes.string.isRequired,
+  createdAT: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
 };
 

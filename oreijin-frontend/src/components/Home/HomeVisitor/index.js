@@ -29,7 +29,7 @@ const Main = () => (
     </Grid.Column>
     <Grid.Column tablet={16} computer={8}>
       <Divider />
-      <Header className="main__services__header" as="h2" textAlign="center"> Services disponibles </Header>
+      <Header className="main__services__header" as="h2" textAlign="center"> Annonces disponibles </Header>
       <Segment>
         {
           // Render a Service component for each service in data

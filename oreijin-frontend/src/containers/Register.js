@@ -9,6 +9,9 @@ const mapStateToProps = (state) => ({
   form: state.register.form,
   location: state.register.location,
   isTCChecked: state.register.isTCChecked,
+  loading: state.register.loading,
+  isError: state.register.isError,
+  isSuccess: state.register.isSuccess,
 });
 
 const mapDispatchToProps = (dispatch) => ({
