@@ -1,22 +1,27 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { Button, Form, Container, Segment, Header } from 'semantic-ui-react';
+import {
+  Button, Form, Container, Segment, Header,
+} from 'semantic-ui-react';
 
 import './styles.scss';
 
 const Login = ({
   changeField,
   handleLogin,
-  handleLogout,
   username,
   password,
-  isLogged,
 }) => {
+  const history = useHistory();
   const handleSubmit = () => {
     console.log(`username: ${username}`);
     console.log(`password: ${password}`);
     handleLogin();
+
+    // Redirect to page '/home' after submit
+    history.push('/home');
   };
 
   return (
@@ -59,10 +64,8 @@ const Login = ({
 Login.propTypes = {
   username: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
-  isLogged: PropTypes.bool.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  handleLogout: PropTypes.func.isRequired,
 };
 
 export default Login;

@@ -2,14 +2,14 @@
 import React from 'react';
 // == Import components that we need to use from Semantic-UI-React
 import {
-  Divider, Grid, Card, Header,
+  Divider, Grid, Card, Header, Feed, Segment, 
 } from 'semantic-ui-react';
 
 // == Import components
 import UserCard from '../../Partials/UserCard';
-import Service from '../../Partials/Service';
+import Service from '../../../containers/Service';
 import cards from '../../../cards';
-import services from '../../../services';
+import services from '../../../services-visitor';
 
 // == Import styles and assets
 import './styles.scss';
@@ -30,15 +30,16 @@ const Main = () => (
     <Grid.Column tablet={16} computer={8}>
       <Divider />
       <Header className="main__services__header" as="h2" textAlign="center"> Services disponibles </Header>
-      <Card.Group itemsPerRow="1">
+      <Segment>
         {
           // Render a Service component for each service in data
-          services.map(({ title, description, type }) => (
-            <Service key={title} title={title} description={description} type={type} />
+          services.map((service) => (
+            <Service key={service.title} {...service} />
           ))
         }
-      </Card.Group>
+      </Segment>
     </Grid.Column>
+    <Divider />
     <Grid.Column mobile={16} tablet={16} computer={16}>
       <Divider />
       <Header className="main__usercard__header" as="h2" textAlign="center"> Reijin les plus actifs </Header>

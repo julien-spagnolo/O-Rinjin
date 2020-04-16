@@ -1,0 +1,40 @@
+.ui.home__connected {
+  margin-top: 1em;
+}
+
+.ui.segment.home__connected__services {
+  margin: 0.5em 1.8em;
+}
+
+.ui.segment.home__connected__map {
+  margin: 0.5em 1.8em;
+}
+
+.home__connected {
+
+  &__services {
+
+    &__body {
+      overflow-y: auto;
+    }
+
+    &__filter {
+      background-color: #ccc;
+      margin-bottom: 1.5rem;
+    }
+
+    &__title {
+    }
+
+    &__add {
+      background-color: #777;
+    }
+
+  }
+
+  &__map {
+    border-radius: 1em;
+    background-color: #fff;
+  }
+
+}

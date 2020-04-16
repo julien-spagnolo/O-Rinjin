@@ -1,12 +1,15 @@
 // == Import npm
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 // == Import components from react-router
 import { Switch, Route } from 'react-router-dom';
 
 // == Import components
-import Header from '../Header';
+import Header from '../../containers/Header';
 import Footer from '../Layout/Footer';
-import HomeVisitor from '../Main/HomeVisitor';
+import Home from '../../containers/Home';
+import HomeConnected from '../Home/HomeConnected';
 import Connexion from '../../containers/Login';
 import Register from '../../containers/Register';
 
@@ -17,21 +20,32 @@ import LegalMentions from '../Layout/LegalMentions';
 import './styles.scss';
 
 // == Component
-const App = () => (
-  <div className="app">
-    <Header />
-    {/* Switch component: renders the first <Route> that matches the location  */}
-    <Switch>
-      {/* Render a component when its path matches the current URL */}
-      <Route exact path="/" component={HomeVisitor} />
-      <Route exact path="/login" component={Connexion} />
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/team" component={Team} />
-      <Route exact path="/legal-mentions" component={LegalMentions} />
-    </Switch>
-    <Footer />
-  </div>
-);
+const App = ({ checkAuth }) => {
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  return (
+    <div className="app">
+      <Header />
+      {/* Switch component: renders the first <Route> that matches the location  */}
+      <Switch>
+        {/* Render a component when its path matches the current URL */}
+        <Route exact path="/" component={Home} />
+        <Route exact path="/home" component={HomeConnected} />
+        <Route exact path="/login" component={Connexion} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/team" component={Team} />
+        <Route exact path="/legal-mentions" component={LegalMentions} />
+      </Switch>
+      <Footer />
+    </div>
+  );
+};
+
+App.propTypes = {
+  checkAuth: PropTypes.func.isRequired,  
+};
 
 // == Export
 export default App;

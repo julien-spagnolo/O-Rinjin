@@ -28,11 +28,11 @@ const registerMiddleware = (store) => (next) => (action) => {
             method: 'post',
             data: {
               ...store.getState().register.form,
-              avatar: "",
+              avatar: '',
             },
           })
-            .then((response) => {
-              console.log(response.data);
+            .then((res) => {
+              console.log(res.data);
             })
             .catch((err) => {
               console.log(err);

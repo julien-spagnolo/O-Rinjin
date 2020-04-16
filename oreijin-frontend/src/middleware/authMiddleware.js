@@ -1,6 +1,8 @@
 import axios from 'axios';
-
-import { LOGIN, LOGOUT } from '../actions/user';
+import {
+  LOGIN, LOGOUT, CHECK_AUTH,
+  loginSuccess, logoutSuccess,
+} from '../actions/user';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
@@ -16,6 +18,13 @@ export default (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response.data);
+          // create a cookie for token
+          // TODO set an expiration date
+          document.cookie = `token=${response.data.token}`;
+
+          store.dispatch(loginSuccess({
+            [response.data.token]: response.data.token,
+          }));
         })
         .catch((error) => {
           console.log(error);
@@ -24,7 +33,17 @@ export default (store) => (next) => (action) => {
       console.log(store.getState().user.form); */
       break;
     case LOGOUT:
-      console.log('bouton déconnexion cliqué');
+      // set an expiration date to delete
+      document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+      store.dispatch(logoutSuccess());
+      break;
+    case CHECK_AUTH:
+      // Check if the cookie exists
+      // source: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+      if (document.cookie.split(';').some((item) => item.trim().startsWith('token='))) {
+        store.dispatch(loginSuccess({}));
+      }
+      else return next(action);
       break;
     default:
       next(action);

@@ -15,10 +15,7 @@ const Footer = () => (
   <div className="footer">
     <Container>
       <Divider />
-      <Container text fluid textAlign="center">
-        Copyright © - All rights reserved ...
-      </Container>
-      <Grid columns={2}>
+      <Grid columns={3}>
         <Grid.Column>
           <Menu secondary text vertical>
             <Menu.Item>
@@ -29,8 +26,11 @@ const Footer = () => (
             </Menu.Item>
           </Menu>
         </Grid.Column>
-        <Grid.Column verticalAlign="bottom">
-          <Menu className="footer__networks" secondary icon>
+        <Grid.Column textAlign="center">
+          Copyright © - All rights reserved ...
+        </Grid.Column>
+        <Grid.Column verticalAlign="middle">
+          <Menu className="footer__networks" secondary icon stackable>
             <Menu.Item href="https://www.facebook.com" target="_blank" icon="facebook f" />
             <Menu.Item href="https://twitter.com" target="_blank" icon="twitter" />
             <Menu.Item href="https://www.youtube.com" target="_blank" icon="youtube" />
