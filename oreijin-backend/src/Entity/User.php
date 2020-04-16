@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -16,77 +17,92 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("users")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups("users")
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups("users")
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups("users")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups("users")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups("users")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=70)
+     * @Groups("users")
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Groups("users")
      */
     private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups("users")
      */
     private $city;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=8)
+     * @Groups("users")
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="decimal", precision=11, scale=8)
+     * @Groups("users")
      */
     private $longitude;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("users")
      */
     private $birthDate;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups("users")
      */
     private $avatar;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("users")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("users")
      */
     private $updatedAT;
 
@@ -141,7 +157,7 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'USER';
 
         return array_unique($roles);
     }

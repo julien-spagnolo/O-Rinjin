@@ -3,23 +3,42 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
+/**
+ * @Route("/api", name="user_")
+ */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/register", name="auth_register",  methods={"POST"})
+     * @Route("/users", name="list",  methods={"GET"})
+     * @param UserRepository $userRepository
+     * @param Serializer $serializer
+     * @return void
+     */
+    public function browse(UserRepository $userRepository, SerializerInterface $serializer)
+    {
+        $users = $userRepository->findAll();
+    
+        $data = $serializer->normalize($users, null, ['groups' => 'users']);
+    
+        return $this->json($data);
+    }
+
+    /**
+     * @Route("/register", name="register",  methods={"POST"})
      * @param Request $request
      * @param UserManagerInterface $userManager
      * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function register(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
+    public function create(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
     {
         $data = json_decode(
             $request->getContent(),
@@ -39,11 +58,12 @@ class UserController extends AbstractController
         $avatar = $data['avatar'];
 
         $user = new User();
+        $role = $user->getRoles();
         $encoded = $encoder->encodePassword($user, $plainPassword);
         $user
             ->setEmail($email)
             ->setPassword($encoded)
-            ->setRoles(['USER'])
+            ->setRoles($role)
             ->setFirstName($firstName)
             ->setLastName($lastName)
             ->setAddress($address)
@@ -59,4 +79,5 @@ class UserController extends AbstractController
 
         return new JsonResponse(["success" => $user->getFirstName() . " has been registered!"], 200);
     }
+
 }
