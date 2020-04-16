@@ -24,7 +24,7 @@ class ServiceCategory
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=70)
+     * @ORM\Column(type="string", length=150)
      */
     private $slug;
 
