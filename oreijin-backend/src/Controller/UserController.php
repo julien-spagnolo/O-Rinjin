@@ -13,13 +13,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
-/**
- * @Route("/api", name="api_user_")
- */
+
 class UserController extends AbstractController
 {
     /**
-     * @Route("/users", name="browse",  methods={"GET"})
+     * @Route("/api/users", name="browse",  methods={"GET"})
      * @param UserRepository $userRepository
      * @param Serializer $serializer
      * @return void
@@ -33,8 +31,8 @@ class UserController extends AbstractController
         return $this->json($data);
     }
 
-      /*  
-     * @Route("/users/{id}", name="read",  methods={"GET"}, requirements={"id"="\d+"})
+    /** 
+     * @Route("/api/users/{id}", name="read",  methods={"GET"}, requirements={"id"="\d+"})
      * @param SerializerInterface $serializer
      * @param UserRepository $userRepository
      * @return void
