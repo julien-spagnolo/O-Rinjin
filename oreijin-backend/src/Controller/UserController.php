@@ -33,7 +33,7 @@ class UserController extends AbstractController
         return $this->json($data);
     }
 
-    /**
+      /*  
      * @Route("/users/{id}", name="read",  methods={"GET"}, requirements={"id"="\d+"})
      * @param SerializerInterface $serializer
      * @param UserRepository $userRepository
