@@ -1,0 +1,45 @@
+App\Entity\Service:
+    service_{1..10}:
+      user: '@user_*'
+      serviceCategory: '@servicecategory_*'
+      title: "test"
+      body: "azeazeazeaez"
+      type: 0
+      active: 1
+      createdAt: '<dateTime()>'
+      image: '<imageUrl(640, 480)>'
+
+
+App\Entity\User:
+    user_{1..30}:
+      email: '<freeEmail()>'
+      roles: ['<jobTitle()>']
+      password: 'k&|X+a45*2['
+      firstName: '<firstName()>'
+      lastName: '<lastName()>'
+      address: '<address()>'
+      postalCode: <postcode()>
+      city: '<city()>'
+      latitude: <latitude(-90, 90)>
+      longitude: <longitude(-180, 180)>
+      birthDate: '<dateTime()>'
+      avatar: '<imageUrl(640, 480)>'
+      createdAt: '<dateTime()>'
+            
+                        
+App\Entity\ServiceCategory:
+    servicecategory_{1..10}:
+      title: '<sentence(6, true)>'
+      slug: '<slug()>'
+      createdAt: '<dateTime()>'
+         
+       
+     
+App\Entity\Comment: 
+   comment{1..50}: 
+      user: '@user_*'
+      service: '@service_*'
+      isBlocked: '<boolean(50)>'
+      createdAt: '<dateTime()>'
+      body: '<text(420)>'
+          
