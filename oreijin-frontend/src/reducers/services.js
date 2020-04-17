@@ -1,16 +1,23 @@
-import { GET_SERVICES_LIST_SUCCESS, ON_CHANGE_FIELD, ON_CHANGE_FIELD_TYPE } from '../actions/service';
+import {
+  GET_SERVICES_LIST_SUCCESS,
+  ON_CHANGE_FIELD,
+  ON_CHANGE_FIELD_TYPE,
+  ADD_SERVICE_SUCCESS,
+  ADD_SERVICE_ERROR
+} from '../actions/service';
 
 const initialState = {
   services: [],
   form: {
     title: '',
-    category: '',
+    service_category_id: '',
     body: '',
     type: 0,
     image: '',
     active: true,
-    createdBy: '',
-    updateBy: '',
+    user_id: '',
+    created_by: '',
+    update_by: '',
   },
 };
 
@@ -40,6 +47,14 @@ export default (state = initialState, action = {}) => {
           ...action.payload,
         },
       };
+    // case ADD_SERVICE_SUCCESS:
+    //   return {
+    //     ...state,
+    //     form: {
+    //       ...state.form,
+    //       ...action.payload,
+    //     },
+    //   };
     default:
       return state;
   }

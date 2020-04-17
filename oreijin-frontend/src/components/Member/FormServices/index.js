@@ -6,23 +6,34 @@ import {
 import { Link } from 'react-router-dom';
 import './styles.scss';
 
-const FormServices = ({ form, onChangeField, onChangeFieldType }) => {
+const FormServices = ({
+  form, onChangeField, onChangeFieldType, addService,
+}) => {
   // Static variable before getting categories from API
+
+  // TODO map on category list
+  // TODO return a list of objects with the shape of
+  // {
+  //   key: category.id,
+  //   text: category.title,
+  //   value: category.id,
+  // }
+
   const dropdownOptions = [
     {
       key: 'Aide à domicile',
       text: 'Aide à domicile',
-      value: 'Aide à domicile',
+      value: 0,
     },
     {
       key: 'Bricolage et dépannage',
       text: 'Bricolage et dépannage',
-      value: 'Bricolage et dépannage',
+      value: 1,
     },
     {
       key: 'Aide à la mobilité',
       text: 'Aide à la mobilité',
-      value: 'Aide à la mobilité',
+      value: 2,
     },
   ];
 
@@ -33,7 +44,7 @@ const FormServices = ({ form, onChangeField, onChangeFieldType }) => {
         <Form
           onSubmit={(evt) => {
             evt.preventDefault();
-            // TODO handleSubmit()
+            addService(form.created_by);
           }}
           success
           error
@@ -50,34 +61,32 @@ const FormServices = ({ form, onChangeField, onChangeFieldType }) => {
             header="L'inscription a échoué !"
             content="Veuillez remplir à nouveau le formulaire"
           /> */}
-          <Form.Group>
-            <Form.Field width={10}>
-              <Form.Input
-                required
-                label="Intitulé du service"
-                placeholder="Intitulé du service"
-                type="text"
-                name="title"
-                onChange={(evt) => {
-                  onChangeField(evt.target.name, evt.target.value);
-                }}
-                value={form.title}
-              />
-            </Form.Field>
-            <Form.Field
+          <Form.Field width={10}>
+            <Form.Input
               required
-              width={4}
-              control={Select}
-              label="Catégories"
-              options={dropdownOptions}
-              placeholder="Choisir une catégorie"
-              clearable
-              name="category"
+              label="Intitulé du service"
+              placeholder="Intitulé du service"
+              type="text"
+              name="title"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
               }}
+              value={form.title}
             />
-          </Form.Group>
+          </Form.Field>
+          <Form.Field
+            required
+            width={4}
+            control={Select}
+            label="Catégorie"
+            options={dropdownOptions}
+            placeholder="Choisir une catégorie"
+            clearable
+            name="category"
+            onChange={(evt, { value }) => {
+              onChangeField('service_category_id', value);
+            }}
+          />
           <Form.Field>
             Type de service
           </Form.Field>
@@ -165,11 +174,12 @@ FormServices.propTypes = {
     body: PropTypes.string.isRequired,
     type: PropTypes.number.isRequired,
     image: PropTypes.string,
-    createdBy: PropTypes.string,
-    updateBy: PropTypes.string,
+    created_by: PropTypes.number,
+    update_by: PropTypes.string,
   }).isRequired,
   onChangeField: PropTypes.func.isRequired,
   onChangeFieldType: PropTypes.func.isRequired,
+  addService: PropTypes.func.isRequired,
 };
 
 export default FormServices;
