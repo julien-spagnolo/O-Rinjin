@@ -13,7 +13,6 @@ export default (store) => (next) => (action) => {
       axios({
         method: 'post',
         url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/api/login_check',
-
         withCredentials: true,
         data: {
           username: store.getState().user.form.username,

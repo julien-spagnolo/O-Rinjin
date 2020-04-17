@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Header, Container, Segment, Form, Button, Select, Radio, Message, Divider,
+  Header, Container, Segment, Form, Button, Select, Radio, Message,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './styles.scss';
