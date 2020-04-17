@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Header, Container, Segment, Form, Button, Select, Radio, Message,
+  Header, Container, Segment, Form, Button, Select, Radio, Message, Divider,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './styles.scss';
@@ -67,7 +67,7 @@ const FormServices = ({
             header="La création du service a échoué !"
             content="Veuillez remplir à nouveau le formulaire"
           />
-          <Form.Field width={10}>
+          <Form.Field width={16}>
             <Form.Input
               required
               label="Intitulé du service"
@@ -80,47 +80,51 @@ const FormServices = ({
               value={form.title}
             />
           </Form.Field>
-          <Form.Field
-            required
-            width={4}
-            control={Select}
-            label="Catégorie"
-            options={dropdownOptions}
-            placeholder="Choisir une catégorie"
-            clearable
-            name="category"
-            onChange={(evt, { value }) => {
-              onChangeField('service_category_id', value);
-            }}
-          />
-          <Form.Field>
-            Type de service
-          </Form.Field>
-          <Form.Field>
-            <Radio
-              label="Demande"
-              name="type"
-              value={0}
-              checked={form.type === 0}
-              onChange={(evt, { value }) => {
-                onChangeFieldType(value);
-              }}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Radio
-              label="Proposition"
-              name="type"
-              value={1}
-              checked={form.type === 1}
-              onChange={(evt, { value }) => {
-                onChangeFieldType(value);
-              }}
-            />
-          </Form.Field>
           <Form.Group>
             <Form.Field
-              width={4}
+              required
+              width={8}
+              control={Select}
+              label="Catégorie"
+              options={dropdownOptions}
+              placeholder="Choisir une catégorie"
+              clearable
+              name="category"
+              onChange={(evt, { value }) => {
+                onChangeField('service_category_id', value);
+              }}
+            />
+            <Form.Group grouped>
+              <Form.Field>
+                Type de service
+              </Form.Field>
+              <Form.Field>
+                <Radio
+                  label="Demande"
+                  name="type"
+                  value={0}
+                  checked={form.type === 0}
+                  onChange={(evt, { value }) => {
+                    onChangeFieldType(value);
+                  }}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Radio
+                  label="Proposition"
+                  name="type"
+                  value={1}
+                  checked={form.type === 1}
+                  onChange={(evt, { value }) => {
+                    onChangeFieldType(value);
+                  }}
+                />
+              </Form.Field>
+            </Form.Group>
+          </Form.Group>
+          <Form.Group widths={3}>
+            <Form.Field
+              // width={4}
               control={Select}
               label="Tag 1"
               options={dropdownOptions}
@@ -131,7 +135,7 @@ const FormServices = ({
               // }}
             />
             <Form.Field
-              width={4}
+              // width={4}
               control={Select}
               label="Tag 2"
               options={dropdownOptions}
@@ -142,7 +146,7 @@ const FormServices = ({
               // }}
             />
             <Form.Field
-              width={4}
+              // width={4}
               control={Select}
               label="Tag 3"
               options={dropdownOptions}
@@ -153,9 +157,7 @@ const FormServices = ({
               // }}
             />
           </Form.Group>
-          <Form.Button>
-            Importer une image
-          </Form.Button>
+          <Button style={{ marginBottom: '0.7rem' }} content="Importer une image" icon="upload" labelPosition="left" />
           <Form.TextArea
             label="Description du service"
             placeholder="Ajoutez une description ... "
@@ -164,6 +166,7 @@ const FormServices = ({
             onChange={(evt) => {
               onChangeField(evt.target.name, evt.target.value);
             }}
+            style={{ minHeight: 150 }}
           />
           {/* TODO loading={loading}  */}
           <Button as={Link} to="/home" secondary>Annuler</Button>
@@ -188,6 +191,7 @@ FormServices.propTypes = {
   onChangeField: PropTypes.func.isRequired,
   onChangeFieldType: PropTypes.func.isRequired,
   addService: PropTypes.func.isRequired,
+  resetServiceForm: PropTypes.func.isRequired,
 };
 
 export default FormServices;
