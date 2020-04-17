@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Header, Container, Segment, Form, Button, Select, Radio,
+  Header, Container, Segment, Form, Button, Select, Radio, Message,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './styles.scss';
 
 const FormServices = ({
-  form, onChangeField, onChangeFieldType, addService,
+  form, onChangeField, onChangeFieldType, addService, isSuccess, isError, resetServiceForm,
 }) => {
   // Static variable before getting categories from API
 
@@ -37,6 +37,12 @@ const FormServices = ({
     },
   ];
 
+  useEffect(() => {
+    console.log('//== useEffect !!!');
+    // TODO action to reset states
+    resetServiceForm();
+  }, []);
+
   return (
     <Container>
       <Segment raised>
@@ -49,18 +55,18 @@ const FormServices = ({
           success
           error
         >
-          {/* <Message
+          <Message
             success
             hidden={!isSuccess}
-            header="Inscription réussi !"
-            content="Allez sur la page de connexion !"
+            header="Création d'un service réussi !"
+            content="Vous n'avez plus qu'a attendre une réponse d'un de nos utilisateurs !"
           />
           <Message
             error
             hidden={!isError}
-            header="L'inscription a échoué !"
+            header="La création du service a échoué !"
             content="Veuillez remplir à nouveau le formulaire"
-          /> */}
+          />
           <Form.Field width={10}>
             <Form.Input
               required
@@ -177,6 +183,8 @@ FormServices.propTypes = {
     created_by: PropTypes.number,
     update_by: PropTypes.string,
   }).isRequired,
+  isSuccess: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
   onChangeField: PropTypes.func.isRequired,
   onChangeFieldType: PropTypes.func.isRequired,
   addService: PropTypes.func.isRequired,

@@ -35,6 +35,8 @@ export default (store) => (next) => (action) => {
         created_by: action.payload,
         user_id: action.payload,
       });
+
+      store.dispatch(addServiceError());
       // axios({
       //   method: 'post',
       //   url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/api/services/add',

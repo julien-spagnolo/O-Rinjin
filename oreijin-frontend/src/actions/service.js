@@ -5,6 +5,7 @@ export const ON_CHANGE_FIELD_TYPE = 'ON_CHANGE_FIELD_TYPE';
 export const ADD_SERVICE = 'ADD_SERVICE';
 export const ADD_SERVICE_SUCCESS = 'ADD_SERVICE_SUCCESS';
 export const ADD_SERVICE_ERROR = 'ADD_SERVICE_ERROR';
+export const RESET_SERVICE_FORM = 'RESET_SERVICE_FORM';
 
 export const getServicesList = () => ({
   type: GET_SERVICES_LIST,
@@ -37,4 +38,8 @@ export const addServiceSuccess = (payload) => ({
 
 export const addServiceError = () => ({
   type: ADD_SERVICE_ERROR,
+});
+
+export const resetServiceForm = () => ({
+  type: RESET_SERVICE_FORM,
 });
