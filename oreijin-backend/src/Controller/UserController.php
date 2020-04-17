@@ -3,94 +3,116 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserType;
+use App\Manager\UserManager;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\AbstractList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 
 class UserController extends AbstractController
 {
-    /**
-     * @Route("/api/users", name="browse",  methods={"GET"})
-     * @param UserRepository $userRepository
-     * @param Serializer $serializer
-     * @return void
-     */
-    public function browse(UserRepository $userRepository, SerializerInterface $serializer)
+    private $userManager;
+
+    public function __construct(UserManager $userManager)
     {
-        $users = $userRepository->findAll();
+        $this->userManager = $userManager;
+    }
 
-        $data = $serializer->normalize($users, null, ['groups' => 'users-list']);
+    /**
+     * @Route(
+     *      "/api/users", 
+     *      name="user_browse",  
+     *      methods={"GET"}
+     * )
+     */
+    public function browse(): Response
+    {
+        $users = $this->userManager->browse();
 
-        return $this->json($data);
+        $users = $this->userManager->serialize($users, ['groups' => 'users-list']);
+
+        return new Response($users);
     }
 
     /** 
-     * @Route("/api/users/{id}", name="read",  methods={"GET"}, requirements={"id"="\d+"})
-     * @param SerializerInterface $serializer
-     * @param UserRepository $userRepository
-     * @return void
+     * @Route(
+     *      "/api/users/{id}", 
+     *      name="user_read",  
+     *      methods={"GET"}, 
+     *      requirements={"id"="\d+"}
+     * )
      */
-    public function read(UserRepository $userRepository, SerializerInterface $serializer, $id = null)
+    public function read(User $user): Response
     {
-        $user = $userRepository->find($id);
+        // $user = $userRepository->find($id);
+        // $data = $serializer->normalize($user, null, ['groups' => 'user-profile']);
 
-        $data = $serializer->normalize($user, null, ['groups' => 'user-profile']);
+        $user = $this->userManager->serialize($user, ['groups' => 'user-profile']);
 
-        return $this->json($data);
+        return new Response($user);
     }
 
     /**
-     * @Route("/register", name="register",  methods={"POST"})
-     * @param Request $request
-     * @param UserManagerInterface $userManager
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route(
+     *      "/register", 
+     *      name="user_register",  
+     *      methods={"POST"}
+     * )
      */
-    public function create(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
+    public function add(Request $request): JsonResponse
     {
-        $data = json_decode(
-            $request->getContent(),
-            true
+
+        $data = $request->getContent();
+        $user = $this->userManager->create($data);
+
+        dd($user);
+
+        return $this->json($user, JsonResponse::HTTP_CREATED);
+    }
+
+    /**
+     * @Route(
+     *      "/api/users/{id}",
+     *      name="user_edit",
+     *      methods={"PUT"},
+     *      requirements={"id"="\d+"}
+     * )
+     */
+    public function edit(Request $request, User $user): JsonResponse
+    {
+        $data = $request->getContent();
+        $user = $this->userManager->update($user, $data);
+
+        return $this->json($user);
+    }
+
+    /**
+     * @Route(
+     *     "/api/users/{id}",
+     *     name="delete_album",
+     *     methods={"DELETE"},
+     *     requirements={"id"="\d+"}
+     * )
+     * @param int $id
+     *
+     * @return JsonResponse
+     */
+    public function delete(User $user): JsonResponse
+    {
+        $this->userManager->delete($user);
+
+        return new JsonResponse(
+            null,
+            JsonResponse::HTTP_NO_CONTENT
         );
-
-        $plainPassword = $data['password'];
-        $email = $data['email'];
-        $firstName = $data['firstname'];
-        $lastName = $data['lastname'];
-        $address = $data['address'];
-        $postalCode = $data['postalcode'];
-        $city = $data['city'];
-        $latitude = $data['latitude'];
-        $longitude = $data['longitude'];
-        $birthDate = $data['birthdate'];
-        $avatar = $data['avatar'];
-
-        $user = new User();
-        $role = $user->getRoles();
-        $encoded = $encoder->encodePassword($user, $plainPassword);
-        $user
-            ->setEmail($email)
-            ->setPassword($encoded)
-            ->setRoles($role)
-            ->setFirstName($firstName)
-            ->setLastName($lastName)
-            ->setAddress($address)
-            ->setPostalCode($postalCode)
-            ->setCity($city)
-            ->setLatitude($latitude)
-            ->setLongitude($longitude)
-            ->setBirthDate(new \DateTime($birthDate))
-            ->setAvatar($avatar);
-
-        $em->persist($user);
-        $em->flush();
-
-        return new JsonResponse(["success" => $user->getFirstName() . " has been registered!"], Response::HTTP_CREATED);
     }
 }

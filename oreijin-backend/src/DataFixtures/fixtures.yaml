@@ -24,7 +24,6 @@ App\Entity\User:
       longitude: <longitude(-180, 180)>
       birthDate: '<dateTime()>'
       avatar: '<imageUrl(640, 480)>'
-      createdAt: '<dateTime()>'
             
                         
 App\Entity\ServiceCategory:

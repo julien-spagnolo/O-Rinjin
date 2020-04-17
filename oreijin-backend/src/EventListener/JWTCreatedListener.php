@@ -27,7 +27,7 @@ class JWTCreatedListener{
         }
 
         $user = $token->getUser();
-
+        
         if (!$user instanceof UserInterface) {
             throw new AccessDeniedException();
         }

@@ -5,14 +5,18 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -24,6 +28,8 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups("users-list")
+     * @Assert\Email
+     * @Assert\NotBlank
      */
     private $email;
 
@@ -36,7 +42,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Groups("users-list")
+     * 
      */
     private $password;
 
@@ -95,18 +101,6 @@ class User implements UserInterface
     private $avatar;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @Groups("users-list")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Groups("users-list")
-     */
-    private $updatedAT;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="user", orphanRemoval=true)
      * @Groups({"users-list","user-profile"})
      */
@@ -118,11 +112,17 @@ class User implements UserInterface
      */
     private $comment;
 
+    /**
+     * @var string
+     * 
+     * @Assert\NotBlank(groups={"register", "update-password"})
+     */
+    private $plainPassword;
+
     public function __construct()
     {
         $this->service = new ArrayCollection();
         $this->comment = new ArrayCollection();
-        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -200,7 +200,7 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getFirstName(): ?string
@@ -311,26 +311,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getPlainPassword(): ?string
     {
-        return $this->createdAt;
+        return $this->plainPassword;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setPlainPassword(?string $plainPassword): self
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAT(): ?\DateTimeInterface
-    {
-        return $this->updatedAT;
-    }
-
-    public function setUpdatedAT(?\DateTimeInterface $updatedAT): self
-    {
-        $this->updatedAT = $updatedAT;
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
