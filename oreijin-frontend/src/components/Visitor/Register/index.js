@@ -23,7 +23,7 @@ const Register = ({
         error
       >
 
-        <Message 
+        <Message
           success
           hidden={!isSuccess}
           header="Inscription réussi !"

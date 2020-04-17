@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Header, Container, Segment, Form, Button, Select, Radio,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './styles.scss';
 
-const FormServices = () => {
+const FormServices = ({ form, onChangeField, onChangeFieldType }) => {
   // Static variable before getting categories from API
   const dropdownOptions = [
     {
@@ -25,8 +26,6 @@ const FormServices = () => {
     },
   ];
 
-  const value = '1';
-
   return (
     <Container>
       <Segment raised>
@@ -39,13 +38,13 @@ const FormServices = () => {
           success
           error
         >
-          {/* <Message 
+          {/* <Message
             success
             hidden={!isSuccess}
             header="Inscription réussi !"
             content="Allez sur la page de connexion !"
           />
-          <Message 
+          <Message
             error
             hidden={!isError}
             header="L'inscription a échoué !"
@@ -60,9 +59,9 @@ const FormServices = () => {
                 type="text"
                 name="title"
                 onChange={(evt) => {
-                  // onChangeField(evt.target.name, evt.target.value);
+                  onChangeField(evt.target.name, evt.target.value);
                 }}
-                value="{form.firstname}"
+                value={form.title}
               />
             </Form.Field>
             <Form.Field
@@ -73,6 +72,10 @@ const FormServices = () => {
               options={dropdownOptions}
               placeholder="Choisir une catégorie"
               clearable
+              name="category"
+              onChange={(evt) => {
+                onChangeField(evt.target.name, evt.target.value);
+              }}
             />
           </Form.Group>
           <Form.Field>
@@ -81,18 +84,23 @@ const FormServices = () => {
           <Form.Field>
             <Radio
               label="Demande"
-              name="radioGroup"
-              value="1"
-              checked={value === '1'}
-
+              name="type"
+              value={0}
+              checked={form.type === 0}
+              onChange={(evt, { value }) => {
+                onChangeFieldType(value);
+              }}
             />
           </Form.Field>
           <Form.Field>
             <Radio
               label="Proposition"
-              name="radioGroup"
-              value="2"
-              checked={value === '2'}
+              name="type"
+              value={1}
+              checked={form.type === 1}
+              onChange={(evt, { value }) => {
+                onChangeFieldType(value);
+              }}
             />
           </Form.Field>
           <Form.Group>
@@ -103,6 +111,9 @@ const FormServices = () => {
               options={dropdownOptions}
               placeholder="Tag1"
               clearable
+              // onChange={(evt) => {
+              //   onChangeField(evt.target.name, evt.target.value);
+              // }}
             />
             <Form.Field
               width={4}
@@ -111,6 +122,9 @@ const FormServices = () => {
               options={dropdownOptions}
               placeholder="Tag 2"
               clearable
+              // onChange={(evt) => {
+              //   onChangeField(evt.target.name, evt.target.value);
+              // }}
             />
             <Form.Field
               width={4}
@@ -119,6 +133,9 @@ const FormServices = () => {
               options={dropdownOptions}
               placeholder="Tag 3"
               clearable
+              // onChange={(evt) => {
+              //   onChangeField(evt.target.name, evt.target.value);
+              // }}
             />
           </Form.Group>
           <Form.Button>
@@ -127,6 +144,11 @@ const FormServices = () => {
           <Form.TextArea
             label="Description du service"
             placeholder="Ajoutez une description ... "
+            value={form.body}
+            name="body"
+            onChange={(evt) => {
+              onChangeField(evt.target.name, evt.target.value);
+            }}
           />
           {/* TODO loading={loading}  */}
           <Button as={Link} to="/home" secondary>Annuler</Button>
@@ -136,4 +158,18 @@ const FormServices = () => {
     </Container>
   );
 };
+
+FormServices.propTypes = {
+  form: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    type: PropTypes.number.isRequired,
+    image: PropTypes.string,
+    createdBy: PropTypes.string,
+    updateBy: PropTypes.string,
+  }).isRequired,
+  onChangeField: PropTypes.func.isRequired,
+  onChangeFieldType: PropTypes.func.isRequired,
+};
+
 export default FormServices;

@@ -50,7 +50,7 @@ const App = ({ checkAuth }) => {
 };
 
 App.propTypes = {
-  checkAuth: PropTypes.func.isRequired,  
+  checkAuth: PropTypes.func.isRequired,
 };
 
 // == Export
