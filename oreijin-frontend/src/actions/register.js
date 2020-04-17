@@ -4,7 +4,8 @@ export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 export const UPDATE_LOCATION_ERROR = 'UPDATE_LOCATION_ERROR';
 export const HANDLE_SUBMIT = 'HANDLE_SUBMIT';
 export const HANDLE_SUBMIT_SUCCESS = 'HANDLE_SUBMIT_SUCCESS';
-export const LOADING = 'LOADING';
+
+export const LOADING_REGISTER = 'LOADING_REGISTER';
 // export const HANDLE_SUBMIT_ERROR = 'HANDLE_SUBMIT_ERROR';
 
 
@@ -23,7 +24,8 @@ export const handleSubmit = () => ({
 
 export const handleSubmitSuccess = () => ({
   type: HANDLE_SUBMIT_SUCCESS,
-})
+
+});
 
 export const updateLocation = (payload) => ({
   type: UPDATE_LOCATION,
@@ -35,5 +37,6 @@ export const updateLocationError = () => ({
 });
 
 export const loading = () => ({
-  type: LOADING,
-})
+
+  type: LOADING_REGISTER,
+});

@@ -2,17 +2,21 @@ import axios from 'axios';
 import jwt from 'jwt-decode';
 import {
   LOGIN, LOGOUT, CHECK_AUTH,
-  loginSuccess, logoutSuccess, loading
+
+  loginSuccess, logoutSuccess, loginLoading,
+
 } from '../actions/user';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
     case LOGIN:
-      store.dispatch(loading());
-      
+
+      store.dispatch(loginLoading());
+
       axios({
         method: 'post',
-        url: 'http://localhost:8000/api/login_check',
+        url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/api/login_check',
+
         withCredentials: true,
         data: {
           username: store.getState().user.form.username,
@@ -20,29 +24,23 @@ export default (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response.data);
-          // create a cookie for token
-          // TODO set an expiration date
-          
           // decoding JWT token
           const userInfos = jwt(response.data.token);
-          console.log(userInfos);
-          
-          store.dispatch(loginSuccess({    
+          store.dispatch(loginSuccess({
             roles: [...userInfos.roles],
             email: userInfos.username,
             id: userInfos.id,
             firstname: userInfos.firstname,
             lastname: userInfos.lastname,
           }));
+          // create a cookie for token
+          // TODO set an expiration date
 
           document.cookie = `token=${response.data.token}`;
         })
         .catch((error) => {
           console.log(error);
         });
-      /* console.log('bouton connexion cliqué');
-      console.log(store.getState().user.form); */
       break;
     case LOGOUT:
       // set an expiration date to delete

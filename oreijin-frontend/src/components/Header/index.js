@@ -5,7 +5,7 @@ import { Responsive, Menu, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 import VisitorDropdown from '../Partials/VisitorDropdown';
-import ConnectedDropdown from '../Partials/ConnectedDropdown';
+import ConnectedDropdown from '../../containers/ConnectedDropdown';
 import VisitorMenu from '../Partials/VisitorMenu';
 import ConnectedMenu from '../../containers/ConnectedMenu';
 

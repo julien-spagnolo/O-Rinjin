@@ -1,4 +1,5 @@
-import { CHANGE_LOGIN_FIELD, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOADING } from '../actions/user';
+import { CHANGE_LOGIN_FIELD, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_LOADING } from '../actions/user';
+
 
 const initialState = {
   form: {
@@ -38,7 +39,9 @@ export default (state = initialState, action = {}) => {
         isLogged: false,
         infos: {},
       };
-    case LOADING:
+
+    case LOGIN_LOADING:
+
       return {
         ...state,
         loading: true,

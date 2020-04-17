@@ -1,5 +1,7 @@
 import {
-  ON_CHANGE_FIELD, ON_TOGGLE_TC, LOADING,
+
+  ON_CHANGE_FIELD, ON_TOGGLE_TC, LOADING_REGISTER,
+
   UPDATE_LOCATION, UPDATE_LOCATION_ERROR, HANDLE_SUBMIT_SUCCESS,
 } from '../actions/register';
 
@@ -41,15 +43,17 @@ const register = (state = initialState, action = {}) => {
         form: {
           ...state.form,
           ...action.payload,
-        }
+        },
       };
     case UPDATE_LOCATION_ERROR:
       return {
         ...state,
-        form: {...state.form},
+
+        form: { ...state.form },
         isError: true,
       };
-    case LOADING:
+    case LOADING_REGISTER:
+
       return {
         ...state,
         loading: true,

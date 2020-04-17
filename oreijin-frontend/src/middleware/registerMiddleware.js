@@ -29,7 +29,7 @@ const registerMiddleware = (store) => (next) => (action) => {
           }));
 
           axios({
-            url: "http://localhost:8000/register",
+            url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/register',
             method: 'post',
             data: {
               ...store.getState().register.form,
@@ -38,7 +38,7 @@ const registerMiddleware = (store) => (next) => (action) => {
           })
             .then((res) => {
               store.dispatch(handleSubmitSuccess());
-              
+
             })
             .catch((err) => {
               console.log(err);

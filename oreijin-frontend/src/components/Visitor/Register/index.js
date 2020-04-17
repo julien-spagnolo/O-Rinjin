@@ -22,13 +22,15 @@ const Register = ({
         success
         error
       >
+
         <Message 
           success
           hidden={!isSuccess}
           header="Inscription réussi !"
           content="Allez sur la page de connexion !"
         />
-        <Message 
+
+        <Message
           error
           hidden={!isError}
           header="L'inscription a échoué !"

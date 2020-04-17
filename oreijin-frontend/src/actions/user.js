@@ -10,7 +10,8 @@ export const LOGOUT_ERROR = 'LOGOUT_ERROR';
 
 export const CHECK_AUTH = 'CHECK_AUTH';
 
-export const LOADING = 'LOADING';
+export const LOGIN_LOADING = 'LOADING';
+
 
 export const changeLoginField = (value, name) => ({
   type: CHANGE_LOGIN_FIELD,
@@ -45,6 +46,6 @@ export const checkAuth = () => ({
   type: CHECK_AUTH,
 });
 
-export const loading = () => ({
-  type: LOADING,
+export const loginLoading = () => ({
+  type: LOGIN_LOADING,
 });
