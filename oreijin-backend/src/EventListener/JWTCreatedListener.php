@@ -39,6 +39,9 @@ class JWTCreatedListener{
         $payload['id'] = $user->getId();
         $payload['firstname'] = $user->getFirstName();
         $payload['lastname'] = $user->getLastName();
+        $payload['address'] = $user->getAddress();
+        $payload['latitude'] = $user->getLatitude();
+        $payload['longitude'] = $user->getLongitude();
 
         // unset($payload['roles']);
     
