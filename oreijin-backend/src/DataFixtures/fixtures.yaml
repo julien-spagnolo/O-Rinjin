@@ -3,7 +3,7 @@ App\Entity\Service:
       user: '@user_*'
       serviceCategory: '@servicecategory_*'
       title: "test"
-      body: "azeazeazeaez"
+      body: <text()>
       type: 0
       active: 1
       createdAt: '<dateTime()>'
@@ -13,11 +13,11 @@ App\Entity\Service:
 App\Entity\User:
     user_{1..30}:
       email: '<freeEmail()>'
-      roles: ['<jobTitle()>']
-      password: 'k&|X+a45*2['
+      roles: ["ADMIN"]
+      password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$24/CSMrt81aExnblf9ZwMQ\$aM3QW9kZljYXWS4tL++n3C70sqRYZuLPR0byl0Ud1uk'
       firstName: '<firstName()>'
       lastName: '<lastName()>'
-      address: '<address()>'
+      address: '<streetAddress()>'
       postalCode: <postcode()>
       city: '<city()>'
       latitude: <latitude(-90, 90)>
@@ -42,4 +42,3 @@ App\Entity\Comment:
       isBlocked: '<boolean(50)>'
       createdAt: '<dateTime()>'
       body: '<text(420)>'
-          

@@ -22,8 +22,6 @@ class JWTCreatedListener{
      */
     public function onJWTCreated(JWTCreatedEvent $event)
     {
-        // dd($event);
-
         if (!$token = $this->tokenStorage->getToken()) {
             throw new AccessDeniedException();
         }
@@ -42,8 +40,6 @@ class JWTCreatedListener{
         $payload['address'] = $user->getAddress();
         $payload['latitude'] = $user->getLatitude();
         $payload['longitude'] = $user->getLongitude();
-
-        // unset($payload['roles']);
     
         $event->setData($payload);
     }
