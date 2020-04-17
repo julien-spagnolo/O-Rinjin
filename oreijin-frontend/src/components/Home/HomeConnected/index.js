@@ -20,7 +20,7 @@ const HomeConnected = ({ getServicesList, services }) => {
   return (
     <Grid>
       <Grid.Row divided>
-        <Grid.Column mobile={16} tablet={16} computer={9}>
+        <Grid.Column mobile={16} tablet={16} computer={8}>
           <Segment className="home__connected__services" raised>
             <Header as="h2" dividing textAlign="center" className="home__connected__services__title">ANNONCES</Header>
             <div className="home__connected__services__filter">Emplacement des filtres</div>
@@ -34,7 +34,7 @@ const HomeConnected = ({ getServicesList, services }) => {
             </Segment>
           </Segment>
         </Grid.Column>
-        <Grid.Column mobile={16} tablet={16} computer={7}>
+        <Grid.Column mobile={16} tablet={16} computer={8}>
           <Segment style={{ height: '100vh', overflow: 'hidden' }} className="home__connected__map" raised>
             <Map />
           </Segment>
