@@ -25,7 +25,7 @@ const Login = ({
   useEffect(() => {
     // Redirect to page '/home' after submit
     // We redirect to /home only if isLogged is true
-    if(isLogged) history.push('/home');
+    if (isLogged) history.push('/home');
   }, [isLogged]);
 
   return (

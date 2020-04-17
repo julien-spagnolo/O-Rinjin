@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { 
+import {
   Button, Image, Grid, Icon,
 } from 'semantic-ui-react';
 import { NavLink, Link } from 'react-router-dom';
@@ -9,13 +9,13 @@ import { NavLink, Link } from 'react-router-dom';
 import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
-const ConnectedMenu = ({ logout }) => (
+const ConnectedMenu = ({ logout, user }) => (
   <Grid columns={3} style={{ marginBottom: '1.5rem' }} className="header__container__connected">
     <Grid.Row>
       <Grid.Column width="6" className="header__navlink__group" verticalAlign="middle" textAlign="right">
         <NavLink to="/home" activeClassName="active" className="header__navlink">Accueil</NavLink>
-        <NavLink exact to="/user" activeClassName="active" className="header__navlink">Profil</NavLink>
-        <NavLink exact to="/user/services" activeClassName="active" className="header__navlink">Mes services</NavLink>
+        <NavLink exact to={`/${user}`} activeClassName="active" className="header__navlink">Profil</NavLink>
+        <NavLink exact to={`/${user}/services`} activeClassName="active" className="header__navlink">Mes services</NavLink>
       </Grid.Column>
 
       <Grid.Column width="4" className="header__logo__connected" textAlign="center">
@@ -43,6 +43,7 @@ const ConnectedMenu = ({ logout }) => (
 
 ConnectedMenu.propTypes = {
   logout: PropTypes.func.isRequired,
+  user: PropTypes.string.isRequired,
 };
 
 export default ConnectedMenu;

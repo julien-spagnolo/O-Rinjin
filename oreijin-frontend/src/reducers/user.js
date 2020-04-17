@@ -1,4 +1,6 @@
-import { CHANGE_LOGIN_FIELD, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_LOADING } from '../actions/user';
+import {
+  CHANGE_LOGIN_FIELD, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_LOADING,
+} from '../actions/user';
 
 
 const initialState = {
@@ -45,7 +47,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: true,
-      }
+      };
     default:
       return state;
   }

@@ -2,21 +2,17 @@ import axios from 'axios';
 import jwt from 'jwt-decode';
 import {
   LOGIN, LOGOUT, CHECK_AUTH,
-
   loginSuccess, logoutSuccess, loginLoading,
-
 } from '../actions/user';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
     case LOGIN:
-
       store.dispatch(loginLoading());
 
       axios({
         method: 'post',
         url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/api/login_check',
-
         withCredentials: true,
         data: {
           username: store.getState().user.form.username,
@@ -51,7 +47,16 @@ export default (store) => (next) => (action) => {
       // Check if the cookie exists
       // source: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
       if (document.cookie.split(';').some((item) => item.trim().startsWith('token='))) {
-        store.dispatch(loginSuccess({}));
+        // Decode the token
+        const userInfos = jwt(document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1'));
+        store.dispatch(loginSuccess({
+          roles: [...userInfos.roles],
+          email: userInfos.username,
+          id: userInfos.id,
+          firstname: userInfos.firstname,
+          lastname: userInfos.lastname,
+        }));
+        // store.dispatch(loginSuccess({}));
       }
       else return next(action);
       break;
