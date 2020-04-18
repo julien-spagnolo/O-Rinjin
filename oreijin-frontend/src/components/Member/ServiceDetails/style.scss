@@ -3,22 +3,29 @@
   .ui.items>.item>.image+.content {
     margin-left: 1rem;
   }
+  
+  .ui.segment.service {
+    padding-top: 2rem;
+  }
 }
 @media (min-width:768px){
   .ui{
-  &.segment.service {
-    padding: 2rem;
-  }
+    &.segment.service {
+      padding: 2rem;
+    }
 
-  &.grid>.row>.column.padding--left--right {
-    padding: 0 2rem;
-  }
+    &.grid>.row>.column.padding--left--right {
+      padding: 0 2rem;
+    }
 
-  &.items>.item>.image+.content {
-    margin-left: 0;
+    &.items>.item>.image+.content {
+      margin-left: 0;
+    }
   }
 }
 
+.ui.horizontal.divider {
+  margin-top: 2rem;
 }
 
 .ui.button.service__details__button {

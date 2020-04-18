@@ -1,9 +1,12 @@
+/* eslint-disable max-len */
 import React from 'react';
 // import PropTypes from 'prop-types';
 import {
-  Container, Header, Segment, Form, TextArea, Feed,
+  Container, Header, Segment, Form, TextArea, Comment,
   Label, Image, Divider, Button, Grid, Item, Rating,
+  Icon,
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 import './style.scss';
 import logo from '../../../assets/images/logo.png';
@@ -20,25 +23,27 @@ const ServiceDetails = () => (
           <Label>
             Jardinage
           </Label>
+          <Container style={{ marginTop: '0.7rem' }} content="créé le ... - modifié le ..." textAlign="center" />
         </Container>
       </Grid.Row>
       <Grid.Row>
-        <Grid.Column width={8} as={Item.Group}>
+        <Grid.Column width={9} as={Item.Group}>
           <Item>
             <Item.Image src={logo} size="small" circular />
             <Item.Content className="service__user__content">
-              <Item.Header>Nom du Membre</Item.Header>
+              <Item.Header>Prénom Nom</Item.Header>
               <Item.Extra>
                 <Label>
                 Fiabilité : <Rating icon="star" defaultRating={1} maxRating={5} />
                 </Label>
               </Item.Extra>
-              <Item.Meta>Code Postal - Ville</Item.Meta>
+              <Item.Meta><Icon name="map marker alternate" /> Code Postal - Ville</Item.Meta>
             </Item.Content>
           </Item>
         </Grid.Column>
       </Grid.Row>
     </Grid>
+
     <Divider horizontal>
       <Header as="h5">
         Description
@@ -53,17 +58,24 @@ const ServiceDetails = () => (
       </Grid.Row>
     </Grid>
 
-    <Divider horizontal>
-      <Header as="h5">
-        Photo
-      </Header>
-    </Divider>
-
-    <Grid centered>
-      <Grid.Row>
-        <Image src={logo} />
-      </Grid.Row>
-    </Grid>
+    {
+      // photo is optionnal
+      // if there's no photo, we don't display the photo section
+      logo && (
+        <>
+          <Divider horizontal>
+            <Header as="h5">
+              Photo
+            </Header>
+          </Divider>
+          <Grid centered>
+            <Grid.Row>
+              <Image src={logo} />
+            </Grid.Row>
+          </Grid>
+        </>
+      )
+    }
 
     <Divider horizontal>
       <Header as="h5">
@@ -73,31 +85,19 @@ const ServiceDetails = () => (
 
     <Grid>
       <Grid.Row>
-        <Grid.Column as={Feed} className="padding--left--right">
-          <Feed.Event>
-            <Feed.Label image={logo} />
-            <Feed.Content>
-              <Feed.Date>3 days ago</Feed.Date>
-              <Feed.Summary>
-                <a>Membre 1</a>
-              </Feed.Summary>
-              <Feed.Extra text>
-                Réponse 1
-              </Feed.Extra>
-            </Feed.Content>
-          </Feed.Event>
-          <Feed.Event>
-            <Feed.Label image={logo} />
-            <Feed.Content>
-              <Feed.Date>3 days ago</Feed.Date>
-              <Feed.Summary>
-                <a>Membre 2</a>
-              </Feed.Summary>
-              <Feed.Extra text>
-                Réponse 2
-              </Feed.Extra>
-            </Feed.Content>
-          </Feed.Event>
+        <Grid.Column as={Comment.Group} className="padding--left--right">
+          <Comment>
+            <Comment.Avatar src={logo} />
+            <Comment.Content>
+              <Comment.Author>Reijin 1</Comment.Author>
+              <Comment.Metadata>
+                <Comment.Text>
+                  3 days ago
+                </Comment.Text>
+              </Comment.Metadata>
+              <Comment.Text>Réponse ...</Comment.Text>
+            </Comment.Content>
+          </Comment>
         </Grid.Column>
       </Grid.Row>
     </Grid>
@@ -110,12 +110,18 @@ const ServiceDetails = () => (
 
     <Grid>
       <Grid.Row>
-        <Grid.Column as={Form}>
+        <Grid.Column as={Form} reply>
           <TextArea placeholder="Envoyer une réponse" />
-          <Button className="service__details__button" onClick={console.log('coucou')}>Envoyer</Button>
+          <Button className="service__details__button" labelPosition="left" icon>
+            <Icon name="reply" />
+            Envoyer
+          </Button>
         </Grid.Column>
       </Grid.Row>
     </Grid>
+    <Container>
+      <Link to="/home">Retour à l'accueil</Link>
+    </Container>
   </Segment>
 );
 

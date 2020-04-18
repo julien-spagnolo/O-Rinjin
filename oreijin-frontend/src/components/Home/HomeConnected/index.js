@@ -36,7 +36,7 @@ const HomeConnected = ({ getServicesList, services }) => {
           </Segment>
         </Grid.Column>
         <Grid.Column mobile={16} tablet={16} computer={8}>
-          <Segment style={{ height: '100vh', overflow: 'hidden' }} className="home__connected__map" raised>
+          <Segment style={{ height: '100vh', padding: '0' }} className="home__connected__map" raised>
             <Map />
           </Segment>
         </Grid.Column>
