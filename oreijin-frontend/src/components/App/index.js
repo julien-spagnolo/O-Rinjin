@@ -39,10 +39,10 @@ const App = ({ checkAuth }) => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/service/add" component={FormServices} />
-        <Route exact path="/:user" component={Profil} />
-        <Route exact path="/:user/services" component={ServicesList} />
         <Route exact path="/team" component={Team} />
         <Route exact path="/legal-mentions" component={LegalMentions} />
+        <Route exact path="/:user" component={Profil} />
+        <Route exact path="/:user/services" component={ServicesList} />
       </Switch>
       <Footer />
     </div>
