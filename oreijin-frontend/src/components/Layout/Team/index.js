@@ -13,8 +13,8 @@ import logo from '../../../assets/images/logo.png';
 const Team = () => (
   <Container>
     <Header as="h2" textAlign="center">Notre équipe</Header>
-    <Card.Group stackable itemsPerRow={2}>
-      <Card raised>
+    <Card.Group centered itemsPerRow={2}>
+      <Card style={{ width: '250px', height: '500px' }} raised>
         <Image src={logo} wrapped ui={false} />
         <Card.Content>
           <Card.Header>Hélène</Card.Header>
@@ -32,7 +32,7 @@ const Team = () => (
           </a>
         </Card.Content>
       </Card>
-      <Card raised>
+      <Card style={{ width: '250px', height: '500px' }} raised>
         <Image src={logo} wrapped ui={false} />
         <Card.Content>
           <Card.Header>Julien</Card.Header>
@@ -51,7 +51,7 @@ const Team = () => (
           </a>
         </Card.Content>
       </Card>
-      <Card raised>
+      <Card style={{ width: '250px', height: '500px' }} raised>
         <Image src={logo} wrapped ui={false} />
         <Card.Content>
           <Card.Header>Bryan</Card.Header>
@@ -70,7 +70,7 @@ const Team = () => (
           </a>
         </Card.Content>
       </Card>
-      <Card raised>
+      <Card style={{ width: '250px', height: '500px' }} raised>
         <Image src={logo} wrapped ui={false} />
         <Card.Content>
           <Card.Header>Jonathan</Card.Header>
