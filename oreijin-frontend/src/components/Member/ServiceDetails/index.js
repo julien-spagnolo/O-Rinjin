@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import './style.scss';
 import logo from '../../../assets/images/logo.png';
 
-const ServiceDetails = () => (
+const ServiceDetails = ({ onChangeFieldReply, reply }) => (
   <Segment as={Container} className="service" raised>
     <Grid container centered stackable>
       <Grid.Row>
@@ -111,7 +111,13 @@ const ServiceDetails = () => (
     <Grid>
       <Grid.Row>
         <Grid.Column as={Form} reply>
-          <TextArea placeholder="Envoyer une réponse" />
+          <TextArea
+            placeholder="Envoyer une réponse"
+            value={reply}
+            onChange={(evt) => {
+              onChangeFieldReply(evt.target.value);
+            }}
+          />
           <Button className="service__details__button" labelPosition="left" icon>
             <Icon name="reply" />
             Envoyer
