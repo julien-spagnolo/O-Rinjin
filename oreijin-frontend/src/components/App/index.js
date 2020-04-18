@@ -14,6 +14,7 @@ import Login from '../../containers/Login';
 import Register from '../../containers/Register';
 import FormServices from '../../containers/FormServices';
 import ServicesList from '../Member/ServicesList';
+import ServiceDetails from '../../containers/ServiceDetails';
 import Profil from '../Member/Profil';
 
 import Team from '../Layout/Team';
@@ -39,6 +40,7 @@ const App = ({ checkAuth }) => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/service/add" component={FormServices} />
+        <Route exact path="/service/:uuid" component={ServiceDetails} />
         <Route exact path="/:user" component={Profil} />
         <Route exact path="/:user/services" component={ServicesList} />
         <Route exact path="/team" component={Team} />

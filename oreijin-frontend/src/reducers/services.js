@@ -26,20 +26,13 @@ const initialState = {
   isError: false,
 };
 
+// Map on services list to add an uuid for unique route
 export const getServicesWithUuid = (state = initialState) => state.services.map((service) => ({
-  id: service.id,
-  title: service.title,
-  body: service.body,
-  type: service.type,
-  image: service.image,
-  active: service.active,
-  createdAT: service.createdAT,
-  updatedAt: service.updatedAt,
-  user: service.user,
-  comment: service.comment,
-  serviceCategory: service.serviceCategory,
+  ...service,
   uuid: uuid(),
 }));
+
+export const findServiceByUuid = (state, uuid) => state.services.find((service) => service.uuid === uuid);
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
