@@ -1,13 +1,24 @@
-.ui.tiny.image {
-  display: inline;
+
+@media (min-width:320px){
+  .ui.items>.item>.image+.content {
+    margin-left: 1rem;
+  }
+}
+@media (min-width:768px){
+  .ui{
+  &.segment.service {
+    padding: 2rem;
+  }
+
+  &.grid>.row>.column.padding--left--right {
+    padding: 0 2rem;
+  }
+
+  &.items>.item>.image+.content {
+    margin-left: 0;
+  }
 }
 
-div.ui.container {
-  margin-top: 0;
-}
-
-.ui.container.service__details__avatar {
-  margin: 1.5em 0;
 }
 
 .ui.button.service__details__button {
