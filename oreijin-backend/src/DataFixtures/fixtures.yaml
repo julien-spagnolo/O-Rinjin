@@ -7,7 +7,6 @@ App\Entity\Service:
       type: 0
       active: 1
       createdAt: '<dateTime()>'
-      image: '<imageUrl(640, 480)>'
 
 
 App\Entity\User:
@@ -23,7 +22,6 @@ App\Entity\User:
       latitude: <latitude(-90, 90)>
       longitude: <longitude(-180, 180)>
       birthDate: '<dateTime()>'
-      avatar: '<imageUrl(640, 480)>'
             
                         
 App\Entity\ServiceCategory:
