@@ -14,7 +14,7 @@ import Login from '../../containers/Login';
 import Register from '../../containers/Register';
 import FormServices from '../../containers/FormServices';
 import ServicesList from '../Member/ServicesList';
-import Profil from '../Member/Profil';
+import Profil from '../../containers/Profil';
 
 import Team from '../Layout/Team';
 import LegalMentions from '../Layout/LegalMentions';
