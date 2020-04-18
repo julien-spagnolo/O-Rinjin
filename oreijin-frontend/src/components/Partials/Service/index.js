@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 // == Component
-const Service = ({ isLogged, title, body, type, createdAT }) => (
+const Service = ({ isLogged, title, body, type, createdAT, uuid }) => (
   <Feed as={Segment}>
     <Feed.Event
       as={Link}
-      to="bidon"
+      to={`/service/${uuid}`}
     >
       <Feed.Content>
         <Feed.Summary className="service__title">
@@ -44,6 +44,7 @@ Service.propTypes = {
   // pc: PropTypes.string.isRequired,
   createdAT: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
+  uuid: PropTypes.string.isRequired,
 };
 
 // == Export

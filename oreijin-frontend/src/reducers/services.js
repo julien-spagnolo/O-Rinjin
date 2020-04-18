@@ -1,3 +1,5 @@
+import { v4 as uuid } from 'uuid';
+
 import {
   GET_SERVICES_LIST_SUCCESS,
   ON_CHANGE_FIELD,
@@ -23,6 +25,21 @@ const initialState = {
   isSuccess: false,
   isError: false,
 };
+
+export const getServicesWithUuid = (state = initialState) => state.services.map((service) => ({
+  id: service.id,
+  title: service.title,
+  body: service.body,
+  type: service.type,
+  image: service.image,
+  active: service.active,
+  createdAT: service.createdAT,
+  updatedAt: service.updatedAt,
+  user: service.user,
+  comment: service.comment,
+  serviceCategory: service.serviceCategory,
+  uuid: uuid(),
+}));
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {

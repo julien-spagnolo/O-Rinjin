@@ -17,6 +17,7 @@ const HomeConnected = ({ getServicesList, services }) => {
     // console.log('USE EFFECT !');
     getServicesList();
   }, []);
+
   return (
     <Grid>
       <Grid.Row divided>
