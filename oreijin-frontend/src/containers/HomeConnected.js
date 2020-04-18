@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import HomeConnected from '../components/Home/HomeConnected';
 import { getServicesList } from '../actions/service';
-import { getServicesWithUuid } from '../reducers/services';
+import { getServicesWithSlug } from '../reducers/services';
 
 const mapStateToProps = (state) => ({
  infos: {...state.user.infos},
- services: getServicesWithUuid(state.services),
+ services: getServicesWithSlug(state.services),
 });
 
 const mapDispatchToProps = (dispatch) => ({

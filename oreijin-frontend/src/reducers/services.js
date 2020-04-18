@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'uuid';
+import slugify from 'slugify';
 
 import {
   GET_SERVICES_LIST_SUCCESS,
@@ -27,12 +27,12 @@ const initialState = {
 };
 
 // Map on services list to add an uuid for unique route
-export const getServicesWithUuid = (state = initialState) => state.services.map((service) => ({
+export const getServicesWithSlug = (state = initialState) => state.services.map((service) => ({
   ...service,
-  uuid: uuid(),
+  slug: slugify(`${service.id} ${service.title}`, {lower:true}),
 }));
 
-export const findServiceByUuid = (state, uuid) => state.services.find((service) => service.uuid === uuid);
+export const findServiceBySlug = (state, slug) => state.services.find((service) => slugify(`${service.id} ${service.title}`, {lower:true}) === slug);
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
