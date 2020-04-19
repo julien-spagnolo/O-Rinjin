@@ -21,23 +21,25 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("users-list")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups("users-list")
-     * @Assert\Email
+     * @Groups({"register", "update"})
+     * @Assert\Regex(
+     *      pattern="#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#",
+     *      message = "The email '{{ value }}' is not a valid email."
+     * )
      * @Assert\NotBlank
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups("users-list")
+     * @Groups({"register", "update"})
      */
-    private $roles = [];
+    private $roles = ["USER"];
 
     /**
      * @var string The hashed password
@@ -48,74 +50,86 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"users-list","user-profile"})
+     * @Groups({"register", "update"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"users-list","user-profile"})
+     * @Groups({"register", "update"})
+     * @Assert\NotBlank
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=70)
-     * @Groups({"users-list","user-profile"})
+     * @Groups({"register", "update"})
+     * @Assert\NotBlank
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Groups({"users-list","user-profile"})
+     * @Groups({"register", "update"})
+     * @Assert\NotBlank
      */
     private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"users-list","user-profile"})
+     * @Groups({"register", "update"})
+     * @Assert\NotBlank
      */
     private $city;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=8)
-     * @Groups({"users-list","user-profile"})
+     * @Groups({"register", "update"})
+     * @Assert\NotBlank
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="decimal", precision=11, scale=8)
-     * @Groups({"users-list","user-profile"})
+     * @Groups({"register", "update"})
      */
     private $longitude;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"users-list","user-profile"})
+     * @Groups({"register", "update"})
      */
     private $birthDate;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Groups({"users-list","user-profile"})
+     * @Groups({"register", "update"})
+     * @Assert\File(
+     *      maxSize = "2048k",
+     *      mimeTypes = {"application/png", "application/jpg", "application/jpeg"},
+     *      mimeTypesMessage = "Please upload a valid format")
      */
     private $avatar;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="user", orphanRemoval=true)
-     * @Groups({"users-list","user-profile"})
+     * @Groups({"register", "update"})
      */
     private $service;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
-     * @Groups({"users-list","user-profile"})
+     * @Groups({"register", "update"})
      */
     private $comment;
 
     /**
      * @var string
-     * 
-     * @Assert\NotBlank(groups={"register", "update-password"})
+     * @Assert\NotBlank(
+     *      groups={"register", "update"},
+     *      message="New password can not be blank."
+     * )
+     * @Assert\Regex(pattern="#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,15}$#", message="It expects atleast 1 small-case letter, 1 Capital letter, 1 digit, 1 special character and the length should be between 6-15 characters.")
      */
     private $plainPassword;
 

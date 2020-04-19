@@ -3,19 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\UserType;
 use App\Manager\UserManager;
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\AbstractList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\SerializerInterface;
 
 
 class UserController extends AbstractController
@@ -29,8 +22,8 @@ class UserController extends AbstractController
 
     /**
      * @Route(
-     *      "/api/users", 
-     *      name="user_browse",  
+     *      "/api/users",
+     *      name="browse_user",  
      *      methods={"GET"}
      * )
      */
@@ -46,7 +39,7 @@ class UserController extends AbstractController
     /** 
      * @Route(
      *      "/api/users/{id}", 
-     *      name="user_read",  
+     *      name="read_user",  
      *      methods={"GET"}, 
      *      requirements={"id"="\d+"}
      * )
@@ -64,7 +57,7 @@ class UserController extends AbstractController
     /**
      * @Route(
      *      "/register", 
-     *      name="user_register",  
+     *      name="register_user",  
      *      methods={"POST"}
      * )
      */
@@ -74,15 +67,13 @@ class UserController extends AbstractController
         $data = $request->getContent();
         $user = $this->userManager->create($data);
 
-        dd($user);
-
         return $this->json($user, JsonResponse::HTTP_CREATED);
     }
 
     /**
      * @Route(
      *      "/api/users/{id}",
-     *      name="user_edit",
+     *      name="edit_user",
      *      methods={"PUT"},
      *      requirements={"id"="\d+"}
      * )
@@ -98,7 +89,7 @@ class UserController extends AbstractController
     /**
      * @Route(
      *     "/api/users/{id}",
-     *     name="delete_album",
+     *     name="delete_user",
      *     methods={"DELETE"},
      *     requirements={"id"="\d+"}
      * )

@@ -46,7 +46,7 @@ abstract class AbstractManager {
     protected function save(object $entity, string $data, array $validationGroups = [], array $deserializeContext = []): object
     {
         $this->deserialize($data, $entity, $deserializeContext);
-        
+
         $this->validate($entity, $validationGroups);
 
         $this->entityManager->persist($entity);
@@ -69,7 +69,7 @@ abstract class AbstractManager {
         if(count($errors) > 0){
             // TODO: A refactoriser pour retourner une liste d'erreurs au format ...
             $errorsString = (string) $errors;
-            dd($errorsString);
+
             throw new BadRequestHttpException($errorsString);
         }
     }
