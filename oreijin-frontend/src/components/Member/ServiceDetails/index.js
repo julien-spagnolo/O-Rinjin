@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   Container, Header, Segment, Form, TextArea, Comment,
   Label, Image, Divider, Button, Grid, Item, Rating,
@@ -132,11 +132,9 @@ const ServiceDetails = ({ onChangeFieldReply, reply }) => (
 );
 
 
-/* ServiceDetails.propTypes = {
-  service: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
-}; */
+ServiceDetails.propTypes = {
+  onChangeFieldReply: PropTypes.func.isRequired,
+  reply: PropTypes.string.isRequired,
+};
 
 export default ServiceDetails;
