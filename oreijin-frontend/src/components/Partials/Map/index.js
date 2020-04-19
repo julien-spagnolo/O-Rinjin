@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
 
 import mapToken from '../../../../mapbox.config';
+import mapServices from '../../../map-services';
 // == Import
-// import './styles.css';
+import './styles.scss';
+// import 'mapbox-gl/dist/mapbox-gl.css';
 import logoMarker from '../../../assets/images/logo.svg';
 
 // TODO hide token api
@@ -22,6 +24,8 @@ const Map = () => {
     zoom: 11,
   });
 
+  const [selectedService, setSelectedService] = useState(null);
+
 
   return (
     <ReactMapGL
@@ -35,42 +39,44 @@ const Map = () => {
         setViewport(newViewport);
       }}
     >
-      {/* map.services ....  */}
-      <Marker
-        key="1"
-        latitude={48.866667}
-        longitude={2.333333}
-      >
-        <img style={{width: '50px', height: '50px', borderRadius: '50%'}} src={logoMarker} alt="marqueur" />
-      </Marker>
-      <Marker
-        key="2"
-        latitude={48.866456}
-        longitude={2.4}
-      >
-        <img style={{width: '50px', height: '50px', borderRadius: '50%'}} src={logoMarker} alt="marqueur" />
-      </Marker>
-      <Marker
-        key="3"
-        latitude={48.80987}
-        longitude={2.3234}
-      >
-        <img src="https://i.imgur.com/MK4NUzI.png" alt="marqueur" />
-      </Marker>
-      <Marker
-        key="4"
-        latitude={48.8347}
-        longitude={2.3675}
-      >
-        <img src="https://i.imgur.com/MK4NUzI.png" alt="marqueur" />
-      </Marker>
-      <Marker
-        key="5"
-        latitude={48.89990}
-        longitude={2.3675}
-      >
-        <img src="https://i.imgur.com/MK4NUzI.png" alt="marqueur" />
-      </Marker>
+      {
+        mapServices.map((service) => {
+          console.log(service);
+          return (
+            <Marker
+              key={service.key}
+              latitude={service.latitude}
+              longitude={service.longitude}
+            >
+              <button
+                type="button"
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  setSelectedService(service);
+                }}
+              >
+                <img style={{ width: '50px', height: '50px', borderRadius: '50%' }} src={logoMarker} alt="marqueur" />
+              </button>
+            </Marker>
+          );
+        })
+      }
+      {
+        selectedService ? (
+          <Popup
+            className="map__popup"
+            latitude={selectedService.latitude}
+            longitude={selectedService.longitude}
+            onClose={() => {
+              setSelectedService(null);
+            }}
+          >
+            <div>{selectedService.title}</div>
+            <div>Catégorie : {selectedService.category}</div>
+            <div>Type : {selectedService.type}</div>
+          </Popup>
+        ) : null
+      }
     </ReactMapGL>
   );
 };
