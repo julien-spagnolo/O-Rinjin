@@ -3,7 +3,7 @@ import Service from '../components/Partials/Service';
 
 
 const mapStateToProps = (state) => ({
-  isLogged: state.user.isLogged,
+  isLogged: state.user.isLogged, 
 });
 
 const mapDispatchToProps = {};

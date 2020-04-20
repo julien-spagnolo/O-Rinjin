@@ -2,6 +2,7 @@ export const GET_SERVICES_LIST = 'GET_SERVICES_LIST';
 export const GET_SERVICES_LIST_SUCCESS = 'GET_SERVICES_LIST_SUCCESS';
 export const ON_CHANGE_FIELD = 'ON_CHANGE_FIELD';
 export const ON_CHANGE_FIELD_TYPE = 'ON_CHANGE_FIELD_TYPE';
+export const ON_CHANGE_FIELD_REPLY = 'ON_CHANGE_FIELD_REPLY';
 export const ADD_SERVICE = 'ADD_SERVICE';
 export const ADD_SERVICE_SUCCESS = 'ADD_SERVICE_SUCCESS';
 export const ADD_SERVICE_ERROR = 'ADD_SERVICE_ERROR';
@@ -42,4 +43,9 @@ export const addServiceError = () => ({
 
 export const resetServiceForm = () => ({
   type: RESET_SERVICE_FORM,
+});
+
+export const onChangeFieldReply = (payload) => ({
+  type: ON_CHANGE_FIELD_REPLY,
+  payload,
 });
