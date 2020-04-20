@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
   GET_SERVICES_LIST, getServicesListSuccess,
   ADD_SERVICE, addServiceSuccess, addServiceError,
-  DELETE_SERVICE,
+  DELETE_SERVICE, deleteServiceSuccess, deleteServiceError,
 } from '../actions/service';
 import {
   GET_CATEGORIES_LIST, getCategoriesListSuccess,
@@ -86,7 +86,14 @@ export default (store) => (next) => (action) => {
           Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
         },
         withCredentials: true,
-      });
+      })
+        .then((res) => {
+          store.dispatch(deleteServiceSuccess(res.data));
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(deleteServiceError());
+        });
       return next(action);
     default:
       return next(action);
