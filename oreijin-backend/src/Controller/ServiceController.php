@@ -2,90 +2,106 @@
 
 namespace App\Controller;
 
-use App\Repository\ServiceRepository;
+use App\Entity\Service;
+use App\Manager\ServiceManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
-use App\Entity\Service;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\ServiceCategoryRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ServiceController extends AbstractController
 {
-    /**
-     * @Route("/api/services", name="browse2",  methods={"GET"})
-     * @param ServiceRepository $serviceRepository
-     * @param Serializer $serializer
-     * @return void
-     */
-    public function browse(ServiceRepository $serviceRepository, SerializerInterface $serializer)
+    private $userManager;
+
+    public function __construct(ServiceManager $serviceManager)
     {
-        $services = $serviceRepository->findAll();
+        $this->serviceManager = $serviceManager;
+    }
 
-        $data = $serializer->normalize($services, null, ['groups' => 'services']);
+    /**
+     * @Route(
+     *      "/api/services",
+     *      name="api_service_browse",  
+     *      methods={"GET"}
+     * )
+     */
+    public function browse(): Response
+    {
+        $services = $this->serviceManager->browse();
 
-        return $this->json($data);
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+
+        return new Response($services);
     }
 
     /** 
-     * @Route("/api/services/{id}", name="read2",  methods={"GET"}, requirements={"id"="\d+"})
-     * @param SerializerInterface $serializer
-     * @param ServiceRepository $serviceRepository
-     * @return void
+     * @Route(
+     *      "/api/services/{id}", 
+     *      name="api_service_read",  
+     *      methods={"GET"}, 
+     *      requirements={"id"="\d+"}
+     * )
      */
-    public function read(ServiceRepository $serviceRepository, SerializerInterface $serializer, $id = null)
+    public function read(Service $service): Response
     {
-        $services = $serviceRepository->findAll();
+        $service = $this->serviceManager->serialize($service, ['groups' => 'services-read']);
 
-        $userServices = [];
-
-        foreach ($services as $service) {
-            if ($service->getUser()->getId() == $id) {
-                $userServices[] = $service;
-            }
-        }
-
-        $data = $serializer->normalize($userServices, null, ['groups' => 'service']);
-
-        return $this->json($data);
+        return new Response($service);
     }
 
     /**
-     * @Route("/api/services", name="add2",  methods={"POST"})
-     * @param ServiceRepository $serviceRepository
-     * @param Serializer $serializer
-     * @return void
+     * @Route(
+     *      "/api/services", 
+     *      name="api_service_add",  
+     *      methods={"POST"}
+     * )
      */
-    public function add(Request $request, EntityManagerInterface $em)
+    public function add(Request $request): Response
     {
-        $data = json_decode(
-            $request->getContent(),
-            true
+
+        $data = $request->getContent();
+        $service = $this->serviceManager->create($data);
+        $service = $this->serviceManager->serialize($service, ['groups' => 'service-add']);
+
+        return new Response($service, Response::HTTP_CREATED);
+    }
+
+    /**
+     * @Route(
+     *      "/api/services/{id}",
+     *      name="api_service_edit",
+     *      methods={"PUT"},
+     *      requirements={"id"="\d+"}
+     * )
+     */
+    public function edit(Request $request, Service $service): Response
+    {
+        $data = $request->getContent();
+        $service = $this->serviceManager->update($service, $data);
+        $service = $this->serviceManager->serialize($service, ['groups' => 'service-edit']);
+
+        return new Response($service);
+    }
+
+    /**
+     * @Route(
+     *     "/api/services/{id}",
+     *     name="api_service_delete",
+     *     methods={"DELETE"},
+     *     requirements={"id"="\d+"}
+     * )
+     * @param int $id
+     *
+     * @return JsonResponse
+     */
+    public function delete(Service $service): JsonResponse
+    {
+        $this->serviceManager->delete($service);
+
+        return new JsonResponse(
+            null,
+            JsonResponse::HTTP_NO_CONTENT
         );
-
-        $serviceCategory = $em->find('App\Entity\ServiceCategory', $data['service_category_id']);
-
-        $title = $data['title'];
-        $body = $data['body'];
-        $type = $data['type'];
-        $image = $data['image'];
-
-        $service = new Service();
-        $service
-            ->setUser($this->getUser())
-            ->setServiceCategory($serviceCategory)
-            ->setTitle($title)
-            ->setBody($body)
-            ->setType($type)
-            ->setImage($image)
-            ->setActive(true)
-            ->setCreatedAt(new \DateTime('@'.strtotime('now')));
-
-        $em->persist($service);
-        $em->flush();
-        
-        return new JsonResponse(["success" => "Service " . $service->getTitle() . " has been add!"], 200);
     }
 }

@@ -46,7 +46,7 @@ abstract class AbstractManager {
     protected function save(object $entity, string $data, array $validationGroups = [], array $deserializeContext = []): object
     {
         $this->deserialize($data, $entity, $deserializeContext);
-
+        
         $this->validate($entity, $validationGroups);
 
         $this->entityManager->persist($entity);

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -12,73 +13,60 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Service
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("services")
+     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=60)
-     * @Groups("services")
+     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("services")
+     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
      */
     private $body;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups("services")
+     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
      */
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     * @Groups("services")
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups("services")
+     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
      */
     private $active;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @Groups("services")
-     */
-    private $createdAT;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Groups("services")
-     */
-    private $updatedAt;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="service")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("services")
      */
     private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="service", orphanRemoval=true)
-     * @Groups("services")
      */
     private $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ServiceCategory", inversedBy="services")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("services")
      */
     private $serviceCategory;
 
@@ -148,30 +136,6 @@ class Service
     public function setActive(bool $active): self
     {
         $this->active = $active;
-
-        return $this;
-    }
-
-    public function getCreatedAT(): ?\DateTimeInterface
-    {
-        return $this->createdAT;
-    }
-
-    public function setCreatedAT(\DateTimeInterface $createdAT): self
-    {
-        $this->createdAT = $createdAT;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -21,23 +22,20 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"register", "update"})
-     * @Assert\Regex(
-     *      pattern="#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#",
-     *      message = "The email '{{ value }}' is not a valid email."
-     * )
+     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Assert\Email
      * @Assert\NotBlank
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"register", "update"})
      */
     private $roles = ["USER"];
 
@@ -49,61 +47,75 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var string
+     * @Assert\NotBlank(
+     *      groups={"register", "password-update"},
+     *      message="New password can not be blank."
+     * )
+     * @Assert\Regex(pattern="#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,15}$#", message="It expects atleast 1 small-case letter, 1 Capital letter, 1 digit, 1 special character and the length should be between 6-15 characters.")
+     */
+    private $plainPassword;
+
+    /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"register", "update"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Assert\Type("string")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"register", "update"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
      * @Assert\NotBlank
+     * @Assert\Type("string")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=70)
-     * @Groups({"register", "update"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Assert\Type("string")
      * @Assert\NotBlank
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Groups({"register", "update"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
      * @Assert\NotBlank
      */
     private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"register", "update"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Assert\Type("string")
      * @Assert\NotBlank
      */
     private $city;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=8)
-     * @Groups({"register", "update"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
      * @Assert\NotBlank
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="decimal", precision=11, scale=8)
-     * @Groups({"register", "update"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
      */
     private $longitude;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"register", "update"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
      */
     private $birthDate;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Groups({"register", "update"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
      * @Assert\File(
      *      maxSize = "2048k",
      *      mimeTypes = {"application/png", "application/jpg", "application/jpeg"},
@@ -113,25 +125,15 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="user", orphanRemoval=true)
-     * @Groups({"register", "update"})
+     * @MaxDepth(1)
      */
     private $service;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
-     * @Groups({"register", "update"})
+     * @MaxDepth(1)
      */
     private $comment;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(
-     *      groups={"register", "update"},
-     *      message="New password can not be blank."
-     * )
-     * @Assert\Regex(pattern="#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,15}$#", message="It expects atleast 1 small-case letter, 1 Capital letter, 1 digit, 1 special character and the length should be between 6-15 characters.")
-     */
-    private $plainPassword;
 
     public function __construct()
     {

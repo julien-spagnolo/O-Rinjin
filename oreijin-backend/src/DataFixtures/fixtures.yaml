@@ -6,7 +6,6 @@ App\Entity\Service:
       body: <text()>
       type: 0
       active: 1
-      createdAt: '<dateTime()>'
 
 
 App\Entity\User:
@@ -26,9 +25,8 @@ App\Entity\User:
                         
 App\Entity\ServiceCategory:
     servicecategory_{1..10}:
-      title: '<sentence(6, true)>'
+      title: '<jobTitle()>'
       slug: '<slug()>'
-      createdAt: '<dateTime()>'
          
        
      
@@ -37,5 +35,4 @@ App\Entity\Comment:
       user: '@user_*'
       service: '@service_*'
       isBlocked: '<boolean(50)>'
-      createdAt: '<dateTime()>'
       body: '<text(420)>'

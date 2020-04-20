@@ -23,7 +23,7 @@ class UserController extends AbstractController
     /**
      * @Route(
      *      "/api/users",
-     *      name="browse_user",  
+     *      name="api_user_browse",  
      *      methods={"GET"}
      * )
      */
@@ -39,17 +39,14 @@ class UserController extends AbstractController
     /** 
      * @Route(
      *      "/api/users/{id}", 
-     *      name="read_user",  
+     *      name="api_user_read",  
      *      methods={"GET"}, 
      *      requirements={"id"="\d+"}
      * )
      */
     public function read(User $user): Response
     {
-        // $user = $userRepository->find($id);
-        // $data = $serializer->normalize($user, null, ['groups' => 'user-profile']);
-
-        $user = $this->userManager->serialize($user, ['groups' => 'user-profile']);
+        $user = $this->userManager->serialize($user, ['groups' => 'user-read']);
 
         return new Response($user);
     }
@@ -57,39 +54,41 @@ class UserController extends AbstractController
     /**
      * @Route(
      *      "/register", 
-     *      name="register_user",  
+     *      name="api_user_add",  
      *      methods={"POST"}
      * )
      */
-    public function add(Request $request): JsonResponse
+    public function add(Request $request): Response
     {
-
         $data = $request->getContent();
         $user = $this->userManager->create($data);
+        $user = $this->userManager->serialize($user, ['groups' => 'user-add']);
 
-        return $this->json($user, JsonResponse::HTTP_CREATED);
+        return new Response($user, Response::HTTP_CREATED);
     }
 
     /**
      * @Route(
      *      "/api/users/{id}",
-     *      name="edit_user",
+     *      name="api_user_edit",
      *      methods={"PUT"},
      *      requirements={"id"="\d+"}
      * )
      */
-    public function edit(Request $request, User $user): JsonResponse
+    public function edit(Request $request, User $user): Response
     {
         $data = $request->getContent();
         $user = $this->userManager->update($user, $data);
 
-        return $this->json($user);
+        $user = $this->userManager->serialize($user, ['groups' => 'user-edit']);
+
+        return new Response($user);
     }
 
     /**
      * @Route(
      *     "/api/users/{id}",
-     *     name="delete_user",
+     *     name="api_user_delete",
      *     methods={"DELETE"},
      *     requirements={"id"="\d+"}
      * )

@@ -5,41 +5,39 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServiceCategoryRepository")
  */
 class ServiceCategory
 {
+    use TimestampableEntity;
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"service-categories", "services"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Groups("service-categories")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Groups("service-categories")
      */
     private $slug;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="serviceCategory", orphanRemoval=true)
+     * @Groups("service-categories")
      */
     private $services;
 
@@ -75,23 +73,6 @@ class ServiceCategory
         $this->slug = $slug;
 
         return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
     }
 
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self

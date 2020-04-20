@@ -3,48 +3,47 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
 class Comment
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"comments", "services", "users"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("comments")
      */
     private $body;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups("comments")
      */
     private $isBlocked;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comment")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("comments")
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="comment")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("comments")
      */
     private $service;
 
@@ -73,30 +72,6 @@ class Comment
     public function setIsBlocked(bool $isBlocked): self
     {
         $this->isBlocked = $isBlocked;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }
