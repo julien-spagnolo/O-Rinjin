@@ -59,11 +59,10 @@ class ServiceController extends AbstractController
      */
     public function add(Request $request): Response
     {
-
         $data = $request->getContent();
         $service = $this->serviceManager->create($data);
         $service = $this->serviceManager->serialize($service, ['groups' => 'service-add']);
-
+        
         return new Response($service, Response::HTTP_CREATED);
     }
 

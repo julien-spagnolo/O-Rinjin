@@ -30,7 +30,7 @@ class CommentController extends AbstractController
     {
         $comments = $this->commentManager->browse();
 
-        $comments = $this->commentManager->serialize($comments, ['groups' => 'comments']);
+        $comments = $this->commentManager->serialize($comments, ['groups' => 'comments-browse']);
 
         return new Response($comments);
     }
@@ -45,7 +45,7 @@ class CommentController extends AbstractController
      */
     public function read(Comment $comment): Response
     {
-        $comment = $this->commentManager->serialize($comment, ['groups' => 'comments']);
+        $comment = $this->commentManager->serialize($comment, ['groups' => 'comment-read']);
 
         return new Response($comment);
     }
@@ -57,12 +57,14 @@ class CommentController extends AbstractController
      *      methods={"POST"}
      * )
      */
-    public function add(Request $request): JsonResponse
+    public function add(Request $request): Response
     {
         $data = $request->getContent();
+  
         $comment = $this->commentManager->create($data);
+        $comment = $this->commentManager->serialize($comment, ['groups' => 'comment-add']);
 
-        return $this->json($comment, JsonResponse::HTTP_CREATED);
+        return new Response($comment, Response::HTTP_CREATED);
     }
 
     /**
@@ -73,12 +75,14 @@ class CommentController extends AbstractController
      *      requirements={"id"="\d+"}
      * )
      */
-    public function edit(Request $request, Comment $comment): JsonResponse
+    public function edit(Request $request, Comment $comment): Response
     {
         $data = $request->getContent();
+  
         $comment = $this->commentManager->update($comment, $data);
+        $comment = $this->commentManager->serialize($comment, ['groups' => 'comment-edit']);
 
-        return $this->json($comment);
+        return new Response($comment);
     }
 
     /**

@@ -17,19 +17,19 @@ class Comment
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"comments", "services", "users"})
+     * @Groups({"comments-browse", "comment-read", "comment-add", "comment-edit"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("comments")
+     * @Groups({"comments-browse", "comment-read", "comment-add", "comment-edit"})
      */
     private $body;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups("comments")
+     * @Groups({"comments-browse", "comment-read", "comment-add", "comment-edit"})
      */
     private $isBlocked;
 
