@@ -28,6 +28,9 @@ export default (store) => (next) => (action) => {
             id: userInfos.id,
             firstname: userInfos.firstname,
             lastname: userInfos.lastname,
+            longitude: userInfos.longitude,
+            latitude: userInfos.latitude,
+            address: userInfos.address,
           }));
           // create a cookie for token
           // TODO set an expiration date

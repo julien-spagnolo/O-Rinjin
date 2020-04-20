@@ -4,9 +4,9 @@ import {
   Header, Container, Segment, Form, Button, Select, Radio, Message,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import './styles.scss';
+// import './styles.scss';
 
-const FormServices = ({
+const UpdateService = ({
   form, onChangeField, onChangeFieldType, addService, isSuccess, isError, resetServiceForm,
 }) => {
   // Static variable before getting categories from API
@@ -39,7 +39,6 @@ const FormServices = ({
 
   useEffect(() => {
     console.log('//== useEffect !!!');
-    // TODO action to reset states
     resetServiceForm();
   }, []);
 
@@ -177,7 +176,7 @@ const FormServices = ({
   );
 };
 
-FormServices.propTypes = {
+UpdateService.propTypes = {
   form: PropTypes.shape({
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
@@ -194,4 +193,4 @@ FormServices.propTypes = {
   resetServiceForm: PropTypes.func.isRequired,
 };
 
-export default FormServices;
+export default UpdateService;

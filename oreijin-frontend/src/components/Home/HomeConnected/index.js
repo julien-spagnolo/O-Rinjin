@@ -2,7 +2,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 // == Import components that we need to use from Semantic-UI-React
-import { Grid, Segment, Header } from 'semantic-ui-react';
+import {
+  Grid, Segment, Header, Select,
+} from 'semantic-ui-react';
 
 import Service from '../../../containers/Service';
 // import services from '../../../services';
@@ -13,6 +15,27 @@ import './styles.scss';
 
 // == Component
 const HomeConnected = ({ getServicesList, services }) => {
+  const dropdownOptions = [
+    {
+      key: 'Aide à domicile',
+      text: 'Aide à domicile',
+      value: 0,
+      type: 'Demande',
+    },
+    {
+      key: 'Bricolage et dépannage',
+      text: 'Bricolage et dépannage',
+      value: 1,
+      type: 'Proposition',
+    },
+    {
+      key: 'Aide à la mobilité',
+      text: 'Aide à la mobilité',
+      value: 2,
+      type: 'Demande',
+    },
+  ];
+
   useEffect(() => {
     // console.log('USE EFFECT !');
     getServicesList();
@@ -24,7 +47,10 @@ const HomeConnected = ({ getServicesList, services }) => {
         <Grid.Column mobile={16} tablet={16} computer={8}>
           <Segment className="home__connected__services" raised>
             <Header as="h2" dividing textAlign="center" className="home__connected__services__title">ANNONCES</Header>
-            <div className="home__connected__services__filter">Emplacement des filtres</div>
+            <div className="home__connected__services__filter">
+              <Select placeholder="Filtre par catégorie" options={dropdownOptions} />
+              <Select placeholder="Filtre par type" options={dropdownOptions} />
+            </div>
             <Segment style={{ height: '100vh', overflowY: 'scroll' }}>
               {
                 // Render a Service component for each service in data

@@ -40,26 +40,23 @@ const Map = () => {
       }}
     >
       {
-        mapServices.map((service) => {
-          console.log(service);
-          return (
-            <Marker
-              key={service.key}
-              latitude={service.latitude}
-              longitude={service.longitude}
+        mapServices.map((service) => (
+          <Marker
+            key={service.key}
+            latitude={service.latitude}
+            longitude={service.longitude}
+          >
+            <button
+              type="button"
+              onClick={(evt) => {
+                evt.preventDefault();
+                setSelectedService(service);
+              }}
             >
-              <button
-                type="button"
-                onClick={(evt) => {
-                  evt.preventDefault();
-                  setSelectedService(service);
-                }}
-              >
-                <img style={{ width: '50px', height: '50px', borderRadius: '50%' }} src={logoMarker} alt="marqueur" />
-              </button>
-            </Marker>
-          );
-        })
+              <img style={{ width: '50px', height: '50px', borderRadius: '50%' }} src={logoMarker} alt="marqueur" />
+            </button>
+          </Marker>
+        ))
       }
       {
         selectedService ? (

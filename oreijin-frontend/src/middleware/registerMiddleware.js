@@ -24,9 +24,10 @@ const registerMiddleware = (store) => (next) => (action) => {
           // console.log(response.data);
           const coords = response.data.features[0].geometry.coordinates;
           store.dispatch(updateLocation({
-            longitude: coords[0],
-            latitude: coords[1],
+            longitude: `${coords[0]}`,
+            latitude: `${coords[1]}`,
           }));
+          console.log(store.getState().register.form);
 
           axios({
             url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/register',
@@ -36,9 +37,8 @@ const registerMiddleware = (store) => (next) => (action) => {
               avatar: '',
             },
           })
-            .then((res) => {
+            .then(() => {
               store.dispatch(handleSubmitSuccess());
-
             })
             .catch((err) => {
               console.log(err);

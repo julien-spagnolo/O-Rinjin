@@ -1,5 +1,6 @@
 const services = [
   {
+    id: 1,
     title: 'Cherche cat sitting',
     body: 'Bonjour, je cherche à faire garder mon chat Milo pendant mes vacances',
     type: false,
@@ -12,6 +13,7 @@ const services = [
     updated_by: '',
   },
   {
+    id: 7897,
     title: 'Demande cours banjo',
     body: 'Je souhaite prendre des cours particuliers de banjo, je débute',
     type: false,
@@ -24,6 +26,7 @@ const services = [
     updated_by: '',
   },
   {
+    id: 77,
     title: 'Propose covoiturage',
     body: 'Je vous propose de partager avec moi les petits trajets du quotidien',
     type: false,

@@ -12,8 +12,8 @@ import Home from '../../containers/Home';
 import HomeConnected from '../../containers/HomeConnected';
 import Login from '../../containers/Login';
 import Register from '../../containers/Register';
-import FormServices from '../../containers/FormServices';
-import ServicesList from '../Member/ServicesList';
+import AddService from '../../containers/AddService';
+import ServicesList from '../../containers/ServicesList';
 import ServiceDetails from '../../containers/ServiceDetails';
 import Profil from '../../containers/Profil';
 
@@ -39,7 +39,7 @@ const App = ({ checkAuth }) => {
         <Route exact path="/home" component={HomeConnected} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/service/add" component={FormServices} />
+        <Route exact path="/service/add" component={AddService} />
         <Route exact path="/service/:slug" component={ServiceDetails} />
         <Route exact path="/:user" component={Profil} />
         <Route exact path="/:user/services" component={ServicesList} />

@@ -2,7 +2,7 @@
 import React from 'react';
 // == Import components that we need to use from Semantic-UI-React
 import {
-  Divider, Grid, Card, Header, Feed, Segment, 
+  Divider, Grid, Card, Header, Container, Segment,
 } from 'semantic-ui-react';
 
 // == Import components
@@ -21,15 +21,20 @@ const Main = () => (
   <Grid container stackable>
     {/* Width for differents breakpoints  */}
     <Grid.Column tablet={16} computer={8}>
-      <Divider />
-      <p className="main__paragraph">Bienvenue sur <em className="main__em">o'Reijin</em>, le site d'entraide entre particuliers</p>
-      <p className="main__paragraph">Vous avez besoin d'un coup de main pour : "<em className="main__em">SERVICE</em>" ? Ici, vous trouverez forcement un reijin pour vous aider !</p>
-      <p className="main__paragraph">Inscrivez vous et bénéficiez <em className="main__em">gratuitement</em> d'un réseau de personnes pour proposer votre aide ou bien en recevoir</p>
-      <p className="main__paragraph">Un <em className="main__em">reijin</em>, quésaquo ? C'est une personne près de chez vous prête à vous rendre service et juste pour vos beaux yeux !</p>
+      <Divider horizontal>
+        <Header as="h1">O'Reijin</Header>
+      </Divider>
+      <Container className="visitor__intro">
+        <p className="main__paragraph">Bienvenue sur <em className="main__em">o'Reijin</em>, le site d'entraide entre particuliers</p>
+        <p className="main__paragraph">Vous avez besoin d'un coup de main pour : "<em className="main__em">SERVICE</em>" ? Ici, vous trouverez forcement un reijin pour vous aider !</p>
+        <p className="main__paragraph">Inscrivez vous et bénéficiez <em className="main__em">gratuitement</em> d'un réseau de personnes pour proposer votre aide ou bien en recevoir</p>
+        <p className="main__paragraph">Un <em className="main__em">reijin</em>, quésaquo ? C'est une personne près de chez vous prête à vous rendre service et juste pour vos beaux yeux !</p>
+      </Container>
     </Grid.Column>
     <Grid.Column tablet={16} computer={8}>
-      <Divider />
-      <Header className="main__services__header" as="h2" textAlign="center"> Annonces disponibles </Header>
+      <Divider horizontal>
+        <Header as="h1">Annonces disponibles</Header>
+      </Divider>
       <Segment>
         {
           // Render a Service component for each service in data
@@ -39,10 +44,10 @@ const Main = () => (
         }
       </Segment>
     </Grid.Column>
-    <Divider />
     <Grid.Column mobile={16} tablet={16} computer={16}>
-      <Divider />
-      <Header className="main__usercard__header" as="h2" textAlign="center"> Reijin les plus actifs </Header>
+      <Divider horizontal>
+        <Header as="h2"> Reijin les plus actifs </Header>
+      </Divider>
       <Card.Group centered>
         {
           // Render a Card component for each card in data

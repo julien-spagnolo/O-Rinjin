@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
-
-import FormServices from '../components/Member/FormServices';
-
+import AddService from '../components/Member/AddService';
+import { getCategoriesList } from '../actions/categories';
 import {
   onChangeField, onChangeFieldType, addService, resetServiceForm,
 } from '../actions/service';
+import { getCategoriesOptions } from '../reducers/categories';
 
 const mapStateToProps = (state) => ({
   form: {
     ...state.services.form,
-    created_by: state.user.infos.id,
+    user: state.user.infos.id,
   },
+  categories: getCategoriesOptions(state.categories),
   isSuccess: state.services.isSuccess,
   isError: state.services.isError,
 });
@@ -21,10 +22,12 @@ const mapDispatchToProps = (dispatch) => ({
   })),
   // checkAuth: () => dispatch(checkAuth()),
   onChangeFieldType: (payload) => dispatch(onChangeFieldType({
-    type: payload,
+    // eslint-disable-next-line no-unneeded-ternary
+    type: payload ? true : false,
   })),
   addService: (payload) => dispatch(addService(payload)),
   resetServiceForm: () => dispatch(resetServiceForm()),
+  getCategoriesList: () => dispatch(getCategoriesList()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormServices);
+export default connect(mapStateToProps, mapDispatchToProps)(AddService);

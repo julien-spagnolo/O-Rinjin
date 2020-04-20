@@ -98,11 +98,11 @@ const Register = ({
             label="Mot de passe"
             placeholder="Mot de passe"
             type="password"
-            name="password"
+            name="plainPassword"
             onChange={(evt) => {
               onChangeField(evt.target.name, evt.target.value);
             }}
-            value={form.password}
+            value={form.plainPassword}
           />
         </Form.Field>
         <Form.Field>
@@ -175,7 +175,7 @@ Register.propTypes = {
     lastname: PropTypes.string.isRequired,
     birthdate: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
+    plainPassword: PropTypes.string.isRequired,
     address: PropTypes.string,
     city: PropTypes.string.isRequired,
     postalcode: PropTypes.string.isRequired,
