@@ -79,6 +79,14 @@ export default (store) => (next) => (action) => {
       return next(action);
     case DELETE_SERVICE:
       console.log('//== delete service middleware', action.payload);
+      axios({
+        method: 'delete',
+        url: `http://ec2-54-166-216-117.compute-1.amazonaws.com/api/services/${action.payload}`,
+        headers: {
+          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+        },
+        withCredentials: true,
+      });
       return next(action);
     default:
       return next(action);
