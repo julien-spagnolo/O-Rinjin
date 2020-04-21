@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import {
-  Container, Header, Segment, Form, Image, Divider, Button, Message,
+  Container, Header, Segment, Form, Image, Divider, Button, Message, Input,
 } from 'semantic-ui-react';
 
 import logo from '../../../assets/images/logo.png';
@@ -13,6 +13,8 @@ const Profil = ({
   onDeleteAccount,
   error,
   isLogged,
+  getUser,
+  userId,
 }) => {
   const history = useHistory();
 
@@ -20,10 +22,12 @@ const Profil = ({
   useEffect(() => {
     // Redirect to page '/home' after submit
     // We redirect to /home only if isLogged is true
+    // console.log(userId);
+    getUser(userId);
     if (!isLogged) history.push('/');
   }, [isLogged]);
 
-  console.log(userInfos, error);
+  console.log(userInfos);
   return (
     <Container>
       <Segment textAlign="center">
@@ -35,25 +39,27 @@ const Profil = ({
         <Container className="profil__name">
           <p>Prénom : <span>{userInfos.firstname} </span></p>
           <p>Nom : <span>{userInfos.lastname} </span></p>
+          <p>Adresse : <span>{userInfos.address} </span></p>
         </Container>
         <Divider horizontal>
           <Header as="h5">
             Infos
           </Header>
         </Divider>
+        {/*  TODO - Add condition for form display */}
         <Container>
           <Form>
             <Form.Field>
-              <label>Prénom</label>
-              <input placeholder={userInfos.firstname} />
+              <Form.Input label="Prénom" placeholder={userInfos.firstname} />
             </Form.Field>
             <Form.Field>
-              <label>Nom</label>
-              <input placeholder={userInfos.lastname} />
+              <Form.Input label="Nom" placeholder={userInfos.lastname} />
             </Form.Field>
             <Form.Field>
-              <label>Email</label>
-              <input placeholder={userInfos.email} />
+              <Form.Input label="Adresse" placeholder={userInfos.address} />
+            </Form.Field>
+            <Form.Field>
+              <Form.Input label="Email" placeholder={userInfos.email} />
             </Form.Field>
             <Button className="profil__change__button" size="small" type="submit">Modifier</Button>
           </Form>
@@ -90,9 +96,12 @@ Profil.propTypes = {
     firstname: PropTypes.string,
     lastname: PropTypes.string,
     id: PropTypes.number,
+    address: PropTypes.string,
   }).isRequired,
   onDeleteAccount: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 
 
