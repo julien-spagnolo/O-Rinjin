@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 
 import './style.scss';
 import logo from '../../../assets/images/logo.png';
+import Response from '../../Partials/Response';
 
 const ServiceDetails = ({
   onChangeFieldReply, reply,
@@ -94,18 +95,7 @@ const ServiceDetails = ({
       <Grid>
         <Grid.Row>
           <Grid.Column as={Comment.Group} className="padding--left--right">
-            <Comment>
-              <Comment.Avatar src={logo} />
-              <Comment.Content>
-                <Comment.Author>Reijin 1</Comment.Author>
-                <Comment.Metadata>
-                  <Comment.Text>
-                    3 days ago
-                  </Comment.Text>
-                </Comment.Metadata>
-                <Comment.Text>Réponse ...</Comment.Text>
-              </Comment.Content>
-            </Comment>
+            <Response />
           </Grid.Column>
         </Grid.Row>
       </Grid>
