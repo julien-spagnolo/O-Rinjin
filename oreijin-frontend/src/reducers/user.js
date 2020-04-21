@@ -1,5 +1,6 @@
 import {
   CHANGE_LOGIN_FIELD, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_LOADING,
+  DELETE_ACCOUNT_SUCCESS, DELETE_ACCOUNT_ERROR,
 } from '../actions/user';
 
 
@@ -11,6 +12,8 @@ const initialState = {
   infos: {},
   isLogged: false,
   loading: false,
+  isSuccess: false,
+  isError: false,
 };
 
 export default (state = initialState, action = {}) => {
@@ -48,5 +51,15 @@ export default (state = initialState, action = {}) => {
       };
     default:
       return state;
+    case DELETE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        isSuccess: true,
+      };
+    case DELETE_ACCOUNT_ERROR:
+      return {
+        ...state,
+        isError: true,
+      };
   }
 };

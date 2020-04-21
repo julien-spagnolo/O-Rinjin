@@ -99,6 +99,22 @@ export default (store) => (next) => (action) => {
       return next(action);
     case DELETE_ACCOUNT:
       console.log('//== delete account middleware action', action.payload);
+      console.log(`Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`);
+      axios({
+        method: 'delete',
+        url: `http://ec2-54-166-216-117.compute-1.amazonaws.com/api/users/${action.payload}`,
+        headers: {
+          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+        },
+        withCredentials: true,
+      })
+        .then((res) => {
+          store.dispatch(deleteAccountSuccess(res.data));
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(deleteAccountError());
+        });
       return next(action);
     default:
       return next(action);
