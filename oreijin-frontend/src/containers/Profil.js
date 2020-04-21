@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { deleteAccount } from '../actions/user';
 import Profil from '../components/Member/Profil';
 
 
@@ -6,6 +7,8 @@ const mapStateToProps = (state) => ({
   userInfos: state.user.infos,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) => ({
+  onDeleteAccount: (payload) => dispatch(deleteAccount(payload)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profil);

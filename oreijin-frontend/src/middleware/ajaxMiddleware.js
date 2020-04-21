@@ -8,6 +8,8 @@ import {
   GET_CATEGORIES_LIST, getCategoriesListSuccess,
 } from '../actions/categories';
 
+import { DELETE_ACCOUNT, deleteAccountSuccess, deleteAccountError } from '../actions/user';
+
 export default (store) => (next) => (action) => {
   switch (action.type) {
     case GET_CATEGORIES_LIST:
@@ -94,6 +96,9 @@ export default (store) => (next) => (action) => {
           console.log(err);
           store.dispatch(deleteServiceError());
         });
+      return next(action);
+    case DELETE_ACCOUNT:
+      console.log('//== delete account middleware action', action.payload);
       return next(action);
     default:
       return next(action);

@@ -41,9 +41,7 @@ export default (state = initialState, action = {}) => {
         isLogged: false,
         infos: {},
       };
-
     case LOGIN_LOADING:
-
       return {
         ...state,
         loading: true,

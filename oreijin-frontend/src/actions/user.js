@@ -1,3 +1,5 @@
+import { DELETE_SERVICE_ERROR } from './service';
+
 export const CHANGE_LOGIN_FIELD = 'CHANGE_LOGIN_FIELD';
 
 export const LOGIN = 'LOGIN';
@@ -11,6 +13,10 @@ export const LOGOUT_ERROR = 'LOGOUT_ERROR';
 export const CHECK_AUTH = 'CHECK_AUTH';
 
 export const LOGIN_LOADING = 'LOADING';
+
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
+export const DELETE_ACCOUNT_SUCCESS = 'DELETE_ACCOUNT_SUCCESS';
+export const DELETE_ACCOUNT_ERROR = 'DELETE_ACCOUNT_ERROR';
 
 
 export const changeLoginField = (value, name) => ({
@@ -48,4 +54,18 @@ export const checkAuth = () => ({
 
 export const loginLoading = () => ({
   type: LOGIN_LOADING,
+});
+
+export const deleteAccount = (payload) => ({
+  type: DELETE_ACCOUNT,
+  payload,
+});
+
+export const deleteAccountSuccess = (payload) => ({
+  type: DELETE_ACCOUNT_SUCCESS,
+  payload,
+});
+
+export const deleteAccountError = () => ({
+  type: DELETE_SERVICE_ERROR,
 });

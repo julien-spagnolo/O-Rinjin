@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Container, Header, Segment, Form, TextArea, Feed, Icon, Label, Image, Divider, Button,
+  Container, Header, Segment, Form, Image, Divider, Button,
 } from 'semantic-ui-react';
 
 import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
-const Profil = ({ userInfos }) => {
+const Profil = ({ userInfos, onDeleteAccount }) => {
   console.log(userInfos);
   return (
     <Container>
@@ -50,8 +50,18 @@ const Profil = ({ userInfos }) => {
         </Divider>
         <Container>
           <p>Attention</p>
-          <p>La suppression de votre compte est définitive. Vous perdrez toutes les informations et les services liés à ce compte.</p>
-          <Button className="profil__delete__button" size="small" color="red">Supprimer le compte</Button>
+          <p>
+            La suppression de votre compte est définitive.
+            Vous perdrez toutes les informations et les services liés à ce compte.
+          </p>
+          <Button
+            className="profil__delete__button"
+            size="small"
+            color="red"
+            onClick={() => onDeleteAccount(userInfos.id)}
+          >
+            Supprimer le compte
+          </Button>
         </Container>
       </Segment>
     </Container>
@@ -63,7 +73,9 @@ Profil.propTypes = {
     email: PropTypes.string,
     firstname: PropTypes.string,
     lastname: PropTypes.string,
+    id: PropTypes.number,
   }).isRequired,
+  onDeleteAccount: PropTypes.func.isRequired,
 };
 
 
