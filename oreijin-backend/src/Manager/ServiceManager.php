@@ -12,6 +12,11 @@ class ServiceManager extends AbstractManager
         return $this->getRepository()->findAll();
     }
 
+    public function home(): array
+    {
+        return $this->getRepository()->findBy([], ['createdAt' => 'desc'], 3);
+    }
+
     public function create(string $data)
     {
         return $this->save(new Service(), $data, []);

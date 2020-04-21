@@ -35,6 +35,22 @@ class ServiceController extends AbstractController
         return new Response($services);
     }
 
+        /**
+     * @Route(
+     *      "/api/services/home",
+     *      name="api_service_browse_home",  
+     *      methods={"GET"}
+     * )
+     */
+    public function home(): Response
+    {
+        $services = $this->serviceManager->home();
+
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+
+        return new Response($services);
+    }
+
     /** 
      * @Route(
      *      "/api/services/{id}", 
