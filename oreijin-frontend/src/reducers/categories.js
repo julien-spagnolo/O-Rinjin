@@ -10,6 +10,8 @@ export const getCategoriesOptions = (state = initialState) => state.list.map((ca
   value: category.id,
 }));
 
+// eslint-disable-next-line max-len
+export const findCategoryById = (id, state = initialState) => state.list.find((item) => item.id === id);
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {

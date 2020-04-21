@@ -33,7 +33,11 @@ const Response = ({
             3 days ago
           </Comment.Text>
         </Comment.Metadata>
-        <Comment.Text>Test</Comment.Text>
+        <Comment.Text>
+          {
+            comments[index] && comments[index].body
+          }
+        </Comment.Text>
       </Comment.Content>
     </Comment>
   );

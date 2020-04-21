@@ -7,7 +7,7 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case GET_COMMENT_SUCCESS:
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         list: [
           ...state.list,

@@ -15,8 +15,10 @@ import Response from '../../../containers/Response';
 const ServiceDetails = ({
   onChangeFieldReply, reply,
   id, getService, service,
+  category, getCategoriesList,
 }) => {
   useEffect(() => {
+    if (!category) getCategoriesList();
     getService(id);
   }, []);
 
@@ -30,7 +32,7 @@ const ServiceDetails = ({
               {service.type ? 'Proposition' : 'Demande' }
             </Label>
             <Label>
-              Jardinage
+              {category && category.title}
             </Label>
             {/* <Container style={{ marginTop: '0.7rem' }} content="créé le ... - modifié le ..." textAlign="center" /> */}
           </Container>
@@ -139,6 +141,8 @@ ServiceDetails.propTypes = {
   id: PropTypes.string.isRequired,
   getService: PropTypes.func.isRequired,
   service: PropTypes.object.isRequired,
+  category: PropTypes.object.isRequired,
+  getCategoriesList: PropTypes.func.isRequired,
 };
 
 export default ServiceDetails;
