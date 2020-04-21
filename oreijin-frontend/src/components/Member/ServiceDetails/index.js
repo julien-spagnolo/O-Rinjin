@@ -134,6 +134,10 @@ const ServiceDetails = ({
   );
 };
 
+// À modifier
+ServiceDetails.defaultProps = {
+  category: null,
+};
 
 ServiceDetails.propTypes = {
   onChangeFieldReply: PropTypes.func.isRequired,
@@ -141,7 +145,7 @@ ServiceDetails.propTypes = {
   id: PropTypes.string.isRequired,
   getService: PropTypes.func.isRequired,
   service: PropTypes.object.isRequired,
-  category: PropTypes.object.isRequired,
+  category: PropTypes.object,
   getCategoriesList: PropTypes.func.isRequired,
 };
 

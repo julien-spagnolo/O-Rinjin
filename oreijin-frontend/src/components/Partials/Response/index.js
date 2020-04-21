@@ -16,7 +16,7 @@ const Response = ({
   id, index, getComment, comments,
 }) => {
   useEffect(() => {
-    console.log('//= useEffect comment');
+    // console.log('//= useEffect comment');
     getComment({
       index,
       id,
