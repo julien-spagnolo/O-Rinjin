@@ -12,7 +12,6 @@ const Profil = ({
   userInfos,
   onDeleteAccount,
   error,
-  success,
   isLogged,
 }) => {
   const history = useHistory();
@@ -24,7 +23,7 @@ const Profil = ({
     if (!isLogged) history.push('/');
   }, [isLogged]);
 
-  console.log(userInfos, error, success);
+  console.log(userInfos, error);
   return (
     <Container>
       <Segment textAlign="center">
@@ -70,7 +69,6 @@ const Profil = ({
             La suppression de votre compte est définitive.
             Vous perdrez toutes les informations et les services liés à ce compte.
           </p>
-          <Message success hidden={!success} content="Votre compte a bien été supprimé" />
           <Message error hidden={!error} content="Une erreur est survenue lors de la suppression de votre compte." />
           <Button
             className="profil__delete__button"
