@@ -16,11 +16,12 @@ const ServiceDetails = ({
   onChangeFieldReply, reply,
   id, getService, service,
   category, getCategoriesList,
+  addComment, commentListLength,
 }) => {
   useEffect(() => {
     if (!category) getCategoriesList();
     getService(id);
-  }, []);
+  }, [commentListLength]);
 
   return (
     <Segment as={Container} className="service" raised>
@@ -112,7 +113,14 @@ const ServiceDetails = ({
 
       <Grid>
         <Grid.Row>
-          <Grid.Column as={Form} reply>
+          <Grid.Column
+            as={Form}
+            reply
+            onSubmit={(evt) => {
+              evt.preventDefault();
+              addComment();
+            }}
+          >
             <TextArea
               placeholder="Envoyer une réponse"
               value={reply}
@@ -140,6 +148,7 @@ ServiceDetails.defaultProps = {
 };
 
 ServiceDetails.propTypes = {
+  commentListLength: PropTypes.number.isRequired,
   onChangeFieldReply: PropTypes.func.isRequired,
   reply: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
@@ -147,6 +156,7 @@ ServiceDetails.propTypes = {
   service: PropTypes.object.isRequired,
   category: PropTypes.object,
   getCategoriesList: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
 };
 
 export default ServiceDetails;

@@ -7,6 +7,7 @@ import rootReducer from 'src/reducers';
 import authMiddleware from '../middleware/authMiddleware';
 import registerMiddleware from '../middleware/registerMiddleware';
 import ajaxMiddleware from '../middleware/ajaxMiddleware';
+import commentMiddleware from '../middleware/commentMiddleware';
 
 // == Enhancers
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -17,6 +18,7 @@ const enhancers = composeEnhancers(
     authMiddleware,
     registerMiddleware,
     ajaxMiddleware,
+    commentMiddleware,
     // secondMiddleware,
   ),
 );

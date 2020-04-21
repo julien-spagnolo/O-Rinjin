@@ -14,7 +14,7 @@ import {
 } from '../actions/service';
 
 import {
-  GET_COMMENT_SUCCESS,
+  ADD_COMMENT_SUCCESS,
 } from '../actions/comments';
 
 const initialState = {
@@ -127,6 +127,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         service: {
+          ...state.service,
           reply: action.payload,
         },
       };
@@ -147,6 +148,14 @@ export default (state = initialState, action = {}) => {
         service: {
           ...state.service,
           ...action.payload,
+        },
+      };
+    case ADD_COMMENT_SUCCESS:
+      return {
+        ...state,
+        service: {
+          ...state.service,
+          reply: '',
         },
       };
     default:

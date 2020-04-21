@@ -10,9 +10,6 @@ import {
 import {
   GET_CATEGORIES_LIST, getCategoriesListSuccess,
 } from '../actions/categories';
-import {
-  GET_COMMENT, getCommentSuccess,
-} from '../actions/comments';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
@@ -117,24 +114,6 @@ export default (store) => (next) => (action) => {
         .catch((err) => {
           console.log(err);
           store.dispatch(getServiceError());
-        });
-      return next(action);
-    case GET_COMMENT:
-      axios({
-        method: 'get',
-        url: `${baseURL}/api/comments/${action.payload.id}`,
-        headers: {
-          Authorization: authorization,
-        },
-        withCredentials: true,
-      })
-        .then((res) => {
-          // console.log(action.payload);
-          // console.log(res.data);
-          store.dispatch(getCommentSuccess(res.data));
-        })
-        .catch((err) => {
-          console.log(err);
         });
       return next(action);
     default:
