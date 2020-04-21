@@ -36,6 +36,22 @@ class UserController extends AbstractController
         return new Response($users);
     }
 
+        /**
+     * @Route(
+     *      "/api/users/home",
+     *      name="api_user_browse_home",  
+     *      methods={"GET"}
+     * )
+     */
+    public function home(): Response
+    {
+        $users = $this->userManager->home();
+
+        $users = $this->userManager->serialize($users, ['groups' => 'users-list']);
+
+        return new Response($users);
+    }
+
     /** 
      * @Route(
      *      "/api/users/{id}", 

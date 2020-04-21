@@ -19,7 +19,7 @@ class ServiceCategory
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"service-categories", "services"})
+     * @Groups({"service-categories", "services", "services-read"})
      */
     private $id;
 
@@ -45,7 +45,10 @@ class ServiceCategory
     {
         $this->services = new ArrayCollection();
     }
-
+    public function __toString()
+    {
+       return $this->title;
+    }
     public function getId(): ?int
     {
         return $this->id;

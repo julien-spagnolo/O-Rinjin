@@ -56,17 +56,20 @@ class Service
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="service")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("services-read")
      */
     private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="service", orphanRemoval=true)
+     * @Groups("services-read")
      */
     private $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ServiceCategory", inversedBy="services")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("services-read")
      */
     private $serviceCategory;
 
@@ -74,6 +77,12 @@ class Service
     {
         $this->comment = new ArrayCollection();
     }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
 
     public function getId(): ?int
     {
