@@ -142,7 +142,7 @@ export default (state = initialState, action = {}) => {
         isError: true,
       };
     case GET_SERVICE_SUCCESS:
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         service: {

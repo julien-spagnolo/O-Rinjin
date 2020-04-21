@@ -6,6 +6,7 @@ import {
   ADD_COMMENT, addCommentSuccess,
 } from '../actions/comments';
 
+// eslint-disable-next-line consistent-return
 const commentMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_COMMENT:
@@ -25,7 +26,7 @@ const commentMiddleware = (store) => (next) => (action) => {
         .catch((err) => {
           console.log(err);
         });
-      return next(action);
+      break;
     case ADD_COMMENT:
       // console.log(store.getState().services.service);
       axios({
@@ -51,7 +52,7 @@ const commentMiddleware = (store) => (next) => (action) => {
         .catch((err) => {
           console.log(err);
         });
-      return next(action);
+      break;
     default: return next(action);
   }
 };

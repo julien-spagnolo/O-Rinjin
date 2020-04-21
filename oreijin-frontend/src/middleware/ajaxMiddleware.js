@@ -11,6 +11,7 @@ import {
   GET_CATEGORIES_LIST, getCategoriesListSuccess,
 } from '../actions/categories';
 
+// eslint-disable-next-line consistent-return
 export default (store) => (next) => (action) => {
   switch (action.type) {
     case GET_CATEGORIES_LIST:
@@ -29,7 +30,7 @@ export default (store) => (next) => (action) => {
         .catch((err) => {
           console.log(err);
         });
-      return next(action);
+      break;
     case GET_SERVICES_LIST:
 
       // console.log('//== middleware getServicesList');
@@ -52,7 +53,7 @@ export default (store) => (next) => (action) => {
         .catch((err) => {
           console.log(err);
         });
-      return next(action);
+      break;
     case ADD_SERVICE:
       // console.log({
       //   ...store.getState().services.form,
@@ -79,7 +80,7 @@ export default (store) => (next) => (action) => {
           console.log(err);
           store.dispatch(addServiceError());
         });
-      return next(action);
+      break;
     case DELETE_SERVICE:
       console.log('//== delete service middleware', action.payload);
       axios({
@@ -115,7 +116,7 @@ export default (store) => (next) => (action) => {
           console.log(err);
           store.dispatch(getServiceError());
         });
-      return next(action);
+      break;
     default:
       return next(action);
   }

@@ -13,11 +13,12 @@ import './styles.scss';
 // TODO: services props
 const ServicesList = ({
   getServicesList, services,
-  isSuccess, isError }) => {
+  isSuccess, isError,
+}) => {
   useEffect(() => {
     // TODO : replace getServicesList with getUserServices
     getServicesList();
-  });
+  }, []);
 
   return (
     <Container>
