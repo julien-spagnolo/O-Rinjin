@@ -5,6 +5,8 @@ import Profil from '../components/Member/Profil';
 
 const mapStateToProps = (state) => ({
   userInfos: state.user.infos,
+  success: state.user.isSuccess,
+  error: state.user.isError,
 });
 
 const mapDispatchToProps = (dispatch) => ({

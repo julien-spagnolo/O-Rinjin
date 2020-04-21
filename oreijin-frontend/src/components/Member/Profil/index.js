@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Container, Header, Segment, Form, Image, Divider, Button,
+  Container, Header, Segment, Form, Image, Divider, Button, Message,
 } from 'semantic-ui-react';
 
 import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
-const Profil = ({ userInfos, onDeleteAccount }) => {
-  console.log(userInfos);
+const Profil = ({
+  userInfos, onDeleteAccount, error, success,
+}) => {
+  console.log(userInfos, error, success);
   return (
     <Container>
       <Segment textAlign="center">
@@ -54,6 +56,8 @@ const Profil = ({ userInfos, onDeleteAccount }) => {
             La suppression de votre compte est définitive.
             Vous perdrez toutes les informations et les services liés à ce compte.
           </p>
+          <Message success hidden={!success} content="Votre compte a bien été supprimé" />
+          <Message error hidden={!error} content="Une erreur est survenue lors de la suppression de votre compte." />
           <Button
             className="profil__delete__button"
             size="small"
@@ -66,6 +70,11 @@ const Profil = ({ userInfos, onDeleteAccount }) => {
       </Segment>
     </Container>
   );
+};
+
+Profil.defaultProp = {
+  success: PropTypes.bool,
+  error: PropTypes.bool,
 };
 
 Profil.propTypes = {

@@ -14,6 +14,7 @@ const initialState = {
   loading: false,
   isSuccess: false,
   isError: false,
+  test: 'salut',
 };
 
 export default (state = initialState, action = {}) => {
