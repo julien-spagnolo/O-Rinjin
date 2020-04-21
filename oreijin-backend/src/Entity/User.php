@@ -10,6 +10,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Filesystem\Filesystem;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -22,7 +25,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-read"})
      */
     private $id;
 
@@ -141,6 +144,8 @@ class User implements UserInterface
         $this->comment = new ArrayCollection();
     }
 
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -156,6 +161,10 @@ class User implements UserInterface
         $this->email = $email;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->email;
     }
 
     /**
@@ -315,9 +324,13 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAvatar(): ?string
+    public function getAvatar(): ?File
     {
-        return $this->avatar;
+        //return new File($this->avatar);
+        // above not working
+        // bypass using a temporary File
+        $filesystem = new Filesystem();
+        return new File($filesystem->tempnam('/tmp', 'efface_moi_'));
     }
 
     public function setAvatar(?string $avatar): self

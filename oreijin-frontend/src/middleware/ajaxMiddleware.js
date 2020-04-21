@@ -96,6 +96,7 @@ export default (store) => (next) => (action) => {
           console.log(err);
           store.dispatch(deleteServiceError());
         });
+
       return next(action);
     case DELETE_ACCOUNT:
       console.log('//== delete account middleware action', action.payload);
@@ -115,6 +116,7 @@ export default (store) => (next) => (action) => {
           console.log(err);
           store.dispatch(deleteAccountError());
         });
+
       return next(action);
     default:
       return next(action);
