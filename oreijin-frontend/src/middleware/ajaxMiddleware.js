@@ -8,7 +8,7 @@ import {
   GET_CATEGORIES_LIST, getCategoriesListSuccess,
 } from '../actions/categories';
 
-import { DELETE_ACCOUNT, deleteAccountSuccess, deleteAccountError } from '../actions/user';
+import { DELETE_ACCOUNT, deleteAccountSuccess, deleteAccountError, logout } from '../actions/user';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
@@ -111,6 +111,7 @@ export default (store) => (next) => (action) => {
       })
         .then((res) => {
           store.dispatch(deleteAccountSuccess(res.data));
+          store.dispatch(logout());
         })
         .catch((err) => {
           console.log(err);

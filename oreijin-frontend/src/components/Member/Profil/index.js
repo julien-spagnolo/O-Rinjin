@@ -24,10 +24,10 @@ const Profil = ({
     // We redirect to /home only if isLogged is true
     // console.log(userId);
     getUser(userId);
-    if (!isLogged) history.push('/');
+    if (!document.cookie.split(';').some((item) => item.trim().startsWith('token='))) history.push('/');
   }, [isLogged]);
 
-  console.log(userInfos);
+  // console.log(userInfos);
   return (
     <Container>
       <Segment textAlign="center">
