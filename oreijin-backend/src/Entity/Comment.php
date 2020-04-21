@@ -17,7 +17,7 @@ class Comment
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"comments-browse", "comment-read", "comment-add", "comment-edit"})
+     * @Groups({"comments-browse", "comment-read", "comment-add", "comment-edit", "services-read"})
      */
     private $id;
 
