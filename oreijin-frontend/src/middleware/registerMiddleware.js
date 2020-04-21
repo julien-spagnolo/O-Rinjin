@@ -5,8 +5,8 @@ import {
   HANDLE_SUBMIT, loading, handleSubmitSuccess,
   updateLocation, updateLocationError,
 } from '../actions/register';
-
-const mapboxApiToken = 'pk.eyJ1Ijoibm91Z2F6YWtpIiwiYSI6ImNrOG9uaG90NjA0MWEzZ242OWY5Z3o2ZGoifQ.lMw3p6r7TW0oBoxfMrzpFA';
+import { baseURL } from '../axios';
+import mapboxApiToken from '../../mapbox.config';
 
 const registerMiddleware = (store) => (next) => (action) => {
   const { address, city, postalcode } = store.getState().register.form;
@@ -30,7 +30,7 @@ const registerMiddleware = (store) => (next) => (action) => {
           console.log(store.getState().register.form);
 
           axios({
-            url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/register',
+            url: `${baseURL}/register`,
             method: 'post',
             data: {
               ...store.getState().register.form,

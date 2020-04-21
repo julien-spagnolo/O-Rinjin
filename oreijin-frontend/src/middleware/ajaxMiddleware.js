@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-escape */
 import axios from 'axios';
+import { baseURL, authorization } from '../axios';
 import {
   GET_SERVICES_LIST, getServicesListSuccess,
   ADD_SERVICE, addServiceSuccess, addServiceError,
@@ -15,9 +16,9 @@ export default (store) => (next) => (action) => {
     case GET_CATEGORIES_LIST:
       axios({
         method: 'get',
-        url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/api/service-categories',
+        url: `${baseURL}/api/service-categories`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: authorization,
         },
         withCredentials: true,
       })
@@ -37,9 +38,9 @@ export default (store) => (next) => (action) => {
       // source: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
       axios({
         method: 'get',
-        url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/api/services',
+        url: `${baseURL}/api/services`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: authorization,
         },
         withCredentials: true,
       })
@@ -59,9 +60,9 @@ export default (store) => (next) => (action) => {
       // });
       axios({
         method: 'post',
-        url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/api/services',
+        url: `${baseURL}/api/services`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: authorization,
         },
         data: {
           ...store.getState().services.form,
@@ -83,7 +84,7 @@ export default (store) => (next) => (action) => {
       console.log('//== delete service middleware', action.payload);
       axios({
         method: 'delete',
-        url: `http://ec2-54-166-216-117.compute-1.amazonaws.com/api/services/${action.payload}`,
+        url: `${baseURL}/api/services/${action.payload}`,
         headers: {
           Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
         },
@@ -100,9 +101,9 @@ export default (store) => (next) => (action) => {
     case GET_SERVICE:
       axios({
         method: 'get',
-        url: `http://ec2-54-166-216-117.compute-1.amazonaws.com/api/services/${action.payload}`,
+        url: `${baseURL}/api/services/${action.payload}`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: authorization,
         },
         withCredentials: true,
       })
