@@ -5,6 +5,8 @@ namespace App\Manager;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 class UserManager extends AbstractManager {
 
@@ -27,11 +29,24 @@ class UserManager extends AbstractManager {
     }
 
     public function create(string $data)
-    {
+    {  
+        
         return $this->save(new User(), $data, [
             'Default',
             'register',
         ], self::IGNORED_ATTRIBUTES);
+        
+    }
+    public function sendEmail(MailerInterface $mailer)
+    {
+        $email = (new Email())
+            ->from('entraideadaptable@gmail.com')
+            ->to('hln.david7@gmail.com')
+            ->subject('O Rijin : confirmation de votre inscription')
+            ->text('Sending emails is fun again!')
+            ->html('<p>See Twig integration for better HTML integration!</p>');
+
+        $mailer->send($email);
     }
 
     public function update(User $user, string $data)
