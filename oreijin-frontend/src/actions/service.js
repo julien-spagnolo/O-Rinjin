@@ -8,6 +8,8 @@ export const ADD_SERVICE_SUCCESS = 'ADD_SERVICE_SUCCESS';
 export const ADD_SERVICE_ERROR = 'ADD_SERVICE_ERROR';
 export const RESET_SERVICE_FORM = 'RESET_SERVICE_FORM';
 export const DELETE_SERVICE = 'DELETE_SERVICE';
+export const DELETE_SERVICE_SUCCESS = 'DELETE_SERVICE_SUCCESS';
+export const DELETE_SERVICE_ERROR = 'DELETE_SERVICE_ERROR';
 
 export const getServicesList = () => ({
   type: GET_SERVICES_LIST,
@@ -54,4 +56,13 @@ export const onChangeFieldReply = (payload) => ({
 export const deleteService = (payload) => ({
   type: DELETE_SERVICE,
   payload,
+});
+
+export const deleteServiceSuccess = (payload) => ({
+  type: DELETE_SERVICE_SUCCESS,
+  payload,
+});
+
+export const deleteServiceError = () => ({
+  type: DELETE_SERVICE_ERROR,
 });

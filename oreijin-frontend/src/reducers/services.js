@@ -8,6 +8,8 @@ import {
   ADD_SERVICE_ERROR,
   RESET_SERVICE_FORM,
   ON_CHANGE_FIELD_REPLY,
+  DELETE_SERVICE_SUCCESS,
+  DELETE_SERVICE_ERROR,
 } from '../actions/service';
 
 const initialState = {
@@ -101,6 +103,16 @@ export default (state = initialState, action = {}) => {
         service: {
           reply: action.payload,
         },
+      };
+    case DELETE_SERVICE_SUCCESS:
+      return {
+        ...state,
+        isSuccess: true,
+      };
+    case DELETE_SERVICE_ERROR:
+      return {
+        ...state,
+        isError: true,
       };
     default:
       return state;
