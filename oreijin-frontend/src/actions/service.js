@@ -1,5 +1,8 @@
 export const GET_SERVICES_LIST = 'GET_SERVICES_LIST';
 export const GET_SERVICES_LIST_SUCCESS = 'GET_SERVICES_LIST_SUCCESS';
+export const GET_SERVICE = 'GET_SERVICE';
+export const GET_SERVICE_SUCCESS = 'GET_SERVICE_SUCCESS';
+export const GET_SERVICE_ERROR = 'GET_SERVICE_ERROR';
 export const ON_CHANGE_FIELD = 'ON_CHANGE_FIELD';
 export const ON_CHANGE_FIELD_TYPE = 'ON_CHANGE_FIELD_TYPE';
 export const ON_CHANGE_FIELD_REPLY = 'ON_CHANGE_FIELD_REPLY';
@@ -13,6 +16,20 @@ export const DELETE_SERVICE_ERROR = 'DELETE_SERVICE_ERROR';
 
 export const getServicesList = () => ({
   type: GET_SERVICES_LIST,
+});
+
+export const getService = (payload) => ({
+  type: GET_SERVICE,
+  payload,
+});
+
+export const getServiceSuccess = (payload) => ({
+  type: GET_SERVICE_SUCCESS,
+  payload,
+});
+
+export const getServiceError = () => ({
+  type: GET_SERVICE_ERROR,
 });
 
 export const getServicesListSuccess = (payload) => ({

@@ -1,8 +1,10 @@
+/* eslint-disable no-useless-escape */
 import axios from 'axios';
 import {
   GET_SERVICES_LIST, getServicesListSuccess,
   ADD_SERVICE, addServiceSuccess, addServiceError,
   DELETE_SERVICE, deleteServiceSuccess, deleteServiceError,
+  GET_SERVICE, getServiceSuccess, getServiceError,
 } from '../actions/service';
 import {
   GET_CATEGORIES_LIST, getCategoriesListSuccess,
@@ -51,10 +53,10 @@ export default (store) => (next) => (action) => {
         });
       return next(action);
     case ADD_SERVICE:
-      console.log({
-        ...store.getState().services.form,
-        user: action.payload,
-      });
+      // console.log({
+      //   ...store.getState().services.form,
+      //   user: action.payload,
+      // });
       axios({
         method: 'post',
         url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/api/services',
@@ -93,6 +95,24 @@ export default (store) => (next) => (action) => {
         .catch((err) => {
           console.log(err);
           store.dispatch(deleteServiceError());
+        });
+      return next(action);
+    case GET_SERVICE:
+      axios({
+        method: 'get',
+        url: `http://ec2-54-166-216-117.compute-1.amazonaws.com/api/services/${action.payload}`,
+        headers: {
+          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+        },
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log(res.data);
+          store.dispatch(getServiceSuccess(res.data));
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(getServiceError());
         });
       return next(action);
     default:

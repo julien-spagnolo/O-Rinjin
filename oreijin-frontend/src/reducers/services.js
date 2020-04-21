@@ -10,6 +10,7 @@ import {
   ON_CHANGE_FIELD_REPLY,
   DELETE_SERVICE_SUCCESS,
   DELETE_SERVICE_ERROR,
+  GET_SERVICE_SUCCESS,
 } from '../actions/service';
 
 const initialState = {
@@ -30,13 +31,25 @@ const initialState = {
   isError: false,
 };
 
-// Map on services list to add an uuid for unique route
+/**
+ * Add a slug for each service and return the list
+ * @param {Object} state
+ */
 export const getServicesWithSlug = (state = initialState) => state.list.map((service) => ({
   ...service,
   slug: slugify(`${service.id} ${service.title}`, { lower: true }),
 }));
 
-export const findServiceBySlug = (state, slug) => state.list.find((service) => slugify(`${service.id} ${service.title}`, { lower: true }) === slug);
+
+/**
+ * Extract the service id from the slug
+ * @param {String} slug
+ */
+export const getServiceIdFromSlug = (slug) => {
+  const words = slug.split('-');
+  // console.log(words[0]);
+  return words[0];
+};
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -113,6 +126,14 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         isError: true,
+      };
+    case GET_SERVICE_SUCCESS:
+      return {
+        ...state,
+        service: {
+          ...state.service,
+          ...action.payload,
+        },
       };
     default:
       return state;
