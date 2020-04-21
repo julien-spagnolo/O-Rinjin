@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import {
   Container, Header, Segment, Form, Image, Divider, Button, Message,
 } from 'semantic-ui-react';
@@ -8,8 +9,21 @@ import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
 const Profil = ({
-  userInfos, onDeleteAccount, error, success,
+  userInfos,
+  onDeleteAccount,
+  error,
+  success,
+  isLogged,
 }) => {
+  const history = useHistory();
+
+  // Called everytime 'isLogged' changes
+  useEffect(() => {
+    // Redirect to page '/home' after submit
+    // We redirect to /home only if isLogged is true
+    if (!isLogged) history.push('/');
+  }, [isLogged]);
+
   console.log(userInfos, error, success);
   return (
     <Container>
@@ -72,11 +86,6 @@ const Profil = ({
   );
 };
 
-Profil.defaultProp = {
-  success: PropTypes.bool,
-  error: PropTypes.bool,
-};
-
 Profil.propTypes = {
   userInfos: PropTypes.shape({
     email: PropTypes.string,
@@ -85,6 +94,7 @@ Profil.propTypes = {
     id: PropTypes.number,
   }).isRequired,
   onDeleteAccount: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 

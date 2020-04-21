@@ -5,6 +5,7 @@ import Profil from '../components/Member/Profil';
 
 const mapStateToProps = (state) => ({
   userInfos: state.user.infos,
+  isLogged: state.user.isLogged,
   success: state.user.isSuccess,
   error: state.user.isError,
 });

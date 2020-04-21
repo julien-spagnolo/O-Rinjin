@@ -14,7 +14,6 @@ const initialState = {
   loading: false,
   isSuccess: false,
   isError: false,
-  test: 'salut',
 };
 
 export default (state = initialState, action = {}) => {
@@ -55,7 +54,9 @@ export default (state = initialState, action = {}) => {
     case DELETE_ACCOUNT_SUCCESS:
       return {
         ...state,
+        isLogged: false,
         isSuccess: true,
+        infos: {},
       };
     case DELETE_ACCOUNT_ERROR:
       return {

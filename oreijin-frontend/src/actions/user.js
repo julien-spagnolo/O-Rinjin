@@ -67,5 +67,5 @@ export const deleteAccountSuccess = (payload) => ({
 });
 
 export const deleteAccountError = () => ({
-  type: DELETE_SERVICE_ERROR,
+  type: DELETE_ACCOUNT_ERROR,
 });
