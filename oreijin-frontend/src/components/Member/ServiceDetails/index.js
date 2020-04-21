@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 import './style.scss';
 import logo from '../../../assets/images/logo.png';
-import Response from '../../Partials/Response';
+import Response from '../../../containers/Response';
 
 const ServiceDetails = ({
   onChangeFieldReply, reply,
@@ -95,7 +95,9 @@ const ServiceDetails = ({
       <Grid>
         <Grid.Row>
           <Grid.Column as={Comment.Group} className="padding--left--right">
-            <Response />
+            {
+              service.comment.map((item, index) => <Response key={`${item.id}-comment`} {...item} index={index} />)
+            }
           </Grid.Column>
         </Grid.Row>
       </Grid>

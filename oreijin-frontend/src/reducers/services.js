@@ -13,6 +13,10 @@ import {
   GET_SERVICE_SUCCESS,
 } from '../actions/service';
 
+import {
+  GET_COMMENT_SUCCESS,
+} from '../actions/comments';
+
 const initialState = {
   list: [],
   form: {
@@ -25,6 +29,15 @@ const initialState = {
     user: '',
   },
   service: {
+    id: null,
+    title: '',
+    body: '',
+    type: null,
+    image: null,
+    active: null,
+    user: {},
+    comment: [],
+    serviceCategory: {},
     reply: '',
   },
   isSuccess: false,
@@ -128,6 +141,7 @@ export default (state = initialState, action = {}) => {
         isError: true,
       };
     case GET_SERVICE_SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
         service: {
