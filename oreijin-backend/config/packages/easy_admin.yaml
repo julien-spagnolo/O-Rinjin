@@ -1,0 +1,7 @@
+easy_admin:
+   entities:
+
+       - App\Entity\Comment
+       - App\Entity\Service
+       - App\Entity\ServiceCategory
+       - App\Entity\User
