@@ -25,7 +25,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-read"})
      */
     private $id;
 

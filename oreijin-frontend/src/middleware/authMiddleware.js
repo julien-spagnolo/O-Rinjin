@@ -59,6 +59,9 @@ export default (store) => (next) => (action) => {
           id: userInfos.id,
           firstname: userInfos.firstname,
           lastname: userInfos.lastname,
+          address: userInfos.address,
+          latitude: userInfos.latitude,
+          longitude: userInfos.longitude,
         }));
         // store.dispatch(loginSuccess({}));
       }

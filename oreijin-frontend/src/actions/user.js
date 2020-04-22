@@ -12,6 +12,13 @@ export const CHECK_AUTH = 'CHECK_AUTH';
 
 export const LOGIN_LOADING = 'LOADING';
 
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
+export const DELETE_ACCOUNT_SUCCESS = 'DELETE_ACCOUNT_SUCCESS';
+export const DELETE_ACCOUNT_ERROR = 'DELETE_ACCOUNT_ERROR';
+
+export const GET_USER = 'GET_USER';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_ERROR = 'GET_USER_ERROR';
 
 export const changeLoginField = (value, name) => ({
   type: CHANGE_LOGIN_FIELD,
@@ -48,4 +55,32 @@ export const checkAuth = () => ({
 
 export const loginLoading = () => ({
   type: LOGIN_LOADING,
+});
+
+export const deleteAccount = (payload) => ({
+  type: DELETE_ACCOUNT,
+  payload,
+});
+
+export const deleteAccountSuccess = (payload) => ({
+  type: DELETE_ACCOUNT_SUCCESS,
+  payload,
+});
+
+export const deleteAccountError = () => ({
+  type: DELETE_ACCOUNT_ERROR,
+});
+
+export const getUser = (payload) => ({
+  type: GET_USER,
+  payload,
+});
+
+export const getUserSuccess = (payload) => ({
+  type: GET_USER_SUCCESS,
+  payload,
+});
+
+export const getUserError = () => ({
+  type: DELETE_ACCOUNT_SUCCESS,
 });

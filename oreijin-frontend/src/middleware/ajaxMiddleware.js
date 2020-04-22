@@ -11,6 +11,8 @@ import {
   GET_CATEGORIES_LIST, getCategoriesListSuccess,
 } from '../actions/categories';
 
+import { DELETE_ACCOUNT, deleteAccountSuccess, deleteAccountError, logout } from '../actions/user';
+
 // eslint-disable-next-line consistent-return
 export default (store) => (next) => (action) => {
   switch (action.type) {
@@ -98,6 +100,28 @@ export default (store) => (next) => (action) => {
           console.log(err);
           store.dispatch(deleteServiceError());
         });
+
+      return next(action);
+    case DELETE_ACCOUNT:
+      console.log('//== delete account middleware action', action.payload);
+      console.log(`Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`);
+      axios({
+        method: 'delete',
+        url: `http://ec2-54-166-216-117.compute-1.amazonaws.com/api/users/${action.payload}`,
+        headers: {
+          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+        },
+        withCredentials: true,
+      })
+        .then((res) => {
+          store.dispatch(deleteAccountSuccess(res.data));
+          store.dispatch(logout());
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(deleteAccountError());
+        });
+
       return next(action);
     case GET_SERVICE:
       axios({
