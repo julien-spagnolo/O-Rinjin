@@ -23,13 +23,13 @@ class Comment
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"comments-browse", "comment-read", "comment-add", "comment-edit"})
+     * @Groups({"comments-browse", "comment-read", "comment-add", "comment-edit", "services-read"})
      */
     private $body;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"comments-browse", "comment-read", "comment-add", "comment-edit"})
+     * @Groups({"comments-browse", "comment-read", "comment-add", "comment-edit", "services-read"})
      */
     private $isBlocked;
 

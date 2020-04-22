@@ -99,14 +99,14 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=8)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse"})
      * @Assert\NotBlank
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="decimal", precision=11, scale=8)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse"})
      */
     private $longitude;
 

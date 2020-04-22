@@ -64,7 +64,7 @@ class ServiceController extends AbstractController
     {
         $services = $this->serviceManager->browse();
 
-        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-browse']);
 
         return new Response($services);
     }

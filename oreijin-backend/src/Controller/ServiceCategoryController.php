@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ServiceCategory;
 use App\Manager\ServiceCategoryManager;
-use App\Security\Voter\ServiceCategoryVoter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -57,6 +57,8 @@ class ServiceCategoryController extends AbstractController
      *      name="api_service_category_add",  
      *      methods={"POST"}
      * )
+     * 
+     * @IsGranted("ROLE_MODO", message="No access!")
      */
     public function add(Request $request): Response
     {
@@ -74,6 +76,8 @@ class ServiceCategoryController extends AbstractController
      *      methods={"PUT"},
      *      requirements={"id"="\d+"}
      * )
+     * 
+     * @IsGranted("ROLE_MODO", message="No access!")
      */
     public function edit(Request $request, ServiceCategory $serviceCategory): Response
     {
@@ -96,6 +100,8 @@ class ServiceCategoryController extends AbstractController
      * @param int $id
      *
      * @return JsonResponse
+     * 
+     * @IsGranted("ROLE_ADMIN", message="No access!")
      */
     public function delete(ServiceCategory $serviceCategory): JsonResponse
     {
