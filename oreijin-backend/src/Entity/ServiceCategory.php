@@ -19,7 +19,7 @@ class ServiceCategory
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"service-categories", "services", "services-read"})
+     * @Groups({"service-categories", "services-read"})
      */
     private $id;
 

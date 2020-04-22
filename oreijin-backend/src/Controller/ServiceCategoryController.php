@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ServiceCategory;
 use App\Manager\ServiceCategoryManager;
+use App\Security\Voter\ServiceCategoryVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -57,13 +58,13 @@ class ServiceCategoryController extends AbstractController
      *      methods={"POST"}
      * )
      */
-    public function add(Request $request): JsonResponse
+    public function add(Request $request): Response
     {
-
         $data = $request->getContent();
         $serviceCategory = $this->serviceCategoryManager->create($data);
+        $serviceCategory = $this->serviceCategoryManager->serialize($serviceCategory, ['groups' => 'service-categories']);
 
-        return $this->json($serviceCategory, JsonResponse::HTTP_CREATED);
+        return new Response($serviceCategory);
     }
 
     /**
@@ -74,12 +75,15 @@ class ServiceCategoryController extends AbstractController
      *      requirements={"id"="\d+"}
      * )
      */
-    public function edit(Request $request, ServiceCategory $serviceCategory): JsonResponse
+    public function edit(Request $request, ServiceCategory $serviceCategory): Response
     {
+        // $this->denyAccessUnlessGranted(ServiceCategoryVoter::BACK_OFFICE, $serviceCategory);
+
         $data = $request->getContent();
         $serviceCategory = $this->serviceCategoryManager->update($serviceCategory, $data);
+        $serviceCategory = $this->serviceCategoryManager->serialize($serviceCategory, ['groups' => 'service-categories']);
 
-        return $this->json($serviceCategory);
+        return new Response($serviceCategory);
     }
 
     /**
@@ -95,6 +99,8 @@ class ServiceCategoryController extends AbstractController
      */
     public function delete(ServiceCategory $serviceCategory): JsonResponse
     {
+        // $this->denyAccessUnlessGranted(ServiceCategoryVoter::BACK_OFFICE, $serviceCategory);
+
         $this->serviceCategoryManager->delete($serviceCategory);
 
         return new JsonResponse(

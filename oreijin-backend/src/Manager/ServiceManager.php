@@ -7,14 +7,19 @@ use App\Repository\ServiceRepository;
 
 class ServiceManager extends AbstractManager
 {
-    public function browse(): array
-    {
-        return $this->getRepository()->findAll();
-    }
-
     public function home(): array
     {
         return $this->getRepository()->findBy([], ['createdAt' => 'desc'], 3);
+    }
+
+    public function servicesByUser($userId): array
+    {
+        return $this->getRepository()->findBy(['user' => $userId], ['createdAt' => 'desc']);
+    }
+
+    public function browse(): array
+    {
+        return $this->getRepository()->findAll();
     }
 
     public function create(string $data)

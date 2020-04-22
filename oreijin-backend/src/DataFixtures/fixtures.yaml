@@ -11,7 +11,7 @@ App\Entity\Service:
 App\Entity\User:
     user_{1..30}:
       email: '<freeEmail()>'
-      roles: ["ADMIN"]
+      roles: ["ROLE_USER"]
       password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$24/CSMrt81aExnblf9ZwMQ\$aM3QW9kZljYXWS4tL++n3C70sqRYZuLPR0byl0Ud1uk'
       firstName: '<firstName()>'
       lastName: '<lastName()>'
