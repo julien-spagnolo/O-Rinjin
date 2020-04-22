@@ -13,6 +13,8 @@ import {
   GET_SERVICE_SUCCESS,
 } from '../actions/service';
 
+import { GET_USER_SUCCESS } from '../actions/user';
+
 import {
   ADD_COMMENT_SUCCESS,
 } from '../actions/comments';
@@ -156,6 +158,14 @@ export default (state = initialState, action = {}) => {
         service: {
           ...state.service,
           reply: '',
+        },
+      };
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        service: {
+          ...state.service,
+          user: { ...action.payload },
         },
       };
     default:

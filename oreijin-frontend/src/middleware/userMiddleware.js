@@ -15,11 +15,12 @@ const registerMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
+          store.dispatch(getUserSuccess(res.data));
         })
         .catch((err) => {
           console.log(err);
-        })
+        });
       return next(action);
     default:
       return next(action);
