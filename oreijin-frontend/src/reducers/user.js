@@ -1,6 +1,6 @@
 import {
   CHANGE_LOGIN_FIELD, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_LOADING,
-  DELETE_ACCOUNT_SUCCESS, DELETE_ACCOUNT_ERROR,
+  DELETE_ACCOUNT_SUCCESS, DELETE_ACCOUNT_ERROR, GET_USER_SUCCESS,
 } from '../actions/user';
 
 
@@ -10,6 +10,7 @@ const initialState = {
     password: '',
   },
   infos: {},
+  profile: {},
   isLogged: false,
   loading: false,
   isSuccess: false,
@@ -28,6 +29,7 @@ export default (state = initialState, action = {}) => {
       };
     case LOGIN_SUCCESS:
       return {
+        ...state,
         form: {
           username: '',
           password: '',
@@ -49,8 +51,6 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: true,
       };
-    default:
-      return state;
     case DELETE_ACCOUNT_SUCCESS:
       return {
         ...state,
@@ -63,5 +63,14 @@ export default (state = initialState, action = {}) => {
         ...state,
         isError: true,
       };
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...action.payload,
+        },
+      };
+    default:
+      return state;
   }
 };

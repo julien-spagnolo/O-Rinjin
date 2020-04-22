@@ -10,6 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
   error: state.user.isError,
   // extract the user's id from the slug
   userId: ownProps.match.params.user.split('-')[2],
+  profile: state.user.profile,
 });
 
 const mapDispatchToProps = (dispatch) => ({

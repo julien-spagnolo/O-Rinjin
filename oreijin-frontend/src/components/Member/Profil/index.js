@@ -15,6 +15,7 @@ const Profil = ({
   isLogged,
   getUser,
   userId,
+  profile,
 }) => {
   const history = useHistory();
 
@@ -37,9 +38,9 @@ const Profil = ({
           <Button className="profil__import__button" size="small" color="blue">Importer une photo</Button>
         </Container>
         <Container className="profil__name">
-          <p>Prénom : <span>{userInfos.firstname} </span></p>
-          <p>Nom : <span>{userInfos.lastname} </span></p>
-          <p>Adresse : <span>{userInfos.address} </span></p>
+          <p>Prénom : <span>{profile.firstName} </span></p>
+          <p>Nom : <span>{profile.lastName} </span></p>
+          <p>Code postal : <span>{profile.postalCode} </span></p>
         </Container>
         <Divider horizontal>
           <Header as="h5">
@@ -102,6 +103,7 @@ Profil.propTypes = {
   getUser: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
   userId: PropTypes.string.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
 
