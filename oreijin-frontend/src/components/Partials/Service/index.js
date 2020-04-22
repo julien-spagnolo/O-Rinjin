@@ -38,7 +38,7 @@ const Service = ({
             </Feed.Summary>
             <Feed.Extra text className="service__category">
               <Label>
-                {type ? 'Demande' : 'Proposition'}
+                {type ? 'Proposition' : 'Demande'}
               </Label>
               <Label>
                 Catégorie
@@ -53,7 +53,7 @@ const Service = ({
               {body}
             </Responsive>
             <Feed.Meta style={{ marginTop: '1rem' }}>
-              <Icon name="map marker alternate" />69440 - créée le
+              <Icon name="map marker alternate" />69440
             </Feed.Meta>
           </Feed.Content>
         </Feed.Event>

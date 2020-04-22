@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
+
 import { getServicesList } from '../actions/service';
-
 import ServicesList from '../components/Member/ServicesList';
-
+import { getServicesWithSlug } from '../reducers/services';
 
 const mapStateToProps = (state) => ({
-  services: state.services.list,
+  services: getServicesWithSlug(state.services),
   isLogged: state.user.isLogged,
   isSuccess: state.services.isSuccess,
   isError: state.services.isError,

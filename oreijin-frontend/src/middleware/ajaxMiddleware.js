@@ -1,8 +1,11 @@
+/* eslint-disable no-useless-escape */
 import axios from 'axios';
+import { baseURL, authorization } from '../axios';
 import {
   GET_SERVICES_LIST, getServicesListSuccess,
   ADD_SERVICE, addServiceSuccess, addServiceError,
   DELETE_SERVICE, deleteServiceSuccess, deleteServiceError,
+  GET_SERVICE, getServiceSuccess, getServiceError,
 } from '../actions/service';
 import {
   GET_CATEGORIES_LIST, getCategoriesListSuccess,
@@ -10,14 +13,15 @@ import {
 
 import { DELETE_ACCOUNT, deleteAccountSuccess, deleteAccountError, logout } from '../actions/user';
 
+// eslint-disable-next-line consistent-return
 export default (store) => (next) => (action) => {
   switch (action.type) {
     case GET_CATEGORIES_LIST:
       axios({
         method: 'get',
-        url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/api/service-categories',
+        url: `${baseURL}/api/service-categories`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: authorization,
         },
         withCredentials: true,
       })
@@ -28,7 +32,7 @@ export default (store) => (next) => (action) => {
         .catch((err) => {
           console.log(err);
         });
-      return next(action);
+      break;
     case GET_SERVICES_LIST:
 
       // console.log('//== middleware getServicesList');
@@ -37,9 +41,9 @@ export default (store) => (next) => (action) => {
       // source: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
       axios({
         method: 'get',
-        url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/api/services',
+        url: `${baseURL}/api/services`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: authorization,
         },
         withCredentials: true,
       })
@@ -51,17 +55,17 @@ export default (store) => (next) => (action) => {
         .catch((err) => {
           console.log(err);
         });
-      return next(action);
+      break;
     case ADD_SERVICE:
-      console.log({
-        ...store.getState().services.form,
-        user: action.payload,
-      });
+      // console.log({
+      //   ...store.getState().services.form,
+      //   user: action.payload,
+      // });
       axios({
         method: 'post',
-        url: 'http://ec2-54-166-216-117.compute-1.amazonaws.com/api/services',
+        url: `${baseURL}/api/services`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: authorization,
         },
         data: {
           ...store.getState().services.form,
@@ -78,12 +82,12 @@ export default (store) => (next) => (action) => {
           console.log(err);
           store.dispatch(addServiceError());
         });
-      return next(action);
+      break;
     case DELETE_SERVICE:
       console.log('//== delete service middleware', action.payload);
       axios({
         method: 'delete',
-        url: `http://ec2-54-166-216-117.compute-1.amazonaws.com/api/services/${action.payload}`,
+        url: `${baseURL}/api/services/${action.payload}`,
         headers: {
           Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
         },
@@ -119,6 +123,24 @@ export default (store) => (next) => (action) => {
         });
 
       return next(action);
+    case GET_SERVICE:
+      axios({
+        method: 'get',
+        url: `${baseURL}/api/services/${action.payload}`,
+        headers: {
+          Authorization: authorization,
+        },
+        withCredentials: true,
+      })
+        .then((res) => {
+          // console.log(res.data);
+          store.dispatch(getServiceSuccess(res.data));
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(getServiceError());
+        });
+      break;
     default:
       return next(action);
   }

@@ -10,7 +10,12 @@ import {
   ON_CHANGE_FIELD_REPLY,
   DELETE_SERVICE_SUCCESS,
   DELETE_SERVICE_ERROR,
+  GET_SERVICE_SUCCESS,
 } from '../actions/service';
+
+import {
+  ADD_COMMENT_SUCCESS,
+} from '../actions/comments';
 
 const initialState = {
   list: [],
@@ -24,19 +29,40 @@ const initialState = {
     user: '',
   },
   service: {
+    id: null,
+    title: '',
+    body: '',
+    type: null,
+    image: null,
+    active: null,
+    user: {},
+    comment: [],
+    serviceCategory: {},
     reply: '',
   },
   isSuccess: false,
   isError: false,
 };
 
-// Map on services list to add an uuid for unique route
+/**
+ * Add a slug for each service and return the list
+ * @param {Object} state
+ */
 export const getServicesWithSlug = (state = initialState) => state.list.map((service) => ({
   ...service,
   slug: slugify(`${service.id} ${service.title}`, { lower: true }),
 }));
 
-export const findServiceBySlug = (state, slug) => state.list.find((service) => slugify(`${service.id} ${service.title}`, { lower: true }) === slug);
+
+/**
+ * Extract the service id from the slug
+ * @param {String} slug
+ */
+export const getServiceIdFromSlug = (slug) => {
+  const words = slug.split('-');
+  // console.log(words[0]);
+  return words[0];
+};
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -101,6 +127,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         service: {
+          ...state.service,
           reply: action.payload,
         },
       };
@@ -113,6 +140,23 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         isError: true,
+      };
+    case GET_SERVICE_SUCCESS:
+      // console.log(action.payload);
+      return {
+        ...state,
+        service: {
+          ...state.service,
+          ...action.payload,
+        },
+      };
+    case ADD_COMMENT_SUCCESS:
+      return {
+        ...state,
+        service: {
+          ...state.service,
+          reply: '',
+        },
       };
     default:
       return state;
