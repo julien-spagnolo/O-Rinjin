@@ -18,7 +18,7 @@ const ServicesList = ({
   useEffect(() => {
     // TODO : replace getServicesList with getUserServices
     getServicesList();
-  }, []);
+  }, [services]);
 
   return (
     <Container>
