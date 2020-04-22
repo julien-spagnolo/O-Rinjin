@@ -19,10 +19,10 @@ const Footer = () => (
         <Grid.Column>
           <Menu secondary text vertical>
             <Menu.Item>
-              <NavLink to="/team">Notre équipe</NavLink>
+              <NavLink exact to="/team">Notre équipe</NavLink>
             </Menu.Item>
             <Menu.Item>
-              <NavLink to="/legal-mentions">Mentions Légales</NavLink>
+              <NavLink exact to="/legal-mentions">Mentions Légales</NavLink>
             </Menu.Item>
           </Menu>
         </Grid.Column>

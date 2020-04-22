@@ -25,7 +25,7 @@ const Service = ({
       <Grid.Column width={userServices ? 12 : 16}>
         <Header as="h4">
           <Image size="mini" src={logo} circular />
-          <Header.Content>Unknown Reijin</Header.Content>
+          <Header.Content>Unknown Rinjin</Header.Content>
         </Header>
         <Feed.Event
           as={Link}
