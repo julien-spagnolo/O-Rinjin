@@ -12,13 +12,17 @@ import './styles.scss';
 
 // TODO: services props
 const ServicesList = ({
-  getServicesList, services,
+  getUserServicesList, services,
   isSuccess, isError,
 }) => {
   useEffect(() => {
     // TODO : replace getServicesList with getUserServices
-    getServicesList();
-  }, [services]);
+    getUserServicesList();
+  }, []);
+
+  useEffect(() => {
+    getUserServicesList();
+  }, [isSuccess]);
 
   return (
     <Container>
@@ -26,14 +30,19 @@ const ServicesList = ({
         <Header as="h2" dividing textAlign="center" className="home__connected__services__title">Mes Annonces</Header>
         <Message success hidden={!isSuccess} content="Le service a bien été supprimé." />
         <Message error hidden={!isError} content="Une erreur est survenue lors de la suppression du service." />
-        <Segment style={{ height: '100vh', overflowY: 'scroll' }}>
-          {
-            // Render a Service component for each service in data
-            services.map((service) => (
-              <Service key={uuid()} {...service} userServices />
-            ))
-          }
-        </Segment>
+        {
+          services.length === 0 ? 'Vous n\'avez créé aucun service.' : (
+            <Segment style={{ height: '100vh', overflowY: 'scroll' }}>
+              {
+                // Render a Service component for each service in data
+                services.map((service) => (
+                  <Service key={uuid()} {...service} userServices />
+                ))
+              }
+            </Segment>
+          )
+        }
+      
       </Segment>
     </Container>
   );
@@ -41,7 +50,7 @@ const ServicesList = ({
 
 ServicesList.propTypes = {
   services: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  getServicesList: PropTypes.func.isRequired,
+  getUserServicesList: PropTypes.func.isRequired,
   isSuccess: PropTypes.bool.isRequired,
   isError: PropTypes.bool.isRequired,
 };

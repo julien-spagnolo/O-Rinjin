@@ -2,6 +2,7 @@ import {
   CHANGE_LOGIN_FIELD, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_LOADING,
   DELETE_ACCOUNT_SUCCESS, DELETE_ACCOUNT_ERROR, GET_USER_SUCCESS,
   CHANGE_PROFILE_FIELD,
+  GET_USER_SERVICES_LIST_SUCCESS,
 } from '../actions/user';
 
 
@@ -13,6 +14,7 @@ const initialState = {
   infos: {},
   profile: {},
   profileForm: {},
+  services: [],
   isLogged: false,
   loading: false,
   isSuccess: false,
@@ -47,6 +49,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         isLogged: false,
         infos: {},
+        services: {},
       };
     case LOGIN_LOADING:
       return {
@@ -85,8 +88,15 @@ export default (state = initialState, action = {}) => {
         profileForm: {
           ...state.profileForm,
           ...action.payload,
-        }
-      }
+        },
+      };
+    case GET_USER_SERVICES_LIST_SUCCESS:
+      return {
+        ...state,
+        services: [ 
+          ...action.payload,
+        ],
+      };
     default:
       return state;
   }

@@ -4,6 +4,7 @@ import { baseURL, authorization } from '../axios';
 import {
   GET_USER, getUserSuccess, getUserError,
   UPDATE_PROFILE, updateProfileSuccess, updateProfileError,
+  GET_USER_SERVICES_LIST, getUserServicesListSuccess, getUserServicesListError,
 } from '../actions/user';
 
 const registerMiddleware = (store) => (next) => (action) => {
@@ -44,6 +45,25 @@ const registerMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.log(err);
+        });
+      break;
+    case GET_USER_SERVICES_LIST:
+      // console.log('récupération de la liste des services de cet utilisateur');
+      axios({
+        method: 'get',
+        url: `${baseURL}/api/services/user/${store.getState().user.infos.id}`,
+        headers: {
+          Authorization: authorization,
+        },
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log(res.data);
+          store.dispatch(getUserServicesListSuccess(res.data));
+        })
+        .catch((err) => {
+          // console.log(err);
+          store.dispatch(getUserServicesListError());
         });
       break;
     default:

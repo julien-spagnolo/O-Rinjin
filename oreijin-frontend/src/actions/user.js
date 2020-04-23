@@ -4,6 +4,7 @@ export const CHANGE_PROFILE_FIELD = 'CHANGE_PROFILE_FIELD';
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const UPDATE_PROFILE_SUCCESS = 'UPDATE_PROFILE_SUCCESS';
+export const UPDATE_PROFILE_ERROR = 'UPDATE_PROFILE_ERROR';
 
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -24,6 +25,10 @@ export const DELETE_ACCOUNT_ERROR = 'DELETE_ACCOUNT_ERROR';
 export const GET_USER = 'GET_USER';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_ERROR = 'GET_USER_ERROR';
+
+export const GET_USER_SERVICES_LIST = 'GET_USER_SERVICES_LIST';
+export const GET_USER_SERVICES_LIST_SUCCESS = 'GET_USER_SERVICES_LIST_SUCCESS';
+export const GET_USER_SERVICES_LIST_ERROR = 'GET_USER_SERVICES_ERROR';
 
 export const changeLoginField = (value, name) => ({
   type: CHANGE_LOGIN_FIELD,
@@ -106,4 +111,17 @@ export const updateProfileSuccess = (payload) => ({
 
 export const updateProfileError = () => ({
   type: UPDATE_PROFILE_ERROR,
+});
+
+export const getUserServicesList = () => ({
+  type: GET_USER_SERVICES_LIST,
+});
+
+export const getUserServicesListSuccess = (payload) => ({
+  type: GET_USER_SERVICES_LIST_SUCCESS,
+  payload,
+});
+
+export const getUserServicesListError = () => ({
+  type: GET_USER_SERVICES_LIST_ERROR,
 });
