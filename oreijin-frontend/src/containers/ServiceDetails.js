@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 import { getServiceIdFromSlug } from '../reducers/services';
-import { onChangeFieldReply, getService } from '../actions/service';
+import { getService } from '../actions/service';
 import { getCategoriesList } from '../actions/categories';
 import ServiceDetails from '../components/Member/ServiceDetails';
 import { findCategoryById } from '../reducers/categories';
-import { addComment } from '../actions/comments';
+import { addComment, onChangeFieldReply } from '../actions/comments';
 import { getUser } from '../actions/user';
 
 const mapStateToProps = (state, ownProps) => ({
   service: state.services.service,
-  reply: state.services.service.reply,
+  reply: state.comments.reply,
   id: getServiceIdFromSlug(ownProps.match.params.slug),
   category: findCategoryById(state.services.service.serviceCategory.id, state.categories),
   commentListLength: state.comments.list.length,

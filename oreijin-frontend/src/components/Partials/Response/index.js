@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useEffect } from 'react';
+import React from 'react';
 // == Import components that we need to use from Semantic-UI-React
 import {
   Comment,
@@ -13,41 +13,24 @@ import logo from '../../../assets/images/logo.svg';
 
 // == Component
 const Response = ({
-  id, index, getComment, comments,
-}) => {
-  useEffect(() => {
-    // console.log('//= useEffect comment');
-    getComment({
-      index,
-      id,
-    });
-  }, []);
-
-  return (
-    <Comment>
-      <Comment.Avatar src={logo} />
-      <Comment.Content>
-        <Comment.Author>Rinjin anonyme</Comment.Author>
-        <Comment.Metadata>
-          <Comment.Text>
-            3 days ago
-          </Comment.Text>
-        </Comment.Metadata>
-        <Comment.Text>
-          {
-            comments[index] && comments[index].body
-          }
-        </Comment.Text>
-      </Comment.Content>
-    </Comment>
-  );
-};
+  body,
+}) => (
+  <Comment>
+    <Comment.Avatar src={logo} />
+    <Comment.Content>
+      <Comment.Author>Rinjin Anonyme</Comment.Author>
+      <Comment.Metadata>
+      </Comment.Metadata>
+      <Comment.Text>
+        {body}
+      </Comment.Text>
+    </Comment.Content>
+  </Comment>
+);
 
 Response.propTypes = {
-  id: PropTypes.number.isRequired,
-  index: PropTypes.number.isRequired,
-  getComment: PropTypes.func.isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  // id: PropTypes.number.isRequired,
+  body: PropTypes.string.isRequired,
 };
 // == Export
 export default Response;

@@ -7,7 +7,6 @@ import {
   ADD_SERVICE_SUCCESS,
   ADD_SERVICE_ERROR,
   RESET_SERVICE_FORM,
-  ON_CHANGE_FIELD_REPLY,
   DELETE_SERVICE_SUCCESS,
   DELETE_SERVICE_ERROR,
   GET_SERVICE_SUCCESS,
@@ -15,12 +14,8 @@ import {
   EDIT_SERVICE_SUCCESS,
   EDIT_SERVICE_ERROR,
 } from '../actions/service';
-
 import { GET_USER_SUCCESS } from '../actions/user';
-
-import {
-  ADD_COMMENT_SUCCESS,
-} from '../actions/comments';
+import { ADD_COMMENT_SUCCESS } from '../actions/comments';
 
 const initialState = {
   list: [],
@@ -129,14 +124,6 @@ export default (state = initialState, action = {}) => {
         isSuccess: false,
         isError: false,
       };
-    case ON_CHANGE_FIELD_REPLY:
-      return {
-        ...state,
-        service: {
-          ...state.service,
-          reply: action.payload,
-        },
-      };
     case GET_SERVICE_SUCCESS:
       // console.log(action.payload);
       return {
@@ -150,14 +137,6 @@ export default (state = initialState, action = {}) => {
           body: action.payload.body,
           type: action.payload.type,
           serviceCategory: { ...action.payload.serviceCategory },
-        }
-      };
-    case ADD_COMMENT_SUCCESS:
-      return {
-        ...state,
-        service: {
-          ...state.service,
-          reply: '',
         },
       };
     case GET_USER_SUCCESS:

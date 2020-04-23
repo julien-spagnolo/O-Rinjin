@@ -6,6 +6,8 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_ERROR = 'ADD_COMMENT_ERROR';
 
+export const ON_CHANGE_FIELD_REPLY = 'ON_CHANGE_FIELD_REPLY';
+
 export const getComment = (payload) => ({
   type: GET_COMMENT,
   payload,
@@ -31,4 +33,9 @@ export const addCommentSuccess = (payload) => ({
 
 export const addCommentError = () => ({
   type: ADD_COMMENT_ERROR,
+});
+
+export const onChangeFieldReply = (payload) => ({
+  type: ON_CHANGE_FIELD_REPLY,
+  payload,
 });
