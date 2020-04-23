@@ -19,16 +19,25 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
-    public function findByPostalCode($postalCode)
+
+    public function searchByFilters($request)
     {
-        return $this->createQueryBuilder('s')
+        $this->createQueryBuilder('s')
             ->join('s.user', 'u')
-            ->where('u.postalCode = :postalCode')
-            ->setParameter('postalCode', $postalCode)
-            ->orderBy('s.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
     }
+
+
+
+    // public function findByPostalCode($postalCode)
+    // {
+    //     return $this->createQueryBuilder('s')
+    //         ->join('s.user', 'u')
+    //         ->where('u.postalCode = :postalCode')
+    //         ->setParameter('postalCode', $postalCode)
+    //         ->orderBy('s.createdAt', 'DESC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 
     /*
     public function findOneBySomeField($value): ?Service

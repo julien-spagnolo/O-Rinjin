@@ -76,10 +76,10 @@ class ServiceController extends AbstractController
      *      methods={"GET"}
      * )
      */
-    public function browse(): Response
+    public function browse(Request $request): Response
     {
         
-        $services = $this->serviceManager->browse();
+        $services = $this->serviceManager->searchByFilters($request);
 
         $services = $this->serviceManager->serialize($services, ['groups' => 'services-browse']);
 
