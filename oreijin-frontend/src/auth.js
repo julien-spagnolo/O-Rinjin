@@ -21,7 +21,7 @@ class Auth {
     sessionStorage.clear();
   }
 
-  isAuthenticated = () => sessionStorage.getItem('token');
+  isAuthenticated = () => (sessionStorage.getItem('token') !== null);
 }
 
 export default new Auth();
