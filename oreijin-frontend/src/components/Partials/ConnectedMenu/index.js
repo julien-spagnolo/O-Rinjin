@@ -9,13 +9,13 @@ import { NavLink, Link } from 'react-router-dom';
 import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
-const ConnectedMenu = ({ logout, user }) => (
+const ConnectedMenu = ({ logout, userSlug, isAdmin }) => (
   <Grid columns={3} style={{ marginBottom: '1.5rem' }} className="header__container__connected">
     <Grid.Row>
       <Grid.Column width="6" className="header__navlink__group" verticalAlign="middle" textAlign="right">
         <NavLink to="/home" activeClassName="active" className="header__navlink">Accueil</NavLink>
-        <NavLink exact to={`/${user}`} activeClassName="active" className="header__navlink">Profil</NavLink>
-        <NavLink exact to={`/${user}/services`} activeClassName="active" className="header__navlink">Mes services</NavLink>
+        <NavLink exact to={`/${userSlug}`} activeClassName="active" className="header__navlink">Profil</NavLink>
+        <NavLink exact to={`/${userSlug}/services`} activeClassName="active" className="header__navlink">Mes services</NavLink>
       </Grid.Column>
 
       <Grid.Column width="4" className="header__logo__connected" textAlign="center">
@@ -26,6 +26,13 @@ const ConnectedMenu = ({ logout, user }) => (
         <Button as={Link} to="/service/add" className="header__button__connected" size="small">
           <Button.Content>Créer un service</Button.Content>
         </Button>
+        {
+          isAdmin && (
+            <Button className="header__button__connected__admin" size="small">
+              <a href="http://ec2-54-166-216-117.compute-1.amazonaws.com/admin">Admin</a>
+            </Button>
+          )
+        }
         <Button
           as={Link}
           to="/"
@@ -43,7 +50,8 @@ const ConnectedMenu = ({ logout, user }) => (
 
 ConnectedMenu.propTypes = {
   logout: PropTypes.func.isRequired,
-  user: PropTypes.string.isRequired,
+  userSlug: PropTypes.string.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
 };
 
 export default ConnectedMenu;

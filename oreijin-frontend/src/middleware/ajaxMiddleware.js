@@ -6,6 +6,7 @@ import {
   ADD_SERVICE, addServiceSuccess, addServiceError,
   DELETE_SERVICE, deleteServiceSuccess, deleteServiceError,
   GET_SERVICE, getServiceSuccess, getServiceError,
+  EDIT_SERVICE, editServiceSuccess, editServiceError,
 } from '../actions/service';
 import {
   GET_CATEGORIES_LIST, getCategoriesListSuccess,
@@ -142,6 +143,27 @@ export default (store) => (next) => (action) => {
         .catch((err) => {
           console.log(err);
           store.dispatch(getServiceError());
+        });
+      break;
+    case EDIT_SERVICE:
+      axios({
+        method: 'put',
+        url: `${baseURL}/api/services/${store.getState().services.service.id}`,
+        headers: {
+          Authorization: authorization,
+        },
+        data: {
+          ...store.getState().services.editForm,
+        },
+        withCredentials: true,
+      })
+        .then((res) => {
+          // console.log(res.data);
+          store.dispatch(editServiceSuccess());
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(editServiceError());
         });
       break;
     default:

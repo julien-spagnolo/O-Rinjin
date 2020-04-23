@@ -21,6 +21,11 @@
 .ui.button.header__button__connected {
    background-color: #f2c00f;
    margin: 0 0.3rem;
+
+  &__admin {
+    background-color: #423E37;
+    color: #f2c00f;
+  } 
 }
 
 // .header__logo {

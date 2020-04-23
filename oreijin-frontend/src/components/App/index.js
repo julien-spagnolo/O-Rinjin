@@ -13,6 +13,7 @@ import HomeConnected from '../../containers/HomeConnected';
 import Login from '../../containers/Login';
 import Register from '../../containers/Register';
 import AddService from '../../containers/AddService';
+import UpdateService from '../../containers/UpdateService';
 import ServicesList from '../../containers/ServicesList';
 import ServiceDetails from '../../containers/ServiceDetails';
 import Profil from '../../containers/Profil';
@@ -42,6 +43,7 @@ const App = ({ checkAuth }) => {
         <Route exact path="/team" component={Team} />
         <Route exact path="/legal-mentions" component={LegalMentions} />
         <Route exact path="/service/add" component={AddService} />
+        <Route exact path="/service/edit/:slug" component={UpdateService} />
         <Route exact path="/service/:slug" component={ServiceDetails} />
         <Route exact path="/:user" component={Profil} />
         <Route exact path="/:user/services" component={ServicesList} />

@@ -22,7 +22,8 @@ const Team = () => (
             Dev Backend/Symfony
           </Card.Meta>
           <Card.Description>
-            Elle fait partie du duo de développeurs backend qui s'occupe de tout ce qui touche à Symfony coté serveur
+            En fin de formation dans une école incontournable dans le milieu du web, Hélène fait partie du duo 
+            de développeurs backend, qui s'occupe de tout ce qui touche à Symfony coté serveur.
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
@@ -40,8 +41,8 @@ const Team = () => (
             Lead Dev Backend/Symfony
           </Card.Meta>
           <Card.Description>
-            Il fait partie du duo de développeurs backend qui s'occupe de tout ce qui touche
-            à Symfony coté serveur.
+          Julien se positionne comme le lead dev du duo de développeurs backend qui s'occupe de tout ce qui touche
+          à Symfony coté serveur. Les bases de données, les routes et le Markdown n'ont presque plus aucun secret pour lui.
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
@@ -59,8 +60,8 @@ const Team = () => (
             Lead Dev Frontend/React
           </Card.Meta>
           <Card.Description>
-            Il fait partie du duo de développeurs frontend qui s'occupe de tout ce qui touche
-            à React et au coté client.
+            Créatif et posé Bryan fourmille de bonnes idées pour faire évoluer notre petite équipe de développeurs frontend qui s'occupe de tout ce qui touche
+            à React et au coté client. 
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
@@ -75,11 +76,11 @@ const Team = () => (
         <Card.Content>
           <Card.Header>Jonathan</Card.Header>
           <Card.Meta>
-            Dev Backend/Symfony
+            Dev Frontend/React
           </Card.Meta>
           <Card.Description>
-            Il fait partie du duo de développeurs frontend qui s'occupe de tout ce qui touche
-            à React et au coté client.
+            C'est Jonathan qui est à l'orgine ce de projet d'entraide entre voisins. Il complète parfaitement Bryan, avec qui il forme un duo de choc de développeurs
+            frontend. Ensemble ils gèrent la partie React et le coté client.
           </Card.Description>
         </Card.Content>
         <Card.Content extra>

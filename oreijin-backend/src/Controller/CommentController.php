@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Manager\CommentManager;
+use App\Security\Voter\UserVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -77,6 +78,8 @@ class CommentController extends AbstractController
      */
     public function edit(Request $request, Comment $comment): Response
     {
+        $this->denyAccessUnlessGranted(UserVoter::SAME_USER, $comment);
+
         $data = $request->getContent();
   
         $comment = $this->commentManager->update($comment, $data);
@@ -98,6 +101,8 @@ class CommentController extends AbstractController
      */
     public function delete(Comment $comment): JsonResponse
     {
+        $this->denyAccessUnlessGranted(UserVoter::SAME_USER, $comment);
+
         $this->commentManager->delete($comment);
 
         return new JsonResponse(

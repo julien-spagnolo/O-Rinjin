@@ -62,7 +62,7 @@ const Service = ({
         // Display buttons only on user services page
         userServices && (
           <Grid.Column width={4} textAlign="right">
-            <Button as={Link} to="/service/add" className="user__services__edit" size="tiny" icon><Icon name="edit" /></Button>
+            <Button as={Link} to={`/service/edit/${slug}`} className="user__services__edit" size="tiny" icon><Icon name="edit" /></Button>
             <Button
               color="red"
               size="tiny"

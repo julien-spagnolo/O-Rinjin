@@ -19,44 +19,44 @@ class Service
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
+     * @Groups({"services-list", "services-read", "service-add", "service-edit", "services-browse"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=60)
-     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
+     * @Groups({"services-list", "services-read", "service-add", "service-edit", "services-browse"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
+     * @Groups({"services-list", "services-read", "service-add", "service-edit", "services-browse"})
      */
     private $body;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
+     * @Groups({"services-list", "services-read", "service-add", "service-edit", "services-browse"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
+     * @Groups({"services-list", "services-read", "service-add", "service-edit", "services-browse"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"services-list", "services-read", "service-add", "service-edit"})
+     * @Groups({"services-list", "services-read", "service-add", "service-edit", "services-browse"})
      */
     private $active;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="service")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("services-read")
+     * @Groups({"services-read", "services-browse"})
      */
     private $user;
 
@@ -69,7 +69,7 @@ class Service
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ServiceCategory", inversedBy="services")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("services-read")
+     * @Groups({"services-read", "services-browse"})
      */
     private $serviceCategory;
 

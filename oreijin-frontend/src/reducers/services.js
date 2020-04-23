@@ -11,6 +11,9 @@ import {
   DELETE_SERVICE_SUCCESS,
   DELETE_SERVICE_ERROR,
   GET_SERVICE_SUCCESS,
+  ON_CHANGE_FIELD_EDIT,
+  EDIT_SERVICE_SUCCESS,
+  EDIT_SERVICE_ERROR,
 } from '../actions/service';
 
 import { GET_USER_SUCCESS } from '../actions/user';
@@ -41,6 +44,12 @@ const initialState = {
     comment: [],
     serviceCategory: {},
     reply: '',
+  },
+  editForm: {
+    title: '',
+    body: '',
+    type: false,
+    serviceCategory: {},
   },
   isSuccess: false,
   isError: false,
@@ -77,13 +86,6 @@ export default (state = initialState, action = {}) => {
         ],
       };
     case ON_CHANGE_FIELD:
-      return {
-        ...state,
-        form: {
-          ...state.form,
-          ...action.payload,
-        },
-      };
     case ON_CHANGE_FIELD_TYPE:
       return {
         ...state,
@@ -93,21 +95,17 @@ export default (state = initialState, action = {}) => {
         },
       };
     case ADD_SERVICE_SUCCESS:
+    case DELETE_SERVICE_SUCCESS:
+    case EDIT_SERVICE_SUCCESS:
       return {
         ...state,
-        // form: {
-        //   ...state.form,
-        //   ...action.payload,
-        // },
         isSuccess: true,
       };
     case ADD_SERVICE_ERROR:
+    case DELETE_SERVICE_ERROR:
+    case EDIT_SERVICE_ERROR:
       return {
         ...state,
-        // form: {
-        //   ...state.form,
-        //   ...action.payload,
-        // },
         isError: true,
       };
     case RESET_SERVICE_FORM:
@@ -122,6 +120,12 @@ export default (state = initialState, action = {}) => {
           active: true,
           user: '',
         },
+        editForm: {
+          title: '',
+          body: '',
+          type: false,
+          serviceCategory: {},
+        },
         isSuccess: false,
         isError: false,
       };
@@ -133,16 +137,6 @@ export default (state = initialState, action = {}) => {
           reply: action.payload,
         },
       };
-    case DELETE_SERVICE_SUCCESS:
-      return {
-        ...state,
-        isSuccess: true,
-      };
-    case DELETE_SERVICE_ERROR:
-      return {
-        ...state,
-        isError: true,
-      };
     case GET_SERVICE_SUCCESS:
       // console.log(action.payload);
       return {
@@ -151,6 +145,12 @@ export default (state = initialState, action = {}) => {
           ...state.service,
           ...action.payload,
         },
+        editForm: {
+          title: action.payload.title,
+          body: action.payload.body,
+          type: action.payload.type,
+          serviceCategory: { ...action.payload.serviceCategory },
+        }
       };
     case ADD_COMMENT_SUCCESS:
       return {
