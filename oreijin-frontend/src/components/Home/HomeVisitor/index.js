@@ -36,11 +36,12 @@ const Main = () => (
         <Header as="h1">Annonces disponibles</Header>
       </Divider>
       <Segment>
+        WIP
         {
           // Render a Service component for each service in data
-          services.map((service) => (
-            <Service key={service.title} {...service} />
-          ))
+          // services.map((service) => (
+          //  <Service key={service.title} {...service} />
+          // ))
         }
       </Segment>
     </Grid.Column>
