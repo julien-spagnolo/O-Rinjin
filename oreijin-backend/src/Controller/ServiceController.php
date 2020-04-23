@@ -32,7 +32,7 @@ class ServiceController extends AbstractController
     {
         $services = $this->serviceManager->home();
 
-        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-browse']);
 
         return new Response($services);
     }
@@ -48,7 +48,7 @@ class ServiceController extends AbstractController
     public function getByUser($userId): Response
     {
         $services = $this->serviceManager->getByUser($userId);
-        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-browse']);
 
         return new Response($services);
     }
@@ -64,7 +64,7 @@ class ServiceController extends AbstractController
     public function getByPostalCode($postalCode): Response
     {
         $services = $this->serviceManager->getByPostalCode($postalCode);
-        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-browse']);
 
         return new Response($services);
     }

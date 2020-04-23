@@ -25,7 +25,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-read"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-read", "services-browse"})
      */
     private $id;
 
@@ -61,14 +61,14 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse"})
      * @Assert\Type("string")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse"})
      * @Assert\NotBlank
      * @Assert\Type("string")
      */
@@ -84,7 +84,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=5)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse"})
      * @Assert\Regex("/^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$/")
      * @Assert\NotBlank
      */
