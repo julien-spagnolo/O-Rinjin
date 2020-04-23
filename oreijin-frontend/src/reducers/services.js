@@ -16,6 +16,8 @@ import {
   EDIT_SERVICE_ERROR,
 } from '../actions/service';
 
+import { GET_USER_SUCCESS } from '../actions/user';
+
 import {
   ADD_COMMENT_SUCCESS,
 } from '../actions/comments';
@@ -158,12 +160,12 @@ export default (state = initialState, action = {}) => {
           reply: '',
         },
       };
-    case ON_CHANGE_FIELD_EDIT:
+    case GET_USER_SUCCESS:
       return {
         ...state,
-        editForm: {
-          ...state.editForm,
-          ...action.payload,
+        service: {
+          ...state.service,
+          user: { ...action.payload },
         },
       };
     default:

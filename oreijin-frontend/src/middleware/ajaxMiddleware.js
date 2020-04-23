@@ -13,7 +13,7 @@ import {
 } from '../actions/categories';
 
 import {
-  DELETE_ACCOUNT, deleteAccountSuccess, deleteAccountError, logout,
+  DELETE_ACCOUNT, deleteAccountSuccess, deleteAccountError, logout, getUser,
 } from '../actions/user';
 
 // eslint-disable-next-line consistent-return
@@ -136,8 +136,9 @@ export default (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           store.dispatch(getServiceSuccess(res.data));
+          store.dispatch(getUser(res.data.user.id));
         })
         .catch((err) => {
           console.log(err);

@@ -14,7 +14,8 @@ import Response from '../../../containers/Response';
 
 const ServiceDetails = ({
   onChangeFieldReply, reply,
-  id, getService, service,
+  id,
+  getService, service,
   category, getCategoriesList,
   addComment, commentListLength,
 }) => {
@@ -40,16 +41,17 @@ const ServiceDetails = ({
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={9} as={Item.Group}>
+            {/* {console.log(service.user)} */}
             <Item>
               <Item.Image src={logo} size="small" circular />
               <Item.Content className="service__user__content">
-                <Item.Header>Prénom Nom</Item.Header>
+                <Item.Header>{service.user.firstName} {service.user.lastName}</Item.Header>
                 <Item.Extra>
                   <Label>
-                  Fiabilité : <Rating icon="star" defaultRating={1} maxRating={5} />
+                  Fiabilité : <Rating icon="star" defaultRating={5} maxRating={5} />
                   </Label>
                 </Item.Extra>
-                <Item.Meta><Icon name="map marker alternate" /> Code Postal - Ville</Item.Meta>
+                <Item.Meta><Icon name="map marker alternate" /> {service.user.postalCode} - {service.user.city}</Item.Meta>
               </Item.Content>
             </Item>
           </Grid.Column>

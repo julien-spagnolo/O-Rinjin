@@ -22,13 +22,13 @@ const Main = () => (
     {/* Width for differents breakpoints  */}
     <Grid.Column tablet={16} computer={8}>
       <Divider horizontal>
-        <Header as="h1">O'Reijin</Header>
+        <Header as="h1">O'Rinjin</Header>
       </Divider>
       <Container className="visitor__intro">
-        <p className="main__paragraph">Bienvenue sur <em className="main__em">o'Reijin</em>, le site d'entraide entre particuliers</p>
-        <p className="main__paragraph">Vous avez besoin d'un coup de main pour : "<em className="main__em">SERVICE</em>" ? Ici, vous trouverez forcement un reijin pour vous aider !</p>
+        <p className="main__paragraph">Bienvenue sur <em className="main__em">o'Rinjin</em>, le site d'entraide entre particuliers</p>
+        <p className="main__paragraph">Vous avez besoin d'un coup de main pour : "<em className="main__em">SERVICE</em>" ? Ici, vous trouverez forcement un rinjin pour vous aider !</p>
         <p className="main__paragraph">Inscrivez vous et bénéficiez <em className="main__em">gratuitement</em> d'un réseau de personnes pour proposer votre aide ou bien en recevoir</p>
-        <p className="main__paragraph">Un <em className="main__em">reijin</em>, quésaquo ? C'est une personne près de chez vous prête à vous rendre service et juste pour vos beaux yeux !</p>
+        <p className="main__paragraph">Un <em className="main__em">rinjin</em>, quésaquo ? C'est une personne près de chez vous prête à vous rendre service et juste pour vos beaux yeux !</p>
       </Container>
     </Grid.Column>
     <Grid.Column tablet={16} computer={8}>
@@ -46,7 +46,7 @@ const Main = () => (
     </Grid.Column>
     <Grid.Column mobile={16} tablet={16} computer={16}>
       <Divider horizontal>
-        <Header as="h2"> Reijin les plus actifs </Header>
+        <Header as="h2"> Rinjin les plus actifs </Header>
       </Divider>
       <Card.Group centered>
         {
