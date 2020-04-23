@@ -1,7 +1,10 @@
 import axios from 'axios';
 import jwt from 'jwt-decode';
+
+import auth from '../auth';
+
 import {
-  LOGIN, LOGOUT, CHECK_AUTH,
+  LOGIN, LOGOUT,
   loginSuccess, logoutSuccess, loginLoading,
 } from '../actions/user';
 import { baseURL } from '../axios';
@@ -23,6 +26,8 @@ export default (store) => (next) => (action) => {
         .then((response) => {
           // decoding JWT token
           const userInfos = jwt(response.data.token);
+          auth.login(response.data.token);
+
           store.dispatch(loginSuccess({
             roles: [...userInfos.roles],
             email: userInfos.username,
@@ -45,27 +50,8 @@ export default (store) => (next) => (action) => {
     case LOGOUT:
       // set an expiration date to delete
       document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+      auth.logout();
       store.dispatch(logoutSuccess());
-      break;
-    case CHECK_AUTH:
-      // Check if the cookie exists
-      // source: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
-      if (document.cookie.split(';').some((item) => item.trim().startsWith('token='))) {
-        // Decode the token
-        const userInfos = jwt(document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1'));
-        store.dispatch(loginSuccess({
-          roles: [...userInfos.roles],
-          email: userInfos.username,
-          id: userInfos.id,
-          firstname: userInfos.firstname,
-          lastname: userInfos.lastname,
-          address: userInfos.address,
-          latitude: userInfos.latitude,
-          longitude: userInfos.longitude,
-        }));
-        // store.dispatch(loginSuccess({}));
-      }
-      else return next(action);
       break;
     default:
       next(action);
