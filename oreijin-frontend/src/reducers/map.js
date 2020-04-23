@@ -1,5 +1,5 @@
 import { LOGIN_SUCCESS } from '../actions/user';
-import { ON_CHANGE_VIEWPORT } from '../actions/map';
+import { ON_CHANGE_VIEWPORT, SET_SELECTED_SERVICE } from '../actions/map';
 
 const initialState = {
   viewport: {
@@ -9,7 +9,7 @@ const initialState = {
     height: '100%',
     zoom: 12,
   },
-  selectedMarker: null,
+  selectedService: null,
 };
 
 const map = (state = initialState, action = {}) => {
@@ -22,13 +22,18 @@ const map = (state = initialState, action = {}) => {
           longitude: parseFloat(action.payload.longitude),
           zoom: 12,
         },
-        selectedMarker: null,
+        selectedService: null,
       };
     case ON_CHANGE_VIEWPORT:
       return {
         viewport: {
           ...action.payload,
         },
+      };
+    case SET_SELECTED_SERVICE:
+      return {
+        ...state,
+        selectedService: { ...action.payload },
       };
     default:
       return state;
