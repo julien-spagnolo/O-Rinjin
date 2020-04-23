@@ -6,17 +6,32 @@ import { Link } from 'react-router-dom';
 
 import { Dropdown } from 'semantic-ui-react';
 
-const ConnectedDropdown = ({ logout, user }) => (
+import './styles.scss';
+
+const ConnectedDropdown = ({ logout, userSlug, isAdmin }) => (
   <Dropdown direction="left" text="Menu">
     <Dropdown.Menu>
       <Dropdown.Item as={Link} to="/home" text="Accueil" />
       <Dropdown.Divider />
-      <Dropdown.Item as={Link} to={`/${user}`} text="Profil" />
+      <Dropdown.Item as={Link} to={`/${userSlug}`} text="Profil" />
       <Dropdown.Divider />
-      <Dropdown.Item as={Link} to={`/${user}/services`} text="Mes services" />
+      <Dropdown.Item as={Link} to={`/${userSlug}/services`} text="Mes services" />
       <Dropdown.Divider />
       <Dropdown.Item as={Link} to="/service/add" text="Créer un service" />
       <Dropdown.Divider />
+      {
+        isAdmin && (
+          <>
+            <Dropdown.Item
+              as="a"
+              href="http://ec2-54-166-216-117.compute-1.amazonaws.com/admin"
+              content="Admin"
+            >
+            </Dropdown.Item>
+            <Dropdown.Divider />
+          </>
+        )
+      }
       <Dropdown.Item as={Link} to="/" text="Se déconnecter" onClick={logout} />
     </Dropdown.Menu>
   </Dropdown>
@@ -24,7 +39,8 @@ const ConnectedDropdown = ({ logout, user }) => (
 
 ConnectedDropdown.propTypes = {
   logout: PropTypes.func.isRequired,
-  user: PropTypes.string.isRequired,
+  userSlug: PropTypes.string.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
 };
 
 export default ConnectedDropdown;

@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Service;
 use App\Manager\ServiceManager;
+use App\Security\Voter\ServiceVoter;
+use App\Security\Voter\UserVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,22 +23,6 @@ class ServiceController extends AbstractController
 
     /**
      * @Route(
-     *      "/api/services",
-     *      name="api_service_browse",  
-     *      methods={"GET"}
-     * )
-     */
-    public function browse(): Response
-    {
-        $services = $this->serviceManager->browse();
-
-        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
-
-        return new Response($services);
-    }
-
-        /**
-     * @Route(
      *      "/api/services/home",
      *      name="api_service_browse_home",  
      *      methods={"GET"}
@@ -47,6 +33,55 @@ class ServiceController extends AbstractController
         $services = $this->serviceManager->home();
 
         $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+
+        return new Response($services);
+    }
+
+    /**
+     * @Route(
+     *      "/api/services/user/{userId}",
+     *      name="api_service_browse_user",  
+     *      methods={"GET"}, 
+     *      requirements={"id"="\d+"}
+     * )
+     */
+    public function getByUser($userId): Response
+    {
+        $services = $this->serviceManager->getByUser($userId);
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+
+        return new Response($services);
+    }
+
+        /**
+     * @Route(
+     *      "/api/services/filter/{postalCode}",
+     *      name="api_service_browse_postal_code",  
+     *      methods={"GET"}, 
+     *      requirements={"id"="\d+"}
+     * )
+     */
+    public function getByPostalCode($postalCode): Response
+    {
+        $services = $this->serviceManager->getByPostalCode($postalCode);
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+
+        return new Response($services);
+    }
+
+    /**
+     * @Route(
+     *      "/api/services",
+     *      name="api_service_browse",  
+     *      methods={"GET"}
+     * )
+     */
+    public function browse(): Response
+    {
+        
+        $services = $this->serviceManager->browse();
+
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-browse']);
 
         return new Response($services);
     }
@@ -76,9 +111,10 @@ class ServiceController extends AbstractController
     public function add(Request $request): Response
     {
         $data = $request->getContent();
+
         $service = $this->serviceManager->create($data);
         $service = $this->serviceManager->serialize($service, ['groups' => 'service-add']);
-        
+
         return new Response($service, Response::HTTP_CREATED);
     }
 
@@ -92,6 +128,8 @@ class ServiceController extends AbstractController
      */
     public function edit(Request $request, Service $service): Response
     {
+        $this->denyAccessUnlessGranted(UserVoter::SAME_USER, $service);
+
         $data = $request->getContent();
         $service = $this->serviceManager->update($service, $data);
         $service = $this->serviceManager->serialize($service, ['groups' => 'service-edit']);
@@ -112,6 +150,8 @@ class ServiceController extends AbstractController
      */
     public function delete(Service $service): JsonResponse
     {
+        $this->denyAccessUnlessGranted(UserVoter::SAME_USER, $service);
+
         $this->serviceManager->delete($service);
 
         return new JsonResponse(

@@ -19,13 +19,13 @@ class ServiceCategory
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"service-categories", "services", "services-read"})
+     * @Groups({"service-categories", "services-read", "services-browse"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=60)
-     * @Groups("service-categories")
+     * @Groups({"service-categories", "services-browse"})
      */
     private $title;
 

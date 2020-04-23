@@ -40,7 +40,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = ["USER"];
+    private $roles = ["ROLE_USER"];
 
     /**
      * @var string The hashed password
@@ -83,8 +83,9 @@ class User implements UserInterface
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=5)
      * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Assert\Regex("/^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$/")
      * @Assert\NotBlank
      */
     private $postalCode;
@@ -99,14 +100,14 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=8)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse"})
      * @Assert\NotBlank
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="decimal", precision=11, scale=8)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse"})
      */
     private $longitude;
 
@@ -184,7 +185,7 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'USER';
+        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }

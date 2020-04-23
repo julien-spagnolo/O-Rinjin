@@ -40,7 +40,7 @@ class UserManager extends AbstractManager {
     public function sendEmail(MailerInterface $mailer)
     {
         $email = (new Email())
-            ->from('entraideadaptable@gmail.com')
+            ->from('inscriptionorinjin@gmail.com')
             ->to('hln.david7@gmail.com')
             ->subject('O Rijin : confirmation de votre inscription')
             ->text('Sending emails is fun again!')

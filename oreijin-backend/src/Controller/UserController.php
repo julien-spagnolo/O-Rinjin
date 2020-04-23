@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Manager\UserManager;
+use App\Security\Voter\UserVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -93,6 +94,8 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user): Response
     {
+        $this->denyAccessUnlessGranted(UserVoter::SAME_USER, $user);
+
         $data = $request->getContent();
         $user = $this->userManager->update($user, $data);
 
@@ -114,6 +117,8 @@ class UserController extends AbstractController
      */
     public function delete(User $user): JsonResponse
     {
+        $this->denyAccessUnlessGranted(UserVoter::SAME_USER, $user);
+
         $this->userManager->delete($user);
 
         return new JsonResponse(

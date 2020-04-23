@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ServiceCategory;
 use App\Manager\ServiceCategoryManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -56,14 +57,16 @@ class ServiceCategoryController extends AbstractController
      *      name="api_service_category_add",  
      *      methods={"POST"}
      * )
+     * 
+     * @IsGranted("ROLE_MODO", message="No access!")
      */
-    public function add(Request $request): JsonResponse
+    public function add(Request $request): Response
     {
-
         $data = $request->getContent();
         $serviceCategory = $this->serviceCategoryManager->create($data);
+        $serviceCategory = $this->serviceCategoryManager->serialize($serviceCategory, ['groups' => 'service-categories']);
 
-        return $this->json($serviceCategory, JsonResponse::HTTP_CREATED);
+        return new Response($serviceCategory);
     }
 
     /**
@@ -73,13 +76,18 @@ class ServiceCategoryController extends AbstractController
      *      methods={"PUT"},
      *      requirements={"id"="\d+"}
      * )
+     * 
+     * @IsGranted("ROLE_MODO", message="No access!")
      */
-    public function edit(Request $request, ServiceCategory $serviceCategory): JsonResponse
+    public function edit(Request $request, ServiceCategory $serviceCategory): Response
     {
+        // $this->denyAccessUnlessGranted(ServiceCategoryVoter::BACK_OFFICE, $serviceCategory);
+
         $data = $request->getContent();
         $serviceCategory = $this->serviceCategoryManager->update($serviceCategory, $data);
+        $serviceCategory = $this->serviceCategoryManager->serialize($serviceCategory, ['groups' => 'service-categories']);
 
-        return $this->json($serviceCategory);
+        return new Response($serviceCategory);
     }
 
     /**
@@ -92,9 +100,13 @@ class ServiceCategoryController extends AbstractController
      * @param int $id
      *
      * @return JsonResponse
+     * 
+     * @IsGranted("ROLE_ADMIN", message="No access!")
      */
     public function delete(ServiceCategory $serviceCategory): JsonResponse
     {
+        // $this->denyAccessUnlessGranted(ServiceCategoryVoter::BACK_OFFICE, $serviceCategory);
+
         $this->serviceCategoryManager->delete($serviceCategory);
 
         return new JsonResponse(
