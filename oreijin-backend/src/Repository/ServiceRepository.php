@@ -41,7 +41,7 @@ class ServiceRepository extends ServiceEntityRepository
 
         if (!empty($search->userId)) {
             $query = $query
-                ->andWhere('u.id <= :id')
+                ->andWhere('u.id = :id')
                 ->setParameter('id', $search->userId);
         }
         // dd($this->paginator->paginate(
