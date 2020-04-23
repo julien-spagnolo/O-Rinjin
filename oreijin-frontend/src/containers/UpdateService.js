@@ -1,0 +1,34 @@
+import { connect } from 'react-redux';
+import UpdateService from '../components/Member/UpdateService';
+import { getCategoriesList } from '../actions/categories';
+import {
+  onChangeFieldEdit, getService, resetServiceForm, editService,
+} from '../actions/service';
+import { getCategoriesOptions } from '../reducers/categories';
+import { getServiceIdFromSlug } from '../reducers/services';
+
+// const mapStateToProps = null;
+const mapStateToProps = (state, ownProps) => ({
+  id: getServiceIdFromSlug(ownProps.match.params.slug),
+  categories: getCategoriesOptions(state.categories),
+  author: state.services.service.user,
+  userId: state.user.infos.id,
+  form: state.services.editForm,
+  isSuccess: state.services.isSuccess,
+  isError: state.services.isError,
+});
+
+// const mapDispatchToProps = {};
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeFieldEdit: (inputName, inputValue) => dispatch(onChangeFieldEdit({
+    [inputName]: inputValue,
+  })),
+  // checkAuth: () => dispatch(checkAuth()),
+  editService: () => dispatch(editService()),
+  resetServiceForm: () => dispatch(resetServiceForm()),
+  getCategoriesList: () => dispatch(getCategoriesList()),
+  getService: (payload) => dispatch(getService(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateService);

@@ -6,6 +6,7 @@ export const GET_SERVICE_ERROR = 'GET_SERVICE_ERROR';
 export const ON_CHANGE_FIELD = 'ON_CHANGE_FIELD';
 export const ON_CHANGE_FIELD_TYPE = 'ON_CHANGE_FIELD_TYPE';
 export const ON_CHANGE_FIELD_REPLY = 'ON_CHANGE_FIELD_REPLY';
+export const ON_CHANGE_FIELD_EDIT = 'ON_CHANGE_FIELD_EDIT';
 export const ADD_SERVICE = 'ADD_SERVICE';
 export const ADD_SERVICE_SUCCESS = 'ADD_SERVICE_SUCCESS';
 export const ADD_SERVICE_ERROR = 'ADD_SERVICE_ERROR';
@@ -13,6 +14,9 @@ export const RESET_SERVICE_FORM = 'RESET_SERVICE_FORM';
 export const DELETE_SERVICE = 'DELETE_SERVICE';
 export const DELETE_SERVICE_SUCCESS = 'DELETE_SERVICE_SUCCESS';
 export const DELETE_SERVICE_ERROR = 'DELETE_SERVICE_ERROR';
+export const EDIT_SERVICE = 'EDIT_SERVICE';
+export const EDIT_SERVICE_SUCCESS = 'EDIT_SERVICE_SUCCESS';
+export const EDIT_SERVICE_ERROR = 'EDIT_SERVICE_ERROR';
 
 export const getServicesList = () => ({
   type: GET_SERVICES_LIST,
@@ -82,4 +86,21 @@ export const deleteServiceSuccess = (payload) => ({
 
 export const deleteServiceError = () => ({
   type: DELETE_SERVICE_ERROR,
+});
+
+export const editService = () => ({
+  type: EDIT_SERVICE,
+});
+
+export const editServiceSuccess = () => ({
+  type: EDIT_SERVICE_SUCCESS,
+});
+
+export const editServiceError = () => ({
+  type: EDIT_SERVICE_ERROR,
+});
+
+export const onChangeFieldEdit = (payload) => ({
+  type: ON_CHANGE_FIELD_EDIT,
+  payload,
 });

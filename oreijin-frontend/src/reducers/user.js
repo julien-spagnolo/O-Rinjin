@@ -9,7 +9,9 @@ const initialState = {
     username: '',
     password: '',
   },
-  infos: {},
+  infos: {
+    id: -1,
+  },
   isLogged: false,
   loading: false,
   isSuccess: false,
