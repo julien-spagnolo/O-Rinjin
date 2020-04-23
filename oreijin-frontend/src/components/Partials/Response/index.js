@@ -27,7 +27,7 @@ const Response = ({
     <Comment>
       <Comment.Avatar src={logo} />
       <Comment.Content>
-        <Comment.Author>Reijin 1</Comment.Author>
+        <Comment.Author>Rinjin anonyme</Comment.Author>
         <Comment.Metadata>
           <Comment.Text>
             3 days ago
