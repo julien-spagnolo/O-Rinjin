@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import slugify from 'slugify';
 
 import {
@@ -13,11 +14,15 @@ import {
   ON_CHANGE_FIELD_EDIT,
   EDIT_SERVICE_SUCCESS,
   EDIT_SERVICE_ERROR,
+  TOGGLE_LOADING,
+  GET_SERVICES_LIST_BY_POSTAL_CODE_SUCCESS,
+  SET_SELECTED_LIST,
 } from '../actions/service';
 import { GET_USER_SUCCESS } from '../actions/user';
 
 const initialState = {
   list: [],
+  listPostalCode: [],
   form: {
     title: '',
     serviceCategory: '',
@@ -47,6 +52,8 @@ const initialState = {
   },
   isSuccess: false,
   isError: false,
+  isLoading: false,
+  selectedList: false,
 };
 
 /**
@@ -58,6 +65,10 @@ export const getServicesWithSlug = (state = initialState) => state.list.map((ser
   slug: slugify(`${service.id} ${service.title}`, { lower: true }),
 }));
 
+export const getServicesByPostalcodeWithSlug = (state = initialState) => state.listPostalCode.map((service) => ({
+  ...service,
+  slug: slugify(`${service.id} ${service.title}`, { lower: true }),
+}));
 
 /**
  * Extract the service id from the slug
@@ -78,6 +89,7 @@ export default (state = initialState, action = {}) => {
         list: [
           ...action.payload,
         ],
+        isLoading: false,
       };
     case ON_CHANGE_FIELD:
     case ON_CHANGE_FIELD_TYPE:
@@ -153,6 +165,21 @@ export default (state = initialState, action = {}) => {
           ...state.editForm,
           ...action.payload,
         },
+      };
+    case TOGGLE_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case GET_SERVICES_LIST_BY_POSTAL_CODE_SUCCESS:
+      return {
+        ...state,
+        listPostalCode: [...action.payload],
+      };
+    case SET_SELECTED_LIST:
+      return {
+        ...state,
+        selectedList: action.payload,
       };
     default:
       return state;

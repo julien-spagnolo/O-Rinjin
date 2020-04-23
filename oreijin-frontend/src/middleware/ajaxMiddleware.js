@@ -6,7 +6,9 @@ import {
   ADD_SERVICE, addServiceSuccess, addServiceError,
   DELETE_SERVICE, deleteServiceSuccess, deleteServiceError,
   GET_SERVICE, getServiceSuccess, getServiceError,
-  EDIT_SERVICE, editServiceSuccess, editServiceError,
+  EDIT_SERVICE, editServiceSuccess, editServiceError, toggleLoading,
+  GET_SERVICES_LIST_BY_POSTAL_CODE, getServicesListByPostalCodeSuccess,
+  getServicesListByPostalCodeError,
 } from '../actions/service';
 import {
   GET_CATEGORIES_LIST, getCategoriesListSuccess,
@@ -37,11 +39,9 @@ export default (store) => (next) => (action) => {
         });
       break;
     case GET_SERVICES_LIST:
-
       // console.log('//== middleware getServicesList');
 
-      // Get cookie value
-      // source: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+      store.dispatch(toggleLoading());
       axios({
         method: 'get',
         url: `${baseURL}/api/services`,
@@ -51,12 +51,33 @@ export default (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          // console.log(res.data);
-          // console.log(getServicesListSuccess(res.data));
+          console.log(res.data);
+          console.log(store.getState().user.infos.postalcode);
           store.dispatch(getServicesListSuccess(res.data));
         })
         .catch((err) => {
           console.log(err);
+        });
+      break;
+    case GET_SERVICES_LIST_BY_POSTAL_CODE:
+      // console.log('//== middleware getServicesList');
+
+      store.dispatch(toggleLoading());
+      axios({
+        method: 'get',
+        url: `${baseURL}/api/services/filter/${action.payload}`,
+        headers: {
+          Authorization: authorization,
+        },
+        withCredentials: true,
+      })
+        .then((res) => {
+          // console.log(res.data);
+          store.dispatch(getServicesListByPostalCodeSuccess(res.data));
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(getServicesListByPostalCodeError());
         });
       break;
     case ADD_SERVICE:

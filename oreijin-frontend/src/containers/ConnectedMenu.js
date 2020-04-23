@@ -7,7 +7,7 @@ import ConnectedMenu from '../components/Partials/ConnectedMenu';
 
 const mapStateToProps = (state) => ({
   userSlug: slugify(`${state.user.infos.firstname} ${state.user.infos.lastname} ${state.user.infos.id}`, { lower: true }),
-  isAdmin: state.user.infos.roles[0] === 'ADMIN',
+  isAdmin: state.user.infos.roles[0] === 'ROLE_ADMIN' || 'ROLE_MODO',
 });
 
 const mapDispatchToProps = (dispatch) => ({
