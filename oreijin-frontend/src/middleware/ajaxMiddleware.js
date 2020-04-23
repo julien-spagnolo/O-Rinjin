@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { baseURL, authorization } from '../axios';
 import {
+  getServicesList, getServicesListByPostalCode,
   GET_SERVICES_LIST, getServicesListSuccess,
   ADD_SERVICE, addServiceSuccess, addServiceError,
   DELETE_SERVICE, deleteServiceSuccess, deleteServiceError,
@@ -51,8 +52,8 @@ export default (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data);
-          console.log(store.getState().user.infos.postalcode);
+          // console.log(res.data);
+          // console.log(store.getState().user.infos.postalcode);
           store.dispatch(getServicesListSuccess(res.data));
         })
         .catch((err) => {
@@ -101,6 +102,8 @@ export default (store) => (next) => (action) => {
           // console.log(res.data);
           // console.log(getServicesListSuccess(res.data));
           store.dispatch(addServiceSuccess(res.data));
+          store.dispatch(getServicesListByPostalCode(store.getState().user.infos.postalcode));
+          store.dispatch(getServicesList());
         })
         .catch((err) => {
           console.log(err);
@@ -120,6 +123,8 @@ export default (store) => (next) => (action) => {
         .then((res) => {
           store.dispatch(deleteServiceSuccess(res.data));
           store.dispatch(getUserServicesList());
+          store.dispatch(getServicesListByPostalCode(store.getState().user.infos.postalcode));
+          store.dispatch(getServicesList());
         })
         .catch((err) => {
           console.log(err);
