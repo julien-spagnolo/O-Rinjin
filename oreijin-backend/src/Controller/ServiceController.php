@@ -47,7 +47,7 @@ class ServiceController extends AbstractController
      */
     public function getByUser($userId): Response
     {
-        $services = $this->serviceManager->servicesByUser($userId);
+        $services = $this->serviceManager->getByUser($userId);
         $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
 
         return new Response($services);

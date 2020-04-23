@@ -15,6 +15,10 @@ const Profil = ({
   isLogged,
   getUser,
   userId,
+  profile,
+  form,
+  onChangeProfileField,
+  onUpdateProfile,
 }) => {
   const history = useHistory();
 
@@ -25,7 +29,7 @@ const Profil = ({
     // console.log(userId);
     getUser(userId);
     if (!document.cookie.split(';').some((item) => item.trim().startsWith('token='))) history.push('/');
-  }, [isLogged]);
+  }, [isLogged, userId]);
 
   // console.log(userInfos);
   return (
@@ -34,57 +38,123 @@ const Profil = ({
         <Header as="h1">Profil</Header>
         <Container className="service__details__avatar">
           <Image src={logo} size="small" />
-          <Button className="profil__import__button" size="small" color="blue">Importer une photo</Button>
+          {
+            profile.email === userInfos.email && <Button className="profil__import__button" size="small" color="blue">Importer une photo</Button>
+          }
         </Container>
         <Container className="profil__name">
-          <p>Prénom : <span>{userInfos.firstname} </span></p>
-          <p>Nom : <span>{userInfos.lastname} </span></p>
-          <p>Adresse : <span>{userInfos.address} </span></p>
+          <p>Prénom : <span>{profile.firstName} </span></p>
+          <p>Nom : <span>{profile.lastName} </span></p>
+          <p>Code postal : <span>{profile.postalCode} </span></p>
         </Container>
-        <Divider horizontal>
-          <Header as="h5">
-            Infos
-          </Header>
-        </Divider>
-        {/*  TODO - Add condition for form display */}
-        <Container>
-          <Form>
-            <Form.Field>
-              <Form.Input label="Prénom" placeholder={userInfos.firstname} />
-            </Form.Field>
-            <Form.Field>
-              <Form.Input label="Nom" placeholder={userInfos.lastname} />
-            </Form.Field>
-            <Form.Field>
-              <Form.Input label="Adresse" placeholder={userInfos.address} />
-            </Form.Field>
-            <Form.Field>
-              <Form.Input label="Email" placeholder={userInfos.email} />
-            </Form.Field>
-            <Button className="profil__change__button" size="small" type="submit">Modifier</Button>
-          </Form>
-        </Container>
-        <Divider horizontal>
-          <Header as="h5">
-            Suppression
-          </Header>
-        </Divider>
-        <Container>
-          <p>Attention</p>
-          <p>
-            La suppression de votre compte est définitive.
-            Vous perdrez toutes les informations et les services liés à ce compte.
-          </p>
-          <Message error hidden={!error} content="Une erreur est survenue lors de la suppression de votre compte." />
-          <Button
-            className="profil__delete__button"
-            size="small"
-            color="red"
-            onClick={() => onDeleteAccount(userInfos.id)}
-          >
-            Supprimer le compte
-          </Button>
-        </Container>
+        {
+          profile.email === userInfos.email && (
+            <>
+              <Divider horizontal>
+                <Header as="h5">
+                  Infos
+                </Header>
+              </Divider>
+              {/*  TODO - Add condition for form display */}
+              <Container>
+                <Form
+                  onSubmit={(evt) => {
+                    evt.preventDefault();
+                    onUpdateProfile();
+                  }}
+                >
+                  <Form.Field>
+                    <Form.Input
+                      label="Prénom"
+                      placeholder={profile.firstName}
+                      value={form.firstName}
+                      name="firstName"
+                      onChange={(evt) => onChangeProfileField({
+                        [evt.target.name]: evt.target.value,
+                      })}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <Form.Input
+                      label="Nom"
+                      placeholder={profile.lastName}
+                      value={form.lastName}
+                      name="lastName"
+                      onChange={(evt) => onChangeProfileField({
+                        [evt.target.name]: evt.target.value,
+                      })}
+                    />
+                  </Form.Field>
+                  <Form.Group>
+                    <Form.Field width={8}>
+                      <Form.Input
+                        label="Adresse"
+                        placeholder={profile.address}
+                        value={form.address}
+                        name="address"
+                        onChange={(evt) => onChangeProfileField({
+                          [evt.target.name]: evt.target.value,
+                        })}
+                      />
+                    </Form.Field>
+                    <Form.Field width={4}>
+                      <Form.Input
+                        className="profile__form"
+                        label="Ville"
+                        placeholder={profile.city}
+                        value={form.city}
+                        name="city"
+                        onChange={(evt) => onChangeProfileField({
+                          [evt.target.name]: evt.target.value,
+                        })}
+                      />
+                    </Form.Field>
+                    <Form.Field width={4}>
+                      <Form.Input
+                        className="profile__form"
+                        label="Code Postal"
+                        placeholder={profile.postalCode}
+                        value={form.postalCode}
+                        name="postalCode"
+                        onChange={(evt) => onChangeProfileField({
+                          [evt.target.name]: evt.target.value,
+                        })}
+                      />
+                    </Form.Field>
+                  </Form.Group>
+                  <Button
+                    className="profil__change__button"
+                    size="small"
+                    type="submit"
+                  >
+                      Modifier
+                  </Button>
+                </Form>
+              </Container>
+              <Divider horizontal>
+                <Header as="h5">
+                  Suppression
+                </Header>
+              </Divider>
+              <Container>
+                <p>Attention</p>
+                <p>
+                  La suppression de votre compte est définitive.
+                  Vous perdrez toutes les informations et les services liés à ce compte.
+                </p>
+                <Message error hidden={!error} content="Une erreur est survenue lors de la suppression de votre compte." />
+                <Button
+                  className="profil__delete__button"
+                  size="small"
+                  color="red"
+                  onClick={() => onDeleteAccount(userInfos.id)}
+                >
+                  Supprimer le compte
+                </Button>
+              </Container>
+            </>
+          )
+        }
       </Segment>
     </Container>
   );
@@ -100,8 +170,12 @@ Profil.propTypes = {
   }).isRequired,
   onDeleteAccount: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
+  onChangeProfileField: PropTypes.func.isRequired,
+  onUpdateProfile: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
   userId: PropTypes.string.isRequired,
+  profile: PropTypes.object.isRequired,
+  form: PropTypes.object.isRequired,
 };
 
 

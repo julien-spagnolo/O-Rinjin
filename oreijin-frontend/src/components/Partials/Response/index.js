@@ -28,7 +28,6 @@ const Response = ({
   </Comment>
 );
 
-
 Response.propTypes = {
   // id: PropTypes.number.isRequired,
   body: PropTypes.string.isRequired,

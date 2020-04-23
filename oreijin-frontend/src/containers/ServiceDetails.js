@@ -5,6 +5,7 @@ import { getCategoriesList } from '../actions/categories';
 import ServiceDetails from '../components/Member/ServiceDetails';
 import { findCategoryById } from '../reducers/categories';
 import { addComment, onChangeFieldReply } from '../actions/comments';
+import { getUser } from '../actions/user';
 
 const mapStateToProps = (state, ownProps) => ({
   service: state.services.service,
@@ -19,6 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
   getService: (payload) => dispatch(getService(payload)),
   getCategoriesList: () => dispatch(getCategoriesList()),
   addComment: (payload) => dispatch(addComment(payload)),
+  getUser: (payload) => dispatch(getUser(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ServiceDetails);

@@ -1,6 +1,10 @@
 /* eslint-disable camelcase */
 import axios from 'axios';
-import { GET_USER, getUserSuccess, getUserError } from '../actions/user';
+import { baseURL, authorization } from '../axios';
+import {
+  GET_USER, getUserSuccess, getUserError,
+  UPDATE_PROFILE, updateProfileSuccess, updateProfileError,
+} from '../actions/user';
 
 const registerMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -8,9 +12,30 @@ const registerMiddleware = (store) => (next) => (action) => {
       // console.log(action.payload);
       axios({
         method: 'get',
-        url: `http://ec2-54-166-216-117.compute-1.amazonaws.com/api/users/${action.payload}`,
+        url: `${baseURL}/api/users/${action.payload}`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: authorization,
+        },
+        withCredentials: true,
+      })
+        .then((res) => {
+          // console.log(res.data);
+          store.dispatch(getUserSuccess(res.data));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      break;
+    case UPDATE_PROFILE:
+      // console.log(store.getState().user.profileForm);
+      axios({
+        method: 'put',
+        url: `${baseURL}/api/users/${store.getState().user.profile.id}`,
+        headers: {
+          Authorization: authorization,
+        },
+        data: {
+          ...store.getState().user.profileForm,
         },
         withCredentials: true,
       })
@@ -19,8 +44,8 @@ const registerMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.log(err);
-        })
-      return next(action);
+        });
+      break;
     default:
       return next(action);
   }

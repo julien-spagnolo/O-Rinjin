@@ -1,5 +1,10 @@
 export const CHANGE_LOGIN_FIELD = 'CHANGE_LOGIN_FIELD';
 
+export const CHANGE_PROFILE_FIELD = 'CHANGE_PROFILE_FIELD';
+
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const UPDATE_PROFILE_SUCCESS = 'UPDATE_PROFILE_SUCCESS';
+
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
@@ -83,4 +88,22 @@ export const getUserSuccess = (payload) => ({
 
 export const getUserError = () => ({
   type: DELETE_ACCOUNT_SUCCESS,
+});
+
+export const changeProfileField = (payload) => ({
+  type: CHANGE_PROFILE_FIELD,
+  payload,
+});
+
+export const updateProfile = () => ({
+  type: UPDATE_PROFILE,
+});
+
+export const updateProfileSuccess = (payload) => ({
+  type: UPDATE_PROFILE_SUCCESS,
+  payload,
+});
+
+export const updateProfileError = () => ({
+  type: UPDATE_PROFILE_ERROR,
 });
