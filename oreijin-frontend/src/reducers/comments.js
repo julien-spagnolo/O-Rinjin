@@ -1,18 +1,21 @@
-import { GET_COMMENT_SUCCESS } from '../actions/comments';
+import { ON_CHANGE_FIELD_REPLY, ADD_COMMENT_SUCCESS } from '../actions/comments';
 
 const initialState = {
   list: [],
+  reply: '',
 };
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case GET_COMMENT_SUCCESS:
-      // console.log(action.payload);
+    case ADD_COMMENT_SUCCESS:
       return {
-        list: [
-          ...state.list,
-          { ...action.payload },
-        ],
+        ...state,
+        reply: '',
+      };
+    case ON_CHANGE_FIELD_REPLY:
+      return {
+        ...state,
+        reply: action.payload,
       };
     default:
       return state;

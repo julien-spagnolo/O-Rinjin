@@ -16,12 +16,12 @@ const ServiceDetails = ({
   onChangeFieldReply, reply,
   id, getService, service,
   category, getCategoriesList,
-  addComment, commentListLength,
+  addComment,
 }) => {
   useEffect(() => {
     if (!category) getCategoriesList();
     getService(id);
-  }, [commentListLength]);
+  }, [reply]);
 
   return (
     <Segment as={Container} className="service" raised>
@@ -99,7 +99,7 @@ const ServiceDetails = ({
         <Grid.Row>
           <Grid.Column as={Comment.Group} className="padding--left--right">
             {
-              service.comment.map((item, index) => <Response key={`${item.id}-comment`} {...item} index={index} />)
+              service.comment.length === 0 ? 'Soyez la première personne à répondre à ce service.' : service.comment.map((item) => <Response key={`${item.id}-comment`} {...item} />)
             }
           </Grid.Column>
         </Grid.Row>
