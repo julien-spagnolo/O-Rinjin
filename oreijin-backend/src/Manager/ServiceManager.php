@@ -17,14 +17,25 @@ class ServiceManager extends AbstractManager
         return $this->getRepository()->findBy(['user' => $userId], ['createdAt' => 'desc']);
     }
 
-    public function getByPostalCode($postalcode):array
+    public function getByPostalCode($postalcode): array
     {
         return $this->getRepository()->findByPostalCode($postalcode);
     }
 
-    public function browse($request): array
+    public function searchByFilters(): array
     {
-        return $this->getRepository()->searchByFilters($request);
+
+        return $this->getRepository()->findAll();
+
+        // $sort = $request->query->get('sort');
+        // $direction = $request->query->get('direction');
+
+        // $request->query->remove('sort');
+        // $request->query->remove('direction');
+
+        // $filters = $request->query->all();
+
+        // return $this->getRepository()->getByFilters($filters, $sort, $direction)
     }
 
     public function create(string $data)

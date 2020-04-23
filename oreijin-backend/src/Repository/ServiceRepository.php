@@ -20,11 +20,11 @@ class ServiceRepository extends ServiceEntityRepository
     }
 
 
-    public function searchByFilters($request)
-    {
-        $this->createQueryBuilder('s')
-            ->join('s.user', 'u')
-    }
+    // public function searchByFilters($request)
+    // {
+    //     $this->createQueryBuilder('s')
+    //         ->join('s.user', 'u')
+    // }
 
 
 

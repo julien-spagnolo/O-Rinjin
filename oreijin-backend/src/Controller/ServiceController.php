@@ -6,6 +6,7 @@ use App\Entity\Service;
 use App\Manager\ServiceManager;
 use App\Security\Voter\ServiceVoter;
 use App\Security\Voter\UserVoter;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -76,12 +77,18 @@ class ServiceController extends AbstractController
      *      methods={"GET"}
      * )
      */
-    public function browse(Request $request): Response
+    public function browse(PaginatorInterface $paginator, Request $request): Response
     {
         
-        $services = $this->serviceManager->searchByFilters($request);
+        $services = $this->serviceManager->searchByFilters();
+        $pagination = $paginator->paginate(
+            $services, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            15 /*limit per page*/
+        );
+        // dd($pagination);
 
-        $services = $this->serviceManager->serialize($services, ['groups' => 'services-browse']);
+        $services = $this->serviceManager->serialize($pagination, ['groups' => 'services-browse']);
 
         return new Response($services);
     }
