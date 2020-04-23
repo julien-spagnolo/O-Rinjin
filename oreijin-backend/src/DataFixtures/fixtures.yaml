@@ -16,7 +16,7 @@ App\Entity\User:
       firstName: '<firstName()>'
       lastName: '<lastName()>'
       address: '<streetAddress()>'
-      postalCode: <postcode()>
+      postalCode: '75000'
       city: '<city()>'
       latitude: <latitude(-90, 90)>
       longitude: <longitude(-180, 180)>

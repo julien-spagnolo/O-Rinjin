@@ -117,7 +117,7 @@ class UserController extends AbstractController
      */
     public function delete(User $user): JsonResponse
     {
-        $this->denyAccessUnlessGranted('EDIT', $user);
+        $this->denyAccessUnlessGranted(UserVoter::SAME_USER, $user);
 
         $this->userManager->delete($user);
 

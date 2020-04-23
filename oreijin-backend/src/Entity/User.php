@@ -40,7 +40,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles;
+    private $roles = ["ROLE_USER"];
 
     /**
      * @var string The hashed password
@@ -83,8 +83,9 @@ class User implements UserInterface
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=5)
      * @Groups({"users-list", "user-read", "user-add", "user-edit"})
+     * @Assert\Regex("/^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$/")
      * @Assert\NotBlank
      */
     private $postalCode;

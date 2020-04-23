@@ -12,9 +12,14 @@ class ServiceManager extends AbstractManager
         return $this->getRepository()->findBy([], ['createdAt' => 'desc'], 3);
     }
 
-    public function servicesByUser($userId): array
+    public function getByUser($userId): array
     {
         return $this->getRepository()->findBy(['user' => $userId], ['createdAt' => 'desc']);
+    }
+
+    public function getByPostalCode($postalcode):array
+    {
+        return $this->getRepository()->findByPostalCode($postalcode);
     }
 
     public function browse(): array

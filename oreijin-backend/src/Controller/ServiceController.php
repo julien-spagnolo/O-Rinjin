@@ -45,9 +45,25 @@ class ServiceController extends AbstractController
      *      requirements={"id"="\d+"}
      * )
      */
-    public function allServicesByUser($userId): Response
+    public function getByUser($userId): Response
     {
         $services = $this->serviceManager->servicesByUser($userId);
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+
+        return new Response($services);
+    }
+
+        /**
+     * @Route(
+     *      "/api/services/filter/{postalcode}",
+     *      name="api_service_browse_postal_code",  
+     *      methods={"GET"}, 
+     *      requirements={"id"="\d+"}
+     * )
+     */
+    public function getByPostalCode($postalCode): Response
+    {
+        $services = $this->serviceManager->getByPostalCode($postalCode);
         $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
 
         return new Response($services);
@@ -62,6 +78,7 @@ class ServiceController extends AbstractController
      */
     public function browse(): Response
     {
+        
         $services = $this->serviceManager->browse();
 
         $services = $this->serviceManager->serialize($services, ['groups' => 'services-browse']);
