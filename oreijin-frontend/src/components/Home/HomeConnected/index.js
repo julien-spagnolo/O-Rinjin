@@ -8,7 +8,7 @@ import {
 
 import Service from '../../../containers/Service';
 // import services from '../../../services';
-import Map from '../../Partials/Map';
+import Map from '../../../containers/Map';
 
 // == Import styles and assets
 import './styles.scss';

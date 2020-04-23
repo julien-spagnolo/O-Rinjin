@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
+import PropTypes from 'prop-types';
 
 import mapToken from '../../../../mapbox.config';
 import mapServices from '../../../map-services';
@@ -14,18 +15,11 @@ const mapAccess = {
   mapboxApiAccessToken: mapToken,
 };
 
-const Map = () => {
-  // state de la map
-  const [viewport, setViewport] = useState({
-    latitude: 48.866667,
-    longitude: 2.333333,
-    width: '100%',
-    height: '100%',
-    zoom: 11,
-  });
-
+const Map = ({ viewport, services, onChangeViewport }) => {
   const [selectedService, setSelectedService] = useState(null);
 
+  useEffect(() => {
+  }, [viewport, services]);
 
   return (
     <ReactMapGL
@@ -36,7 +30,7 @@ const Map = () => {
       mapStyle="mapbox://styles/mapbox/outdoors-v11"
       // Permet de se déplacer sur la map
       onViewportChange={(newViewport) => {
-        setViewport(newViewport);
+        onChangeViewport(newViewport);
       }}
     >
       {
@@ -76,6 +70,12 @@ const Map = () => {
       }
     </ReactMapGL>
   );
+};
+
+Map.propTypes = {
+  viewport: PropTypes.object.isRequired,
+  services: PropTypes.array.isRequired,
+  onChangeViewport: PropTypes.func.isRequired,
 };
 
 // == Export
