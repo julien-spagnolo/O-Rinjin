@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Service;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Service|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,17 +16,45 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ServiceRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Service::class);
+        $this->paginator = $paginator;
     }
 
 
-    // public function searchByFilters($request)
-    // {
-    //     $this->createQueryBuilder('s')
-    //         ->join('s.user', 'u')
-    // }
+    public function findSearch(SearchData $search)
+    {
+
+        $query = $this
+            ->createQueryBuilder('s')
+            ->join('s.user', 'u')
+            ->orderBy('s.createdAt', 'DESC');
+
+        if (!empty($search->postalCode)) {
+            $query = $query
+                ->andWhere('u.postalCode = :postalCode')
+                ->setParameter('postalCode', $search->postalCode);
+        }
+
+        if (!empty($search->userId)) {
+            $query = $query
+                ->andWhere('u.id <= :id')
+                ->setParameter('id', $search->userId);
+        }
+        // dd($this->paginator->paginate(
+        //     $query,
+        //     $search->page,
+        //     $search->limit
+        // ));
+        return $this->paginator->paginate(
+            $query,
+            $search->page,
+            $search->limit
+        );
+    }
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Service;
 use App\Manager\ServiceManager;
 use App\Security\Voter\ServiceVoter;
@@ -49,7 +50,7 @@ class ServiceController extends AbstractController
     public function getByUser($userId): Response
     {
         $services = $this->serviceManager->getByUser($userId);
-        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-browse']);
 
         return new Response($services);
     }
@@ -65,7 +66,7 @@ class ServiceController extends AbstractController
     public function getByPostalCode($postalCode): Response
     {
         $services = $this->serviceManager->getByPostalCode($postalCode);
-        $services = $this->serviceManager->serialize($services, ['groups' => 'services-list']);
+        $services = $this->serviceManager->serialize($services, ['groups' => 'services-browse']);
 
         return new Response($services);
     }
@@ -77,15 +78,15 @@ class ServiceController extends AbstractController
      *      methods={"GET"}
      * )
      */
-    public function browse(PaginatorInterface $paginator, Request $request): Response
+    public function browse(Request $request): Response
     {
-        
-        $services = $this->serviceManager->searchByFilters();
-        $pagination = $paginator->paginate(
-            $services, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            15 /*limit per page*/
-        );
+        $data = new SearchData();
+        $data->page = $request->get('page', 1);
+        $data->limit = $request->get('limit', 10);
+        $data->postalCode = $request->get('postalCode');
+        $data->userId = $request->get('userId');
+
+        $pagination = $this->serviceManager->searchByFilters($data);
         // dd($pagination);
 
         $services = $this->serviceManager->serialize($pagination, ['groups' => 'services-browse']);

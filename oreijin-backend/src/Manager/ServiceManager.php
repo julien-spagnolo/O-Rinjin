@@ -22,10 +22,10 @@ class ServiceManager extends AbstractManager
         return $this->getRepository()->findByPostalCode($postalcode);
     }
 
-    public function searchByFilters(): array
+    public function searchByFilters($data): object
     {
 
-        return $this->getRepository()->findAll();
+        return $this->getRepository()->findSearch($data);
 
         // $sort = $request->query->get('sort');
         // $direction = $request->query->get('direction');
