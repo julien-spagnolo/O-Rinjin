@@ -7,7 +7,7 @@ const initialState = {
     longitude: 2.333333,
     width: '100%',
     height: '100%',
-    zoom: 12,
+    zoom: 11.070872916521907,
   },
   selectedService: null,
 };
@@ -20,7 +20,7 @@ const map = (state = initialState, action = {}) => {
           ...state.viewport,
           latitude: parseFloat(action.payload.latitude),
           longitude: parseFloat(action.payload.longitude),
-          zoom: 12,
+          zoom: 11.070872916521907,
         },
         selectedService: null,
       };

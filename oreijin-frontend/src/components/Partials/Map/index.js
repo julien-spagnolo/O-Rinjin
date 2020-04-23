@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl';
 import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
 
@@ -35,6 +35,9 @@ const Map = ({
         onChangeViewport(newViewport);
       }}
     >
+      <div style={{ position: 'absolute', right: 0, margin: '1rem' }}>
+        <NavigationControl />
+      </div>
       {
         services.length !== 0 && services.map((service) => (
           <Marker
