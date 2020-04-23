@@ -24,7 +24,7 @@ const UpdateService = ({
   useEffect(() => {
     // console.log('userID : ', userId);
     // console.log('authorID : ', author.id);
-    if (author.id && author.id !== userId) history.push('/home');
+    if (author.id && userId && author.id !== userId) history.push('/home');
   }, [author]);
 
   return (

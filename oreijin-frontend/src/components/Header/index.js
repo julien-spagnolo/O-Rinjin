@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Responsive, Menu, Image } from 'semantic-ui-react';
 
-import auth from '../../auth';
+import PropTypes from 'prop-types';
+
 import VisitorDropdown from '../Partials/VisitorDropdown';
 import ConnectedDropdown from '../../containers/ConnectedDropdown';
 import VisitorMenu from '../Partials/VisitorMenu';
@@ -11,7 +12,7 @@ import ConnectedMenu from '../../containers/ConnectedMenu';
 import logo from '../../assets/images/logo.png';
 import './styles.scss';
 
-const Header = () => (
+const Header = ({ isLogged }) => (
   // == Icon and burger menu for mobile navbar, using Semantic-UI-React
   <>
     {/* Menu display for mobile screens  */}
@@ -23,7 +24,7 @@ const Header = () => (
         {/* <Menu.Item position="right" icon="bars" /> */}
         <Menu.Item position="right">
           {/* A changer !!!! !isLogged -> isLogged  */}
-          {auth.isAuthenticated() ? <ConnectedDropdown /> : <VisitorDropdown />}
+          {isLogged ? <ConnectedDropdown /> : <VisitorDropdown />}
         </Menu.Item>
       </Menu>
       <div className="header__container">
@@ -33,9 +34,13 @@ const Header = () => (
     {/* Menu display for tablet and desktop screens */}
     <Responsive minWidth={500}>
       {/* A changer !!!! !isLogged -> isLogged  */}
-      {auth.isAuthenticated() ? <ConnectedMenu /> : <VisitorMenu />}
+      {isLogged ? <ConnectedMenu /> : <VisitorMenu />}
     </Responsive>
   </>
 );
+
+Header.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+};
 
 export default Header;
