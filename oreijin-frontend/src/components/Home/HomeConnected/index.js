@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {
   Grid, Segment, Header, Select,
 } from 'semantic-ui-react';
-
+import auth from '../../../auth';
 import Service from '../../../containers/Service';
 // import services from '../../../services';
 import Map from '../../Partials/Map';
@@ -37,7 +37,6 @@ const HomeConnected = ({ getServicesList, services }) => {
   ];
 
   useEffect(() => {
-    // console.log('USE EFFECT !');
     getServicesList();
   }, []);
 

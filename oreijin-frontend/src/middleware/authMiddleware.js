@@ -8,6 +8,7 @@ import {
   loginSuccess, logoutSuccess, loginLoading,
 } from '../actions/user';
 import { baseURL } from '../axios';
+import { getServicesList } from '../actions/service';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
@@ -40,8 +41,10 @@ export default (store) => (next) => (action) => {
           }));
           // create a cookie for token
           // TODO set an expiration date
-
           // document.cookie = `token=${response.data.token}`;
+        })
+        .then(() => {
+          store.dispatch(getServicesList());
         })
         .catch((error) => {
           console.log(error);
