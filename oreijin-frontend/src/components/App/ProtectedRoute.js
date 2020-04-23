@@ -4,9 +4,9 @@ import { Route, Redirect } from 'react-router-dom';
 const ProtectedRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={() => {
+    render={(props) => {
       if (document.cookie.split(';').some((item) => item.trim().startsWith('token='))) {
-        return <Component />;
+        return <Component {...props} />;
       }
       return <Redirect to="/login" />;
     }}

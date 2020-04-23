@@ -41,7 +41,7 @@ export default (store) => (next) => (action) => {
           // create a cookie for token
           // TODO set an expiration date
 
-          document.cookie = `token=${response.data.token}`;
+          // document.cookie = `token=${response.data.token}`;
         })
         .catch((error) => {
           console.log(error);
@@ -49,7 +49,7 @@ export default (store) => (next) => (action) => {
       break;
     case LOGOUT:
       // set an expiration date to delete
-      document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+      // document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
       auth.logout();
       store.dispatch(logoutSuccess());
       break;

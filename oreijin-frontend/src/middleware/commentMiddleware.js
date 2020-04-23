@@ -18,7 +18,7 @@ const commentMiddleware = (store) => (next) => (action) => {
         },
         data: {
           service: store.getState().services.service.id,
-          user: store.getState().user.infos.id,
+          user: sessionStorage.getItem('id'),
           body: store.getState().comments.reply,
           isBlocked: false,
         },

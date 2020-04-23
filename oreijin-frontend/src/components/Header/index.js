@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Responsive, Menu, Image } from 'semantic-ui-react';
 
-import PropTypes from 'prop-types';
-
 import auth from '../../auth';
 import VisitorDropdown from '../Partials/VisitorDropdown';
 import ConnectedDropdown from '../../containers/ConnectedDropdown';
