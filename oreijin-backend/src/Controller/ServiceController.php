@@ -55,7 +55,7 @@ class ServiceController extends AbstractController
 
         /**
      * @Route(
-     *      "/api/services/filter/{postalcode}",
+     *      "/api/services/filter/{postalCode}",
      *      name="api_service_browse_postal_code",  
      *      methods={"GET"}, 
      *      requirements={"id"="\d+"}
