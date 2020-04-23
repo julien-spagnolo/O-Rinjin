@@ -13,7 +13,7 @@ import logo from '../../../assets/images/logo.svg';
 
 // == Component
 const Response = ({
-  body, id,
+  body,
 }) => (
   <Comment>
     <Comment.Avatar src={logo} />
@@ -30,7 +30,7 @@ const Response = ({
 
 
 Response.propTypes = {
-  id: PropTypes.number.isRequired,
+  // id: PropTypes.number.isRequired,
   body: PropTypes.string.isRequired,
 };
 // == Export
