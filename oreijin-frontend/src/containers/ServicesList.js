@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 
 import { getUserServicesList } from '../actions/user';
 import ServicesList from '../components/Member/ServicesList';
-import { getServicesWithSlug } from '../reducers/services';
 
 const mapStateToProps = (state) => ({
   services: state.user.services,

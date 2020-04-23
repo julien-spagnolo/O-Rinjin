@@ -15,7 +15,6 @@ import {
   EDIT_SERVICE_ERROR,
 } from '../actions/service';
 import { GET_USER_SUCCESS } from '../actions/user';
-import { ADD_COMMENT_SUCCESS } from '../actions/comments';
 
 const initialState = {
   list: [],
@@ -145,6 +144,14 @@ export default (state = initialState, action = {}) => {
         service: {
           ...state.service,
           user: { ...action.payload },
+        },
+      };
+    case ON_CHANGE_FIELD_EDIT:
+      return {
+        ...state,
+        editForm: {
+          ...state.editForm,
+          ...action.payload,
         },
       };
     default:
