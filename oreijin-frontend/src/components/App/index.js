@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 
 // == Import components
+import ProtectedRoute from './ProtectedRoute';
 import Header from '../../containers/Header';
 import Footer from '../Layout/Footer';
 import Home from '../../containers/Home';
@@ -37,16 +38,16 @@ const App = ({ checkAuth }) => {
       <Switch>
         {/* Render a component when its path matches the current URL */}
         <Route exact path="/" component={Home} />
-        <Route exact path="/home" component={HomeConnected} />
+        <ProtectedRoute exact path="/home" component={HomeConnected} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/team" component={Team} />
         <Route exact path="/legal-mentions" component={LegalMentions} />
-        <Route exact path="/service/add" component={AddService} />
-        <Route exact path="/service/edit/:slug" component={UpdateService} />
-        <Route exact path="/service/:slug" component={ServiceDetails} />
-        <Route exact path="/:user" component={Profil} />
-        <Route exact path="/:user/services" component={ServicesList} />
+        <ProtectedRoute exact path="/service/add" component={AddService} />
+        <ProtectedRoute exact path="/service/edit/:slug" component={UpdateService} />
+        <ProtectedRoute exact path="/service/:slug" component={ServiceDetails} />
+        <ProtectedRoute exact path="/:user" component={Profil} />
+        <ProtectedRoute exact path="/:user/services" component={ServicesList} />
       </Switch>
       <Footer />
     </div>
