@@ -29,14 +29,14 @@ const ServicesList = ({
     <Container>
       <Segment className="home__connected__services" raised>
         <Header as="h2" dividing textAlign="center" className="home__connected__services__title">Mes Annonces</Header>
-        <Message success hidden={!isSuccess} content="Le service a bien été supprimé." />
+        {/* <Message success hidden={!isSuccess} content="Le service a bien été supprimé." /> */}
         <Message error hidden={!isError} content="Une erreur est survenue lors de la suppression du service." />
         {
           services.length === 0 ? 'Vous n\'avez créé aucun service.' : (
             <Segment style={{ height: '100vh', overflowY: 'scroll' }}>
               {
                 // Render a Service component for each service in data
-                services.map((service) => (
+                services.length !== 0 && services.map((service) => (
                   <Service key={uuid()} {...service} userServices slug={slugify(`${service.id} ${service.title}`, { lower: true })} />
                 ))
               }

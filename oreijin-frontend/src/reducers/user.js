@@ -41,6 +41,7 @@ export default (state = initialState, action = {}) => {
         infos: {
           ...action.payload,
         },
+        services: [],
         isLogged: true,
         loading: false,
       };
