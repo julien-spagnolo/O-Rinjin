@@ -36,7 +36,7 @@ const ServicesList = ({
             <Segment style={{ height: '100vh', overflowY: 'scroll' }}>
               {
                 // Render a Service component for each service in data
-                services.map((service) => (
+                services.length !== 0 && services.map((service) => (
                   <Service key={uuid()} {...service} userServices slug={slugify(`${service.id} ${service.title}`, { lower: true })} />
                 ))
               }
