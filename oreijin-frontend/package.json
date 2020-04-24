@@ -67,6 +67,7 @@
     "react-router-dom": "^5.1.2",
     "redux": "*",
     "semantic-ui-react": "^0.88.2",
+    "semantic-ui-react-form-validator": "^1.0.2",
     "slugify": "^1.4.0",
     "uuid": "^7.0.3"
   }
