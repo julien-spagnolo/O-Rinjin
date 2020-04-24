@@ -44,7 +44,7 @@ export default (store) => (next) => (action) => {
             postalcode: userInfos.postalcode,
             city: userInfos.city,
           }));
-          store.dispatch(getServicesListByPostalCode(userInfos.postalcode));
+          store.dispatch(getServicesListByPostalCode(sessionStorage.getItem('postalcode')));
           // create a cookie for token
           // TODO set an expiration date
 
@@ -81,7 +81,7 @@ export default (store) => (next) => (action) => {
           city: userInfos.city,
         }));
         // store.dispatch(loginSuccess({}));
-        store.dispatch(getServicesListByPostalCode(userInfos.postalcode));
+        store.dispatch(getServicesListByPostalCode(sessionStorage.getItem('postalcode')));
       }
       else return next(action);
       break;

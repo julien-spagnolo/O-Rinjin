@@ -102,7 +102,7 @@ export default (store) => (next) => (action) => {
           // console.log(res.data);
           // console.log(getServicesListSuccess(res.data));
           store.dispatch(addServiceSuccess(res.data));
-          store.dispatch(getServicesListByPostalCode(store.getState().user.infos.postalcode));
+          store.dispatch(getServicesListByPostalCode(sessionStorage.getItem('postalcode')));
           store.dispatch(getServicesList());
         })
         .catch((err) => {
@@ -116,14 +116,14 @@ export default (store) => (next) => (action) => {
         method: 'delete',
         url: `${baseURL}/api/services/${action.payload}`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: authorization,
         },
         withCredentials: true,
       })
         .then((res) => {
           store.dispatch(deleteServiceSuccess(res.data));
           store.dispatch(getUserServicesList());
-          store.dispatch(getServicesListByPostalCode(store.getState().user.infos.postalcode));
+          store.dispatch(getServicesListByPostalCode(sessionStorage.getItem('postalcode')));
           store.dispatch(getServicesList());
         })
         .catch((err) => {
@@ -133,13 +133,13 @@ export default (store) => (next) => (action) => {
 
       return next(action);
     case DELETE_ACCOUNT:
-      console.log('//== delete account middleware action', action.payload);
-      console.log(`Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`);
+      // console.log('//== delete account middleware action', action.payload);
+      // console.log(`Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`);
       axios({
         method: 'delete',
-        url: `http://ec2-54-166-216-117.compute-1.amazonaws.com/api/users/${action.payload}`,
+        url: `${baseURL}/api/users/${action.payload}`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: authorization,
         },
         withCredentials: true,
       })

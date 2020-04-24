@@ -148,7 +148,7 @@ const Profil = ({
                   className="profil__delete__button"
                   size="small"
                   color="red"
-                  onClick={() => onDeleteAccount(sessionStorage.getItem('id'))}
+                  onClick={() => onDeleteAccount(parseInt(sessionStorage.getItem('id'), 10))}
                 >
                   Supprimer le compte
                 </Button>
