@@ -9,7 +9,7 @@ import { getCategoriesOptions } from '../reducers/categories';
 const mapStateToProps = (state) => ({
   form: {
     ...state.services.form,
-    user: parseInt(sessionStorage.getItem('id'), 10),
+    user: state.user.infos.id,
   },
   categories: getCategoriesOptions(state.categories),
   isSuccess: state.services.isSuccess,

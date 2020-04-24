@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import {
-  Container, Header, Segment, Form, Image, Divider, Button, Message,
+  Container, Header, Segment, Form, Image, Divider, Button, Message, Input,
 } from 'semantic-ui-react';
 
 import logo from '../../../assets/images/logo.png';
 import './styles.scss';
-import auth from '../../../auth';
 
 const Profil = ({
   userInfos,
@@ -29,7 +28,7 @@ const Profil = ({
     // We redirect to /home only if isLogged is true
     // console.log(userId);
     getUser(userId);
-    if (!auth.isAuthenticated()) history.push('/');
+    if (!document.cookie.split(';').some((item) => item.trim().startsWith('token='))) history.push('/');
   }, [isLogged, userId]);
 
   // console.log(userInfos);
@@ -40,7 +39,7 @@ const Profil = ({
         <Container className="service__details__avatar">
           <Image src={logo} size="small" />
           {
-            profile.email === sessionStorage.getItem('username') && <Button className="profil__import__button" size="small" color="blue">Importer une photo</Button>
+            profile.email === userInfos.email && <Button className="profil__import__button" size="small" color="blue">Importer une photo</Button>
           }
         </Container>
         <Container className="profil__name">
@@ -49,7 +48,7 @@ const Profil = ({
           <p>Code postal : <span>{profile.postalCode} </span></p>
         </Container>
         {
-          profile.email === sessionStorage.getItem('username') && (
+          profile.email === userInfos.email && (
             <>
               <Divider horizontal>
                 <Header as="h5">
@@ -148,7 +147,7 @@ const Profil = ({
                   className="profil__delete__button"
                   size="small"
                   color="red"
-                  onClick={() => onDeleteAccount(sessionStorage.getItem('id'))}
+                  onClick={() => onDeleteAccount(userInfos.id)}
                 >
                   Supprimer le compte
                 </Button>

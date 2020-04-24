@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => ({
   id: getServiceIdFromSlug(ownProps.match.params.slug),
   categories: getCategoriesOptions(state.categories),
   author: state.services.service.user,
-  userId: parseInt(sessionStorage.getItem('id'), 10),
+  userId: state.user.infos.id,
   form: state.services.editForm,
   isSuccess: state.services.isSuccess,
   isError: state.services.isError,

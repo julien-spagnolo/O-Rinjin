@@ -92,7 +92,7 @@ export default (store) => (next) => (action) => {
         method: 'delete',
         url: `${baseURL}/api/services/${action.payload}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
         },
         withCredentials: true,
       })
@@ -107,13 +107,13 @@ export default (store) => (next) => (action) => {
 
       return next(action);
     case DELETE_ACCOUNT:
-      // console.log('//== delete account middleware action', action.payload);
-      // console.log(`Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`);
+      console.log('//== delete account middleware action', action.payload);
+      console.log(`Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`);
       axios({
         method: 'delete',
-        url: `${baseURL}/api/users/${action.payload}`,
+        url: `http://ec2-54-166-216-117.compute-1.amazonaws.com/api/users/${action.payload}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
         },
         withCredentials: true,
       })
@@ -158,7 +158,7 @@ export default (store) => (next) => (action) => {
         },
         withCredentials: true,
       })
-        .then(() => {
+        .then((res) => {
           // console.log(res.data);
           store.dispatch(editServiceSuccess());
         })

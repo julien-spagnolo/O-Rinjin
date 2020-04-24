@@ -51,7 +51,7 @@ const registerMiddleware = (store) => (next) => (action) => {
       // console.log('récupération de la liste des services de cet utilisateur');
       axios({
         method: 'get',
-        url: `${baseURL}/api/services/user/${sessionStorage.getItem('id')}`,
+        url: `${baseURL}/api/services/user/${store.getState().user.infos.id}`,
         headers: {
           Authorization: authorization,
         },

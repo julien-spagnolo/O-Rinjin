@@ -4,6 +4,7 @@ import { getServicesList } from '../actions/service';
 import { getServicesWithSlug } from '../reducers/services';
 
 const mapStateToProps = (state) => ({
+  infos: { ...state.user.infos },
   services: getServicesWithSlug(state.services),
 });
 

@@ -8,7 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 // == import prop-types library for prop types validation
 import PropTypes from 'prop-types';
-import auth from '../../../auth';
+
 // == Import styles and assets
 import './styles.scss';
 import logo from '../../../assets/images/logo.svg';
@@ -29,7 +29,7 @@ const Service = ({
         </Header>
         <Feed.Event
           as={Link}
-          to={auth.isAuthenticated() ? `/service/${slug}` : '/'}
+          to={isLogged ? `/service/${slug}` : '/'}
         >
           <Feed.Content>
             <Feed.Summary className="service__title">
