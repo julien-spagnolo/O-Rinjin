@@ -28,7 +28,7 @@ import './styles.scss';
 // == Component
 const App = ({ checkAuth }) => {
   useEffect(() => {
-    checkAuth();
+    // checkAuth();
   }, []);
 
   return (

@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import axios from 'axios';
-import { baseURL, authorization } from '../axios';
+import baseURL from '../axios';
 import {
   GET_USER, getUserSuccess, getUserError,
   UPDATE_PROFILE, updateProfileSuccess, updateProfileError,
@@ -15,7 +15,7 @@ const registerMiddleware = (store) => (next) => (action) => {
         method: 'get',
         url: `${baseURL}/api/users/${action.payload}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -33,7 +33,7 @@ const registerMiddleware = (store) => (next) => (action) => {
         method: 'put',
         url: `${baseURL}/api/users/${store.getState().user.profile.id}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         data: {
           ...store.getState().user.profileForm,
@@ -53,7 +53,7 @@ const registerMiddleware = (store) => (next) => (action) => {
         method: 'get',
         url: `${baseURL}/api/services/user/${sessionStorage.getItem('id')}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })

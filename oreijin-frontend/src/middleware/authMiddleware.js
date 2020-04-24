@@ -9,7 +9,7 @@ import {
 import {
   getServicesListByPostalCode,
 } from '../actions/service';
-import { baseURL } from '../axios';
+import baseURL from '../axios';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
@@ -26,28 +26,14 @@ export default (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          // decoding JWT token
-          const userInfos = jwt(response.data.token);
-
           // Create sessionStorages
-          auth.login(response.data.token);
-          // console.log(userInfos);
-          store.dispatch(loginSuccess({
-            roles: [...userInfos.roles],
-            email: userInfos.username,
-            id: userInfos.id,
-            firstname: userInfos.firstname,
-            lastname: userInfos.lastname,
-            longitude: userInfos.longitude,
-            latitude: userInfos.latitude,
-            address: userInfos.address,
-            postalcode: userInfos.postalcode,
-            city: userInfos.city,
-          }));
-          store.dispatch(getServicesListByPostalCode(sessionStorage.getItem('postalcode')));
-          // create a cookie for token
-          // TODO set an expiration date
-
+          if (auth.login(response.data.token)) {
+            // console.log(userInfos);
+            store.dispatch(loginSuccess());
+            // create a cookie for token
+            store.dispatch(getServicesListByPostalCode());
+          }
+          else console.log('ECHEC');
           // document.cookie = `token=${response.data.token}`;
         })
         .catch((error) => {
@@ -68,18 +54,7 @@ export default (store) => (next) => (action) => {
       if (document.cookie.split(';').some((item) => item.trim().startsWith('token='))) {
         // Decode the token
         const userInfos = jwt(sessionStorage.getItem('token'));
-        store.dispatch(loginSuccess({
-          roles: [...userInfos.roles],
-          email: userInfos.username,
-          id: userInfos.id,
-          firstname: userInfos.firstname,
-          lastname: userInfos.lastname,
-          address: userInfos.address,
-          latitude: userInfos.latitude,
-          longitude: userInfos.longitude,
-          postalcode: userInfos.postalcode,
-          city: userInfos.city,
-        }));
+        store.dispatch(loginSuccess());
         // store.dispatch(loginSuccess({}));
         store.dispatch(getServicesListByPostalCode(sessionStorage.getItem('postalcode')));
       }

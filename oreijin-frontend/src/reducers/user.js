@@ -50,7 +50,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         isLogged: false,
         infos: {},
-        services: {},
+        services: [],
       };
     case LOGIN_LOADING:
       return {

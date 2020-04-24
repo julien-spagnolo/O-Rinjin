@@ -27,9 +27,8 @@ export const setSelectedList = (payload) => ({
   payload,
 });
 
-export const getServicesListByPostalCode = (payload) => ({
+export const getServicesListByPostalCode = () => ({
   type: GET_SERVICES_LIST_BY_POSTAL_CODE,
-  payload,
 });
 
 export const getServicesListByPostalCodeSuccess = (payload) => ({

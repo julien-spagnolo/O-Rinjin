@@ -15,13 +15,15 @@ class Auth {
       // console.log(userInfos[data]);
       sessionStorage.setItem(data, userInfos[data]);
     }
+
+    return true;
   }
 
   logout = () => {
     sessionStorage.clear();
   }
 
-  isAuthenticated = () => (sessionStorage.getItem('token') !== null);
+  isAuthenticated = () => (sessionStorage.getItem('token'));
 }
 
 export default new Auth();

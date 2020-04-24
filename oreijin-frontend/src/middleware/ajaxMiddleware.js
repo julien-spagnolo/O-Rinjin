@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 import axios from 'axios';
-import { baseURL, authorization } from '../axios';
+import baseURL from '../axios';
 import {
   getServicesList, getServicesListByPostalCode,
   GET_SERVICES_LIST, getServicesListSuccess,
@@ -27,7 +27,7 @@ export default (store) => (next) => (action) => {
         method: 'get',
         url: `${baseURL}/api/service-categories`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -47,7 +47,7 @@ export default (store) => (next) => (action) => {
         method: 'get',
         url: `${baseURL}/api/services`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -61,14 +61,15 @@ export default (store) => (next) => (action) => {
         });
       break;
     case GET_SERVICES_LIST_BY_POSTAL_CODE:
-      // console.log('//== middleware getServicesList');
+      console.log('//== middleware getServicesList');
+      // console.log(sessionStorage.getItem('token'));
 
       store.dispatch(toggleLoading());
       axios({
         method: 'get',
         url: `${baseURL}/api/services/filter/${sessionStorage.getItem('postalcode')}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -90,7 +91,7 @@ export default (store) => (next) => (action) => {
         method: 'post',
         url: `${baseURL}/api/services`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         data: {
           ...store.getState().services.form,
@@ -116,7 +117,7 @@ export default (store) => (next) => (action) => {
         method: 'delete',
         url: `${baseURL}/api/services/${action.payload}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -139,7 +140,7 @@ export default (store) => (next) => (action) => {
         method: 'delete',
         url: `${baseURL}/api/users/${action.payload}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -158,7 +159,7 @@ export default (store) => (next) => (action) => {
         method: 'get',
         url: `${baseURL}/api/services/${action.payload}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -177,7 +178,7 @@ export default (store) => (next) => (action) => {
         method: 'put',
         url: `${baseURL}/api/services/${store.getState().services.service.id}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         data: {
           ...store.getState().services.editForm,
