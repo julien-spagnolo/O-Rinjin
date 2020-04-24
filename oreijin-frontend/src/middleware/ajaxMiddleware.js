@@ -66,7 +66,7 @@ export default (store) => (next) => (action) => {
       store.dispatch(toggleLoading());
       axios({
         method: 'get',
-        url: `${baseURL}/api/services/filter/${action.payload}`,
+        url: `${baseURL}/api/services/filter/${sessionStorage.getItem('postalcode')}`,
         headers: {
           Authorization: authorization,
         },

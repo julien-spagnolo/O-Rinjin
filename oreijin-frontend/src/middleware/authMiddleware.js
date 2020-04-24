@@ -1,5 +1,7 @@
 import axios from 'axios';
 import jwt from 'jwt-decode';
+import auth from '../auth';
+
 import {
   LOGIN, LOGOUT, CHECK_AUTH,
   loginSuccess, logoutSuccess, loginLoading,
@@ -26,7 +28,10 @@ export default (store) => (next) => (action) => {
         .then((response) => {
           // decoding JWT token
           const userInfos = jwt(response.data.token);
-          console.log(userInfos);
+
+          // Create sessionStorages
+          auth.login(response.data.token);
+          // console.log(userInfos);
           store.dispatch(loginSuccess({
             roles: [...userInfos.roles],
             email: userInfos.username,
@@ -52,6 +57,9 @@ export default (store) => (next) => (action) => {
     case LOGOUT:
       // set an expiration date to delete
       document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+
+      // Clear sessionStorage items
+      auth.logout();
       store.dispatch(logoutSuccess());
       break;
     case CHECK_AUTH:
