@@ -12,6 +12,7 @@ const initialState = {
     birthdate: '',
     email: '',
     plainPassword: '',
+    verificationPassword: '',
     address: '',
     city: '',
     postalcode: '',

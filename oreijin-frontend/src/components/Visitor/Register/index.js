@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 import {
   Header, Container, Segment, Form, Button, Message,
 } from 'semantic-ui-react';
+
+import {
+  checkEmail, checkPassword, getMaxDateInput, checkBirthDate,
+  verifyPassword, checkAddress, checkCity, checkPostalCode,
+} from '../../../functions';
+
 // == Import
 import './styles.scss';
 
@@ -17,7 +23,12 @@ const Register = ({
       <Form
         onSubmit={(evt) => {
           evt.preventDefault();
-          handleSubmit();
+          if (isTCChecked) {
+            handleSubmit();
+          }
+          else {
+            console.log('pas bon la checkbox');
+          }
         }}
         success
         error
@@ -74,6 +85,7 @@ const Register = ({
               name="email"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
+                console.log(checkEmail(evt.target.value));
               }}
               value={form.email}
             />
@@ -84,9 +96,11 @@ const Register = ({
               label="Date de naissance"
               placeholder="Date de naissance"
               type="date"
+              max={getMaxDateInput()}
               name="birthdate"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
+                console.log(checkBirthDate(evt.target.value));
               }}
               value={form.birthdate}
             />
@@ -101,6 +115,7 @@ const Register = ({
             name="plainPassword"
             onChange={(evt) => {
               onChangeField(evt.target.name, evt.target.value);
+              console.log(checkPassword(evt.target.value));
             }}
             value={form.plainPassword}
           />
@@ -111,6 +126,12 @@ const Register = ({
             label="Vérification du mot de passe"
             placeholder="Vérification du mot de passe"
             type="password"
+            name="verificationPassword"
+            onChange={(evt) => {
+              onChangeField(evt.target.name, evt.target.value);
+              console.log(verifyPassword(form.plainPassword, evt.target.value));
+            }}
+            value={form.verificationPassword}
           />
         </Form.Field>
         <Form.Group>
@@ -123,6 +144,8 @@ const Register = ({
               name="address"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
+                console.log('Rue : ', checkAddress(evt.target.value));
+
               }}
               value={form.address}
             />
@@ -136,6 +159,8 @@ const Register = ({
               name="city"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
+                console.log('Ville : ', checkCity(evt.target.value));
+
               }}
               value={form.city}
             />
@@ -150,6 +175,7 @@ const Register = ({
               name="postalcode"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
+                console.log('Code postale : ', checkPostalCode(evt.target.value));
               }}
               value={form.postalcode}
             />
@@ -158,7 +184,7 @@ const Register = ({
         <Form.Field>
           <Form.Checkbox
             required
-            label="I agree to the Terms and Conditions"
+            label="J'accepte les termes et conditions d'inscription"
             onChange={onToggleTC}
             checked={isTCChecked}
           />
@@ -176,6 +202,7 @@ Register.propTypes = {
     birthdate: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     plainPassword: PropTypes.string.isRequired,
+    verificationPassword: PropTypes.string.isRequired,
     address: PropTypes.string,
     city: PropTypes.string.isRequired,
     postalcode: PropTypes.string.isRequired,
