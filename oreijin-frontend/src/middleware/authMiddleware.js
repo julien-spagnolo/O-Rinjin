@@ -48,7 +48,7 @@ export default (store) => (next) => (action) => {
           // create a cookie for token
           // TODO set an expiration date
 
-          document.cookie = `token=${response.data.token}`;
+          // document.cookie = `token=${response.data.token}`;
         })
         .catch((error) => {
           console.log(error);
@@ -56,7 +56,7 @@ export default (store) => (next) => (action) => {
       break;
     case LOGOUT:
       // set an expiration date to delete
-      document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+      // document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
 
       // Clear sessionStorage items
       auth.logout();
@@ -67,7 +67,7 @@ export default (store) => (next) => (action) => {
       // source: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
       if (document.cookie.split(';').some((item) => item.trim().startsWith('token='))) {
         // Decode the token
-        const userInfos = jwt(document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1'));
+        const userInfos = jwt(sessionStorage.getItem('token'));
         store.dispatch(loginSuccess({
           roles: [...userInfos.roles],
           email: userInfos.username,
