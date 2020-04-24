@@ -12,35 +12,30 @@ import auth from '../../auth';
 import logo from '../../assets/images/logo.png';
 import './styles.scss';
 
-const Header = ({ isLogged }) => {
-  useEffect(() => {
-    // useEffect
-  }, [auth.isAuthenticated()]);
-  return (
-    // == Icon and burger menu for mobile navbar, using Semantic-UI-React
-    <>
-      {/* Menu display for mobile screens  */}
-      <Responsive maxWidth={499}>
-        <Menu fixed="top">
-          <Menu.Item href="https://www.facebook.com" target="_blank" icon="facebook f" />
-          <Menu.Item href="https://twitter.com" target="_blank" icon="twitter" />
-          <Menu.Item href="https://www.youtube.com" target="_blank" icon="youtube" />
-          {/* <Menu.Item position="right" icon="bars" /> */}
-          <Menu.Item position="right">
-            {auth.isAuthenticated() ? <ConnectedDropdown /> : <VisitorDropdown />}
-          </Menu.Item>
-        </Menu>
-        <div className="header__container">
-          <Image className="header__logo__mobile" src={logo} centered size="small" />
-        </div>
-      </Responsive>
-      {/* Menu display for tablet and desktop screens */}
-      <Responsive minWidth={500}>
-        {auth.isAuthenticated() ? <ConnectedMenu /> : <VisitorMenu />}
-      </Responsive>
-    </>
-  );
-};
+const Header = ({ isLogged }) => (
+  // == Icon and burger menu for mobile navbar, using Semantic-UI-React
+  <>
+    {/* Menu display for mobile screens  */}
+    <Responsive maxWidth={499}>
+      <Menu fixed="top">
+        <Menu.Item href="https://www.facebook.com" target="_blank" icon="facebook f" />
+        <Menu.Item href="https://twitter.com" target="_blank" icon="twitter" />
+        <Menu.Item href="https://www.youtube.com" target="_blank" icon="youtube" />
+        {/* <Menu.Item position="right" icon="bars" /> */}
+        <Menu.Item position="right">
+          {isLogged ? <ConnectedDropdown /> : <VisitorDropdown />}
+        </Menu.Item>
+      </Menu>
+      <div className="header__container">
+        <Image className="header__logo__mobile" src={logo} centered size="small" />
+      </div>
+    </Responsive>
+    {/* Menu display for tablet and desktop screens */}
+    <Responsive minWidth={500}>
+      {isLogged ? <ConnectedMenu /> : <VisitorMenu />}
+    </Responsive>
+  </>
+);
 
 Header.propTypes = {
   isLogged: PropTypes.bool.isRequired,

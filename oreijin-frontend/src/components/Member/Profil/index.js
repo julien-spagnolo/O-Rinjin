@@ -10,7 +10,6 @@ import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
 const Profil = ({
-  userInfos,
   onDeleteAccount,
   error,
   isLogged,
@@ -29,7 +28,7 @@ const Profil = ({
     // We redirect to /home only if isLogged is true
     // console.log(userId);
     getUser(userId);
-    if (!auth.isAuthenticated()) history.push('/');
+    if (!isLogged) history.push('/');
   }, [isLogged, userId]);
 
   // console.log(userInfos);
@@ -162,13 +161,6 @@ const Profil = ({
 };
 
 Profil.propTypes = {
-  userInfos: PropTypes.shape({
-    email: PropTypes.string,
-    firstname: PropTypes.string,
-    lastname: PropTypes.string,
-    id: PropTypes.number,
-    address: PropTypes.string,
-  }).isRequired,
   onDeleteAccount: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
   onChangeProfileField: PropTypes.func.isRequired,
