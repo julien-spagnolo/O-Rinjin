@@ -2,8 +2,10 @@
 
 namespace App\Manager;
 
+use App\Data\SearchData;
 use App\Entity\Service;
 use App\Repository\ServiceRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 class ServiceManager extends AbstractManager
 {
@@ -12,20 +14,22 @@ class ServiceManager extends AbstractManager
         return $this->getRepository()->findBy([], ['createdAt' => 'desc'], 3);
     }
 
-    public function getByUser($userId): array
+    public function servicesByUser($userId): array
     {
         return $this->getRepository()->findBy(['user' => $userId], ['createdAt' => 'desc']);
     }
 
-    public function getByPostalCode($postalcode): array
+    public function searchByFilters(Request $request): object
     {
-        return $this->getRepository()->findByPostalCode($postalcode);
-    }
+        
+        $search = new SearchData();
+        $datas = $request->query->all();
+        
+        $newSearch = (object) $datas;
+        // dd($newSearch);
 
-    public function searchByFilters($data): object
-    {
-
-        return $this->getRepository()->findSearch($data);
+        // dd($data);
+        return $this->getRepository()->findSearch($newSearch);
 
         // $sort = $request->query->get('sort');
         // $direction = $request->query->get('direction');
@@ -35,7 +39,7 @@ class ServiceManager extends AbstractManager
 
         // $filters = $request->query->all();
 
-        // return $this->getRepository()->getByFilters($filters, $sort, $direction)
+        // return $this->getRepository()->getByFilters($filters, $sort, $direction);
     }
 
     public function create(string $data)

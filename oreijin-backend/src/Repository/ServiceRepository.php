@@ -25,9 +25,9 @@ class ServiceRepository extends ServiceEntityRepository
     }
 
 
-    public function findSearch(SearchData $search)
+    public function findSearch(SearchData $search): object
     {
-
+        dd($search);
         $query = $this
             ->createQueryBuilder('s')
             ->join('s.user', 'u')

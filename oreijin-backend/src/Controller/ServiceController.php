@@ -80,14 +80,7 @@ class ServiceController extends AbstractController
      */
     public function browse(Request $request): Response
     {
-        $data = new SearchData();
-        $data->page = $request->get('page', 1);
-        $data->limit = $request->get('limit', 10);
-        $data->postalCode = $request->get('postalCode');
-        $data->userId = $request->get('userId');
-
-        $pagination = $this->serviceManager->searchByFilters($data);
-        // dd($pagination);
+        $pagination = $this->serviceManager->searchByFilters($request);
 
         $services = $this->serviceManager->serialize($pagination, ['groups' => 'services-browse']);
 
