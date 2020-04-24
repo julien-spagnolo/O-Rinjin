@@ -8,7 +8,7 @@ import VisitorDropdown from '../Partials/VisitorDropdown';
 import ConnectedDropdown from '../../containers/ConnectedDropdown';
 import VisitorMenu from '../Partials/VisitorMenu';
 import ConnectedMenu from '../../containers/ConnectedMenu';
-
+import auth from '../../auth';
 import logo from '../../assets/images/logo.png';
 import './styles.scss';
 
@@ -24,7 +24,7 @@ const Header = ({ isLogged }) => (
         {/* <Menu.Item position="right" icon="bars" /> */}
         <Menu.Item position="right">
           {/* A changer !!!! !isLogged -> isLogged  */}
-          {isLogged ? <ConnectedDropdown /> : <VisitorDropdown />}
+          {auth.isAuthenticated() ? <ConnectedDropdown /> : <VisitorDropdown />}
         </Menu.Item>
       </Menu>
       <div className="header__container">
@@ -34,7 +34,7 @@ const Header = ({ isLogged }) => (
     {/* Menu display for tablet and desktop screens */}
     <Responsive minWidth={500}>
       {/* A changer !!!! !isLogged -> isLogged  */}
-      {isLogged ? <ConnectedMenu /> : <VisitorMenu />}
+      {auth.isAuthenticated() ? <ConnectedMenu /> : <VisitorMenu />}
     </Responsive>
   </>
 );
