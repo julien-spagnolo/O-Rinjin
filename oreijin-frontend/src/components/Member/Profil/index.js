@@ -5,6 +5,7 @@ import {
   Container, Header, Segment, Form, Image, Divider, Button, Message, Input,
 } from 'semantic-ui-react';
 
+import auth from '../../../auth';
 import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
@@ -28,7 +29,7 @@ const Profil = ({
     // We redirect to /home only if isLogged is true
     // console.log(userId);
     getUser(userId);
-    if (!document.cookie.split(';').some((item) => item.trim().startsWith('token='))) history.push('/');
+    if (!auth.isAuthenticated()) history.push('/');
   }, [isLogged, userId]);
 
   // console.log(userInfos);
@@ -39,7 +40,7 @@ const Profil = ({
         <Container className="service__details__avatar">
           <Image src={logo} size="small" />
           {
-            profile.email === userInfos.email && <Button className="profil__import__button" size="small" color="blue">Importer une photo</Button>
+            profile.email === sessionStorage.getItem('username') && <Button className="profil__import__button" size="small" color="blue">Importer une photo</Button>
           }
         </Container>
         <Container className="profil__name">
@@ -48,7 +49,7 @@ const Profil = ({
           <p>Code postal : <span>{profile.postalCode} </span></p>
         </Container>
         {
-          profile.email === userInfos.email && (
+          profile.email === sessionStorage.getItem('username') && (
             <>
               <Divider horizontal>
                 <Header as="h5">
@@ -147,7 +148,7 @@ const Profil = ({
                   className="profil__delete__button"
                   size="small"
                   color="red"
-                  onClick={() => onDeleteAccount(userInfos.id)}
+                  onClick={() => onDeleteAccount(sessionStorage.getItem('id'))}
                 >
                   Supprimer le compte
                 </Button>
