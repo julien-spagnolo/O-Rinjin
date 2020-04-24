@@ -4,6 +4,9 @@ import {
   LOGIN, LOGOUT, CHECK_AUTH,
   loginSuccess, logoutSuccess, loginLoading,
 } from '../actions/user';
+import {
+  getServicesListByPostalCode,
+} from '../actions/service';
 import { baseURL } from '../axios';
 
 export default (store) => (next) => (action) => {
@@ -23,6 +26,7 @@ export default (store) => (next) => (action) => {
         .then((response) => {
           // decoding JWT token
           const userInfos = jwt(response.data.token);
+          console.log(userInfos);
           store.dispatch(loginSuccess({
             roles: [...userInfos.roles],
             email: userInfos.username,
@@ -32,7 +36,10 @@ export default (store) => (next) => (action) => {
             longitude: userInfos.longitude,
             latitude: userInfos.latitude,
             address: userInfos.address,
+            postalcode: userInfos.postalcode,
+            city: userInfos.city,
           }));
+          store.dispatch(getServicesListByPostalCode(userInfos.postalcode));
           // create a cookie for token
           // TODO set an expiration date
 
@@ -62,8 +69,11 @@ export default (store) => (next) => (action) => {
           address: userInfos.address,
           latitude: userInfos.latitude,
           longitude: userInfos.longitude,
+          postalcode: userInfos.postalcode,
+          city: userInfos.city,
         }));
         // store.dispatch(loginSuccess({}));
+        store.dispatch(getServicesListByPostalCode(userInfos.postalcode));
       }
       else return next(action);
       break;

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import slugify from 'slugify';
 import PropTypes from 'prop-types';
 import {
   Container, Segment, Header, Message,
@@ -36,13 +37,12 @@ const ServicesList = ({
               {
                 // Render a Service component for each service in data
                 services.map((service) => (
-                  <Service key={uuid()} {...service} userServices />
+                  <Service key={uuid()} {...service} userServices slug={slugify(`${service.id} ${service.title}`, { lower: true })} />
                 ))
               }
             </Segment>
           )
         }
-      
       </Segment>
     </Container>
   );

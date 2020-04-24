@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
-
+import React, { useEffect } from 'react';
+import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl';
+import { v4 as uuid } from 'uuid';
+import PropTypes from 'prop-types';
 
 import mapToken from '../../../../mapbox.config';
-import mapServices from '../../../map-services';
+
 // == Import
 import './styles.scss';
 // import 'mapbox-gl/dist/mapbox-gl.css';
@@ -14,18 +15,13 @@ const mapAccess = {
   mapboxApiAccessToken: mapToken,
 };
 
-const Map = () => {
-  // state de la map
-  const [viewport, setViewport] = useState({
-    latitude: 48.866667,
-    longitude: 2.333333,
-    width: '100%',
-    height: '100%',
-    zoom: 11,
-  });
+const Map = ({
+  viewport, services, onChangeViewport, setSelectedService, selectedService,
+}) => {
+  // const [selectedService, setSelectedService] = useState(null);
 
-  const [selectedService, setSelectedService] = useState(null);
-
+  useEffect(() => {
+  }, [viewport, services]);
 
   return (
     <ReactMapGL
@@ -36,15 +32,18 @@ const Map = () => {
       mapStyle="mapbox://styles/mapbox/outdoors-v11"
       // Permet de se déplacer sur la map
       onViewportChange={(newViewport) => {
-        setViewport(newViewport);
+        onChangeViewport(newViewport);
       }}
     >
+      <div style={{ position: 'absolute', right: 0, margin: '1rem' }}>
+        <NavigationControl />
+      </div>
       {
-        mapServices.map((service) => (
+        services.length !== 0 && services.map((service) => (
           <Marker
-            key={service.key}
-            latitude={service.latitude}
-            longitude={service.longitude}
+            key={uuid()}
+            latitude={parseFloat(service.user.latitude)}
+            longitude={parseFloat(service.user.longitude)}
           >
             <button
               type="button"
@@ -62,20 +61,31 @@ const Map = () => {
         selectedService ? (
           <Popup
             className="map__popup"
-            latitude={selectedService.latitude}
-            longitude={selectedService.longitude}
+            latitude={parseFloat(selectedService.user.latitude)}
+            longitude={parseFloat(selectedService.user.longitude)}
+
             onClose={() => {
-              setSelectedService(null);
+              console.log('clic sur le popup WIP');
             }}
           >
             <div>{selectedService.title}</div>
-            <div>Catégorie : {selectedService.category}</div>
-            <div>Type : {selectedService.type}</div>
+            <div>{selectedService.type ? 'Demande' : 'Proposition'} - {selectedService.serviceCategory.title}</div>
           </Popup>
         ) : null
       }
     </ReactMapGL>
   );
+};
+
+Map.defaultProps = {
+  selectedService: null,
+};
+
+Map.propTypes = {
+  viewport: PropTypes.object.isRequired,
+  services: PropTypes.array.isRequired,
+  onChangeViewport: PropTypes.func.isRequired,
+  selectedService: PropTypes.object,
 };
 
 // == Export

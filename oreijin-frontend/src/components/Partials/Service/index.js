@@ -1,5 +1,6 @@
 // == Import npm
 import React from 'react';
+import slugify from 'slugify';
 // == Import components that we need to use from Semantic-UI-React
 import {
   Feed, Segment, Icon, Responsive, Button, Grid, Image, Divider, Header,
@@ -16,7 +17,7 @@ import logo from '../../../assets/images/logo.svg';
 // == Component
 const Service = ({
   isLogged, id, title, body, type,
-  slug, userServices, onDeleteService,
+  slug, userServices, onDeleteService, serviceCategory, user,
 }) => (
   <Feed as={Segment}>
     <Grid stackable>
@@ -25,7 +26,12 @@ const Service = ({
       <Grid.Column width={userServices ? 12 : 16}>
         <Header as="h4">
           <Image size="mini" src={logo} circular />
-          <Header.Content>Unknown Rinjin</Header.Content>
+          <Header.Content
+            as={Link}
+            to={`/${slugify(`${user.firstName} ${user.lastName} ${user.id}`, { lower: true })}`}
+          >
+            {`${user.firstName} ${user.lastName}`}
+          </Header.Content>
         </Header>
         <Feed.Event
           as={Link}
@@ -41,7 +47,7 @@ const Service = ({
                 {type ? 'Proposition' : 'Demande'}
               </Label>
               <Label>
-                Catégorie
+                { serviceCategory.title }
               </Label>
             </Feed.Extra>
             <Responsive as={Feed.Extra} text minWidth={550}>
@@ -53,7 +59,7 @@ const Service = ({
               {body}
             </Responsive>
             <Feed.Meta style={{ marginTop: '1rem' }}>
-              <Icon name="map marker alternate" />69440
+              <Icon name="map marker alternate" />{ user.postalCode }
             </Feed.Meta>
           </Feed.Content>
         </Feed.Event>
@@ -96,6 +102,8 @@ Service.propTypes = {
   onDeleteService: PropTypes.func.isRequired,
   slug: PropTypes.string,
   userServices: PropTypes.bool,
+  user: PropTypes.object.isRequired,
+  serviceCategory: PropTypes.object.isRequired,
 };
 
 // == Export

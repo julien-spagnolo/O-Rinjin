@@ -16,6 +16,34 @@ export const DELETE_SERVICE_ERROR = 'DELETE_SERVICE_ERROR';
 export const EDIT_SERVICE = 'EDIT_SERVICE';
 export const EDIT_SERVICE_SUCCESS = 'EDIT_SERVICE_SUCCESS';
 export const EDIT_SERVICE_ERROR = 'EDIT_SERVICE_ERROR';
+export const TOGGLE_LOADING = 'TOGGLE_LOADING';
+export const GET_SERVICES_LIST_BY_POSTAL_CODE = 'GET_SERVICES_LIST_BY_POSTAL_CODE';
+export const GET_SERVICES_LIST_BY_POSTAL_CODE_SUCCESS = 'GET_SERVICES_LIST_BY_POSTAL_CODE_SUCCESS';
+export const GET_SERVICES_LIST_BY_POSTAL_CODE_ERROR = 'GET_SERVICES_LIST_BY_POSTAL_CODE_ERROR';
+export const SET_SELECTED_LIST = 'SET_SELECTED_LIST';
+
+export const setSelectedList = (payload) => ({
+  type: SET_SELECTED_LIST,
+  payload,
+});
+
+export const getServicesListByPostalCode = (payload) => ({
+  type: GET_SERVICES_LIST_BY_POSTAL_CODE,
+  payload,
+});
+
+export const getServicesListByPostalCodeSuccess = (payload) => ({
+  type: GET_SERVICES_LIST_BY_POSTAL_CODE_SUCCESS,
+  payload,
+});
+
+export const getServicesListByPostalCodeError = () => ({
+  type: GET_SERVICES_LIST_BY_POSTAL_CODE_ERROR,
+});
+
+export const toggleLoading = () => ({
+  type: TOGGLE_LOADING,
+});
 
 export const getServicesList = () => ({
   type: GET_SERVICES_LIST,

@@ -7,7 +7,7 @@ import ConnectedDropdown from '../components/Partials/ConnectedDropdown';
 const mapStateToProps = (state) => ({
   userSlug: slugify(`${state.user.infos.firstname} ${state.user.infos.lastname} ${state.user.infos.id}`, { lower: true }),
   // TODO replace USER with ADMIN
-  isAdmin: state.user.infos.roles[0] === 'ADMIN',
+  isAdmin: state.user.infos.roles[0] === 'ROLE_ADMIN' || state.user.infos.roles[0] === 'ROLE_MODO',
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -2,11 +2,14 @@
 import axios from 'axios';
 import { baseURL, authorization } from '../axios';
 import {
+  getServicesList, getServicesListByPostalCode,
   GET_SERVICES_LIST, getServicesListSuccess,
   ADD_SERVICE, addServiceSuccess, addServiceError,
   DELETE_SERVICE, deleteServiceSuccess, deleteServiceError,
   GET_SERVICE, getServiceSuccess, getServiceError,
-  EDIT_SERVICE, editServiceSuccess, editServiceError,
+  EDIT_SERVICE, editServiceSuccess, editServiceError, toggleLoading,
+  GET_SERVICES_LIST_BY_POSTAL_CODE, getServicesListByPostalCodeSuccess,
+  getServicesListByPostalCodeError,
 } from '../actions/service';
 import {
   GET_CATEGORIES_LIST, getCategoriesListSuccess,
@@ -37,11 +40,9 @@ export default (store) => (next) => (action) => {
         });
       break;
     case GET_SERVICES_LIST:
-
       // console.log('//== middleware getServicesList');
 
-      // Get cookie value
-      // source: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+      store.dispatch(toggleLoading());
       axios({
         method: 'get',
         url: `${baseURL}/api/services`,
@@ -52,11 +53,32 @@ export default (store) => (next) => (action) => {
       })
         .then((res) => {
           // console.log(res.data);
-          // console.log(getServicesListSuccess(res.data));
+          // console.log(store.getState().user.infos.postalcode);
           store.dispatch(getServicesListSuccess(res.data));
         })
         .catch((err) => {
           console.log(err);
+        });
+      break;
+    case GET_SERVICES_LIST_BY_POSTAL_CODE:
+      // console.log('//== middleware getServicesList');
+
+      store.dispatch(toggleLoading());
+      axios({
+        method: 'get',
+        url: `${baseURL}/api/services/filter/${action.payload}`,
+        headers: {
+          Authorization: authorization,
+        },
+        withCredentials: true,
+      })
+        .then((res) => {
+          // console.log(res.data);
+          store.dispatch(getServicesListByPostalCodeSuccess(res.data));
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(getServicesListByPostalCodeError());
         });
       break;
     case ADD_SERVICE:
@@ -80,6 +102,8 @@ export default (store) => (next) => (action) => {
           // console.log(res.data);
           // console.log(getServicesListSuccess(res.data));
           store.dispatch(addServiceSuccess(res.data));
+          store.dispatch(getServicesListByPostalCode(store.getState().user.infos.postalcode));
+          store.dispatch(getServicesList());
         })
         .catch((err) => {
           console.log(err);
@@ -99,6 +123,8 @@ export default (store) => (next) => (action) => {
         .then((res) => {
           store.dispatch(deleteServiceSuccess(res.data));
           store.dispatch(getUserServicesList());
+          store.dispatch(getServicesListByPostalCode(store.getState().user.infos.postalcode));
+          store.dispatch(getServicesList());
         })
         .catch((err) => {
           console.log(err);

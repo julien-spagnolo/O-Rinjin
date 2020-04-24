@@ -3,18 +3,20 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 // == Import components that we need to use from Semantic-UI-React
 import {
-  Grid, Segment, Header, Select,
+  Grid, Segment, Header, Select, Button,
 } from 'semantic-ui-react';
 
 import Service from '../../../containers/Service';
 // import services from '../../../services';
-import Map from '../../Partials/Map';
+import Map from '../../../containers/Map';
 
 // == Import styles and assets
 import './styles.scss';
 
 // == Component
-const HomeConnected = ({ getServicesList, services }) => {
+const HomeConnected = ({
+  getServicesList, services, servicesPostalcode, selectedList, setSelectedList,
+}) => {
   const dropdownOptions = [
     {
       key: 'Aide à domicile',
@@ -51,10 +53,32 @@ const HomeConnected = ({ getServicesList, services }) => {
               <Select placeholder="Filtre par catégorie" options={dropdownOptions} />
               <Select placeholder="Filtre par type" options={dropdownOptions} />
             </div>
+            <Button.Group fluid>
+              <Button
+                onClick={() => {
+                  setSelectedList(false);
+                }}
+              >
+                Ma zone
+              </Button>
+              <Button.Or text="ou" />
+              <Button
+                onClick={() => {
+                  setSelectedList(true);
+                }}
+              >
+                Toutes
+              </Button>
+            </Button.Group>
             <Segment style={{ height: '100vh', overflowY: 'scroll' }}>
               {
                 // Render a Service component for each service in data
-                services.map((service) => (
+                selectedList && services.map((service) => (
+                  <Service key={service.id} {...service} />
+                ))
+              }
+              {
+                !selectedList && servicesPostalcode.map((service) => (
                   <Service key={service.id} {...service} />
                 ))
               }
@@ -76,6 +100,11 @@ HomeConnected.propTypes = {
   services: PropTypes.arrayOf(
     PropTypes.object.isRequired,
   ).isRequired,
+  servicesPostalcode: PropTypes.arrayOf(
+    PropTypes.object.isRequired,
+  ).isRequired,
+  selectedList: PropTypes.bool.isRequired,
+  setSelectedList: PropTypes.func.isRequired,
 };
 
 // == Export
