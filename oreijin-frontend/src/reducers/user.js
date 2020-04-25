@@ -13,7 +13,6 @@ const initialState = {
     username: '',
     password: '',
   },
-  infos: {},
   profile: {},
   profileForm: {},
   services: [],
@@ -45,6 +44,7 @@ export default (state = initialState, action = {}) => {
           ...action.payload,
         },
         errors: [],
+
         services: [],
         isLogged: true,
         loading: false,
@@ -53,8 +53,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         isLogged: false,
-        infos: {},
-        services: {},
+        services: [],
       };
     case LOGIN_LOADING:
       return {
@@ -67,7 +66,6 @@ export default (state = initialState, action = {}) => {
         ...state,
         isLogged: false,
         isSuccess: true,
-        infos: {},
       };
     case DELETE_ACCOUNT_ERROR:
       return {
@@ -108,6 +106,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         isError: true,
         errors: [
+
           ...action.payload,
         ],
       };

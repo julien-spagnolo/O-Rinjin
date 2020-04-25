@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { baseURL, authorization } from '../axios';
+import baseURL from '../axios';
 
 import {
   ADD_COMMENT, addCommentSuccess,
@@ -14,11 +14,11 @@ const commentMiddleware = (store) => (next) => (action) => {
         method: 'post',
         url: `${baseURL}/api/comments`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         data: {
           service: store.getState().services.service.id,
-          user: store.getState().user.infos.id,
+          user: parseInt(sessionStorage.getItem('id'), 10),
           body: store.getState().comments.reply,
           isBlocked: false,
         },

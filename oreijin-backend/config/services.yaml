@@ -36,3 +36,6 @@ services:
     App\Normalizer\EntityNormalizer:
         tags:
             - { name: serializer.normalizer }
+    App\Listener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }

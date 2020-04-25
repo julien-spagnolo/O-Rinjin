@@ -25,15 +25,18 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-read", "services-browse"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-read", "services-browse", "comments-browse"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"users-list", "user-read", "user-add", "user-edit"})
-     * @Assert\Email
      * @Assert\NotBlank
+     * @Assert\Email(
+        *     message="The email '{{ value }}' is not a valid email.",
+        *     mode="loose"
+        * )
      */
     private $email;
 
@@ -55,20 +58,20 @@ class User implements UserInterface
      *      groups={"register", "password-update"},
      *      message="New password can not be blank."
      * )
-     * @Assert\Regex(pattern="#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,15}$#", message="It expects atleast 1 small-case letter, 1 Capital letter, 1 digit, 1 special character and the length should be between 6-15 characters.")
+     * @Assert\Regex(pattern="#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,15}$#", message="It expects atleast 1 small-case letter, 1 Capital letter, 1 digit, 1 special character and the length should be between 6-15 characters.")
      */
     private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse", "comments-browse"})
      * @Assert\Type("string")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse", "comments-browse"})
      * @Assert\NotBlank
      * @Assert\Type("string")
      */

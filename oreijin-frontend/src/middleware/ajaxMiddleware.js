@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 import axios from 'axios';
-import { baseURL, authorization } from '../axios';
+import baseURL from '../axios';
 import {
   getServicesList, getServicesListByPostalCode,
   GET_SERVICES_LIST, getServicesListSuccess,
@@ -27,7 +27,7 @@ export default (store) => (next) => (action) => {
         method: 'get',
         url: `${baseURL}/api/service-categories`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -47,7 +47,7 @@ export default (store) => (next) => (action) => {
         method: 'get',
         url: `${baseURL}/api/services`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -61,14 +61,15 @@ export default (store) => (next) => (action) => {
         });
       break;
     case GET_SERVICES_LIST_BY_POSTAL_CODE:
-      // console.log('//== middleware getServicesList');
+      console.log('//== middleware getServicesList');
+      // console.log(sessionStorage.getItem('token'));
 
       store.dispatch(toggleLoading());
       axios({
         method: 'get',
-        url: `${baseURL}/api/services/filter/${action.payload}`,
+        url: `${baseURL}/api/services/filter/${sessionStorage.getItem('postalcode')}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -86,7 +87,7 @@ export default (store) => (next) => (action) => {
         method: 'post',
         url: `${baseURL}/api/services`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         data: {
           ...store.getState().services.form,
@@ -98,7 +99,7 @@ export default (store) => (next) => (action) => {
           // console.log(res.data);
           // console.log(getServicesListSuccess(res.data));
           store.dispatch(addServiceSuccess(res.data));
-          store.dispatch(getServicesListByPostalCode(store.getState().user.infos.postalcode));
+          store.dispatch(getServicesListByPostalCode(sessionStorage.getItem('postalcode')));
           store.dispatch(getServicesList());
         })
         .catch((err) => {
@@ -112,14 +113,14 @@ export default (store) => (next) => (action) => {
         method: 'delete',
         url: `${baseURL}/api/services/${action.payload}`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
         .then((res) => {
           store.dispatch(deleteServiceSuccess(res.data));
           store.dispatch(getUserServicesList());
-          store.dispatch(getServicesListByPostalCode(store.getState().user.infos.postalcode));
+          store.dispatch(getServicesListByPostalCode(sessionStorage.getItem('postalcode')));
           store.dispatch(getServicesList());
         })
         .catch((err) => {
@@ -129,13 +130,13 @@ export default (store) => (next) => (action) => {
 
       return next(action);
     case DELETE_ACCOUNT:
-      console.log('//== delete account middleware action', action.payload);
-      console.log(`Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`);
+      // console.log('//== delete account middleware action', action.payload);
+      // console.log(`Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`);
       axios({
         method: 'delete',
-        url: `http://ec2-54-166-216-117.compute-1.amazonaws.com/api/users/${action.payload}`,
+        url: `${baseURL}/api/users/${action.payload}`,
         headers: {
-          Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -154,7 +155,7 @@ export default (store) => (next) => (action) => {
         method: 'get',
         url: `${baseURL}/api/services/${action.payload}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         withCredentials: true,
       })
@@ -173,7 +174,7 @@ export default (store) => (next) => (action) => {
         method: 'put',
         url: `${baseURL}/api/services/${store.getState().services.service.id}`,
         headers: {
-          Authorization: authorization,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         data: {
           ...store.getState().services.editForm,

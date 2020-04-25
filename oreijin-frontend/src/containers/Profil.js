@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
 import { deleteAccount, getUser, changeProfileField, updateProfile } from '../actions/user';
 import Profil from '../components/Member/Profil';
-
+import auth from '../auth';
 
 const mapStateToProps = (state, ownProps) => ({
-  userInfos: state.user.infos,
-  isLogged: state.user.isLogged,
+  isLogged: auth.isAuthenticated() !== null,
   success: state.user.isSuccess,
   error: state.user.isError,
   // extract the user's id from the slug

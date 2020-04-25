@@ -5,7 +5,8 @@ import {
   HANDLE_SUBMIT, loading, handleSubmitSuccess, handleSubmitError,
   updateLocation, updateLocationError,
 } from '../actions/register';
-import { baseURL } from '../axios';
+import baseURL from '../axios';
+
 import mapboxApiToken from '../../mapbox.config';
 
 const registerMiddleware = (store) => (next) => (action) => {

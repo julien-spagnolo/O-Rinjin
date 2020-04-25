@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Responsive, Menu, Image } from 'semantic-ui-react';
 
@@ -8,7 +8,7 @@ import VisitorDropdown from '../Partials/VisitorDropdown';
 import ConnectedDropdown from '../../containers/ConnectedDropdown';
 import VisitorMenu from '../Partials/VisitorMenu';
 import ConnectedMenu from '../../containers/ConnectedMenu';
-
+import auth from '../../auth';
 import logo from '../../assets/images/logo.png';
 import './styles.scss';
 
@@ -23,7 +23,6 @@ const Header = ({ isLogged }) => (
         <Menu.Item href="https://www.youtube.com" target="_blank" icon="youtube" />
         {/* <Menu.Item position="right" icon="bars" /> */}
         <Menu.Item position="right">
-          {/* A changer !!!! !isLogged -> isLogged  */}
           {isLogged ? <ConnectedDropdown /> : <VisitorDropdown />}
         </Menu.Item>
       </Menu>
@@ -33,7 +32,6 @@ const Header = ({ isLogged }) => (
     </Responsive>
     {/* Menu display for tablet and desktop screens */}
     <Responsive minWidth={500}>
-      {/* A changer !!!! !isLogged -> isLogged  */}
       {isLogged ? <ConnectedMenu /> : <VisitorMenu />}
     </Responsive>
   </>
