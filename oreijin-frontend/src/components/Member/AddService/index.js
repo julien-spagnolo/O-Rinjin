@@ -13,7 +13,7 @@ import './styles.scss';
 const AddService = ({
   form, onChangeField, onChangeFieldType,
   addService, isSuccess, isError, resetServiceForm,
-  categories, getCategoriesList,
+  categories, getCategoriesList, errors,
 }) => {
   useEffect(() => {
     // console.log('//== useEffect !!!');
@@ -29,7 +29,8 @@ const AddService = ({
           onSubmit={(evt) => {
             evt.preventDefault();
             // console.log(form.user);
-            addService(form.user);
+            if (Validator.checkServiceForm(form, categories)) addService(form.user);
+            else console.log('Error submit form');
           }}
           success
           error
@@ -43,9 +44,14 @@ const AddService = ({
           <Message
             error
             hidden={!isError}
-            header="La création du service a échoué !"
-            content="Veuillez remplir à nouveau le formulaire"
-          />
+          >
+            <Message.Header>La création du service a échoué !</Message.Header>
+            {
+              errors.map((error) => (
+                <div key={error}>{error}</div>
+              ))
+            }
+          </Message>
           <Form.Field width={16}>
             {
               form.title !== '' && !Validator.checkServiceTitle(form.title) ? <Label basic color="red" pointing="below">Indiquez un titre valide. caractères spéciaux autorisés : -!?'.,</Label> : null
@@ -62,6 +68,9 @@ const AddService = ({
               value={form.title}
             />
           </Form.Field>
+          {
+            !form.serviceCategory ? <Label basic color="red" pointing="below">Sélectionnez une catégorie.</Label> : null
+          }
           <Form.Group>
             <Form.Field
               required
@@ -88,6 +97,7 @@ const AddService = ({
                   checked={form.type === false}
                   onChange={(evt, { value }) => {
                     onChangeFieldType(value);
+                    // console.log(value);
                   }}
                 />
               </Form.Field>
@@ -99,6 +109,7 @@ const AddService = ({
                   checked={form.type === true}
                   onChange={(evt, { value }) => {
                     onChangeFieldType(value);
+                    console.log(value);
                   }}
                 />
               </Form.Field>
@@ -170,6 +181,10 @@ AddService.propTypes = {
     type: PropTypes.bool.isRequired,
     image: PropTypes.string,
     user: PropTypes.number,
+    serviceCategory: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   }).isRequired,
   categories: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   isSuccess: PropTypes.bool.isRequired,
@@ -179,6 +194,7 @@ AddService.propTypes = {
   addService: PropTypes.func.isRequired,
   resetServiceForm: PropTypes.func.isRequired,
   getCategoriesList: PropTypes.func.isRequired,
+  errors: PropTypes.array.isRequired,
 };
 
 export default AddService;

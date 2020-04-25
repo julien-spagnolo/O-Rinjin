@@ -59,7 +59,6 @@ const Register = ({
               name="firstname"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
-                console.log(categories);
                 console.log(Validator.checkName(evt.target.value));
               }}
               value={form.firstname}

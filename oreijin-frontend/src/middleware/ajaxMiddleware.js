@@ -82,10 +82,6 @@ export default (store) => (next) => (action) => {
         });
       break;
     case ADD_SERVICE:
-      // console.log({
-      //   ...store.getState().services.form,
-      //   user: action.payload,
-      // });
       axios({
         method: 'post',
         url: `${baseURL}/api/services`,
@@ -106,8 +102,8 @@ export default (store) => (next) => (action) => {
           store.dispatch(getServicesList());
         })
         .catch((err) => {
-          console.log(err);
-          store.dispatch(addServiceError());
+          // console.log(err);
+          store.dispatch(addServiceError(['Erreur serveur !']));
         });
       break;
     case DELETE_SERVICE:
@@ -128,7 +124,7 @@ export default (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.log(err);
-          store.dispatch(deleteServiceError());
+          store.dispatch(deleteServiceError(['Erreur serveur !']));
         });
 
       return next(action);
@@ -190,7 +186,7 @@ export default (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.log(err);
-          store.dispatch(editServiceError());
+          store.dispatch(editServiceError(['Erreur serveur !']));
         });
       break;
     default:

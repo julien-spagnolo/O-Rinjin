@@ -23,6 +23,13 @@ const validator = {
     return regex.test(password);
   },
 
+  /**
+   * Checks if the verification password matches with the password entered by the user
+   * 
+   * @param {String} paswword Password entered by the user
+   * @param {String} verification Password to verify
+   * @return {bool}
+   */
   verifyPassword: (password, verification) => {
     if (validator.checkPassword(password)) return password === verification;
     return false;
@@ -44,7 +51,6 @@ const validator = {
    * @param {String} date
    * @return {String} return the date computed
    */
-
   getMaxDateInput: () => {
     const today = new Date();
     const dd = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
@@ -117,11 +123,38 @@ const validator = {
     return regex.test(description);
   },
 
+  /**
+   * Checks if the service category's id is included in the category list
+   * 
+   * @param {Number} categoryId
+   * @param {Array{Object}} categoryList An array of object
+   * @return {bool} true if the category exists in the list
+   */
   checkServiceCategory: (categoryId, categoryList) => {
     if (categoryList.find((category) => categoryId === category.value)) return true;
     return false;
   },
 
+  checkServiceType: (value) => typeof value === 'boolean',
+
+  checkServiceForm: (form, categoryList) => {
+    const {
+      title, serviceCategory, type, body,
+    } = { ...form };
+
+    if (!validator.checkServiceTitle(title)) return false;
+    if (!validator.checkServiceCategory(serviceCategory, categoryList)) return false;
+    if (!validator.checkServiceType(type)) return false;
+    if (!validator.checkServiceDescription(body)) return false;
+    return true;
+  },
+
+  /**
+   * Checks if the register form is valid
+   *
+   * @param {Object} form
+   * @return {bool}
+   */
   checkRegisterForm: (form) => {
     const {
       firstname, lastname, birthdate, email,
