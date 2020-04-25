@@ -12,6 +12,7 @@ const mapStateToProps = (state) => ({
   loading: state.register.loading,
   isError: state.register.isError,
   isSuccess: state.register.isSuccess,
+  errors: state.register.errors,
 });
 
 const mapDispatchToProps = (dispatch) => ({

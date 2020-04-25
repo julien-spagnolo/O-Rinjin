@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {
   Button, Form, Container, Segment, Header, Message,
 } from 'semantic-ui-react';
-import { checkEmail, checkPassword } from '../../../functions';
+import Validator from '../../../validator';
 import './styles.scss';
 
 const Login = ({
@@ -20,7 +20,7 @@ const Login = ({
 }) => {
   const history = useHistory();
   const handleSubmit = () => {
-    if (checkEmail(username) && checkPassword(password)) handleLogin();
+    if (Validator.checkEmail(username) && Validator.checkPassword(password)) handleLogin();
     else loginFormError(['Votre email ou mot de passe est invalide !']);
   };
 
@@ -46,7 +46,7 @@ const Login = ({
             value={username}
             onChange={(event) => {
               changeField(event.target.value, event.target.name);
-              console.log(checkEmail(event.target.value));
+              console.log(Validator.checkEmail(event.target.value));
             }}
           />
           <Form.Input
@@ -59,7 +59,7 @@ const Login = ({
             value={password}
             onChange={(event) => {
               changeField(event.target.value, event.target.name);
-              console.log(checkPassword(event.target.value));
+              console.log(Validator.checkPassword(event.target.value));
             }}
           />
           <Button loading={loading} className="login__form__button">Connexion</Button>

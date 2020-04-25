@@ -2,7 +2,7 @@
 import axios from 'axios';
 import slugify from 'slugify';
 import {
-  HANDLE_SUBMIT, loading, handleSubmitSuccess,
+  HANDLE_SUBMIT, loading, handleSubmitSuccess, handleSubmitError,
   updateLocation, updateLocationError,
 } from '../actions/register';
 import { baseURL } from '../axios';
@@ -27,7 +27,7 @@ const registerMiddleware = (store) => (next) => (action) => {
             longitude: `${coords[0]}`,
             latitude: `${coords[1]}`,
           }));
-          console.log(store.getState().register.form);
+          // console.log(store.getState().register.form);
 
           axios({
             url: `${baseURL}/register`,
@@ -41,11 +41,12 @@ const registerMiddleware = (store) => (next) => (action) => {
               store.dispatch(handleSubmitSuccess());
             })
             .catch((err) => {
-              console.log(err);
+              // console.log(err);
+              store.dispatch(handleSubmitError(['Cet email est déjà utilisé.']));
             });
         })
         .catch(() => {
-          store.dispatch(updateLocationError());
+          store.dispatch(updateLocationError(['Votre adresse est introuvable.']));
         });
 
       return next(action);
