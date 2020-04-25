@@ -25,7 +25,7 @@ const validator = {
 
   /**
    * Checks if the verification password matches with the password entered by the user
-   * 
+   *
    * @param {String} paswword Password entered by the user
    * @param {String} verification Password to verify
    * @return {bool}
@@ -42,7 +42,7 @@ const validator = {
    * @return {bool} true if it matches
    */
   checkName: (name) => {
-    const regex = /^[a-zA-Z]{2,}$/;
+    const regex = /^[a-zA-Z-¨^èéêëÉÈËäï ]{2,}$/;
     return regex.test(name);
   },
 
@@ -86,7 +86,7 @@ const validator = {
    * @return {bool} true if it matches
    */
   checkCity: (city) => {
-    const regex = /^[a-zA-Z- ]{1,}$/;
+    const regex = /^[a-zA-Z-ÉéÏïèÈë ]{1,}$/;
     return regex.test(city);
   },
 
@@ -108,7 +108,7 @@ const validator = {
    * @return {bool} true if it matches
    */
   checkServiceTitle: (title) => {
-    const regex = /^[a-zA-Z0-9-!?'., ]{10,60}$/;
+    const regex = /^[a-zA-Z0-9-!?'.,ÉÈéèàÀôÔïÏë ]{10,60}$/;
     return regex.test(title);
   },
 
@@ -119,13 +119,13 @@ const validator = {
    * @return {bool} true if it matches
    */
   checkServiceDescription: (description) => {
-    const regex = /^[a-zA-Z0-9-!?'.()",+;: ]{50,280}$/;
+    const regex = /^[a-zA-Z0-9-!?'.()",+;:@_#&/=éèàÏïôÔÉÈëË% ]{50,280}$/;
     return regex.test(description);
   },
 
   /**
    * Checks if the service category's id is included in the category list
-   * 
+   *
    * @param {Number} categoryId
    * @param {Array{Object}} categoryList An array of object
    * @return {bool} true if the category exists in the list
@@ -136,6 +136,11 @@ const validator = {
   },
 
   checkServiceType: (value) => typeof value === 'boolean',
+
+  checkReply: (value) => {
+    const regex = /^[a-zA-Z0-9-!?'.()",+;:@_#&/=éèàÏïôÔÉÈëË% ]{1,140}$/;
+    return regex.test(value);
+  },
 
   checkServiceForm: (form, categoryList) => {
     const {
@@ -167,7 +172,23 @@ const validator = {
     if (!validator.checkEmail(email)) return false;
     if (!validator.checkPassword(plainPassword)) return false;
     if (!validator.verifyPassword(plainPassword, verificationPassword)) return false;
-    if (!validator.checkAddress(address) && !validator.checkCity(city) && !(validator.checkPostalCode(postalcode))) return false;
+    if (!validator.checkAddress(address)) return false;
+    if (!validator.checkCity(city)) return false;
+    if (!validator.checkPostalCode(postalcode)) return false;
+
+    return true;
+  },
+
+  checkProfileForm: (form) => {
+    const {
+      firstName, lastName, address, city, postalCode,
+    } = { ...form };
+
+    if (!validator.checkName(firstName)) return false;
+    if (!validator.checkName(lastName)) return false;
+    if (!validator.checkAddress(address)) return false;
+    if (!validator.checkCity(city)) return false;
+    if (!validator.checkPostalCode(postalCode)) return false;
 
     return true;
   },

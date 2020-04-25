@@ -5,12 +5,13 @@ import auth from '../auth';
 
 const mapStateToProps = (state, ownProps) => ({
   isLogged: auth.isAuthenticated() !== null,
-  success: state.user.isSuccess,
-  error: state.user.isError,
+  isSuccess: state.user.isSuccess,
+  isError: state.user.isError,
   // extract the user's id from the slug
   userId: ownProps.match.params.user.split('-')[2],
   profile: state.user.profile,
   form: state.user.profileForm,
+  errors: state.user.errors,
 });
 
 const mapDispatchToProps = (dispatch) => ({

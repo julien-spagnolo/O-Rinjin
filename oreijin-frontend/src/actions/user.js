@@ -104,13 +104,13 @@ export const updateProfile = () => ({
   type: UPDATE_PROFILE,
 });
 
-export const updateProfileSuccess = (payload) => ({
+export const updateProfileSuccess = () => ({
   type: UPDATE_PROFILE_SUCCESS,
-  payload,
 });
 
-export const updateProfileError = () => ({
+export const updateProfileError = (payload) => ({
   type: UPDATE_PROFILE_ERROR,
+  payload,
 });
 
 export const getUserServicesList = () => ({
