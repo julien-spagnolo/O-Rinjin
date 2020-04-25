@@ -45,7 +45,7 @@ const Register = ({
           <Message.Header>L'inscription a échoué !</Message.Header>
           {
             errors.map((error) => (
-              <div key={error} >{error}</div>
+              <div key={error}>{error}</div>
             ))
           }
         </Message>
