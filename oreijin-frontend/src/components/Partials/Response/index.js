@@ -13,12 +13,12 @@ import logo from '../../../assets/images/logo.svg';
 
 // == Component
 const Response = ({
-  body,
+  body, user,
 }) => (
   <Comment>
     <Comment.Avatar src={logo} />
     <Comment.Content>
-      <Comment.Author>Rinjin Anonyme</Comment.Author>
+      <Comment.Author>{/* {user.firstName} {user.lastName} */}Décommenter le nom</Comment.Author>
       <Comment.Metadata>
       </Comment.Metadata>
       <Comment.Text>
@@ -31,6 +31,7 @@ const Response = ({
 Response.propTypes = {
   // id: PropTypes.number.isRequired,
   body: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
 };
 // == Export
 export default Response;
