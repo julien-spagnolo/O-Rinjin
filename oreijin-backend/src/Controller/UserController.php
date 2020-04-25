@@ -39,7 +39,7 @@ class UserController extends AbstractController
 
         /**
      * @Route(
-     *      "/api/users/home",
+     *      "/users/home",
      *      name="api_user_browse_home",  
      *      methods={"GET"}
      * )
