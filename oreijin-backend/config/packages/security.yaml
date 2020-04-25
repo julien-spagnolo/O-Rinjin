@@ -48,7 +48,6 @@ security:
         - { path: ^/api/service-categories/\?$, roles: ROLE_MODO }
         - { path: ^/api/service-categories$,    roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,                        roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/admin,                      roles: ROLE_MODO }
 
     role_hierarchy:
         ROLE_MODO:  [ROLE_USER]

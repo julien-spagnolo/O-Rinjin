@@ -2,6 +2,7 @@
 
 namespace App\Manager;
 
+use App\Exception\ValidatorException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -70,7 +71,7 @@ abstract class AbstractManager
             // TODO: A refactoriser pour retourner une liste d'erreurs au format ...
             $errorsString = (string) $errors;
 
-            throw new BadRequestHttpException($errorsString);
+            throw new ValidatorException($errors);
         }
     }
 }

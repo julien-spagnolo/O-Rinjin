@@ -32,8 +32,11 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"users-list", "user-read", "user-add", "user-edit"})
-     * @Assert\Email
      * @Assert\NotBlank
+     * @Assert\Email(
+        *     message="The email '{{ value }}' is not a valid email.",
+        *     mode="loose"
+        * )
      */
     private $email;
 
@@ -55,7 +58,7 @@ class User implements UserInterface
      *      groups={"register", "password-update"},
      *      message="New password can not be blank."
      * )
-     * @Assert\Regex(pattern="#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,15}$#", message="It expects atleast 1 small-case letter, 1 Capital letter, 1 digit, 1 special character and the length should be between 6-15 characters.")
+     * @Assert\Regex(pattern="#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,15}$#", message="It expects atleast 1 small-case letter, 1 Capital letter, 1 digit, 1 special character and the length should be between 6-15 characters.")
      */
     private $plainPassword;
 
