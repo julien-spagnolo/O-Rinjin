@@ -5,6 +5,8 @@ import {
   GET_USER_SERVICES_LIST_SUCCESS,
 } from '../actions/user';
 
+import { LOGIN_FORM_ERROR } from '../actions/form';
+
 
 const initialState = {
   form: {
@@ -18,6 +20,7 @@ const initialState = {
   loading: false,
   isSuccess: false,
   isError: false,
+  errors: [],
 };
 
 export default (state = initialState, action = {}) => {
@@ -37,6 +40,11 @@ export default (state = initialState, action = {}) => {
           username: '',
           password: '',
         },
+        infos: {
+          ...action.payload,
+        },
+        errors: [],
+
         services: [],
         isLogged: true,
         loading: false,
@@ -51,6 +59,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: true,
+        errors: [],
       };
     case DELETE_ACCOUNT_SUCCESS:
       return {
@@ -89,6 +98,15 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         services: [
+          ...action.payload,
+        ],
+      };
+    case LOGIN_FORM_ERROR:
+      return {
+        ...state,
+        isError: true,
+        errors: [
+
           ...action.payload,
         ],
       };

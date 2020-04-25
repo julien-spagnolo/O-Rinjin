@@ -14,6 +14,7 @@ const mapStateToProps = (state) => ({
   categories: getCategoriesOptions(state.categories),
   isSuccess: state.services.isSuccess,
   isError: state.services.isError,
+  errors: state.services.errors,
 });
 
 const mapDispatchToProps = (dispatch) => ({

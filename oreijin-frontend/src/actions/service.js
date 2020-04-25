@@ -87,8 +87,9 @@ export const addServiceSuccess = (payload) => ({
   payload,
 });
 
-export const addServiceError = () => ({
+export const addServiceError = (payload) => ({
   type: ADD_SERVICE_ERROR,
+  payload,
 });
 
 export const resetServiceForm = () => ({
@@ -105,8 +106,9 @@ export const deleteServiceSuccess = (payload) => ({
   payload,
 });
 
-export const deleteServiceError = () => ({
+export const deleteServiceError = (payload) => ({
   type: DELETE_SERVICE_ERROR,
+  payload,
 });
 
 export const editService = () => ({
@@ -117,8 +119,9 @@ export const editServiceSuccess = () => ({
   type: EDIT_SERVICE_SUCCESS,
 });
 
-export const editServiceError = () => ({
+export const editServiceError = (payload) => ({
   type: EDIT_SERVICE_ERROR,
+  payload,
 });
 
 export const onChangeFieldEdit = (payload) => ({

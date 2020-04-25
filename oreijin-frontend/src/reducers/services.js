@@ -50,6 +50,7 @@ const initialState = {
     type: false,
     serviceCategory: {},
   },
+  errors: [],
   isSuccess: false,
   isError: false,
   isLoading: false,
@@ -106,6 +107,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         isSuccess: true,
+        errors: [],
       };
     case ADD_SERVICE_ERROR:
     case DELETE_SERVICE_ERROR:
@@ -113,6 +115,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         isError: true,
+        errors: [...action.payload],
       };
     case RESET_SERVICE_FORM:
       return {
@@ -132,6 +135,7 @@ export default (state = initialState, action = {}) => {
           type: false,
           serviceCategory: {},
         },
+        errors: [],
         isSuccess: false,
         isError: false,
       };
