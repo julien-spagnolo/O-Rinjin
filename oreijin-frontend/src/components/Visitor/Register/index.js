@@ -59,12 +59,13 @@ const Register = ({
               name="firstname"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
+                console.log(categories);
                 console.log(Validator.checkName(evt.target.value));
               }}
               value={form.firstname}
             />
             {
-              form.firstname !== '' && !Validator.checkName(form.firstname) ? <Label color="red" pointing>Indiquez un prénom valide</Label> : null
+              form.firstname !== '' && !Validator.checkName(form.firstname) ? <Label basic color="red" pointing>Indiquez un prénom valide</Label> : null
             }
           </Form.Field>
           <Form.Field width={8}>
@@ -81,7 +82,7 @@ const Register = ({
               value={form.lastname}
             />
             {
-              form.lastname !== '' && !Validator.checkName(form.lastname) ? <Label color="red" pointing>Indiquez un nom valide</Label> : null
+              form.lastname !== '' && !Validator.checkName(form.lastname) ? <Label basic color="red" pointing>Indiquez un nom valide</Label> : null
             }
           </Form.Field>
         </Form.Group>
@@ -100,7 +101,7 @@ const Register = ({
               value={form.email}
             />
             {
-              form.email !== '' && !Validator.checkEmail(form.email) ? <Label color="red" pointing>Indiquez un email valide</Label> : null
+              form.email !== '' && !Validator.checkEmail(form.email) ? <Label basic color="red" pointing>Indiquez un email valide</Label> : null
             }
           </Form.Field>
           <Form.Field required width={6}>
@@ -118,7 +119,7 @@ const Register = ({
               value={form.birthdate}
             />
             {
-              form.birthdate !== '' && !Validator.checkBirthDate(form.birthdate) ? <Label color="red" pointing>Indiquez une date valide (18 ans minimum)</Label> : null
+              form.birthdate !== '' && !Validator.checkBirthDate(form.birthdate) ? <Label basic color="red" pointing>Indiquez une date valide (18 ans minimum)</Label> : null
             }
           </Form.Field>
         </Form.Group>
@@ -136,7 +137,7 @@ const Register = ({
             value={form.plainPassword}
           />
           {
-            form.plainPassword !== '' && !Validator.checkPassword(form.plainPassword) ? <Label color="red" pointing>Doit contenir au moins 6 caractères, dont 1 majuscule, 1 chiffre et 1 caractère spécial</Label> : null
+            form.plainPassword !== '' && !Validator.checkPassword(form.plainPassword) ? <Label basic color="red" pointing>Doit contenir au moins 6 caractères, dont 1 majuscule, 1 chiffre et 1 caractère spécial</Label> : null
           }
         </Form.Field>
         <Form.Field>
@@ -153,7 +154,7 @@ const Register = ({
             value={form.verificationPassword}
           />
           {
-            form.verificationPassword !== '' && form.verificationPassword !== form.plainPassword ? <Label color="red" pointing>Le mot de passe ne correspond pas</Label> : null
+            form.verificationPassword !== '' && form.verificationPassword !== form.plainPassword ? <Label basic color="red" pointing>Le mot de passe ne correspond pas</Label> : null
           }
         </Form.Field>
         <Form.Group>
@@ -171,7 +172,7 @@ const Register = ({
               value={form.address}
             />
             {
-              form.address !== '' && !Validator.checkAddress(form.address) ? <Label color="red" pointing>Indiquez votre adresse</Label> : null
+              form.address !== '' && !Validator.checkAddress(form.address) ? <Label basic color="red" pointing>Indiquez votre adresse</Label> : null
             }
           </Form.Field>
           <Form.Field width="4">
@@ -188,7 +189,7 @@ const Register = ({
               value={form.city}
             />
             {
-              form.city !== '' && !Validator.checkCity(form.city) ? <Label color="red" pointing>Indiquez votre ville</Label> : null
+              form.city !== '' && !Validator.checkCity(form.city) ? <Label basic color="red" pointing>Indiquez votre ville</Label> : null
             }
           </Form.Field>
           <Form.Field width="4">
@@ -206,7 +207,7 @@ const Register = ({
               value={form.postalcode}
             />
             {
-              form.postalcode !== '' && !Validator.checkPostalCode(form.postalcode) ? <Label color="red" pointing>Indiquez votre code postal</Label> : null
+              form.postalcode !== '' && !Validator.checkPostalCode(form.postalcode) ? <Label basic color="red" pointing>Indiquez votre code postal</Label> : null
             }
           </Form.Field>
         </Form.Group>
@@ -218,7 +219,7 @@ const Register = ({
             checked={isTCChecked}
           />
           {
-            !isTCChecked ? <Label color="red" pointing>Obligatoire</Label> : null
+            !isTCChecked ? <Label basic color="red" pointing>Obligatoire</Label> : null
           }
         </Form.Field>
         <Button loading={loading} type="submit" className="register__form__button">Soumettre</Button>

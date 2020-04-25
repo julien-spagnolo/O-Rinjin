@@ -87,12 +87,39 @@ const validator = {
   /**
    * Check if the postal code match the regex
    *
-   * @param {} postalCode
+   * @param {String} postalCode
    * @return {bool} true if it matches
    */
   checkPostalCode: (postalCode) => {
     const regex = /^(([0-8][0-9])|(9[0-5]))[0-9]{3}$/;
     return regex.test(postalCode);
+  },
+
+  /**
+   * Check if the service title matches the regex
+   * The title must contain 10 to 70 characters
+   * @param {String} title
+   * @return {bool} true if it matches
+   */
+  checkServiceTitle: (title) => {
+    const regex = /^[a-zA-Z0-9-!?'., ]{10,60}$/;
+    return regex.test(title);
+  },
+
+  /**
+   * Check if the service description matches the regex
+   * The description must contain 50 to 280 characters
+   * @param {String} description
+   * @return {bool} true if it matches
+   */
+  checkServiceDescription: (description) => {
+    const regex = /^[a-zA-Z0-9-!?'.()",+;: ]{50,280}$/;
+    return regex.test(description);
+  },
+
+  checkServiceCategory: (categoryId, categoryList) => {
+    if (categoryList.find((category) => categoryId === category.value)) return true;
+    return false;
   },
 
   checkRegisterForm: (form) => {
