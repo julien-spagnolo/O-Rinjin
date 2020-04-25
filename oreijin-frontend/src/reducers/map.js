@@ -18,8 +18,8 @@ const map = (state = initialState, action = {}) => {
       return {
         viewport: {
           ...state.viewport,
-          latitude: parseFloat(action.payload.latitude),
-          longitude: parseFloat(action.payload.longitude),
+          latitude: parseFloat(sessionStorage.getItem('latitude')),
+          longitude: parseFloat(sessionStorage.getItem('longitude')),
           zoom: 11.070872916521907,
         },
         selectedService: null,

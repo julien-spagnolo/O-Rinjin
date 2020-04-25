@@ -15,7 +15,7 @@ import './styles.scss';
 
 // == Component
 const HomeConnected = ({
-  getServicesList, services, servicesPostalcode, selectedList, setSelectedList,
+  getServicesList, services, servicesPostalcode, selectedList, setSelectedList, getServicesListByPostalCode,
 }) => {
   const dropdownOptions = [
     {
@@ -41,6 +41,7 @@ const HomeConnected = ({
   useEffect(() => {
     // console.log('USE EFFECT !');
     getServicesList();
+    getServicesListByPostalCode(sessionStorage.getItem('postalcode'));
   }, []);
 
   return (
