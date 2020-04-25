@@ -31,7 +31,7 @@ export const verifyPassword = (password, verification) => password === verificat
  * @return {bool} true if it matches
  */
 export const checkName = (name) => {
-  const regex = /^[a-zA-Z]{3,}$/;
+  const regex = /^[a-zA-Z]{2,}$/;
   return regex.test(name);
 };
 

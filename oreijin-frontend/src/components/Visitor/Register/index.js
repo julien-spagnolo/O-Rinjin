@@ -2,12 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Header, Container, Segment, Form, Button, Message,
+  Header, Container, Segment, Form, Button, Message, Label,
 } from 'semantic-ui-react';
 
 import {
   checkEmail, checkPassword, getMaxDateInput, checkBirthDate,
-  verifyPassword, checkAddress, checkCity, checkPostalCode,
+  verifyPassword, checkAddress, checkCity, checkPostalCode, checkName,
 } from '../../../functions';
 
 // == Import
@@ -21,8 +21,9 @@ const Register = ({
     <Segment raised>
       <Header as="h1" dividing textAlign="center">Inscription</Header>
       <Form
-        onSubmit={(evt) => {
+        onSubmit={(evt, value) => {
           evt.preventDefault();
+          console.log({ value });
           if (isTCChecked) {
             handleSubmit();
           }
@@ -57,9 +58,13 @@ const Register = ({
               name="firstname"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
+                console.log(checkName(evt.target.value));
               }}
               value={form.firstname}
             />
+            {
+              form.firstname !== '' && !checkName(form.firstname) ? <Label color="red" pointing>Indiquez un prénom valide</Label> : null
+            }
           </Form.Field>
           <Form.Field width={8}>
             <Form.Input
@@ -70,9 +75,13 @@ const Register = ({
               name="lastname"
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
+                console.log(checkName(evt.target.value));
               }}
               value={form.lastname}
             />
+            {
+              form.lastname !== '' && !checkName(form.lastname) ? <Label color="red" pointing>Indiquez un nom valide</Label> : null
+            }
           </Form.Field>
         </Form.Group>
         <Form.Group>
@@ -89,6 +98,9 @@ const Register = ({
               }}
               value={form.email}
             />
+            {
+              form.email !== '' && !checkEmail(form.email) ? <Label color="red" pointing>Indiquez un email valide</Label> : null
+            }
           </Form.Field>
           <Form.Field required width={6}>
             <Form.Input
@@ -104,6 +116,9 @@ const Register = ({
               }}
               value={form.birthdate}
             />
+            {
+              form.birthdate !== '' && !checkBirthDate(form.birthdate) ? <Label color="red" pointing>Indiquez une date valide (18 ans minimum)</Label> : null
+            }
           </Form.Field>
         </Form.Group>
         <Form.Field>
@@ -119,6 +134,9 @@ const Register = ({
             }}
             value={form.plainPassword}
           />
+          {
+            form.plainPassword !== '' && !checkPassword(form.plainPassword) ? <Label color="red" pointing>Doit contenir au moins 6 caractères, dont 1 majuscule, 1 chiffre et 1 caractère spécial</Label> : null
+          }
         </Form.Field>
         <Form.Field>
           <Form.Input
@@ -133,6 +151,9 @@ const Register = ({
             }}
             value={form.verificationPassword}
           />
+          {
+            form.verificationPassword !== '' && form.verificationPassword !== form.plainPassword ? <Label color="red" pointing>Le mot de passe ne correspond pas</Label> : null
+          }
         </Form.Field>
         <Form.Group>
           <Form.Field width="8">
@@ -145,10 +166,12 @@ const Register = ({
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
                 console.log('Rue : ', checkAddress(evt.target.value));
-
               }}
               value={form.address}
             />
+            {
+              form.address !== '' && !checkAddress(form.address) ? <Label color="red" pointing>Indiquez votre adresse</Label> : null
+            }
           </Form.Field>
           <Form.Field width="4">
             <Form.Input
@@ -160,10 +183,12 @@ const Register = ({
               onChange={(evt) => {
                 onChangeField(evt.target.name, evt.target.value);
                 console.log('Ville : ', checkCity(evt.target.value));
-
               }}
               value={form.city}
             />
+            {
+              form.city !== '' && !checkCity(form.city) ? <Label color="red" pointing>Indiquez votre ville</Label> : null
+            }
           </Form.Field>
           <Form.Field width="4">
             <Form.Input
@@ -179,6 +204,9 @@ const Register = ({
               }}
               value={form.postalcode}
             />
+            {
+              form.postalcode !== '' && !checkPostalCode(form.postalcode) ? <Label color="red" pointing>Indiquez votre code postal</Label> : null
+            }
           </Form.Field>
         </Form.Group>
         <Form.Field>
@@ -188,6 +216,9 @@ const Register = ({
             onChange={onToggleTC}
             checked={isTCChecked}
           />
+          {
+            !isTCChecked ? <Label color="red" pointing>Obligatoire</Label> : null
+          }
         </Form.Field>
         <Button loading={loading} type="submit" className="register__form__button">Soumettre</Button>
       </Form>
