@@ -18,11 +18,14 @@ import {
   SET_SELECTED_LIST,
   SET_IS_SUCCESS_FALSE,
 } from '../actions/service';
+import { FILTER_BY_CATEGORY } from '../actions/filters';
 import { GET_USER_SUCCESS } from '../actions/user';
 
 const initialState = {
   list: [],
   listPostalCode: [],
+  listFiltered: [],
+  listPostalCodeFiltered: [],
   form: {
     title: '',
     serviceCategory: '',
@@ -58,18 +61,27 @@ const initialState = {
 };
 
 /**
+ * Filters a list by category
+ * @param {*} categoryId
+ * @param {*} list
+ */
+export const filterListByCategory = (categoryId, list) => {
+  if (categoryId) return list.filter((item) => item.serviceCategory.id === categoryId);
+  return [];
+};
+
+/**
  * Add a slug for each service and return the list
  * @param {Object} state
  */
-export const getServicesWithSlug = (state = initialState) => state.list.map((service) => ({
+export const getServicesWithSlug = (list) => list.map((service) => ({
   ...service,
   slug: slugify(`${service.id} ${service.title}`, { lower: true }),
 }));
-
-export const getServicesByPostalcodeWithSlug = (state = initialState) => state.listPostalCode.map((service) => ({
-  ...service,
-  slug: slugify(`${service.id} ${service.title}`, { lower: true }),
-}));
+// export const getServicesByPostalcodeWithSlug = (list) => state.listPostalCode.map((service) => ({
+//   ...service,
+//   slug: slugify(`${service.id} ${service.title}`, { lower: true }),
+// }));
 
 /**
  * Extract the service id from the slug
@@ -189,6 +201,12 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         isSuccess: false,
+      };
+    case FILTER_BY_CATEGORY:
+      return {
+        ...state,
+        listFiltered: [...filterListByCategory(action.payload, state.list)],
+        listPostalCodeFiltered: [...filterListByCategory(action.payload, state.listPostalCode)],
       };
     default:
       return state;
