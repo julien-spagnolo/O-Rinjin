@@ -4,7 +4,7 @@ import auth from '../auth';
 
 import {
   LOGIN, LOGOUT, CHECK_AUTH,
-  loginSuccess, logoutSuccess, loginLoading,
+  loginSuccess, logoutSuccess, loginError, loginLoading,
 } from '../actions/user';
 import {
   getServicesListByPostalCode,
@@ -37,7 +37,8 @@ export default (store) => (next) => (action) => {
           // document.cookie = `token=${response.data.token}`;
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
+          store.dispatch(loginError(['Email ou mot de passe invalide. Veuillez réessayer.']));
         });
       break;
     case LOGOUT:

@@ -46,8 +46,9 @@ export const loginSuccess = (payload) => ({
   payload,
 });
 
-export const loginError = () => ({
+export const loginError = (payload) => ({
   type: LOGIN_ERROR,
+  payload,
 });
 
 
