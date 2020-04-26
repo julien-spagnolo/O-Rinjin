@@ -61,7 +61,7 @@ const userMiddleware = (store) => (next) => (action) => {
               // update user address
               sessionStorage.setItem('city', `${store.getState().user.profileForm.city}`);
               sessionStorage.setItem('address', `${store.getState().user.profileForm.address}`);
-              sessionStorage.setItem('postalcode', `${store.getState().user.profileForm.postalcode}`);
+              sessionStorage.setItem('postalcode', `${store.getState().user.profileForm.postalCode}`);
 
               store.dispatch(updateProfileSuccess());
             })
