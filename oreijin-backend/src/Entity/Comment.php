@@ -36,7 +36,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comment")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("services-read")
+     * @Groups("comments-browse")
      */
     private $user;
 

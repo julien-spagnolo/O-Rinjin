@@ -23,7 +23,7 @@ class ServiceController extends AbstractController
 
     /**
      * @Route(
-     *      "/services/home",
+     *      "/api/services/home",
      *      name="api_service_browse_home",  
      *      methods={"GET"}
      * )

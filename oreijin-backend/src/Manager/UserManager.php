@@ -25,7 +25,7 @@ class UserManager extends AbstractManager {
     {
         $user = $this->getRepository(User::class)->findAll();
         
-        return $this->getRepository()->findBy([], [], 6);
+        return $this->getRepository()->findBy([], [], 5);
     }
 
     public function create(string $data)
