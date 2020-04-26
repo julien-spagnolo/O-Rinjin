@@ -64,14 +64,14 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse", "comments-browse"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse", "comments-browse", "services-read"})
      * @Assert\Type("string")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse", "comments-browse"})
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-browse", "comments-browse", "services-read"})
      * @Assert\NotBlank
      * @Assert\Type("string")
      */
