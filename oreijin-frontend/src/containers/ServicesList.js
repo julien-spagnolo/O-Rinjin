@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import { getUserServicesList } from '../actions/user';
+import { setIsSuccessFalse } from '../actions/service';
 import ServicesList from '../components/Member/ServicesList';
 
 const mapStateToProps = (state) => ({
@@ -12,6 +13,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getUserServicesList: () => dispatch(getUserServicesList()),
+  setIsSuccessFalse: () => dispatch(setIsSuccessFalse()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ServicesList);

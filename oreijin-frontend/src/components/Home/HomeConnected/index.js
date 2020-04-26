@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 // == Import components that we need to use from Semantic-UI-React
 import {
-  Grid, Segment, Header, Select, Button,
+  Grid, Segment, Header, Select, Button, Label,
 } from 'semantic-ui-react';
 
 import Service from '../../../containers/Service';
@@ -16,32 +16,27 @@ import './styles.scss';
 // == Component
 const HomeConnected = ({
   getServicesList, services, servicesPostalcode, selectedList, setSelectedList, getServicesListByPostalCode,
+  getCategoriesList, categories, filterByCategory,
+  servicesResults, servicesPostalCodeResults,
 }) => {
-  const dropdownOptions = [
-    {
-      key: 'Aide à domicile',
-      text: 'Aide à domicile',
-      value: 0,
-      type: 'Demande',
-    },
-    {
-      key: 'Bricolage et dépannage',
-      text: 'Bricolage et dépannage',
-      value: 1,
-      type: 'Proposition',
-    },
-    {
-      key: 'Aide à la mobilité',
-      text: 'Aide à la mobilité',
-      value: 2,
-      type: 'Demande',
-    },
-  ];
+  // const dropdownOptionsType = [
+  //   {
+  //     key: 'Demande',
+  //     text: 'Demande',
+  //     value: 0,
+  //   },
+  //   {
+  //     key: 'Proposition',
+  //     text: 'Proposition',
+  //     value: 1,
+  //   },
+  // ];
 
   useEffect(() => {
     // console.log('USE EFFECT !');
     getServicesList();
     getServicesListByPostalCode(sessionStorage.getItem('postalcode'));
+    getCategoriesList();
   }, []);
 
   return (
@@ -51,8 +46,25 @@ const HomeConnected = ({
           <Segment className="home__connected__services" raised>
             <Header as="h2" dividing textAlign="center" className="home__connected__services__title">ANNONCES</Header>
             <div className="home__connected__services__filter">
-              <Select placeholder="Filtre par catégorie" options={dropdownOptions} />
-              <Select placeholder="Filtre par type" options={dropdownOptions} />
+              <Select
+                onChange={(evt, { value }) => filterByCategory(value)}
+                placeholder="Filtre par catégorie"
+                options={categories}
+                clearable
+              />
+              {
+                (servicesPostalCodeResults || servicesResults) ? (
+                  <Label>
+                    Ma zone: {servicesPostalCodeResults} résultat(s) | Toutes: {servicesResults} résultat(s)
+                  </Label>
+                ) : null
+              }
+              {/* <Select
+                onChange={(evt, { value }) => console.log('change type : ', value)}
+                placeholder="Filtre par type"
+                options={dropdownOptionsType}
+                clearable
+              /> */}
             </div>
             <Button.Group fluid>
               <Button
@@ -104,8 +116,16 @@ HomeConnected.propTypes = {
   servicesPostalcode: PropTypes.arrayOf(
     PropTypes.object.isRequired,
   ).isRequired,
+  categories: PropTypes.arrayOf(
+    PropTypes.object.isRequired,
+  ).isRequired,
+  servicesResults: PropTypes.number.isRequired,
+  servicesPostalCodeResults: PropTypes.number.isRequired,
   selectedList: PropTypes.bool.isRequired,
   setSelectedList: PropTypes.func.isRequired,
+  getServicesListByPostalCode: PropTypes.func.isRequired,
+  getCategoriesList: PropTypes.func.isRequired,
+  filterByCategory: PropTypes.func.isRequired,
 };
 
 // == Export

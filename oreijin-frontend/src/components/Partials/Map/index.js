@@ -85,6 +85,7 @@ Map.propTypes = {
   viewport: PropTypes.object.isRequired,
   services: PropTypes.array.isRequired,
   onChangeViewport: PropTypes.func.isRequired,
+  setSelectedService: PropTypes.func.isRequired,
   selectedService: PropTypes.object,
 };
 

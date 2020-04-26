@@ -18,9 +18,9 @@ class ExceptionListener
             case $exception instanceof ValidatorException:
                 $message['errors'] = $exception->getErrors();
             break;
-            case $exception instanceof NotFoundHttpException:
-                $message['message'] = 'not found';
-            break;
+            // case $exception instanceof NotFoundHttpException:
+            //     $message['message'] = 'not found';
+            // break;
             default:
             return;
         }

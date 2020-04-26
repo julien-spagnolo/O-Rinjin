@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS } from '../actions/user';
+import { LOGIN_SUCCESS, UPDATE_PROFILE_SUCCESS } from '../actions/user';
 import { ON_CHANGE_VIEWPORT, SET_SELECTED_SERVICE } from '../actions/map';
 
 const initialState = {
@@ -14,6 +14,7 @@ const initialState = {
 
 const map = (state = initialState, action = {}) => {
   switch (action.type) {
+    case UPDATE_PROFILE_SUCCESS:
     case LOGIN_SUCCESS:
       return {
         viewport: {

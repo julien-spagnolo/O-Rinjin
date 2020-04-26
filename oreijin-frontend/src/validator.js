@@ -86,7 +86,9 @@ const validator = {
    * @return {bool} true if it matches
    */
   checkCity: (city) => {
-    const regex = /^[a-zA-Z-ÉéÏïèÈë ]{1,}$/;
+
+    const regex = /^[a-zA-Z-ÉéÏïèÈëÀà ]{1,}$/;
+
     return regex.test(city);
   },
 
@@ -108,7 +110,9 @@ const validator = {
    * @return {bool} true if it matches
    */
   checkServiceTitle: (title) => {
-    const regex = /^[a-zA-Z0-9-!?'.,ÉÈéèàÀôÔïÏë ]{10,60}$/;
+
+    const regex = /^[a-zA-Z0-9-!?'.,ÉÈéèàÀôÔïîÏëçÇ ]{10,60}$/;
+
     return regex.test(title);
   },
 
@@ -119,7 +123,9 @@ const validator = {
    * @return {bool} true if it matches
    */
   checkServiceDescription: (description) => {
-    const regex = /^[a-zA-Z0-9-!?'.()",+;:@_#&/=éèàÏïôÔÉÈëË% ]{50,280}$/;
+
+    const regex = /^[a-zA-Z0-9-!?'.",+;:@_#&/=éèàÏïîÎ$*¥€ôÔÉÈëË%çùÇÙ ]{50,280}$/;
+
     return regex.test(description);
   },
 
@@ -138,7 +144,9 @@ const validator = {
   checkServiceType: (value) => typeof value === 'boolean',
 
   checkReply: (value) => {
-    const regex = /^[a-zA-Z0-9-!?'.()",+;:@_#&/=éèàÏïôÔÉÈëË% ]{1,140}$/;
+
+    const regex = /^[a-zA-Z0-9-!?'.()",+;:@_#&/=éèàÏïôÔÉÈëË%çùÇÙ ]{1,140}$/;
+
     return regex.test(value);
   },
 

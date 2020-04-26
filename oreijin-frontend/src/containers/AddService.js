@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import slugify from 'slugify';
 import AddService from '../components/Member/AddService';
 import { getCategoriesList } from '../actions/categories';
 import {
@@ -15,6 +16,7 @@ const mapStateToProps = (state) => ({
   isSuccess: state.services.isSuccess,
   isError: state.services.isError,
   errors: state.services.errors,
+  userSlug: slugify(`${sessionStorage.getItem('firstname')} ${sessionStorage.getItem('lastname')} ${sessionStorage.getItem('id')}`, { lower: true }),
 });
 
 const mapDispatchToProps = (dispatch) => ({
