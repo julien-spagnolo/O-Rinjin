@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import auth from '../../auth';
-import HomeVisitor from "./HomeVisitor";
+import HomeVisitor from '../../containers/HomeVisitor';
 
 import './styles.scss';
 

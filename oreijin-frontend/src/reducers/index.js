@@ -5,6 +5,7 @@ import services from './services';
 import categories from './categories';
 import comments from './comments';
 import map from './map';
+import homeVisitor from './homeVisitor';
 
 export default combineReducers({
   user,
@@ -13,4 +14,5 @@ export default combineReducers({
   services,
   categories,
   comments,
+  homeVisitor,
 });
