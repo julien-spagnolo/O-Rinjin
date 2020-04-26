@@ -20,7 +20,7 @@ class Service
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups({"services-list", "services-read", "service-add", "service-edit", "services-browse"})
-g     */
+     */
     private $id;
 
     /**
