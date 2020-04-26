@@ -58,6 +58,11 @@ const userMiddleware = (store) => (next) => (action) => {
           })
             .then((res) => {
               // console.log(res.data);
+              // update user address
+              sessionStorage.setItem('city', `${store.getState().user.profileForm.city}`);
+              sessionStorage.setItem('address', `${store.getState().user.profileForm.address}`);
+              sessionStorage.setItem('postalcode', `${store.getState().user.profileForm.postalCode}`);
+
               store.dispatch(updateProfileSuccess());
             })
             .catch((err) => {

@@ -1,7 +1,8 @@
 import {
-  CHANGE_LOGIN_FIELD, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_LOADING,
+  CHANGE_LOGIN_FIELD, CHANGE_PROFILE_FIELD,
+  LOGIN_SUCCESS, LOGIN_ERROR,
+  LOGOUT_SUCCESS, LOGIN_LOADING,
   DELETE_ACCOUNT_SUCCESS, DELETE_ACCOUNT_ERROR, GET_USER_SUCCESS,
-  CHANGE_PROFILE_FIELD,
   GET_USER_SERVICES_LIST_SUCCESS,
   UPDATE_PROFILE_ERROR, UPDATE_PROFILE_SUCCESS,
 } from '../actions/user';
@@ -103,12 +104,14 @@ export default (state = initialState, action = {}) => {
       };
     case UPDATE_PROFILE_ERROR:
     case LOGIN_FORM_ERROR:
+    case LOGIN_ERROR:
       return {
         ...state,
         isError: true,
         errors: [
           ...action.payload,
         ],
+        loading: false,
       };
     case UPDATE_PROFILE_SUCCESS:
       return {

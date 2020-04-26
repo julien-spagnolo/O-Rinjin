@@ -4,7 +4,7 @@ import {
   Header, Container, Segment, Form, Button, Select, Radio, Message, Label,
 } from 'semantic-ui-react';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import Validator from '../../../validator';
 
@@ -13,7 +13,7 @@ import './styles.scss';
 const AddService = ({
   form, onChangeField, onChangeFieldType,
   addService, isSuccess, isError, resetServiceForm,
-  categories, getCategoriesList, errors,
+  categories, getCategoriesList, errors, userSlug,
 }) => {
   useEffect(() => {
     // console.log('//== useEffect !!!');
@@ -23,6 +23,14 @@ const AddService = ({
 
   return (
     <Container>
+      {/* {
+        isSuccess && setTimeout(() => {
+          history.push(`/${userSlug}/services`);
+        }, 5000)
+      } */}
+      {
+        isSuccess && <Redirect to={`/${userSlug}/services`} />
+      }
       <Segment raised>
         <Header as="h1" dividing textAlign="center">Créer un service</Header>
         <Form
@@ -39,7 +47,7 @@ const AddService = ({
             success
             hidden={!isSuccess}
             header="Création d'un service réussi !"
-            content="Vous n'avez plus qu'a attendre une réponse d'un de nos utilisateurs !"
+            content="Vous n'avez plus qu'a attendre une réponse d'un de nos utilisateurs ! Vous serez redirigé vers la page ..."
           />
           <Message
             error
@@ -152,7 +160,7 @@ const AddService = ({
                 </Form.Group> */}
           <Button disabled style={{ marginBottom: '0.7rem' }} content="Importer une image" icon="upload" labelPosition="left" />
           {
-            form.body !== '' && !Validator.checkServiceDescription(form.body) ? <Label basic color="red" pointing="below">Indiquez une description valide. caractères spéciaux autorisés : -!?'.()",+;:</Label> : null
+            form.body !== '' && !Validator.checkServiceDescription(form.body) ? <Label basic color="red" pointing="below">Indiquez une description valide. (entre 50 et 280 caractères)</Label> : null
           }
           <Form.TextArea
             required
@@ -166,8 +174,8 @@ const AddService = ({
             style={{ minHeight: 150 }}
           />
           {/* TODO loading={loading}  */}
-          <Button as={Link} to="/home" secondary>Annuler</Button>
-          <Button type="submit" className="register__form__button">Valider</Button>
+          <Button as={Link} to="/home" secondary disabled={isSuccess}>Annuler</Button>
+          <Button type="submit" className="register__form__button" disabled={isSuccess}>Valider</Button>
         </Form>
       </Segment>
     </Container>
@@ -195,6 +203,7 @@ AddService.propTypes = {
   resetServiceForm: PropTypes.func.isRequired,
   getCategoriesList: PropTypes.func.isRequired,
   errors: PropTypes.array.isRequired,
+  userSlug: PropTypes.string.isRequired,
 };
 
 export default AddService;
