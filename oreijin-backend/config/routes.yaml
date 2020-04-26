@@ -3,8 +3,4 @@
 #    controller: App\Controller\DefaultController::index
 
 api_login_check:
-<<<<<<< HEAD
     path: /api/login_check
-=======
-    path: /api/login_check
->>>>>>> parent of 60f2a81... :white_check_mark: Back update access granted to home (#65)
