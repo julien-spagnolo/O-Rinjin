@@ -21,6 +21,7 @@ export const GET_SERVICES_LIST_BY_POSTAL_CODE = 'GET_SERVICES_LIST_BY_POSTAL_COD
 export const GET_SERVICES_LIST_BY_POSTAL_CODE_SUCCESS = 'GET_SERVICES_LIST_BY_POSTAL_CODE_SUCCESS';
 export const GET_SERVICES_LIST_BY_POSTAL_CODE_ERROR = 'GET_SERVICES_LIST_BY_POSTAL_CODE_ERROR';
 export const SET_SELECTED_LIST = 'SET_SELECTED_LIST';
+export const SET_IS_SUCCESS_FALSE = 'SET_IS_SUCCESS_FALSE';
 
 export const setSelectedList = (payload) => ({
   type: SET_SELECTED_LIST,
@@ -127,4 +128,8 @@ export const editServiceError = (payload) => ({
 export const onChangeFieldEdit = (payload) => ({
   type: ON_CHANGE_FIELD_EDIT,
   payload,
+});
+
+export const setIsSuccessFalse = () => ({
+  type: SET_IS_SUCCESS_FALSE,
 });

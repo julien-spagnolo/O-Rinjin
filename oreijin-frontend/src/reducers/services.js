@@ -8,7 +8,6 @@ import {
   ADD_SERVICE_SUCCESS,
   ADD_SERVICE_ERROR,
   RESET_SERVICE_FORM,
-  DELETE_SERVICE_SUCCESS,
   DELETE_SERVICE_ERROR,
   GET_SERVICE_SUCCESS,
   ON_CHANGE_FIELD_EDIT,
@@ -17,6 +16,7 @@ import {
   TOGGLE_LOADING,
   GET_SERVICES_LIST_BY_POSTAL_CODE_SUCCESS,
   SET_SELECTED_LIST,
+  SET_IS_SUCCESS_FALSE,
 } from '../actions/service';
 import { GET_USER_SUCCESS } from '../actions/user';
 
@@ -102,7 +102,6 @@ export default (state = initialState, action = {}) => {
         },
       };
     case ADD_SERVICE_SUCCESS:
-    case DELETE_SERVICE_SUCCESS:
     case EDIT_SERVICE_SUCCESS:
       return {
         ...state,
@@ -115,6 +114,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         isError: true,
+        isSucces: false,
         errors: [...action.payload],
       };
     case RESET_SERVICE_FORM:
@@ -184,6 +184,11 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         selectedList: action.payload,
+      };
+    case SET_IS_SUCCESS_FALSE:
+      return {
+        ...state,
+        isSuccess: false,
       };
     default:
       return state;

@@ -15,6 +15,7 @@ import './styles.scss';
 const ServicesList = ({
   getUserServicesList, services,
   isSuccess, isError,
+  setIsSuccessFalse,
 }) => {
   useEffect(() => {
     // TODO : replace getServicesList with getUserServices
@@ -25,11 +26,28 @@ const ServicesList = ({
     getUserServicesList();
   }, [isSuccess]);
 
+  const delayedHideMessage = () => {
+    // eslint-disable-next-line no-unused-vars
+    const timeoutId = setTimeout(() => {
+      console.log('set time out detected');
+      setIsSuccessFalse();
+    }, 3000);
+  };
+
   return (
     <Container>
       <Segment className="home__connected__services" raised>
         <Header as="h2" dividing textAlign="center" className="home__connected__services__title">Mes Annonces</Header>
         {/* <Message success hidden={!isSuccess} content="Le service a bien été supprimé." /> */}
+        {
+          isSuccess && delayedHideMessage()
+        }
+        <Message
+          success
+          hidden={!isSuccess}
+          header="Création d'un service réussi !"
+          content="Vous n'avez plus qu'a attendre une réponse d'un de nos utilisateurs !"
+        />
         <Message error hidden={!isError} content="Une erreur est survenue lors de la suppression du service." />
         {
           services.length === 0 ? 'Vous n\'avez créé aucun service.' : (
@@ -51,6 +69,7 @@ const ServicesList = ({
 ServicesList.propTypes = {
   services: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   getUserServicesList: PropTypes.func.isRequired,
+  setIsSuccessFalse: PropTypes.func.isRequired,
   isSuccess: PropTypes.bool.isRequired,
   isError: PropTypes.bool.isRequired,
 };
