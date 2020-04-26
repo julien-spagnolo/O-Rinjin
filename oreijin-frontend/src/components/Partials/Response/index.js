@@ -1,9 +1,9 @@
 // == Import npm
 import React from 'react';
+import { Link } from 'react-router-dom';
+import slugify from 'slugify';
 // == Import components that we need to use from Semantic-UI-React
-import {
-  Comment,
-} from 'semantic-ui-react';
+import { Comment } from 'semantic-ui-react';
 // == import prop-types library for prop types validation
 import PropTypes from 'prop-types';
 
@@ -18,7 +18,9 @@ const Response = ({
   <Comment>
     <Comment.Avatar src={logo} />
     <Comment.Content>
-      <Comment.Author>{/* {user.firstName} {user.lastName} */}Décommenter le nom</Comment.Author>
+      <Comment.Author as={Link} to={`/${slugify(`${user.firstName} ${user.lastName} ${user.id}`, { lower: true })}`}>
+        {user.firstName} {user.lastName}
+      </Comment.Author>
       <Comment.Metadata>
       </Comment.Metadata>
       <Comment.Text>
