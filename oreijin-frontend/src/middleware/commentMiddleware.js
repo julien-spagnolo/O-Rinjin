@@ -1,6 +1,8 @@
 import axios from 'axios';
 import baseURL from '../axios';
 
+import { getService } from '../actions/service';
+
 import {
   ADD_COMMENT, addCommentSuccess,
 } from '../actions/comments';
@@ -28,6 +30,8 @@ const commentMiddleware = (store) => (next) => (action) => {
           // console.log(action.payload);
           // console.log(res.data);
           store.dispatch(addCommentSuccess());
+          // to update comments list
+          store.dispatch(getService(store.getState().services.service.id));
         })
         .catch((err) => {
           console.log(err);

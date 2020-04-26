@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import {
-  Container, Header, Segment, Form, Image, Divider, Button, Message, Input,
+  Container, Header, Segment, Form, Image, Divider, Button, Message, Label,
 } from 'semantic-ui-react';
 
-import auth from '../../../auth';
+import Validator from '../../../validator';
+
 import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
 const Profil = ({
   onDeleteAccount,
-  error,
+  isError,
+  isSuccess,
   isLogged,
   getUser,
   userId,
@@ -19,6 +21,7 @@ const Profil = ({
   form,
   onChangeProfileField,
   onUpdateProfile,
+  errors,
 }) => {
   const history = useHistory();
 
@@ -57,13 +60,34 @@ const Profil = ({
               </Divider>
               {/*  TODO - Add condition for form display */}
               <Container>
+                <Message
+                  success
+                  hidden={!isSuccess}
+                  header="Inscription réussi !"
+                  content="Allez sur la page de connexion !"
+                />
+                <Message
+                  error
+                  hidden={!isError}
+                >
+                  <Message.Header>L'inscription a échoué !</Message.Header>
+                  {
+                    errors.map((error) => (
+                      <div key={error}>{error}</div>
+                    ))
+                  }
+                </Message>
                 <Form
                   onSubmit={(evt) => {
                     evt.preventDefault();
-                    onUpdateProfile();
+                    if (Validator.checkProfileForm(form)) onUpdateProfile();
+                    else console.log('Erreur edit profile');
                   }}
                 >
                   <Form.Field>
+                    {
+                      !Validator.checkName(form.firstName) ? <Label basic color="red" pointing="below">Indiquez un prénom valide</Label> : null
+                    }
                     <Form.Input
                       label="Prénom"
                       placeholder={profile.firstName}
@@ -75,6 +99,9 @@ const Profil = ({
                     />
                   </Form.Field>
                   <Form.Field>
+                    {
+                      !Validator.checkName(form.lastName) ? <Label basic color="red" pointing="below">Indiquez un nom valide</Label> : null
+                    }
                     <Form.Input
                       label="Nom"
                       placeholder={profile.lastName}
@@ -96,6 +123,9 @@ const Profil = ({
                           [evt.target.name]: evt.target.value,
                         })}
                       />
+                      {
+                        !Validator.checkAddress(form.address) ? <Label basic color="red" pointing>Indiquez une adresse valide.</Label> : null
+                      }
                     </Form.Field>
                     <Form.Field width={4}>
                       <Form.Input
@@ -108,6 +138,9 @@ const Profil = ({
                           [evt.target.name]: evt.target.value,
                         })}
                       />
+                      {
+                        !Validator.checkCity(form.city) ? <Label basic color="red" pointing>Indiquez une ville valide.</Label> : null
+                      }
                     </Form.Field>
                     <Form.Field width={4}>
                       <Form.Input
@@ -120,6 +153,9 @@ const Profil = ({
                           [evt.target.name]: evt.target.value,
                         })}
                       />
+                      {
+                        !Validator.checkPostalCode(form.postalCode) ? <Label basic color="red" pointing>Indiquez un code postal valide</Label> : null
+                      }
                     </Form.Field>
                   </Form.Group>
                   <Button
@@ -142,7 +178,7 @@ const Profil = ({
                   La suppression de votre compte est définitive.
                   Vous perdrez toutes les informations et les services liés à ce compte.
                 </p>
-                <Message error hidden={!error} content="Une erreur est survenue lors de la suppression de votre compte." />
+                <Message error hidden={!isError} content="Une erreur est survenue lors de la suppression de votre compte." />
                 <Button
                   className="profil__delete__button"
                   size="small"
@@ -169,6 +205,9 @@ Profil.propTypes = {
   userId: PropTypes.string.isRequired,
   profile: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
+  isError: PropTypes.bool.isRequired,
+  isSuccess: PropTypes.bool.isRequired,
+  errors: PropTypes.array.isRequired,
 };
 
 

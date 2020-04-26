@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Header, Container, Segment, Form, Button, Select, Radio, Message,
+  Header, Container, Segment, Form, Button, Select, Radio, Message, Label,
 } from 'semantic-ui-react';
 import { Link, useHistory } from 'react-router-dom';
 // import './styles.scss';
+
+import Validator from '../../../validator';
 
 const UpdateService = ({
   id, categories, getCategoriesList,
@@ -12,6 +14,7 @@ const UpdateService = ({
   form, userId, editService,
   resetServiceForm,
   isSuccess, isError,
+  errors,
 }) => {
   const history = useHistory();
   useEffect(() => {
@@ -34,7 +37,8 @@ const UpdateService = ({
         <Form
           onSubmit={(evt) => {
             evt.preventDefault();
-            editService();
+            if (Validator.checkServiceForm(form, categories)) editService();
+            else console.log('Error edit service');
           }}
           success
           error
@@ -48,10 +52,18 @@ const UpdateService = ({
           <Message
             error
             hidden={!isError}
-            header="La modification du service a échoué !"
-            content="Veuillez remplir à nouveau le formulaire"
-          />
+          >
+            <Message.Header>La modification du service a échoué !</Message.Header>
+            {
+              errors.map((error) => (
+                <div key={error}>{error}</div>
+              ))
+            }
+          </Message>
           <Form.Field width={16}>
+            {
+              !Validator.checkServiceTitle(form.title) ? <Label basic color="red" pointing="below">Indiquez un titre valide. caractères spéciaux autorisés : -!?'.,</Label> : null
+            }
             <Form.Input
               required
               label="Intitulé du service"
@@ -64,6 +76,9 @@ const UpdateService = ({
               value={form.title}
             />
           </Form.Field>
+          {
+            !form.serviceCategory ? <Label basic color="red" pointing="below">Sélectionnez une catégorie.</Label> : null
+          }
           <Form.Group>
             <Form.Field
               required
@@ -102,7 +117,10 @@ const UpdateService = ({
               </Form.Field>
             </Form.Group>
           </Form.Group>
-          <Button style={{ marginBottom: '0.7rem' }} content="Importer une image" icon="upload" labelPosition="left" />
+          <Button style={{ marginBottom: '0.7rem' }} content="Importer une image" icon="upload" labelPosition="left" disabled />
+          {
+            !Validator.checkServiceDescription(form.body) ? <Label basic color="red" pointing="below">Indiquez une description valide. caractères spéciaux autorisés : -!?'.()",+;:</Label> : null
+          }
           <Form.TextArea
             label="Description du service"
             placeholder="Ajoutez une description ... "
@@ -136,6 +154,7 @@ UpdateService.propTypes = {
   resetServiceForm: PropTypes.func.isRequired,
   isSuccess: PropTypes.bool.isRequired,
   isError: PropTypes.bool.isRequired,
+  errors: PropTypes.array.isRequired,
 };
 
 export default UpdateService;

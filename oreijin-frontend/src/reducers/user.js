@@ -3,7 +3,10 @@ import {
   DELETE_ACCOUNT_SUCCESS, DELETE_ACCOUNT_ERROR, GET_USER_SUCCESS,
   CHANGE_PROFILE_FIELD,
   GET_USER_SERVICES_LIST_SUCCESS,
+  UPDATE_PROFILE_ERROR, UPDATE_PROFILE_SUCCESS,
 } from '../actions/user';
+
+import { LOGIN_FORM_ERROR } from '../actions/form';
 
 
 const initialState = {
@@ -18,6 +21,7 @@ const initialState = {
   loading: false,
   isSuccess: false,
   isError: false,
+  errors: [],
 };
 
 export default (state = initialState, action = {}) => {
@@ -37,6 +41,10 @@ export default (state = initialState, action = {}) => {
           username: '',
           password: '',
         },
+        infos: {
+          ...action.payload,
+        },
+        errors: [],
         services: [],
         isLogged: true,
         loading: false,
@@ -51,6 +59,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: true,
+        errors: [],
       };
     case DELETE_ACCOUNT_SUCCESS:
       return {
@@ -91,6 +100,22 @@ export default (state = initialState, action = {}) => {
         services: [
           ...action.payload,
         ],
+      };
+    case UPDATE_PROFILE_ERROR:
+    case LOGIN_FORM_ERROR:
+      return {
+        ...state,
+        isError: true,
+        errors: [
+          ...action.payload,
+        ],
+      };
+    case UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isError: false,
+        isSuccess: true,
+        errors: [],
       };
     default:
       return state;

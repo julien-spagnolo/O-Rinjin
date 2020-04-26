@@ -2,7 +2,7 @@ import {
 
   ON_CHANGE_FIELD, ON_TOGGLE_TC, LOADING_REGISTER,
 
-  UPDATE_LOCATION, UPDATE_LOCATION_ERROR, HANDLE_SUBMIT_SUCCESS,
+  UPDATE_LOCATION, UPDATE_LOCATION_ERROR, HANDLE_SUBMIT_SUCCESS, HANDLE_SUBMIT_ERROR,
 } from '../actions/register';
 
 const initialState = {
@@ -12,6 +12,7 @@ const initialState = {
     birthdate: '',
     email: '',
     plainPassword: '',
+    verificationPassword: '',
     address: '',
     city: '',
     postalcode: '',
@@ -22,6 +23,7 @@ const initialState = {
   isSuccess: false,
   isError: false,
   loading: false,
+  errors: [],
 };
 
 const register = (state = initialState, action = {}) => {
@@ -50,12 +52,15 @@ const register = (state = initialState, action = {}) => {
     case UPDATE_LOCATION_ERROR:
       return {
         ...state,
-
         form: { ...state.form },
         isError: true,
+        loading: false,
+        errors: [
+          ...state.errors,
+          ...action.payload,
+        ],
       };
     case LOADING_REGISTER:
-
       return {
         ...state,
         loading: true,
@@ -63,8 +68,19 @@ const register = (state = initialState, action = {}) => {
     case HANDLE_SUBMIT_SUCCESS:
       return {
         ...state,
-        loading: false,
         isSuccess: true,
+        isError: false,
+        loading: false,
+        errors: [],
+      };
+    case HANDLE_SUBMIT_ERROR:
+      return {
+        ...state,
+        loading: false,
+        isError: true,
+        errors: [
+          ...action.payload,
+        ],
       };
     default:
       return state;

@@ -19,7 +19,7 @@ class Service
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"services-list", "services-read", "service-add", "service-edit", "services-browse"})
+     * @Groups({"services-list", "services-read", "service-add", "service-edit", "services-browse", "comments-browse"})
      */
     private $id;
 

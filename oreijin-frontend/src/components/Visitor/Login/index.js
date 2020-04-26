@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import {
-  Button, Form, Container, Segment, Header,
+  Button, Form, Container, Segment, Header, Message,
 } from 'semantic-ui-react';
-
+import Validator from '../../../validator';
 import './styles.scss';
 
 const Login = ({
@@ -15,10 +15,13 @@ const Login = ({
   password,
   isLogged,
   loading,
+  loginFormError,
+  errors,
 }) => {
   const history = useHistory();
   const handleSubmit = () => {
-    handleLogin();
+    if (Validator.checkEmail(username) && Validator.checkPassword(password)) handleLogin();
+    else loginFormError(['Votre email ou mot de passe est invalide !']);
   };
 
   // Called everytime 'isLogged' changes
@@ -26,7 +29,7 @@ const Login = ({
     // Redirect to page '/home' after submit
     // We redirect to /home only if isLogged is true
     if (isLogged) history.push('/home');
-  }, [isLogged]);
+  }, [isLogged, errors.length]);
 
   return (
     <Container>
@@ -43,6 +46,7 @@ const Login = ({
             value={username}
             onChange={(event) => {
               changeField(event.target.value, event.target.name);
+              console.log(Validator.checkEmail(event.target.value));
             }}
           />
           <Form.Input
@@ -55,10 +59,12 @@ const Login = ({
             value={password}
             onChange={(event) => {
               changeField(event.target.value, event.target.name);
+              console.log(Validator.checkPassword(event.target.value));
             }}
           />
           <Button loading={loading} className="login__form__button">Connexion</Button>
         </Form>
+        <Message error hidden={errors.length === 0} content={errors[0]} />
       </Segment>
     </Container>
   );
@@ -72,6 +78,8 @@ Login.propTypes = {
   handleLogin: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
+  loginFormError: PropTypes.func.isRequired,
+  errors: PropTypes.array.isRequired,
 };
 
 export default Login;

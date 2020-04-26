@@ -16,6 +16,7 @@ const mapStateToProps = (state, ownProps) => ({
   form: state.services.editForm,
   isSuccess: state.services.isSuccess,
   isError: state.services.isError,
+  errors: state.services.errors,
 });
 
 // const mapDispatchToProps = {};

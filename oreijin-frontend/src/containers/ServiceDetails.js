@@ -6,6 +6,7 @@ import ServiceDetails from '../components/Member/ServiceDetails';
 import { findCategoryById } from '../reducers/categories';
 import { addComment, onChangeFieldReply } from '../actions/comments';
 import { getUser } from '../actions/user';
+import { replyFormError } from '../actions/form';
 
 const mapStateToProps = (state, ownProps) => ({
   service: state.services.service,
@@ -13,6 +14,7 @@ const mapStateToProps = (state, ownProps) => ({
   id: getServiceIdFromSlug(ownProps.match.params.slug),
   category: findCategoryById(state.services.service.serviceCategory.id, state.categories),
   commentListLength: state.comments.list.length,
+  isError: state.comments.isError,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -20,6 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
   getService: (payload) => dispatch(getService(payload)),
   getCategoriesList: () => dispatch(getCategoriesList()),
   addComment: (payload) => dispatch(addComment(payload)),
+  replyFormError: () => dispatch(replyFormError()),
   getUser: (payload) => dispatch(getUser(payload)),
 });
 

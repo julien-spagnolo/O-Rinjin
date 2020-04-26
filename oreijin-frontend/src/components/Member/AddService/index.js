@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Header, Container, Segment, Form, Button, Select, Radio, Message,
+  Header, Container, Segment, Form, Button, Select, Radio, Message, Label,
 } from 'semantic-ui-react';
+
 import { Link } from 'react-router-dom';
+
+import Validator from '../../../validator';
+
 import './styles.scss';
 
 const AddService = ({
   form, onChangeField, onChangeFieldType,
   addService, isSuccess, isError, resetServiceForm,
-  categories, getCategoriesList,
+  categories, getCategoriesList, errors,
 }) => {
   useEffect(() => {
     // console.log('//== useEffect !!!');
@@ -24,8 +28,9 @@ const AddService = ({
         <Form
           onSubmit={(evt) => {
             evt.preventDefault();
-            console.log(form.user);
-            addService(form.user);
+            // console.log(form.user);
+            if (Validator.checkServiceForm(form, categories)) addService(form.user);
+            else console.log('Error submit form');
           }}
           success
           error
@@ -39,14 +44,22 @@ const AddService = ({
           <Message
             error
             hidden={!isError}
-            header="La création du service a échoué !"
-            content="Veuillez remplir à nouveau le formulaire"
-          />
+          >
+            <Message.Header>La création du service a échoué !</Message.Header>
+            {
+              errors.map((error) => (
+                <div key={error}>{error}</div>
+              ))
+            }
+          </Message>
           <Form.Field width={16}>
+            {
+              form.title !== '' && !Validator.checkServiceTitle(form.title) ? <Label basic color="red" pointing="below">Indiquez un titre valide. caractères spéciaux autorisés : -!?'.,</Label> : null
+            }
             <Form.Input
               required
               label="Intitulé du service"
-              placeholder="Intitulé du service"
+              placeholder="Intitulé du service (entre 10 et 60 caractères)"
               type="text"
               name="title"
               onChange={(evt) => {
@@ -55,6 +68,9 @@ const AddService = ({
               value={form.title}
             />
           </Form.Field>
+          {
+            !form.serviceCategory ? <Label basic color="red" pointing="below">Sélectionnez une catégorie.</Label> : null
+          }
           <Form.Group>
             <Form.Field
               required
@@ -63,10 +79,10 @@ const AddService = ({
               label="Catégorie"
               options={categories}
               placeholder="Choisir une catégorie"
-              clearable
               name="category"
               onChange={(evt, { value }) => {
                 onChangeField('serviceCategory', value);
+                console.log(Validator.checkServiceCategory(value, categories));
               }}
             />
             <Form.Group grouped>
@@ -81,6 +97,7 @@ const AddService = ({
                   checked={form.type === false}
                   onChange={(evt, { value }) => {
                     onChangeFieldType(value);
+                    // console.log(value);
                   }}
                 />
               </Form.Field>
@@ -92,6 +109,7 @@ const AddService = ({
                   checked={form.type === true}
                   onChange={(evt, { value }) => {
                     onChangeFieldType(value);
+                    console.log(value);
                   }}
                 />
               </Form.Field>
@@ -132,10 +150,14 @@ const AddService = ({
               // }}
             />
                 </Form.Group> */}
-          <Button style={{ marginBottom: '0.7rem' }} content="Importer une image" icon="upload" labelPosition="left" />
+          <Button disabled style={{ marginBottom: '0.7rem' }} content="Importer une image" icon="upload" labelPosition="left" />
+          {
+            form.body !== '' && !Validator.checkServiceDescription(form.body) ? <Label basic color="red" pointing="below">Indiquez une description valide. caractères spéciaux autorisés : -!?'.()",+;:</Label> : null
+          }
           <Form.TextArea
+            required
             label="Description du service"
-            placeholder="Ajoutez une description ... "
+            placeholder="Ajoutez une description (entre 50 et 280 caractères)"
             value={form.body}
             name="body"
             onChange={(evt) => {
@@ -159,6 +181,10 @@ AddService.propTypes = {
     type: PropTypes.bool.isRequired,
     image: PropTypes.string,
     user: PropTypes.number,
+    serviceCategory: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   }).isRequired,
   categories: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   isSuccess: PropTypes.bool.isRequired,
@@ -168,6 +194,7 @@ AddService.propTypes = {
   addService: PropTypes.func.isRequired,
   resetServiceForm: PropTypes.func.isRequired,
   getCategoriesList: PropTypes.func.isRequired,
+  errors: PropTypes.array.isRequired,
 };
 
 export default AddService;

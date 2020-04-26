@@ -11,18 +11,19 @@ import { Link } from 'react-router-dom';
 import './style.scss';
 import logo from '../../../assets/images/logo.png';
 import Response from '../../../containers/Response';
+import Validator from '../../../validator';
 
 const ServiceDetails = ({
   onChangeFieldReply, reply,
   id,
   getService, service,
   category, getCategoriesList,
-  addComment,
+  addComment, isError, replyFormError,
 }) => {
   useEffect(() => {
     if (!category) getCategoriesList();
     getService(id);
-  }, [reply]);
+  }, []);
 
   return (
     <Segment as={Container} className="service" raised>
@@ -120,9 +121,13 @@ const ServiceDetails = ({
             reply
             onSubmit={(evt) => {
               evt.preventDefault();
-              addComment();
+              if (Validator.checkReply(reply)) addComment();
+              else replyFormError();
             }}
           >
+            {
+              isError && reply === '' && <Label basic color="red" pointing="below">Entrez un commentaire</Label>
+            }
             <TextArea
               placeholder="Envoyer une réponse"
               value={reply}
