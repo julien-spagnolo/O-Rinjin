@@ -7,7 +7,6 @@ import {
 
 import Validator from '../../../validator';
 
-import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
 const Profil = ({
@@ -23,10 +22,12 @@ const Profil = ({
   onUpdateProfile,
   errors,
   uploadImage,
+  avatar,
 }) => {
   const history = useHistory();
   // Need to use useState because we can't have a file with redux
   const [file, setFile] = useState(null);
+
   // Called everytime 'isLogged' changes
   useEffect(() => {
     // Redirect to page '/home' after submit
@@ -44,14 +45,15 @@ const Profil = ({
       <Segment textAlign="center">
         <Header as="h1">Profil</Header>
         <Container className="service__details__avatar">
-          <Image src={logo} size="small" />
+          <Image src={avatar} size="small" circular/>
           {
             profile.email === sessionStorage.getItem('username') && (
               <Form
                 onSubmit={(evt) => {
                   evt.preventDefault();
                   // console.log('submit upload');
-                  uploadImage(file);
+                  if (Validator.checkImageSize(file)) uploadImage(file);
+                  else alert('Votre image est trop lourde. (2Mb max)');
                 }}
               >
                 <Button
@@ -61,6 +63,9 @@ const Profil = ({
                   type="button"
                   onClick={() => fileInputRef.current.click()}
                 />
+                {
+                  (file && !Validator.checkImageSize(file)) ? <Label basic color="red">Votre image est trop lourde. (2Mb max)</Label> : null
+                }
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -71,16 +76,11 @@ const Profil = ({
                     // console.log(evt.target.files[0]);
                     // console.log(evt.target);
                     setFile(evt.target.files[0]);
+                    // console.log(evt.target.files[0]);
                   }}
                 />
                 {
-                  file && (
-                    <Button
-                      type="submit"
-                      content="Upload"
-                      size="small"
-                    />
-                  )
+                  (file && Validator.checkImageSize(file)) ? <Button type="submit" content="Upload" size="small" /> : null
                 }
               </Form>
             )
@@ -250,6 +250,7 @@ Profil.propTypes = {
   isSuccess: PropTypes.bool.isRequired,
   errors: PropTypes.array.isRequired,
   uploadImage: PropTypes.func.isRequired,
+  avatar: PropTypes.string.isRequired,
 };
 
 

@@ -54,7 +54,6 @@ export default (state = initialState, action = {}) => {
         ...state,
         isLogged: false,
         services: [],
-        avatar: {},
       };
     case LOGIN_LOADING:
       return {
@@ -65,7 +64,6 @@ export default (state = initialState, action = {}) => {
     case DELETE_ACCOUNT_SUCCESS:
       return {
         ...state,
-        avatar: {},
         isLogged: false,
         isSuccess: true,
       };
@@ -86,7 +84,6 @@ export default (state = initialState, action = {}) => {
           postalCode: action.payload.postalCode,
           address: action.payload.address,
           city: action.payload.city,
-          avatar: {},
         },
       };
     case CHANGE_PROFILE_FIELD:

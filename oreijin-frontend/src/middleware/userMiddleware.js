@@ -125,8 +125,9 @@ const userMiddleware = (store) => (next) => (action) => {
             },
             withCredentials: true,
           })
-            .then((res) => {
-              console.log(res.data);
+            .then((response) => {
+              console.log(response.data);
+              sessionStorage.setItem('avatar', response.data.avatar);
               store.dispatch(updateProfileSuccess());
             })
             .catch((err) => {
@@ -136,7 +137,7 @@ const userMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.log(err);
-        })
+        });
       break;
     default:
       return next(action);

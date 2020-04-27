@@ -11,6 +11,13 @@ const validator = {
   },
 
   /**
+   * Checks if the email match the regex
+   * @param {File} image
+   * @return {bool} true if it matches
+   */
+  checkImageSize: (image) => image.size < 2000000,
+
+  /**
    * Checks if the password match the regex
    * The password must contain at least 1 lower case, 1 upper case
    * 1 numeric character, one special character and must be 6 characters to 15
@@ -86,7 +93,6 @@ const validator = {
    * @return {bool} true if it matches
    */
   checkCity: (city) => {
-
     const regex = /^[a-zA-Z-ÉéÏïèÈëÀà ]{1,}$/;
 
     return regex.test(city);
