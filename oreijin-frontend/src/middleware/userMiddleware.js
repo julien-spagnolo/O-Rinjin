@@ -7,9 +7,25 @@ import {
   UPDATE_PROFILE, updateProfileSuccess, updateProfileError,
   GET_USER_SERVICES_LIST, getUserServicesListSuccess, getUserServicesListError,
 } from '../actions/user';
+import { UPLOAD_IMAGE } from '../actions/uploads';
 
 import mapboxApiToken from '../../mapbox.config';
 
+const uploadAvatar = (avatar) => {
+  // console.log(action.payload);
+  const timestamp = Date.now() / 1000;
+  
+  const formData = new FormData();
+  formData.append('api_key', '917165839151738');
+  formData.append('file', avatar);
+  formData.append('timestamp', timestamp);
+  formData.append('upload_preset', 'ewfjt9wc');
+  // console.log(formData);
+
+  return axios.post('https://api.cloudinary.com/v1_1/orinjin/image/upload', formData);
+};
+
+      
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_USER:
@@ -92,6 +108,35 @@ const userMiddleware = (store) => (next) => (action) => {
           // console.log(err);
           store.dispatch(getUserServicesListError());
         });
+      break;
+    case UPLOAD_IMAGE:
+      // console.log(action.payload);
+      uploadAvatar(action.payload)
+        .then((res) => {
+          console.log(res.data);
+          axios({
+            method: 'put',
+            url: `${baseURL}/api/users/${store.getState().user.profile.id}`,
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+            },
+            data: {
+              avatar: res.data.url,
+            },
+            withCredentials: true,
+          })
+            .then((res) => {
+              console.log(res.data);
+              store.dispatch(updateProfileSuccess());
+            })
+            .catch((err) => {
+              // console.log(err);
+              store.dispatch(updateProfileError(['Erreur serveur !']));
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        })
       break;
     default:
       return next(action);

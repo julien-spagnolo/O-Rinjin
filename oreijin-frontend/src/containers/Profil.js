@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { deleteAccount, getUser, changeProfileField, updateProfile } from '../actions/user';
+import { uploadImage } from '../actions/uploads';
 import Profil from '../components/Member/Profil';
 import auth from '../auth';
 
@@ -19,6 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
   getUser: (payload) => dispatch(getUser(payload)),
   onChangeProfileField: (payload) => dispatch(changeProfileField(payload)),
   onUpdateProfile: () => dispatch(updateProfile()),
+  uploadImage: (payload) => dispatch(uploadImage(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profil);
