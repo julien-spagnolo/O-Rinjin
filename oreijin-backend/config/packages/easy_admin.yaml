@@ -1,5 +1,6 @@
 easy_admin:
-   entities:
+    site_name: "O'rinjin"
+    entities:
 
        - App\Entity\Comment
        - App\Entity\Service

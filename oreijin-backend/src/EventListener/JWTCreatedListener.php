@@ -42,6 +42,8 @@ class JWTCreatedListener{
         $payload['postalcode'] = $user->getPostalCode();
         $payload['latitude'] = $user->getLatitude();
         $payload['longitude'] = $user->getLongitude();
+        $payload['avatar'] = $user->getAvatar();
+
 
         // unset($payload['roles']);
 

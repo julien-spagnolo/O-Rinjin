@@ -10,9 +10,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Filesystem\Filesystem;
-
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -121,12 +118,8 @@ class User implements UserInterface
     private $birthDate;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     * @Groups({"users-list", "user-read", "user-add", "user-edit"})
-     * @Assert\File(
-     *      maxSize = "2048k",
-     *      mimeTypes = {"application/png", "application/jpg", "application/jpeg"},
-     *      mimeTypesMessage = "Please upload a valid format")
+     * @ORM\Column(type="string", length=200, nullable=true)
+     * @Groups({"users-list", "user-read", "user-add", "user-edit", "services-read", "services-browse", "comments-browse"})
      */
     private $avatar;
 
@@ -328,13 +321,9 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAvatar(): ?File
+    public function getAvatar(): ?String
     {
-        //return new File($this->avatar);
-        // above not working
-        // bypass using a temporary File
-        $filesystem = new Filesystem();
-        return new File($filesystem->tempnam('/tmp', 'efface_moi_'));
+        return $this->avatar;
     }
 
     public function setAvatar(?string $avatar): self
