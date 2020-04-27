@@ -120,6 +120,13 @@ export default (state = initialState, action = {}) => {
         isSuccess: true,
         errors: [],
       };
+    case UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isError: false,
+        isSuccess: true,
+        errors: [],
+      };
     default:
       return state;
   }
