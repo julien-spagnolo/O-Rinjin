@@ -42,7 +42,7 @@ class Service
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=250, nullable=true)
      * @Groups({"services-list", "services-read", "service-add", "service-edit", "services-browse"})
      */
     private $image;
