@@ -158,13 +158,14 @@ const validator = {
 
   checkServiceForm: (form, categoryList) => {
     const {
-      title, serviceCategory, type, body,
+      title, serviceCategory, type, body, image,
     } = { ...form };
 
     if (!validator.checkServiceTitle(title)) return false;
     if (!validator.checkServiceCategory(serviceCategory, categoryList)) return false;
     if (!validator.checkServiceType(type)) return false;
     if (!validator.checkServiceDescription(body)) return false;
+    if (image && !validator.checkImageSize(image)) return false;
     return true;
   },
 

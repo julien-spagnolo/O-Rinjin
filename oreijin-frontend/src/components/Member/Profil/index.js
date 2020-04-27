@@ -45,7 +45,7 @@ const Profil = ({
       <Segment textAlign="center">
         <Header as="h1">Profil</Header>
         <Container className="service__details__avatar">
-          <Image src={avatar} size="small" circular/>
+          <Image src={avatar} size="small" circular />
           {
             profile.email === sessionStorage.getItem('username') && (
               <Form

@@ -85,7 +85,7 @@ const ServiceDetails = ({
             </Divider>
             <Grid centered>
               <Grid.Row>
-                <Image src={logo} />
+                <Image src={service.image} size="large" />
               </Grid.Row>
             </Grid>
           </>
