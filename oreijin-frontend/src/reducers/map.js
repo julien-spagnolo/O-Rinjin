@@ -29,6 +29,8 @@ const map = (state = initialState, action = {}) => {
       return {
         viewport: {
           ...action.payload,
+          width: '100%',
+          height: '100%',
         },
       };
     case SET_SELECTED_SERVICE:
