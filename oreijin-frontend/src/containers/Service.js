@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { deleteService } from '../actions/service';
 import Service from '../components/Partials/Service';
 
-
 const mapStateToProps = (state) => ({
   isLogged: state.user.isLogged,
 });

@@ -8,6 +8,9 @@ import { addComment, onChangeFieldReply } from '../actions/comments';
 import { getUser } from '../actions/user';
 import { replyFormError } from '../actions/form';
 
+import logo from '../assets/images/logo.png';
+
+
 const mapStateToProps = (state, ownProps) => ({
   service: state.services.service,
   reply: state.comments.reply,
@@ -15,6 +18,7 @@ const mapStateToProps = (state, ownProps) => ({
   category: findCategoryById(state.services.service.serviceCategory.id, state.categories),
   commentListLength: state.comments.list.length,
   isError: state.comments.isError,
+  avatar: state.services.service.user.avatar ? state.services.service.user.avatar : logo,
 });
 
 const mapDispatchToProps = (dispatch) => ({
