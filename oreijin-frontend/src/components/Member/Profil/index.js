@@ -33,8 +33,8 @@ const Profil = ({
     // Redirect to page '/home' after submit
     // We redirect to /home only if isLogged is true
     // console.log(userId);
-    getUser(userId);
     if (!isLogged) history.push('/');
+    else getUser(userId);
   }, [isLogged, userId]);
 
   const fileInputRef = React.createRef();
