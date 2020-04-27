@@ -83,6 +83,7 @@ export default (store) => (next) => (action) => {
         });
       break;
     case ADD_SERVICE:
+      console.log(action.payload);
       axios({
         method: 'post',
         url: `${baseURL}/api/services`,
@@ -91,7 +92,8 @@ export default (store) => (next) => (action) => {
         },
         data: {
           ...store.getState().services.form,
-          user: action.payload,
+          user: action.payload.user,
+          image: action.payload.image,
         },
         withCredentials: true,
       })
@@ -103,7 +105,7 @@ export default (store) => (next) => (action) => {
           store.dispatch(getServicesList());
         })
         .catch((err) => {
-          // console.log(err);
+          console.log(err);
           store.dispatch(addServiceError(['Erreur serveur !']));
         });
       break;

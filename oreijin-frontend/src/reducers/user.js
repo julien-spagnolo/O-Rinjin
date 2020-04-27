@@ -9,7 +9,6 @@ import {
 
 import { LOGIN_FORM_ERROR } from '../actions/form';
 
-
 const initialState = {
   form: {
     username: '',
@@ -112,13 +111,6 @@ export default (state = initialState, action = {}) => {
           ...action.payload,
         ],
         loading: false,
-      };
-    case UPDATE_PROFILE_SUCCESS:
-      return {
-        ...state,
-        isError: false,
-        isSuccess: true,
-        errors: [],
       };
     case UPDATE_PROFILE_SUCCESS:
       return {

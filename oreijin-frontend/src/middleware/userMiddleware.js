@@ -3,10 +3,11 @@ import slugify from 'slugify';
 import axios from 'axios';
 import baseURL from '../axios';
 import {
-  GET_USER, getUserSuccess, getUserError,
+  GET_USER, getUserSuccess, getUser,
   UPDATE_PROFILE, updateProfileSuccess, updateProfileError,
   GET_USER_SERVICES_LIST, getUserServicesListSuccess, getUserServicesListError,
 } from '../actions/user';
+import { UPLOAD_IMAGE } from '../actions/uploads';
 
 import mapboxApiToken from '../../mapbox.config';
 

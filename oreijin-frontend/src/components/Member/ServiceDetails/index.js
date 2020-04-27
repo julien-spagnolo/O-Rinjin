@@ -9,7 +9,6 @@ import {
 import { Link } from 'react-router-dom';
 
 import './style.scss';
-import logo from '../../../assets/images/logo.png';
 import Response from '../../../containers/Response';
 import Validator from '../../../validator';
 
@@ -19,6 +18,7 @@ const ServiceDetails = ({
   getService, service,
   category, getCategoriesList,
   addComment, isError, replyFormError,
+  avatar,
 }) => {
   useEffect(() => {
     if (!category) getCategoriesList();
@@ -44,7 +44,7 @@ const ServiceDetails = ({
           <Grid.Column width={9} as={Item.Group}>
             {/* {console.log(service.user)} */}
             <Item>
-              <Item.Image src={logo} size="small" circular />
+              <Item.Image src={avatar} size="small" circular />
               <Item.Content className="service__user__content">
                 <Item.Header>{service.user.firstName} {service.user.lastName}</Item.Header>
                 <Item.Extra>
@@ -85,7 +85,7 @@ const ServiceDetails = ({
             </Divider>
             <Grid centered>
               <Grid.Row>
-                <Image src={logo} />
+                <Image src={service.image} size="large" />
               </Grid.Row>
             </Grid>
           </>

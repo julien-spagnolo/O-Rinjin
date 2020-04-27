@@ -43,7 +43,7 @@ const registerMiddleware = (store) => (next) => (action) => {
             })
             .catch((err) => {
               // console.log(err);
-              store.dispatch(handleSubmitError(['Cet email est déjà utilisé.']));
+              store.dispatch(handleSubmitError([err.message]));
             });
         })
         .catch(() => {
