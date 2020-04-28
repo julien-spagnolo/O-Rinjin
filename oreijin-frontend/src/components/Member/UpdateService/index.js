@@ -6,6 +6,7 @@ import {
 import { Link, useHistory } from 'react-router-dom';
 // import './styles.scss';
 
+import Page404 from '../../404';
 import Validator from '../../../validator';
 
 const UpdateService = ({
@@ -14,7 +15,7 @@ const UpdateService = ({
   form, userId, editService,
   resetServiceForm,
   isSuccess, isError,
-  errors,
+  errors, notFound,
 }) => {
   const history = useHistory();
   useEffect(() => {
@@ -29,6 +30,8 @@ const UpdateService = ({
     // console.log('authorID : ', author.id);
     if (author.id && userId && author.id !== userId) history.push('/home');
   }, [author]);
+
+  if (notFound) return <Page404 />;
 
   return (
     <Container>
@@ -155,6 +158,7 @@ UpdateService.propTypes = {
   isSuccess: PropTypes.bool.isRequired,
   isError: PropTypes.bool.isRequired,
   errors: PropTypes.array.isRequired,
+  notFound: PropTypes.bool.isRequired,
 };
 
 export default UpdateService;

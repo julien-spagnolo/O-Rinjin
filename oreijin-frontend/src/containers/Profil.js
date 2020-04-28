@@ -14,6 +14,7 @@ const mapStateToProps = (state, ownProps) => ({
   profile: state.user.profile,
   form: state.user.profileForm,
   errors: state.user.errors,
+  notFound: state.user.notFound,
   avatar: state.user.profile.avatar ? state.user.profile.avatar : logo,
 });
 

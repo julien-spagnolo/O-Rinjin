@@ -18,7 +18,6 @@ const ServicesList = ({
   setIsSuccessFalse,
 }) => {
   useEffect(() => {
-    // TODO : replace getServicesList with getUserServices
     getUserServicesList();
   }, []);
 

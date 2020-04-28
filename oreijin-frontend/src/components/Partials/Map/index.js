@@ -1,8 +1,14 @@
 import React, { useEffect } from 'react';
+import slugify from 'slugify';
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl';
+import { Link } from 'react-router-dom';
+import {
+  Label, Segment, Container, Header,
+} from 'semantic-ui-react';
 import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
 
+import Service from '../../../containers/Service';
 import mapToken from '../../../../mapbox.config';
 
 // == Import
@@ -45,32 +51,51 @@ const Map = ({
             latitude={parseFloat(service.user.latitude)}
             longitude={parseFloat(service.user.longitude)}
           >
-            <button
+            {/* <button
               type="button"
               onClick={(evt) => {
                 evt.preventDefault();
                 setSelectedService(service);
               }}
             >
-              <img style={{ width: '50px', height: '50px', borderRadius: '50%' }} src={logoMarker} alt="marqueur" />
-            </button>
+            </button> */}
+            <div
+              onClick={(evt) => {
+                evt.preventDefault();
+                setSelectedService(service);
+              }}
+              style={{ cursor: 'pointer' }}
+            >
+              <img
+                style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+                src={logoMarker}
+                alt="marqueur"
+              />
+            </div>
           </Marker>
         ))
       }
       {
         selectedService ? (
-          <Popup
+          <div
             className="map__popup"
-            latitude={parseFloat(selectedService.user.latitude)}
-            longitude={parseFloat(selectedService.user.longitude)}
-
-            onClose={() => {
+            onClick={() => {
               console.log('clic sur le popup WIP');
             }}
           >
-            <div>{selectedService.title}</div>
-            <div>{selectedService.type ? 'Demande' : 'Proposition'} - {selectedService.serviceCategory.title}</div>
-          </Popup>
+            {/* <div>{selectedService.title}</div>
+            <div>
+              <Label>{selectedService.type ? 'Proposition' : 'Demande'}</Label>
+              <Label>{selectedService.serviceCategory.title}</Label>
+            </div>
+            <div>Posté par {selectedService.user.firstName + ' ' + selectedService.user.lastName}</div>
+            <Link to={}></Link> */}
+            <Service
+              key={`${selectedService.title}-marker`}
+              {...selectedService}
+              slug={slugify(`${selectedService.id} ${selectedService.title}`, { lower: true })}
+            />
+          </div>
         ) : null
       }
     </ReactMapGL>

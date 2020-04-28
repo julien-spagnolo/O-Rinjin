@@ -29,7 +29,7 @@ const Service = ({
           <Image size="mini" src={user.avatar ? user.avatar : logo} circular />
           <Header.Content
             as={Link}
-            to={`/${slugify(`${user.firstName} ${user.lastName} ${user.id}`, { lower: true })}`}
+            to={`/user/${slugify(`${user.firstName} ${user.lastName} ${user.id}`, { lower: true })}`}
           >
             {`${user.firstName} ${user.lastName}`}
           </Header.Content>

@@ -93,7 +93,7 @@ export const getUserSuccess = (payload) => ({
 });
 
 export const getUserError = () => ({
-  type: DELETE_ACCOUNT_SUCCESS,
+  type: GET_USER_ERROR,
 });
 
 export const changeProfileField = (payload) => ({
