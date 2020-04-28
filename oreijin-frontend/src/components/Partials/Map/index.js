@@ -52,7 +52,7 @@ const Map = ({
                 setSelectedService(service);
               }}
             >
-              <img style={{ width: '50px', height: '50px', borderRadius: '50%' }} src={logoMarker} alt="marqueur" />
+              <img style={{ width: '50px', height: '50px', borderRadius: '50%' }} src={service.user.avatar ? service.user.avatar : logoMarker} alt="marqueur" />
             </button>
           </Marker>
         ))
