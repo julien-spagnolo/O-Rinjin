@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { deleteAccount, getUser, changeProfileField, updateProfile } from '../actions/user';
+import { uploadImage } from '../actions/uploads';
 import Profil from '../components/Member/Profil';
+import logo from '../assets/images/logo.png';
 import auth from '../auth';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -13,6 +15,7 @@ const mapStateToProps = (state, ownProps) => ({
   form: state.user.profileForm,
   errors: state.user.errors,
   notFound: state.user.notFound,
+  avatar: state.user.profile.avatar ? state.user.profile.avatar : logo,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -20,6 +23,7 @@ const mapDispatchToProps = (dispatch) => ({
   getUser: (payload) => dispatch(getUser(payload)),
   onChangeProfileField: (payload) => dispatch(changeProfileField(payload)),
   onUpdateProfile: () => dispatch(updateProfile()),
+  uploadImage: (payload) => dispatch(uploadImage(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profil);

@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import {
-  Container, Header, Segment, Form, Image, Divider, Button, Message, Label,
+  Container, Header, Segment, Form, Image, Divider, Button, Message, Label, Input,
 } from 'semantic-ui-react';
 
 import Page404 from '../../404';
 import Validator from '../../../validator';
 
-import logo from '../../../assets/images/logo.png';
 import './styles.scss';
 
 const Profil = ({
@@ -24,17 +23,24 @@ const Profil = ({
   onUpdateProfile,
   errors,
   notFound,
+  uploadImage,
+  avatar,
+
 }) => {
   const history = useHistory();
+  // Need to use useState because we can't have a file with redux
+  const [file, setFile] = useState(null);
 
   // Called everytime 'isLogged' changes
   useEffect(() => {
     // Redirect to page '/home' after submit
     // We redirect to /home only if isLogged is true
     // console.log(userId);
-    getUser(userId);
     if (!isLogged) history.push('/');
+    else getUser(userId);
   }, [isLogged, userId]);
+
+  const fileInputRef = React.createRef();
 
   // console.log(userInfos);
   if (notFound) return <Page404 />;
@@ -44,9 +50,45 @@ const Profil = ({
       <Segment textAlign="center">
         <Header as="h1">Profil</Header>
         <Container className="service__details__avatar">
-          <Image src={logo} size="small" />
+          <Image src={avatar} size="small" circular />
           {
-            profile.email === sessionStorage.getItem('username') && <Button className="profil__import__button" size="small" color="blue">Importer une photo</Button>
+            profile.email === sessionStorage.getItem('username') && (
+              <Form
+                onSubmit={(evt) => {
+                  evt.preventDefault();
+                  // console.log('submit upload');
+                  if (Validator.checkImageSize(file)) uploadImage(file);
+                  else alert('Votre image est trop lourde. (2Mb max)');
+                }}
+              >
+                <Button
+                  content="Choisir une photo"
+                  className="profil__import__button"
+                  size="small"
+                  type="button"
+                  onClick={() => fileInputRef.current.click()}
+                />
+                {
+                  (file && !Validator.checkImageSize(file)) ? <Label basic color="red">Votre image est trop lourde. (2Mb max)</Label> : null
+                }
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  hidden
+                  accept=".jpg, .jpeg, .png"
+                  name="avatar"
+                  onChange={(evt) => {
+                    // console.log(evt.target.files[0]);
+                    // console.log(evt.target);
+                    setFile(evt.target.files[0]);
+                    // console.log(evt.target.files[0]);
+                  }}
+                />
+                {
+                  (file && Validator.checkImageSize(file)) ? <Button type="submit" content="Upload" size="small" /> : null
+                }
+              </Form>
+            )
           }
         </Container>
         <Container className="profil__name">
@@ -213,6 +255,9 @@ Profil.propTypes = {
   isSuccess: PropTypes.bool.isRequired,
   errors: PropTypes.array.isRequired,
   notFound: PropTypes.bool.isRequired,
+  uploadImage: PropTypes.func.isRequired,
+  avatar: PropTypes.string.isRequired,
+
 };
 
 

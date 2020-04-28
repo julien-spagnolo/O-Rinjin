@@ -26,7 +26,7 @@ const Service = ({
       {/* Else, column will take all the width  */}
       <Grid.Column width={userServices ? 12 : 16}>
         <Header as="h4">
-          <Image size="mini" src={logo} circular />
+          <Image size="mini" src={user.avatar ? user.avatar : logo} circular />
           <Header.Content
             as={Link}
             to={`/user/${slugify(`${user.firstName} ${user.lastName} ${user.id}`, { lower: true })}`}

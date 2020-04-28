@@ -15,25 +15,12 @@ import './styles.scss';
 
 // == Component
 const HomeConnected = ({
-  getServicesList, services, servicesPostalcode, selectedList, setSelectedList, getServicesListByPostalCode,
+  getServicesList, services, servicesPostalcode, selectedList,
+  setSelectedList, getServicesListByPostalCode,
   getCategoriesList, categories, filterByCategory,
   servicesResults, servicesPostalCodeResults,
 }) => {
-  // const dropdownOptionsType = [
-  //   {
-  //     key: 'Demande',
-  //     text: 'Demande',
-  //     value: 0,
-  //   },
-  //   {
-  //     key: 'Proposition',
-  //     text: 'Proposition',
-  //     value: 1,
-  //   },
-  // ];
-
   useEffect(() => {
-    // console.log('USE EFFECT !');
     getServicesList();
     getServicesListByPostalCode(sessionStorage.getItem('postalcode'));
     getCategoriesList();
@@ -72,7 +59,7 @@ const HomeConnected = ({
                   setSelectedList(false);
                 }}
               >
-                Ma zone
+                Toutes
               </Button>
               <Button.Or text="ou" />
               <Button
@@ -80,20 +67,20 @@ const HomeConnected = ({
                   setSelectedList(true);
                 }}
               >
-                Toutes
+                Ma zone
               </Button>
             </Button.Group>
             <Segment style={{ height: '100vh', overflowY: 'scroll' }}>
               {
                 // Render a Service component for each service in data
-                selectedList && services.map((service) => (
+                !selectedList && ( services.length > 0 ? services.map((service) => (
                   <Service key={service.id} {...service} />
-                ))
+                )) : "Aucun service n'est disponible." )
               }
               {
-                !selectedList && servicesPostalcode.map((service) => (
+                selectedList && ( servicesPostalcode.length > 0 ? servicesPostalcode.map((service) => (
                   <Service key={service.id} {...service} />
-                ))
+                )) : "Aucun service n'est disponible dans votre région." )
               }
             </Segment>
           </Segment>
