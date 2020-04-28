@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import {
-  Container, Header, Segment, Form, Image, Divider, Button, Message, Label, Input,
+  Container, Header, Segment, Form, Image, Divider, Button, Message, Label, Confirm, Input,
 } from 'semantic-ui-react';
 
 import Validator from '../../../validator';
@@ -26,6 +26,7 @@ const Profil = ({
 }) => {
   const history = useHistory();
   // Need to use useState because we can't have a file with redux
+  const [open, setOpen] = useState(false);
   const [file, setFile] = useState(null);
 
   // Called everytime 'isLogged' changes
@@ -196,7 +197,7 @@ const Profil = ({
                       />
                       {
                         !Validator.checkPostalCode(form.postalCode) ? <Label basic color="red" pointing>Indiquez un code postal valide</Label> : null
-                      }
+                       }
                     </Form.Field>
                   </Form.Group>
                   <Button
@@ -220,14 +221,28 @@ const Profil = ({
                   Vous perdrez toutes les informations et les services liés à ce compte.
                 </p>
                 <Message error hidden={!isError} content="Une erreur est survenue lors de la suppression de votre compte." />
-                <Button
-                  className="profil__delete__button"
-                  size="small"
-                  color="red"
-                  onClick={() => onDeleteAccount(parseInt(sessionStorage.getItem('id'), 10))}
-                >
-                  Supprimer le compte
-                </Button>
+                <div>
+                  <Button
+                    className="profil__delete__button"
+                    size="small"
+                    color="red"
+                    onClick={() => setOpen(true)}
+                  >
+                    Supprimer le compte
+                  </Button>
+                  <Confirm
+                    confirmButton="Confirmer"
+                    cancelButton="Annuler"
+                    open={open}
+                    content="La suppression de votre compte est définitive. Vous perdrez toutes les informations et les services liés à ce compte. Confirmer la suppression du compte ?"
+                    onCancel={() => setOpen(false)}
+                    // () => onDeleteAccount(parseInt(sessionStorage.getItem('id'), 10))
+                    onConfirm={() => {
+                      onDeleteAccount(parseInt(sessionStorage.getItem('id'), 10));
+                      setOpen(false);
+                    }}
+                  />
+                </div>
               </Container>
             </>
           )
