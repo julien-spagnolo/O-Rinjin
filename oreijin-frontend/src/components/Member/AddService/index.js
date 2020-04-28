@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Header, Container, Segment, Form, Button, Select, Radio, Message, Label,
@@ -14,12 +14,16 @@ const AddService = ({
   form, onChangeField, onChangeFieldType,
   addService, isSuccess, isError, resetServiceForm,
   categories, getCategoriesList, errors, userSlug,
+  uploadServiceImage,
 }) => {
   useEffect(() => {
     // console.log('//== useEffect !!!');
     getCategoriesList();
     resetServiceForm();
   }, []);
+
+  const [file, setFile] = useState(null);
+  const fileInputRef = React.createRef();
 
   return (
     <Container>
@@ -37,7 +41,11 @@ const AddService = ({
           onSubmit={(evt) => {
             evt.preventDefault();
             // console.log(form.user);
-            if (Validator.checkServiceForm(form, categories)) addService(form.user);
+            if (Validator.checkServiceForm(form, categories)) {
+              console.log(file);
+              if (file) uploadServiceImage(file);
+              else addService({ user: form.user });
+            }
             else console.log('Error submit form');
           }}
           success
@@ -123,42 +131,35 @@ const AddService = ({
               </Form.Field>
             </Form.Group>
           </Form.Group>
-          {/* <Form.Group widths={3}>
-            <Form.Field
-              // width={4}
-              control={Select}
-              label="Tag 1"
-              options={dropdownOptions}
-              placeholder="Tag1"
-              clearable
-              // onChange={(evt) => {
-              //   onChangeField(evt.target.name, evt.target.value);
-              // }}
+          <Form.Field>
+            <Button
+              content="Choisir une photo"
+              className="profil__import__button"
+              size="small"
+              type="button"
+              onClick={() => fileInputRef.current.click()}
             />
-            <Form.Field
-              // width={4}
-              control={Select}
-              label="Tag 2"
-              options={dropdownOptions}
-              placeholder="Tag 2"
-              clearable
-              // onChange={(evt) => {
-              //   onChangeField(evt.target.name, evt.target.value);
-              // }}
+            {
+              (file && !Validator.checkImageSize(file)) ? <Label basic color="red">Votre image est trop lourde. (2Mb max)</Label> : null
+            }
+            {
+              (file && Validator.checkImageSize(file)) ? <Label>{file.name}</Label> : null
+            }
+            <input
+              ref={fileInputRef}
+              type="file"
+              hidden
+              accept=".jpg, .jpeg, .png"
+              name="avatar"
+              onChange={(evt) => {
+                // console.log(evt.target.files[0]);
+                // console.log(evt.target);
+                setFile(evt.target.files[0]);
+              }}
             />
-            <Form.Field
-              // width={4}
-              control={Select}
-              label="Tag 3"
-              options={dropdownOptions}
-              placeholder="Tag 3"
-              clearable
-              // onChange={(evt) => {
-              //   onChangeField(evt.target.name, evt.target.value);
-              // }}
-            />
-                </Form.Group> */}
-          <Button disabled style={{ marginBottom: '0.7rem' }} content="Importer une image" icon="upload" labelPosition="left" />
+          
+          {/* <Button disabled style={{ marginBottom: '0.7rem' }} content="Importer une image" icon="upload" labelPosition="left" /> */}
+          </Form.Field>
           {
             form.body !== '' && !Validator.checkServiceDescription(form.body) ? <Label basic color="red" pointing="below">Indiquez une description valide. (entre 50 et 280 caractères)</Label> : null
           }
@@ -204,6 +205,7 @@ AddService.propTypes = {
   getCategoriesList: PropTypes.func.isRequired,
   errors: PropTypes.array.isRequired,
   userSlug: PropTypes.string.isRequired,
+  uploadServiceImage: PropTypes.func.isRequired,
 };
 
 export default AddService;

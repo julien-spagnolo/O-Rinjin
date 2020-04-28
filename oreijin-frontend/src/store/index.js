@@ -10,6 +10,7 @@ import ajaxMiddleware from '../middleware/ajaxMiddleware';
 import commentMiddleware from '../middleware/commentMiddleware';
 import userMiddleware from '../middleware/userMiddleware';
 import homeVisitorMiddleware from '../middleware/homeVisitorMiddleware';
+import uploadsMiddleware from '../middleware/uploadsMiddleware';
 
 
 // == Enhancers
@@ -24,6 +25,7 @@ const enhancers = composeEnhancers(
     ajaxMiddleware,
     commentMiddleware,
     userMiddleware,
+    uploadsMiddleware,
     // secondMiddleware,
   ),
 );

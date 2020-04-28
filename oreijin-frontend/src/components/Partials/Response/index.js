@@ -16,7 +16,7 @@ const Response = ({
   body, user,
 }) => (
   <Comment>
-    <Comment.Avatar src={logo} />
+    <Comment.Avatar src={user.avatar ? user.avatar : logo} />
     <Comment.Content>
       <Comment.Author as={Link} to={`/user/${slugify(`${user.firstName} ${user.lastName} ${user.id}`, { lower: true })}`}>
         {user.firstName} {user.lastName}

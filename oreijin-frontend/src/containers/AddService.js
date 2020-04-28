@@ -2,9 +2,11 @@ import { connect } from 'react-redux';
 import slugify from 'slugify';
 import AddService from '../components/Member/AddService';
 import { getCategoriesList } from '../actions/categories';
+import { uploadServiceImage } from '../actions/uploads';
 import {
   onChangeField, onChangeFieldType, addService, resetServiceForm,
 } from '../actions/service';
+
 import { getCategoriesOptions } from '../reducers/categories';
 
 const mapStateToProps = (state) => ({
@@ -31,6 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
   addService: (payload) => dispatch(addService(payload)),
   resetServiceForm: () => dispatch(resetServiceForm()),
   getCategoriesList: () => dispatch(getCategoriesList()),
+  uploadServiceImage: (payload) => dispatch(uploadServiceImage(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddService);
