@@ -24,7 +24,7 @@ const ConnectedDropdown = ({ logout, userSlug, isAdmin }) => (
           <>
             <Dropdown.Item
               as="a"
-              href="http://ec2-54-166-216-117.compute-1.amazonaws.com/admin"
+              href="http://ec2-54-166-216-117.compute-1.amazonaws.com/login"
               content="Admin"
             >
             </Dropdown.Item>

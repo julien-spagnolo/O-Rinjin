@@ -46,7 +46,6 @@ const Login = ({
             value={username}
             onChange={(event) => {
               changeField(event.target.value, event.target.name);
-              console.log(Validator.checkEmail(event.target.value));
             }}
           />
           <Form.Input
@@ -59,7 +58,6 @@ const Login = ({
             value={password}
             onChange={(event) => {
               changeField(event.target.value, event.target.name);
-              console.log(Validator.checkPassword(event.target.value));
             }}
           />
           <Button loading={loading} className="login__form__button">Connexion</Button>

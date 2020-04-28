@@ -11,7 +11,6 @@ import Service from '../../../containers/Service';
 import './styles.scss';
 // import services from '../../../services-visitor';
 
-// TODO: services props
 const ServicesList = ({
   getUserServicesList, services,
   isSuccess, isError,

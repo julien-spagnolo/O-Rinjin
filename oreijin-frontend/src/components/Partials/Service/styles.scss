@@ -1,11 +1,3 @@
-div {
-  &.ui.segment.feed {
-    
-  }
-  &.content {
-  }
-}
-
 .button.ui.tiny.icon.button.user__services__edit {
   background-color: #423E37;
   color: #f2c00f;
@@ -13,4 +5,11 @@ div {
 
 .ui.horizontal.divider.service__info__divider {
   margin: 16px;
+}
+
+.ui.stackable.grid.service {
+  transition: box-shadow 0.3s ease-in-out;
+}
+.ui.stackable.grid.service:hover {
+  box-shadow: 0 5px 15px 2px rgba(0, 0, 0, 0.2);
 }

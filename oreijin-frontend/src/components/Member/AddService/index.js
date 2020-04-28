@@ -33,7 +33,7 @@ const AddService = ({
         }, 5000)
       } */}
       {
-        isSuccess && <Redirect to={`/${userSlug}/services`} />
+        isSuccess && <Redirect to={`/user/${userSlug}/services`} />
       }
       <Segment raised>
         <Header as="h1" dividing textAlign="center">Créer un service</Header>

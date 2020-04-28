@@ -17,7 +17,6 @@ import mapboxApiToken from '../../mapbox.config';
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_USER:
-      // console.log(action.payload);
       store.dispatch(resetNotFound());
       axios({
         method: 'get',
@@ -28,7 +27,6 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          // console.log(res.data);
           store.dispatch(getUserSuccess(res.data));
         })
         .catch((err) => {
@@ -63,7 +61,6 @@ const userMiddleware = (store) => (next) => (action) => {
             withCredentials: true,
           })
             .then((res) => {
-              // console.log(res.data);
               // update user address
               sessionStorage.setItem('city', `${store.getState().user.profileForm.city}`);
               sessionStorage.setItem('address', `${store.getState().user.profileForm.address}`);
@@ -81,7 +78,6 @@ const userMiddleware = (store) => (next) => (action) => {
         });
       break;
     case GET_USER_SERVICES_LIST:
-      // console.log('récupération de la liste des services de cet utilisateur');
       axios({
         method: 'get',
         url: `${baseURL}/api/services/user/${sessionStorage.getItem('id')}`,
@@ -91,7 +87,6 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data);
           store.dispatch(getUserServicesListSuccess(res.data));
         })
         .catch((err) => {
