@@ -6,12 +6,12 @@ import {
 } from 'semantic-ui-react';
 import { NavLink, Link } from 'react-router-dom';
 
-import logo from '../../../assets/images/logo.png';
+import logo from '../../../assets/images/logo3.png';
 import './styles.scss';
 
 const ConnectedMenu = ({ logout, userSlug, isAdmin }) => (
   <Grid columns={3} style={{ marginBottom: '1.5rem' }} className="header__container__connected">
-    <Grid.Row>
+    <Grid.Row style={{ padding: '0' }}>
       <Grid.Column width="6" className="header__navlink__group" verticalAlign="middle" textAlign="right">
         <NavLink to="/home" activeClassName="active" className="header__navlink">Accueil</NavLink>
         <NavLink exact to={`/user/${userSlug}`} activeClassName="active" className="header__navlink">Profil</NavLink>
@@ -19,7 +19,7 @@ const ConnectedMenu = ({ logout, userSlug, isAdmin }) => (
       </Grid.Column>
 
       <Grid.Column width="4" className="header__logo__connected" textAlign="center">
-        <Image as={Link} to="/home" className="header__logo" src={logo} centered size="small" />
+        <Image as={Link} to="/home" style={{ marginBottom: '0' }} className="header__logo" src={logo} centered size="small"/>
       </Grid.Column>
 
       <Grid.Column width="6" className="header__logo__connected" verticalAlign="middle">
