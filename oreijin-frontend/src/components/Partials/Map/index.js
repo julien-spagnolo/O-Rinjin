@@ -68,7 +68,7 @@ const Map = ({
             >
               <img
                 style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-                src={logoMarker}
+                src={service.user.avatar ? service.user.avatar : logoMarker}
                 alt="marqueur"
               />
             </div>

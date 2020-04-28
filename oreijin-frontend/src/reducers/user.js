@@ -69,9 +69,18 @@ export default (state = initialState, action = {}) => {
       };
     case DELETE_ACCOUNT_SUCCESS:
       return {
-        ...state,
+        form: {
+          username: '',
+          password: '',
+        },
+        profile: {},
+        profileForm: {},
+        services: [],
         isLogged: false,
-        isSuccess: true,
+        loading: false,
+        isSuccess: false,
+        isError: false,
+        errors: [],
       };
     case DELETE_ACCOUNT_ERROR:
       return {
