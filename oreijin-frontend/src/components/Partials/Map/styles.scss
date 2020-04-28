@@ -1,9 +1,18 @@
 .map__popup {
+  position :absolute;
   text-align: center;
-  border-radius: 1em;
-  background-color: #423E37;
-  color: #f2c00f;
+  width: 100%;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  color: #423E37;
+  bottom: 0;
+  // visibility: visible;
 }
+
+// #popup {
+//   visibility: hidden;
+//   transition: visibility 1s linear 0.33s, opacity 0.33s linear;
+// }
 
 .mapboxgl-popup-content {
   padding: 1em;

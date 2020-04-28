@@ -5,9 +5,14 @@ import {
   DELETE_ACCOUNT_SUCCESS, DELETE_ACCOUNT_ERROR, GET_USER_SUCCESS,
   GET_USER_SERVICES_LIST_SUCCESS,
   UPDATE_PROFILE_ERROR, UPDATE_PROFILE_SUCCESS,
+  GET_USER_ERROR,
 } from '../actions/user';
 
 import { LOGIN_FORM_ERROR } from '../actions/form';
+
+
+import { RESET_NOT_FOUND } from '../actions/error404';
+
 
 const initialState = {
   form: {
@@ -22,6 +27,7 @@ const initialState = {
   isSuccess: false,
   isError: false,
   errors: [],
+  notFound: false,
 };
 
 export default (state = initialState, action = {}) => {
@@ -93,7 +99,13 @@ export default (state = initialState, action = {}) => {
           postalCode: action.payload.postalCode,
           address: action.payload.address,
           city: action.payload.city,
+          notFound: false,
         },
+      };
+    case GET_USER_ERROR:
+      return {
+        ...state,
+        notFound: true,
       };
     case CHANGE_PROFILE_FIELD:
       return {
@@ -127,6 +139,11 @@ export default (state = initialState, action = {}) => {
         isError: false,
         isSuccess: true,
         errors: [],
+      };
+    case RESET_NOT_FOUND:
+      return {
+        ...state,
+        notFound: false,
       };
     default:
       return state;

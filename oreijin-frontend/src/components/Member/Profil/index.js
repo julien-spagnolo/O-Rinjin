@@ -5,6 +5,7 @@ import {
   Container, Header, Segment, Form, Image, Divider, Button, Message, Label, Confirm, Input,
 } from 'semantic-ui-react';
 
+import Page404 from '../../404';
 import Validator from '../../../validator';
 
 import './styles.scss';
@@ -21,8 +22,10 @@ const Profil = ({
   onChangeProfileField,
   onUpdateProfile,
   errors,
+  notFound,
   uploadImage,
   avatar,
+
 }) => {
   const history = useHistory();
   // Need to use useState because we can't have a file with redux
@@ -41,6 +44,8 @@ const Profil = ({
   const fileInputRef = React.createRef();
 
   // console.log(userInfos);
+  if (notFound) return <Page404 />;
+
   return (
     <Container>
       <Segment textAlign="center">
@@ -264,8 +269,10 @@ Profil.propTypes = {
   isError: PropTypes.bool.isRequired,
   isSuccess: PropTypes.bool.isRequired,
   errors: PropTypes.array.isRequired,
+  notFound: PropTypes.bool.isRequired,
   uploadImage: PropTypes.func.isRequired,
   avatar: PropTypes.string.isRequired,
+
 };
 
 

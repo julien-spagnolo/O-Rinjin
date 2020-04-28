@@ -13,9 +13,9 @@ const ConnectedDropdown = ({ logout, userSlug, isAdmin }) => (
     <Dropdown.Menu>
       <Dropdown.Item as={Link} to="/home" text="Accueil" />
       <Dropdown.Divider />
-      <Dropdown.Item as={Link} to={`/${userSlug}`} text="Profil" />
+      <Dropdown.Item as={Link} to={`/user/${userSlug}`} text="Profil" />
       <Dropdown.Divider />
-      <Dropdown.Item as={Link} to={`/${userSlug}/services`} text="Mes services" />
+      <Dropdown.Item as={Link} to={`/user/${userSlug}/services`} text="Mes services" />
       <Dropdown.Divider />
       <Dropdown.Item as={Link} to="/service/add" text="Créer un service" />
       <Dropdown.Divider />

@@ -17,6 +17,7 @@ const mapStateToProps = (state, ownProps) => ({
   isSuccess: state.services.isSuccess,
   isError: state.services.isError,
   errors: state.services.errors,
+  notFound: state.services.notFound,
 });
 
 // const mapDispatchToProps = {};
