@@ -14,8 +14,8 @@ const ConnectedMenu = ({ logout, userSlug, isAdmin }) => (
     <Grid.Row>
       <Grid.Column width="6" className="header__navlink__group" verticalAlign="middle" textAlign="right">
         <NavLink to="/home" activeClassName="active" className="header__navlink">Accueil</NavLink>
-        <NavLink exact to={`/${userSlug}`} activeClassName="active" className="header__navlink">Profil</NavLink>
-        <NavLink exact to={`/${userSlug}/services`} activeClassName="active" className="header__navlink">Mes services</NavLink>
+        <NavLink exact to={`/user/${userSlug}`} activeClassName="active" className="header__navlink">Profil</NavLink>
+        <NavLink exact to={`/user/${userSlug}/services`} activeClassName="active" className="header__navlink">Mes services</NavLink>
       </Grid.Column>
 
       <Grid.Column width="4" className="header__logo__connected" textAlign="center">

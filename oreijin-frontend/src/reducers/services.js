@@ -16,10 +16,11 @@ import {
   TOGGLE_LOADING,
   GET_SERVICES_LIST_BY_POSTAL_CODE_SUCCESS,
   SET_SELECTED_LIST,
-  SET_IS_SUCCESS_FALSE,
+  SET_IS_SUCCESS_FALSE, GET_SERVICE_ERROR,
 } from '../actions/service';
 import { FILTER_BY_CATEGORY } from '../actions/filters';
-import { GET_USER_SUCCESS } from '../actions/user';
+import { GET_USER_SUCCESS, GET_USER_ERROR } from '../actions/user';
+import { NOT_FOUND } from '../actions/error404';
 
 const initialState = {
   list: [],
@@ -58,6 +59,7 @@ const initialState = {
   isError: false,
   isLoading: false,
   selectedList: false,
+  notFound: false,
 };
 
 /**
@@ -78,10 +80,6 @@ export const getServicesWithSlug = (list) => list.map((service) => ({
   ...service,
   slug: slugify(`${service.id} ${service.title}`, { lower: true }),
 }));
-// export const getServicesByPostalcodeWithSlug = (list) => state.listPostalCode.map((service) => ({
-//   ...service,
-//   slug: slugify(`${service.id} ${service.title}`, { lower: true }),
-// }));
 
 /**
  * Extract the service id from the slug
@@ -150,6 +148,7 @@ export default (state = initialState, action = {}) => {
         errors: [],
         isSuccess: false,
         isError: false,
+        notFound: false,
       };
     case GET_SERVICE_SUCCESS:
       // console.log(action.payload);
@@ -173,6 +172,13 @@ export default (state = initialState, action = {}) => {
           ...state.service,
           user: { ...action.payload },
         },
+        notFound: false,
+      };
+    case GET_SERVICE_ERROR:
+    case GET_USER_ERROR:
+      return {
+        ...state,
+        notFound: true,
       };
     case ON_CHANGE_FIELD_EDIT:
       return {

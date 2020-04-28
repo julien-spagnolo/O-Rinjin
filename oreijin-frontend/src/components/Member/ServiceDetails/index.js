@@ -8,6 +8,7 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+import Page404 from '../../404';
 import './style.scss';
 import logo from '../../../assets/images/logo.png';
 import Response from '../../../containers/Response';
@@ -19,11 +20,14 @@ const ServiceDetails = ({
   getService, service,
   category, getCategoriesList,
   addComment, isError, replyFormError,
+  notFound,
 }) => {
   useEffect(() => {
     if (!category) getCategoriesList();
     getService(id);
   }, []);
+
+  if (notFound) return <Page404 />;
 
   return (
     <Segment as={Container} className="service" raised>
@@ -164,6 +168,9 @@ ServiceDetails.propTypes = {
   category: PropTypes.object,
   getCategoriesList: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
+  notFound: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
+  replyFormError: PropTypes.func.isRequired,
 };
 
 export default ServiceDetails;

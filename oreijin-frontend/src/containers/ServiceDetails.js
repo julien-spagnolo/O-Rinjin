@@ -15,6 +15,7 @@ const mapStateToProps = (state, ownProps) => ({
   category: findCategoryById(state.services.service.serviceCategory.id, state.categories),
   commentListLength: state.comments.list.length,
   isError: state.comments.isError,
+  notFound: state.services.notFound,
 });
 
 const mapDispatchToProps = (dispatch) => ({

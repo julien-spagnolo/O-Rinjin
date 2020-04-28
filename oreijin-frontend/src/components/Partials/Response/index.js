@@ -18,7 +18,7 @@ const Response = ({
   <Comment>
     <Comment.Avatar src={logo} />
     <Comment.Content>
-      <Comment.Author as={Link} to={`/${slugify(`${user.firstName} ${user.lastName} ${user.id}`, { lower: true })}`}>
+      <Comment.Author as={Link} to={`/user/${slugify(`${user.firstName} ${user.lastName} ${user.id}`, { lower: true })}`}>
         {user.firstName} {user.lastName}
       </Comment.Author>
       <Comment.Metadata>

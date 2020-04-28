@@ -5,6 +5,7 @@ import {
   Container, Header, Segment, Form, Image, Divider, Button, Message, Label,
 } from 'semantic-ui-react';
 
+import Page404 from '../../404';
 import Validator from '../../../validator';
 
 import logo from '../../../assets/images/logo.png';
@@ -22,6 +23,7 @@ const Profil = ({
   onChangeProfileField,
   onUpdateProfile,
   errors,
+  notFound,
 }) => {
   const history = useHistory();
 
@@ -35,6 +37,8 @@ const Profil = ({
   }, [isLogged, userId]);
 
   // console.log(userInfos);
+  if (notFound) return <Page404 />;
+
   return (
     <Container>
       <Segment textAlign="center">
@@ -208,6 +212,7 @@ Profil.propTypes = {
   isError: PropTypes.bool.isRequired,
   isSuccess: PropTypes.bool.isRequired,
   errors: PropTypes.array.isRequired,
+  notFound: PropTypes.bool.isRequired,
 };
 
 

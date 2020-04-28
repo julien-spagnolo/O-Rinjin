@@ -7,13 +7,14 @@ import {
   UPDATE_PROFILE, updateProfileSuccess, updateProfileError,
   GET_USER_SERVICES_LIST, getUserServicesListSuccess, getUserServicesListError,
 } from '../actions/user';
-
+import { resetNotFound } from '../actions/error404';
 import mapboxApiToken from '../../mapbox.config';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_USER:
       // console.log(action.payload);
+      store.dispatch(resetNotFound());
       axios({
         method: 'get',
         url: `${baseURL}/api/users/${action.payload}`,
@@ -28,6 +29,7 @@ const userMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.log(err);
+          store.dispatch(getUserError());
         });
       break;
     case UPDATE_PROFILE:
