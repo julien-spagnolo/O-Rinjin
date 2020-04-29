@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // == Import components that we need to use from Semantic-UI-React
 import {
   Divider, Grid, Card, Header, Container, Segment,
@@ -31,8 +31,19 @@ const HomeVisitor = ({
     render: () => <Service key={service.title} {...service} />,
   }));
 
-  const serviceWords = [];
-  
+  const [wordToDisplay, setWordToDisplay] = useState(0);
+  const serviceWords = [
+    'Jardinage',
+    'Bricolage',
+    'Aide à la mobilité'
+  ];
+
+  useEffect(() => {
+    const next = (wordToDisplay + 1) % serviceWords.length;
+    const id = setTimeout(() => setWordToDisplay(next), 2000);
+    return () => clearTimeout(id);
+  }, [wordToDisplay]);
+
   return (
     <Grid container stackable>
       {/* Width for differents breakpoints  */}
@@ -42,7 +53,8 @@ const HomeVisitor = ({
         </Divider>
         <Container className="visitor__intro">
           <p className="main__paragraph">Bienvenue sur <em className="main__em">o'Rinjin</em>, le site d'entraide entre particuliers</p>
-          <p className="main__paragraph">Vous avez besoin d'un coup de main pour : "<em className="main__em">SERVICE</em>" ? Ici, vous trouverez forcement un rinjin pour vous aider !</p>
+          <p className="main__paragraph">Vous avez besoin d'un coup de main pour : "<em className="main__em">{serviceWords[wordToDisplay]}</em>" ?</p>
+          <p className="main__paragraph">Ici, vous trouverez forcement un rinjin pour vous aider !</p>
           <p className="main__paragraph">Inscrivez vous et bénéficiez <em className="main__em">gratuitement</em> d'un réseau de personnes pour proposer votre aide ou bien en recevoir</p>
           <p className="main__paragraph">Un <em className="main__em">rinjin</em>, quésaquo ? C'est une personne près de chez vous prête à vous rendre service et juste pour vos beaux yeux !</p>
         </Container>
