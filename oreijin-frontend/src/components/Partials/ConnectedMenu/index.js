@@ -48,6 +48,7 @@ const ConnectedMenu = ({ logout, userSlug, isAdmin }) => (
   </Grid>
 );
 
+
 ConnectedMenu.propTypes = {
   logout: PropTypes.func.isRequired,
   userSlug: PropTypes.string.isRequired,

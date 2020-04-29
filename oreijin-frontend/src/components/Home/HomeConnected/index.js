@@ -43,7 +43,7 @@ const HomeConnected = ({
                 clearable
               />
               {
-                (servicesPostalCodeResults || servicesResults) ? <p>Toutes: {servicesResults} résultat(s) | Ma zone: {servicesPostalCodeResults} résultat(s)</p> : null
+                (servicesPostalCodeResults || servicesResults) ? <p>{servicesResults ? `Toutes: ${servicesResults} résultat(s) ` : null} {servicesPostalCodeResults ? `Ma zone: ${servicesPostalCodeResults} résultat(s)` : null}</p> : null
               }
             </div>
             <Button.Group fluid>
@@ -76,7 +76,7 @@ const HomeConnected = ({
               {
                 selectedList && (servicesPostalcode.length > 0 ? servicesPostalcode.map((service) => (
                   <Service key={service.id} {...service} />
-                )) : "Aucun service n'est disponible dans votre région." )
+                )) : "Aucun service n'est disponible dans votre région.")
               }
             </Segment>
           </Segment>

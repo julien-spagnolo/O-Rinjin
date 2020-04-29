@@ -134,6 +134,9 @@ const ServiceDetails = ({
             {
               isError && reply === '' && <Label basic color="red" pointing="below">Entrez un commentaire</Label>
             }
+            {
+              !Validator.checkReply(reply) && reply !== '' ? <Label basic color="red" pointing="below">Votre réponse est trop longue. (maximum 140 caractères)</Label> : null
+            }
             <TextArea
               placeholder="Envoyer une réponse"
               value={reply}
