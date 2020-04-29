@@ -42,7 +42,7 @@ const HomeConnected = ({
               {
                 (servicesPostalCodeResults || servicesResults) ? (
                   <Label>
-                    Ma zone: {servicesPostalCodeResults} résultat(s) | Toutes: {servicesResults} résultat(s)
+                    Toutes: {servicesResults} résultat(s) | Ma zone: {servicesPostalCodeResults} résultat(s)
                   </Label>
                 ) : null
               }

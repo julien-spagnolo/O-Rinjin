@@ -5,12 +5,13 @@ import {
   Divider, Grid, Card, Header, Container, Segment,
 } from 'semantic-ui-react';
 
+import Carousel from 'semantic-ui-carousel-react';
+
 import PropTypes from 'prop-types';
 
 // == Import components
 import Service from '../../Visitor/ServiceVisitor';
 import UserCard from '../../Visitor/UserCard';
-import cards from '../../../cards';
 
 // == Import styles and assets
 import './styles.scss';
@@ -25,6 +26,13 @@ const HomeVisitor = ({
     getServicesExcerpt();
     getUsersExcerpt();
   }, []);
+
+  const elements = services.map((service) => ({
+    render: () => <Service key={service.title} {...service} />,
+  }));
+
+  const serviceWords = [];
+  
   return (
     <Grid container stackable>
       {/* Width for differents breakpoints  */}
@@ -41,15 +49,16 @@ const HomeVisitor = ({
       </Grid.Column>
       <Grid.Column tablet={16} computer={8}>
         <Divider horizontal>
-          <Header as="h1">Annonces disponibles</Header>
+          <Header as="h1">Services disponibles</Header>
         </Divider>
         <Segment>
-          {
-            // Render a Service component for each service in data
-            services.map((service) => (
-              <Service key={service.title} {...service} />
-            ))
-          }
+          <Carousel
+            elements={elements}
+            duration={4000}
+            animation="fade right"
+            showNextPrev={false}
+            showIndicators
+          />
         </Segment>
       </Grid.Column>
       <Grid.Column mobile={16} tablet={16} computer={16}>
