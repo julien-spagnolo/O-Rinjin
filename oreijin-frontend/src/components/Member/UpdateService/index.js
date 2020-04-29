@@ -90,7 +90,7 @@ const UpdateService = ({
               label="Catégorie"
               options={categories}
               placeholder="Choisir une catégorie"
-              value={form.serviceCategory.id}
+              value={form.serviceCategory}
               name="category"
               onChange={(evt, { value }) => {
                 onChangeFieldEdit('serviceCategory', value);
