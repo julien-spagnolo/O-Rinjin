@@ -162,7 +162,7 @@ export default (state = initialState, action = {}) => {
           title: action.payload.title,
           body: action.payload.body,
           type: action.payload.type,
-          serviceCategory: { ...action.payload.serviceCategory },
+          serviceCategory: action.payload.serviceCategory.id,
         },
       };
     case GET_USER_SUCCESS:
