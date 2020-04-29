@@ -110,14 +110,13 @@ const Profil = ({
                 <Message
                   success
                   hidden={!isSuccess}
-                  header="Inscription réussi !"
-                  content="Allez sur la page de connexion !"
+                  header="Vos modifications ont bien été enregistrées."
                 />
                 <Message
                   error
                   hidden={!isError}
                 >
-                  <Message.Header>L'inscription a échoué !</Message.Header>
+                  <Message.Header>Nous n'avons pas pu enregistrer vos modifications.</Message.Header>
                   {
                     errors.map((error) => (
                       <div key={error}>{error}</div>

@@ -28,7 +28,6 @@ const registerMiddleware = (store) => (next) => (action) => {
             longitude: `${coords[0]}`,
             latitude: `${coords[1]}`,
           }));
-          // console.log(store.getState().register.form);
 
           axios({
             url: `${baseURL}/register`,

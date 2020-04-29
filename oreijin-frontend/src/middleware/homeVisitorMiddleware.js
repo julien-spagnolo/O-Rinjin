@@ -9,13 +9,11 @@ import {
 const homeVisitorMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_SERVICES_EXCERPT:
-      // console.log('get services excerpt middleware');
       axios({
         method: 'get',
         url: `${baseURL}/services/home`,
       })
         .then((res) => {
-          // console.log(res.data);
           store.dispatch(getServicesExcerptSuccess(res.data));
         })
         .catch((err) => {
@@ -23,13 +21,11 @@ const homeVisitorMiddleware = (store) => (next) => (action) => {
         });
       break;
     case GET_USERS_EXCERPT:
-      // console.log('get services excerpt middleware');
       axios({
         method: 'get',
         url: `${baseURL}/users/home`,
       })
         .then((res) => {
-          // console.log(res.data);
           store.dispatch(getUsersExcerptSuccess(res.data));
         })
         .catch((err) => {

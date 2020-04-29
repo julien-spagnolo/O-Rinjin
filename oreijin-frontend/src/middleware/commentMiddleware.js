@@ -11,7 +11,6 @@ import {
 const commentMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case ADD_COMMENT:
-      // console.log(store.getState().services.service);
       axios({
         method: 'post',
         url: `${baseURL}/api/comments`,
@@ -27,8 +26,6 @@ const commentMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then(() => {
-          // console.log(action.payload);
-          // console.log(res.data);
           store.dispatch(addCommentSuccess());
           // to update comments list
           store.dispatch(getService(store.getState().services.service.id));

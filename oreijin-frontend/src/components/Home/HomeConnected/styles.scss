@@ -35,5 +35,16 @@
     border-radius: 1em;
     background-color: #fff;
   }
+  
+}
 
+.button.ui.button.home__connected__button__list {
+  background-color: #423E37;
+  color: #f2c00f;
+
+    &.active{
+      background-color: #f2c00f;
+      color: #423E37;
+      transition: 1s ease;
+    }
 }

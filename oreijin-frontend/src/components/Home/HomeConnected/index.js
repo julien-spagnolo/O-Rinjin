@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 // == Import components that we need to use from Semantic-UI-React
 import {
-  Grid, Segment, Header, Select, Button, Label,
+  Grid, Segment, Header, Select, Button, Label
 } from 'semantic-ui-react';
 
 import Service from '../../../containers/Service';
@@ -31,7 +31,7 @@ const HomeConnected = ({
       <Grid.Row divided>
         <Grid.Column mobile={16} tablet={16} computer={8}>
           <Segment className="home__connected__services" raised>
-            <Header as="h2" dividing textAlign="center" className="home__connected__services__title">ANNONCES</Header>
+            <Header as="h2" dividing textAlign="center" className="home__connected__services__title">SERVICES</Header>
             <div className="home__connected__services__filter">
               <Select
                 onChange={(evt, { value }) => filterByCategory(value)}
@@ -42,7 +42,7 @@ const HomeConnected = ({
               {
                 (servicesPostalCodeResults || servicesResults) ? (
                   <Label>
-                    Ma zone: {servicesPostalCodeResults} résultat(s) | Toutes: {servicesResults} résultat(s)
+                    Toutes: {servicesResults} résultat(s) | Ma zone: {servicesPostalCodeResults} résultat(s)
                   </Label>
                 ) : null
               }
@@ -55,14 +55,17 @@ const HomeConnected = ({
             </div>
             <Button.Group fluid>
               <Button
+                active={!selectedList}
+                className="home__connected__button__list"
                 onClick={() => {
                   setSelectedList(false);
                 }}
               >
                 Toutes
               </Button>
-              <Button.Or text="ou" />
               <Button
+                active={selectedList}
+                className="home__connected__button__list"
                 onClick={() => {
                   setSelectedList(true);
                 }}
@@ -73,12 +76,12 @@ const HomeConnected = ({
             <Segment style={{ height: '100vh', overflowY: 'scroll' }}>
               {
                 // Render a Service component for each service in data
-                !selectedList && ( services.length > 0 ? services.map((service) => (
+                !selectedList && (services.length > 0 ? services.map((service) => (
                   <Service key={service.id} {...service} />
-                )) : "Aucun service n'est disponible." )
+                )) : "Aucun service n'est disponible.")
               }
               {
-                selectedList && ( servicesPostalcode.length > 0 ? servicesPostalcode.map((service) => (
+                selectedList && (servicesPostalcode.length > 0 ? servicesPostalcode.map((service) => (
                   <Service key={service.id} {...service} />
                 )) : "Aucun service n'est disponible dans votre région." )
               }

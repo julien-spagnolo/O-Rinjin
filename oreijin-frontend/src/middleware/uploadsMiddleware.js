@@ -8,7 +8,6 @@ const AVATAR_PRESET = 'ewfjt9wc';
 const IMAGE_PRESET = 'o2qooexr';
 
 const uploadImage = (image, uploadPreset) => {
-  // console.log(action.payload);
   const timestamp = Date.now() / 1000;
 
   const formData = new FormData();
@@ -16,7 +15,6 @@ const uploadImage = (image, uploadPreset) => {
   formData.append('file', image);
   formData.append('timestamp', timestamp);
   formData.append('upload_preset', uploadPreset);
-  // console.log(formData);
 
   return axios.post('https://api.cloudinary.com/v1_1/orinjin/image/upload', formData);
 };
@@ -24,7 +22,6 @@ const uploadImage = (image, uploadPreset) => {
 const uploadsMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case UPLOAD_IMAGE:
-      // console.log(action.payload);
       uploadImage(action.payload, AVATAR_PRESET)
         .then((res) => {
           console.log(res.data);
@@ -40,7 +37,6 @@ const uploadsMiddleware = (store) => (next) => (action) => {
             withCredentials: true,
           })
             .then((response) => {
-              console.log(response.data);
               sessionStorage.setItem('avatar', response.data.avatar);
               store.dispatch(updateProfileSuccess());
               store.dispatch(getUser(store.getState().user.profile.id));

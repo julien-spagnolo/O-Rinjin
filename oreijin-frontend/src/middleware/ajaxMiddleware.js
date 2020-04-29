@@ -32,7 +32,6 @@ export default (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          // console.log(res.data);
           store.dispatch(getCategoriesListSuccess(res.data));
         })
         .catch((err) => {
@@ -40,8 +39,6 @@ export default (store) => (next) => (action) => {
         });
       break;
     case GET_SERVICES_LIST:
-      // console.log('//== middleware getServicesList');
-
       store.dispatch(toggleLoading());
       axios({
         method: 'get',
@@ -52,8 +49,6 @@ export default (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          // console.log(res.data);
-          // console.log(store.getState().user.infos.postalcode);
           store.dispatch(getServicesListSuccess(res.data));
         })
         .catch((err) => {
@@ -61,9 +56,6 @@ export default (store) => (next) => (action) => {
         });
       break;
     case GET_SERVICES_LIST_BY_POSTAL_CODE:
-      console.log('//== middleware getServicesList');
-      // console.log(sessionStorage.getItem('token'));
-
       store.dispatch(toggleLoading());
       axios({
         method: 'get',
@@ -74,7 +66,6 @@ export default (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          // console.log(res.data);
           store.dispatch(getServicesListByPostalCodeSuccess(res.data));
         })
         .catch((err) => {
@@ -83,7 +74,6 @@ export default (store) => (next) => (action) => {
         });
       break;
     case ADD_SERVICE:
-      console.log(action.payload);
       axios({
         method: 'post',
         url: `${baseURL}/api/services`,
@@ -98,8 +88,6 @@ export default (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          // console.log(res.data);
-          // console.log(getServicesListSuccess(res.data));
           store.dispatch(addServiceSuccess(res.data));
           store.dispatch(getServicesListByPostalCode(sessionStorage.getItem('postalcode')));
           store.dispatch(getServicesList());
@@ -110,7 +98,6 @@ export default (store) => (next) => (action) => {
         });
       break;
     case DELETE_SERVICE:
-      console.log('//== delete service middleware', action.payload);
       axios({
         method: 'delete',
         url: `${baseURL}/api/services/${action.payload}`,
@@ -132,8 +119,6 @@ export default (store) => (next) => (action) => {
 
       return next(action);
     case DELETE_ACCOUNT:
-      // console.log('//== delete account middleware action', action.payload);
-      // console.log(`Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')}`);
       axios({
         method: 'delete',
         url: `${baseURL}/api/users/${action.payload}`,
@@ -162,7 +147,6 @@ export default (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data);
           store.dispatch(getServiceSuccess(res.data));
           store.dispatch(getUser(res.data.user.id));
         })
@@ -184,7 +168,6 @@ export default (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          // console.log(res.data);
           store.dispatch(editServiceSuccess());
         })
         .catch((err) => {

@@ -28,23 +28,18 @@ export default (store) => (next) => (action) => {
         .then((response) => {
           // Create sessionStorages
           if (auth.login(response.data.token)) {
-            // console.log(userInfos);
             store.dispatch(loginSuccess());
             // create a cookie for token
             store.dispatch(getServicesListByPostalCode());
           }
           else console.log('ECHEC');
-          // document.cookie = `token=${response.data.token}`;
         })
         .catch((error) => {
-          // console.log(error);
+          console.log(error);
           store.dispatch(loginError(['Email ou mot de passe invalide. Veuillez réessayer.']));
         });
       break;
     case LOGOUT:
-      // set an expiration date to delete
-      // document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
-
       // Clear sessionStorage items
       auth.logout();
       store.dispatch(logoutSuccess());
