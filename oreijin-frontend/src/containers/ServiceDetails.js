@@ -8,7 +8,7 @@ import { addComment, onChangeFieldReply } from '../actions/comments';
 import { getUser } from '../actions/user';
 import { replyFormError } from '../actions/form';
 
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/logo3.png';
 
 
 const mapStateToProps = (state, ownProps) => ({
