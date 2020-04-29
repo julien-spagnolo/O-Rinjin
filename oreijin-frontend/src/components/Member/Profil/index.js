@@ -25,7 +25,7 @@ const Profil = ({
   notFound,
   uploadImage,
   avatar,
-
+  resetProfile,
 }) => {
   const history = useHistory();
   // Need to use useState because we can't have a file with redux
@@ -37,6 +37,7 @@ const Profil = ({
     // Redirect to page '/home' after submit
     // We redirect to /home only if isLogged is true
     // console.log(userId);
+    resetProfile();
     if (!isLogged) history.push('/');
     else getUser(userId);
   }, [isLogged, userId]);
@@ -271,7 +272,7 @@ Profil.propTypes = {
   notFound: PropTypes.bool.isRequired,
   uploadImage: PropTypes.func.isRequired,
   avatar: PropTypes.string.isRequired,
-
+  resetProfile: PropTypes.func.isRequired,
 };
 
 

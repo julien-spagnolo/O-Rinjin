@@ -30,6 +30,12 @@ export const GET_USER_SERVICES_LIST = 'GET_USER_SERVICES_LIST';
 export const GET_USER_SERVICES_LIST_SUCCESS = 'GET_USER_SERVICES_LIST_SUCCESS';
 export const GET_USER_SERVICES_LIST_ERROR = 'GET_USER_SERVICES_ERROR';
 
+export const RESET_PROFILE = 'RESET_PROFILE';
+
+export const resetProfile = () => ({
+  type: RESET_PROFILE,
+});
+
 export const changeLoginField = (value, name) => ({
   type: CHANGE_LOGIN_FIELD,
   payload: {

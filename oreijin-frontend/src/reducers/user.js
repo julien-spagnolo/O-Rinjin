@@ -5,7 +5,7 @@ import {
   DELETE_ACCOUNT_SUCCESS, DELETE_ACCOUNT_ERROR, GET_USER_SUCCESS,
   GET_USER_SERVICES_LIST_SUCCESS,
   UPDATE_PROFILE_ERROR, UPDATE_PROFILE_SUCCESS,
-  GET_USER_ERROR,
+  GET_USER_ERROR, RESET_PROFILE,
 } from '../actions/user';
 
 import { LOGIN_FORM_ERROR } from '../actions/form';
@@ -144,6 +144,12 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         notFound: false,
+      };
+    case RESET_PROFILE:
+      return {
+        ...state,
+        isError: false,
+        isSuccess: false,
       };
     default:
       return state;
