@@ -24,6 +24,7 @@ const ServiceDetails = ({
 
 }) => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!category) getCategoriesList();
     getService(id);
   }, []);

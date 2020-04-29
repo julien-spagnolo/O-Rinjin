@@ -21,6 +21,7 @@ const HomeConnected = ({
   servicesResults, servicesPostalCodeResults,
 }) => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     getServicesList();
     getServicesListByPostalCode(sessionStorage.getItem('postalcode'));
     getCategoriesList();

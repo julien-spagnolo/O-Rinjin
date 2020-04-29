@@ -17,6 +17,7 @@ const ServicesList = ({
   setIsSuccessFalse,
 }) => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     getUserServicesList();
   }, []);
 

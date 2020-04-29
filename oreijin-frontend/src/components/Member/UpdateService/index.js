@@ -19,6 +19,7 @@ const UpdateService = ({
 }) => {
   const history = useHistory();
   useEffect(() => {
+    window.scrollTo(0, 0);
     // console.log('//== useEffect !!!');
     resetServiceForm();
     getCategoriesList();
