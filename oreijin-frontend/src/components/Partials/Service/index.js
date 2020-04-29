@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import auth from '../../../auth';
 // == Import styles and assets
 import './styles.scss';
-import logo from '../../../assets/images/logo.svg';
+import logo from '../../../assets/images/logo3.png';
 
 // == Component
 const Service = ({
