@@ -24,6 +24,7 @@ const ServiceDetails = ({
 
 }) => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!category) getCategoriesList();
     getService(id);
   }, []);
@@ -36,10 +37,10 @@ const ServiceDetails = ({
         <Grid.Row>
           <Header style={{ fontSize: '1.5rem' }} as="h1" sub>{service.title}</Header>
           <Container style={{ marginTop: '0.7rem' }}>
-            <Label>
+            <Label color={service.type ? 'teal' : 'purple'}>
               {service.type ? 'Proposition' : 'Demande' }
             </Label>
-            <Label>
+            <Label style={{ color: '#f2c00f', backgroundColor: '#423E37' }}>
               {category && category.title}
             </Label>
             {/* <Container style={{ marginTop: '0.7rem' }} content="créé le ... - modifié le ..." textAlign="center" /> */}
@@ -49,14 +50,14 @@ const ServiceDetails = ({
           <Grid.Column width={9} as={Item.Group}>
             {/* {console.log(service.user)} */}
             <Item>
-              <Item.Image src={avatar} size="small" circular />
-              <Item.Content className="service__user__content">
+              <Item.Image className="service__details__avatar" src={avatar} size="small" />
+              <Item.Content className="service__user__content" verticalAlign="middle">
                 <Item.Header>{service.user.firstName} {service.user.lastName}</Item.Header>
-                <Item.Extra>
+                {/* <Item.Extra>
                   <Label>
                   Fiabilité : <Rating icon="star" defaultRating={5} maxRating={5} />
                   </Label>
-                </Item.Extra>
+                </Item.Extra> */}
                 <Item.Meta><Icon name="map marker alternate" /> {service.user.postalCode} - {service.user.city}</Item.Meta>
               </Item.Content>
             </Item>
@@ -115,7 +116,7 @@ const ServiceDetails = ({
 
       <Divider horizontal>
         <Header as="h5">
-          Se proposer
+          Répondre
         </Header>
       </Divider>
 

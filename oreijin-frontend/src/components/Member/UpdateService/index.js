@@ -19,6 +19,7 @@ const UpdateService = ({
 }) => {
   const history = useHistory();
   useEffect(() => {
+    window.scrollTo(0, 0);
     // console.log('//== useEffect !!!');
     resetServiceForm();
     getCategoriesList();
@@ -28,7 +29,7 @@ const UpdateService = ({
   useEffect(() => {
     // console.log('userID : ', userId);
     // console.log('authorID : ', author.id);
-    if (author.id && userId && author.id !== userId) history.push('/home');
+    if (author.id && author.id !== userId) history.push('/home');
   }, [author]);
 
   if (notFound) return <Page404 />;

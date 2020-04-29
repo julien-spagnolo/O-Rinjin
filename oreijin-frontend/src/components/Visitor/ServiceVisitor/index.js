@@ -36,7 +36,7 @@ const ServiceVisitor = ({
               {/* <Feed.User>{` - ${created_by}`}</Feed.User> */}
             </Feed.Summary>
             <Feed.Extra text className="service__category">
-              <Label>
+              <Label color={type ? 'teal' : 'purple'}>
                 {type ? 'Proposition' : 'Demande'}
               </Label>
               <Label>

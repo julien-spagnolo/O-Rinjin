@@ -23,6 +23,7 @@ const HomeVisitor = ({
   // With stackable props, the grid has its columns stack on-top of each other
   // after reaching mobile breakpoints
   useEffect(() => {
+    window.scrollTo(0, 0);
     getServicesExcerpt();
     getUsersExcerpt();
   }, []);
