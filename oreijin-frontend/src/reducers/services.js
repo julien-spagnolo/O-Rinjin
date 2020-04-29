@@ -20,7 +20,6 @@ import {
 } from '../actions/service';
 import { FILTER_BY_CATEGORY } from '../actions/filters';
 import { GET_USER_SUCCESS, GET_USER_ERROR } from '../actions/user';
-import { NOT_FOUND } from '../actions/error404';
 
 const initialState = {
   list: [],

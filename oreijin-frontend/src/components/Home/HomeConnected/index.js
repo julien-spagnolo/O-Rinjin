@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 // == Import components that we need to use from Semantic-UI-React
 import {
-  Grid, Segment, Header, Select, Button, Label
+  Grid, Segment, Header, Select, Button,
 } from 'semantic-ui-react';
 
 import Service from '../../../containers/Service';
@@ -34,24 +34,16 @@ const HomeConnected = ({
             <Header as="h2" dividing textAlign="center" className="home__connected__services__title">SERVICES</Header>
             <div className="home__connected__services__filter">
               <Select
-                onChange={(evt, { value }) => filterByCategory(value)}
+                onChange={(evt, { value }) => {
+                  filterByCategory(value);
+                }}
                 placeholder="Filtre par catégorie"
                 options={categories}
                 clearable
               />
               {
-                (servicesPostalCodeResults || servicesResults) ? (
-                  <Label>
-                    Toutes: {servicesResults} résultat(s) | Ma zone: {servicesPostalCodeResults} résultat(s)
-                  </Label>
-                ) : null
+                (servicesPostalCodeResults || servicesResults) ? <p>Toutes: {servicesResults} résultat(s) | Ma zone: {servicesPostalCodeResults} résultat(s)</p> : null
               }
-              {/* <Select
-                onChange={(evt, { value }) => console.log('change type : ', value)}
-                placeholder="Filtre par type"
-                options={dropdownOptionsType}
-                clearable
-              /> */}
             </div>
             <Button.Group fluid>
               <Button
