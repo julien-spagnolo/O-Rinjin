@@ -14,7 +14,7 @@ const Team = () => (
   <Container>
     <Header as="h2" textAlign="center">Notre équipe</Header>
     <Card.Group centered itemsPerRow={2}>
-      <Card style={{ width: '250px', height: '500px' }} raised>
+      <Card style={{ width: '250px' }} raised>
         <Image src={logo} wrapped ui={false} />
         <Card.Content>
           <Card.Header>Hélène</Card.Header>
@@ -33,7 +33,7 @@ const Team = () => (
           </a>
         </Card.Content>
       </Card>
-      <Card style={{ width: '250px', height: '500px' }} raised>
+      <Card style={{ width: '250px' }} raised>
         <Image src={logo} wrapped ui={false} />
         <Card.Content>
           <Card.Header>Julien</Card.Header>
@@ -52,7 +52,7 @@ const Team = () => (
           </a>
         </Card.Content>
       </Card>
-      <Card style={{ width: '250px', height: '500px' }} raised>
+      <Card style={{ width: '250px' }} raised>
         <Image src={logo} wrapped ui={false} />
         <Card.Content>
           <Card.Header>Bryan</Card.Header>
@@ -61,7 +61,7 @@ const Team = () => (
           </Card.Meta>
           <Card.Description>
             Créatif et posé Bryan fourmille de bonnes idées pour faire évoluer notre petite équipe de développeurs frontend qui s'occupe de tout ce qui touche
-            à React et au coté client. 
+            à React et au coté client.
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
@@ -71,7 +71,7 @@ const Team = () => (
           </a>
         </Card.Content>
       </Card>
-      <Card style={{ width: '250px', height: '500px' }} raised>
+      <Card style={{ width: '250px' }} raised>
         <Image src={logo} wrapped ui={false} />
         <Card.Content>
           <Card.Header>Jonathan</Card.Header>
