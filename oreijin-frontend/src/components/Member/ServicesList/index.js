@@ -27,7 +27,7 @@ const ServicesList = ({
   const delayedHideMessage = () => {
     // eslint-disable-next-line no-unused-vars
     const timeoutId = setTimeout(() => {
-      console.log('set time out detected');
+      // console.log('set time out detected');
       setIsSuccessFalse();
     }, 3000);
   };

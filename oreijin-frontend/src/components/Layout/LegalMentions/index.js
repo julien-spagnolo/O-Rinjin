@@ -75,7 +75,7 @@ const LegalMentions = () => (
     <h3>Données personnelles :</h3>
 
     <p>
-      De manière générale, vous n’êtes pas tenu de nous communiquer vos données personnelles lorsque vous visitez notre site Internet www.oRinjin.fr.
+      De manière générale, vous n’êtes pas tenu de nous communiquer vos données personnelles lorsque vous visitez notre site Internet www.oRinjin.fr. L’accès à la partie Intranet du Site est réservé aux personnes physiques majeures disposant de la pleine capacité juridique.
     </p>
     <p>
       Cependant, ce principe comporte certaines exceptions. En effet, pour certains services proposés par notre site, vous pouvez être amenés à nous communiquer certaines données telles que : votre nom, votre fonction, le nom de votre société, votre adresse électronique, et votre numéro de téléphone. Tel est le cas lorsque vous remplissez le formulaire qui vous est proposé en ligne, dans la rubrique « contact ».

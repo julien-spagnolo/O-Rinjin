@@ -49,7 +49,7 @@ const ServiceDetails = ({
           <Grid.Column width={9} as={Item.Group}>
             {/* {console.log(service.user)} */}
             <Item>
-              <Item.Image src={avatar} size="small" circular />
+              <Item.Image className="service__details__avatar" src={avatar} size="small"/>
               <Item.Content className="service__user__content">
                 <Item.Header>{service.user.firstName} {service.user.lastName}</Item.Header>
                 <Item.Extra>

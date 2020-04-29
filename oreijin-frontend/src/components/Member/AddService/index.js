@@ -42,7 +42,6 @@ const AddService = ({
             evt.preventDefault();
             // console.log(form.user);
             if (Validator.checkServiceForm(form, categories)) {
-              console.log(file);
               if (file) uploadServiceImage(file);
               else addService({ user: form.user });
             }
@@ -98,7 +97,6 @@ const AddService = ({
               name="category"
               onChange={(evt, { value }) => {
                 onChangeField('serviceCategory', value);
-                console.log(Validator.checkServiceCategory(value, categories));
               }}
             />
             <Form.Group grouped>
@@ -125,7 +123,6 @@ const AddService = ({
                   checked={form.type === true}
                   onChange={(evt, { value }) => {
                     onChangeFieldType(value);
-                    console.log(value);
                   }}
                 />
               </Form.Field>
@@ -157,8 +154,6 @@ const AddService = ({
                 setFile(evt.target.files[0]);
               }}
             />
-          
-          {/* <Button disabled style={{ marginBottom: '0.7rem' }} content="Importer une image" icon="upload" labelPosition="left" /> */}
           </Form.Field>
           {
             form.body !== '' && !Validator.checkServiceDescription(form.body) ? <Label basic color="red" pointing="below">Indiquez une description valide. (entre 50 et 280 caractères)</Label> : null
