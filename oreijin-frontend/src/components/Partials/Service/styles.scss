@@ -13,3 +13,26 @@
 .ui.stackable.grid.service:hover {
   box-shadow: 0 5px 15px 2px rgba(0, 0, 0, 0.2);
 }
+
+a.event.service__feed:hover {
+  color: #423E37;
+}
+
+// a.content.service__creator {
+//   color: red;
+//   // padding-top: 10px;
+    
+//   &:before {
+//       left: 0;
+//       bottom: 0;
+//       width: 100%;
+//       height: 2px;
+//       background: #F0F;
+//       transform:  scaleX(0);
+//     }
+    
+//     &:hover:before {
+//       transform:  scaleX(1);
+//     }
+// }
+
