@@ -27,6 +27,7 @@ const validator = {
   checkPassword: (password) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{6,15})/;
     // console.log(regex);
+    if (password.includes(';') || password.includes('-') || password.includes('<') || password.includes('>')) return false;
     return regex.test(password);
   },
 
