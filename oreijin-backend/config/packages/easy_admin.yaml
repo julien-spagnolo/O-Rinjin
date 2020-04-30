@@ -15,6 +15,7 @@ easy_admin:
                 form:
                     fields:
                         - email
+                        - { property: plainPassword, label: 'Mot de passe' }
                         - { property: roles, type: 'choice', type_options: { expanded: true, multiple: true, choices: { 'Utilisateur': 'ROLE_USER', 'Modérateur': 'ROLE_MODO', 'Administrateur': 'ROLE_ADMIN' }} }
                         - { property: firstname, label: 'Prénom' }
                         - { property: lastname, label: 'Nom' }
