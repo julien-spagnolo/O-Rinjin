@@ -70,7 +70,7 @@ const HomeVisitor = ({
         <Segment>
           <Carousel
             elements={elements}
-            // duration={4000}
+            duration={5000}
             animation="fade right"
             showNextPrev={false}
             showIndicators
