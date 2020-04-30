@@ -66,7 +66,7 @@ const UpdateService = ({
           </Message>
           <Form.Field width={16}>
             {
-              !Validator.checkServiceTitle(form.title) ? <Label basic color="red" pointing="below">Indiquez un titre valide. caractères spéciaux autorisés : -!?'.,</Label> : null
+              !Validator.checkServiceTitle(form.title) ? <Label basic color="red" pointing="below">Indiquez un titre valide (entre 10 et 60 caractères). Caractères spéciaux autorisés : -!?'.,</Label> : null
             }
             <Form.Input
               required
@@ -123,7 +123,7 @@ const UpdateService = ({
           </Form.Group>
           <Button style={{ marginBottom: '0.7rem' }} content="Importer une image" icon="upload" labelPosition="left" disabled />
           {
-            !Validator.checkServiceDescription(form.body) ? <Label basic color="red" pointing="below">Indiquez une description valide. caractères spéciaux autorisés : -!?'.()",+;:</Label> : null
+            !Validator.checkServiceDescription(form.body) ? <Label basic color="red" pointing="below">Indiquez une description valide. (entre 50 et 240 caractères)</Label> : null
           }
           <Form.TextArea
             label="Description du service"

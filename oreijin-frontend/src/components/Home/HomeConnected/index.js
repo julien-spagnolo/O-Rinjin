@@ -43,7 +43,7 @@ const HomeConnected = ({
                 clearable
               />
               {
-                (servicesPostalCodeResults || servicesResults) ? <p>Toutes: {servicesResults} résultat(s) | Ma zone: {servicesPostalCodeResults} résultat(s)</p> : null
+                (servicesPostalCodeResults || servicesResults) ? <p>{servicesResults ? `Toutes: ${servicesResults} résultat(s) ` : null} {servicesPostalCodeResults ? `Ma zone: ${servicesPostalCodeResults} résultat(s)` : null}</p> : null
               }
             </div>
             <Button.Group fluid>

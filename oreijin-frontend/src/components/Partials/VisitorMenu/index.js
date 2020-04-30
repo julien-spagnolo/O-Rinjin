@@ -14,7 +14,7 @@ const VisitorMenu = () => (
     <Button as={Link} to="/login" className="desktop__header__button" size="small" animated>
       <Button.Content visible>Connexion</Button.Content>
       <Button.Content hidden>
-        <Icon name="user" />
+        <Icon name="sign-in" />
       </Button.Content>
     </Button>
     <div className="header__logo__desktop">
@@ -23,7 +23,7 @@ const VisitorMenu = () => (
     <Button as={Link} to="/register" className="desktop__header__button" animated>
       <Button.Content visible>Inscription</Button.Content>
       <Button.Content hidden>
-        <Icon name="sign-in" />
+        <Icon name="signup" />
       </Button.Content>
     </Button>
   </div>

@@ -1,4 +1,4 @@
-# Cahier des charges : “o’Reijin”
+# Cahier des charges : “O'Rinjin”
 ## __Sommaire:__
 
 * ### [Partie I : Présentation du projet](#presentation)
@@ -20,7 +20,7 @@ Ce projet sera réalisé par une équipe de quatre développeurs. Hélène David
 
 L’objectif principal de ce site sera la mise en relation entre personnes qui sont à la recherche d’une aide particulière concernant plusieurs domaines différents. Il peut s’agir d’un dépannage, d’un covoiturage,d’un service divers ou autre. Il s’agit avant tout de créer un réseau d’entraide sans aucun but lucratif, ce qui veut dire que toutes les annonces ne pourront être faite qu’à titre gracieux ou bien en échange d’un autre service si les deux parties sont en accord avec ce principe. Il sera donc possible de consulter les offres d’entraide, et aussi, d’en créer une fois l’utilisateur connecté. Cette liste d’annonces sera indiquée sur une carte intéractive (google map ou autre), afin que l’utilisateur puisse voir quelles sont les offres à proximité de son domicile.
 
-Le projet “o’Reijin” aura pour cible principale les particuliers. Il s'adresse aussi bien aux étudiants recherchant un service sans avoir besoin de le payer, qu’aux salariés ou retraités qui souhaite organiser entre eux un réseau d’entraide via ces différentes annonces. Il n’a pas pour but de cibler les entreprises, mais son utilisation par ces derniers est envisageable. 
+Le projet “O’Rinjin” aura pour cible principale les particuliers. Il s'adresse aussi bien aux étudiants recherchant un service sans avoir besoin de le payer, qu’aux salariés ou retraités qui souhaite organiser entre eux un réseau d’entraide via ces différentes annonces. Il n’a pas pour but de cibler les entreprises, mais son utilisation par ces derniers est envisageable. 
 
 Cette application web sera limité au marché français, voir francophone, dans un premier temps. Il devra donc être consultable intégralement en français afin de faciliter son utilisation par les futurs utilisateurs. 
 
@@ -151,13 +151,13 @@ Le choix de cette librairie a été motivé par plusieurs raisons.
 
 En premier lieu, la possibilité de réutiliser les composants créés et de les modifier selon le besoin (utile notamment pour les différents formulaires sur ce projet).
 
-Une des forces de React, c’est également la modification des éléments du DOM qui ont besoin d’être modifiés, et cela sans toucher aux parties ne nécessitant pas de changement. Le virtual DOM va rendre ces changements plus rapides et plus précis puisqu’il n’y aura pas de rechargement complet du DOM, mais seulement des parties qui doivent être modifiées. Nous pourrons donc faire de ce site une single page application, et rendre le site plus adapté pour les utilisateurs mobiles notamment.
+C’est également la modification des éléments du DOM qui ont besoin d’être modifiés, et cela sans toucher aux parties ne nécessitant pas de changement. Le virtual DOM va rendre ces changements plus rapides et plus précis puisqu’il n’y aura pas de rechargement complet du DOM, mais seulement des parties qui doivent être modifiées. Nous pourrons donc faire de ce site une single page application, et rendre le site plus adapté pour les utilisateurs mobiles notamment.
 React utilise un système d’état local (state) pour distinguer les composants à modifier. Lorsque un state d’un composant change, React met à jour uniquement ce composant dans le virtual DOM. 
 La librairie Redux permet de centraliser les states des différents composants. Ces derniers n’auront donc qu’un seul flux d’information et seront plus facile à maintenir.
 
 Nous pouvons également nous appuyer sur un grand nombre de packages disponibles et prévu pour fonctionner avec react, ce qui va nous permettre de réaliser ce projet en restant dans le délai qui nous est imposé.
 
-Le projet “NOM DE PROJET” est prévu comme une single page application, comme nous l’avons vu plus haut dans le cahier des charges. Afin de rendre cela possible, il nous faut prévoir un système de routing qui soit directement géré côté front pour ne pas avoir à recharger la page à chaque changement d’url. Nous allons donc nous appuyer sur React-Router. En utilisant cette librairie, nous pouvons donc changer seulement les composants nécessaires sans recharger la page entière à chaque fois. Il est également très utile de pouvoir avoir accès aux paramètres d’url, et la librairie React-Router met à disposition un hook (useParams) qui permet de récupérer la partie dynamique d’une url. Etant donné que nous allons utiliser les pratiques les plus récentes, l’utilisation des hooks est préférables.
+Le projet “O'Rinjin” est prévu comme une single page application, comme nous l’avons vu plus haut dans le cahier des charges. Afin de rendre cela possible, il nous faut prévoir un système de routing qui soit directement géré côté front pour ne pas avoir à recharger la page à chaque changement d’url. Nous allons donc nous appuyer sur React-Router. En utilisant cette librairie, nous pouvons donc changer seulement les composants nécessaires sans recharger la page entière à chaque fois. Il est également très utile de pouvoir avoir accès aux paramètres d’url, et la librairie React-Router met à disposition un hook (useParams) qui permet de récupérer la partie dynamique d’une url. Etant donné que nous allons utiliser les pratiques les plus récentes, l’utilisation des hooks est préférables.
 
 React est une librairie qui gère uniquement l’interface du site, on utilisera le client HTTP Axios pour communiquer avec notre API. Axios a l’avantage d’avoir un support plus étendu des navigateurs que son équivalent Fetch. De plus, il s’occupe de transformer automatiquement nos réponses en format JSON, facilitant ainsi le traitement des données.
 
@@ -182,7 +182,7 @@ Enfin symfony a la chance de compter une vaste communauté de développeurs, qui
 
 Nous comptons utiliser de façon complémentaire les bundles Faker et Nelmio Alice pour créer des fixtures, autrement dit des fausses données, par exemple, simuler de faux noms d’utilisateurs ou encore de fausses adresses.
 
-Le bundle EasyAdmin, nous permettra de gérer rapidement et facilement les CRUD de la partie Back, ce qui nous permettra de tenir les délais impartis et de nous concentrer sur d’autres fonctionnalités.
+Le bundle EasyAdmin, nous permettra de gérer rapidement et facilement les CRUD de la partie Back-Office, ce qui nous permettra de tenir les délais impartis et de nous concentrer sur d’autres fonctionnalités.
 
 Pour gérer les confirmations des adresses mail des utilisateurs au moment de leur inscription sur le site, nous nous servirons du bundle Swift Mailer.
 
@@ -208,56 +208,40 @@ Pour la gestion des rôle, le bundle Voter sera également utilisé.
 #### API
 |Route|Method|Controller|Description|Response|
 |-|-|-|-|-|
-|/api/login|POST|SecurityController|Envoi les informations de connexion à l'API|201|
+|/api/login_check|POST|SecurityController|Envoi les informations de connexion à l'API|201|
 |/api/users|GET|UserController|Retourne la liste de tout les utilisateurs|200|
-|/api/users|POST|UserController|Envoi vers l'api, les données pour la création de l'utilisateur|201|
+|/users/home|GET|UserController|Retourne la liste de 6 utilisateurs pour la démonstration en page d'accueil visiteur|200|
+|/register|POST|UserController|Envoi vers l'api, les données pour la création de l'utilisateur|201|
 |/api/users/{user}|GET|UserController|Retourne un JSON du compte utilisateur sélectionné|200|
-|/api/users/{user}|PUT|UserController|Envoi les information de modification d'un utilisateur vers l'API|200|
-|/api/users/{user}|DELETE|UserController|Supprime le compte de l'utilisateur|204|
+|/api/users/{id}|PUT|UserController|Envoi les information de modification d'un utilisateur vers l'API|200|
+|/api/users/{id}|DELETE|UserController|Supprime le compte de l'utilisateur|204|
+|/services/home|GET|ServiceController|Renvoi les trois service les plus récent en page d'accueil visiteur|200|
+|/api/services/user/{userId}|GET|ServiceController|Renvoi la liste des services d'un utilisateur|200|
+|/api/services/filter/{postalCode}|GET|ServiceController|Renvoi la liste des services filtré par code postal (i.e. 84, 75, 69...)|200|
 |/api/services|GET|ServiceController|Renvoi la liste des services|200|
-|/api/services/{user}|GET|ServiceController|Renvoi la liste des services de l'utilisateur séléctionné|200|
-|/api/services/{uuid}|GET|ServiceController|Renvoi le service sélectionné par un identifiant unique|200|
-|/api/services/{uuid}|DELETE|ServiceController|envoi à l'api une demande de suppression du service sélectionné via un identifiant unique|204|
-|/api/services/{uuid}|PUT|ServiceController|Envoi à l'API les données à modifier le service sélectionné en rapprot avec l'identifiant unique|200|
-|/api/services|POST|ServiceController|Envoi à l'API les données à ajouter en BDD pour la créatio nd'un service (offre ou demande)|201|
+|/api/services/{user}|GET|ServiceController|Renvoi le service demandé via l'id|200|
+|/api/services|POST|ServiceController|Envoi à l'API les données à ajouter en BDD pour la création d'un service (offre ou demande)|201|
+|/api/services/{id}|PUT|ServiceController|Envoi à l'API les données à modifier le service sélectionné en rapport avec l'identifiant unique|200|
+|/api/services/{id}|DELETE|ServiceController|envoi à l'api une demande de suppression du service sélectionné via l'identifiant|204|
+|/api/comments|GET|CommentController|Renvoi la liste des commentaires|200|
+|/api/comments/{id}|GET|CommentController|Renvoi le commentaire demandé via l'id|200|
+|/api/comments|POST|CommentController|Envoi à l'API les données à ajouter en BDD pour la création d'un commentaire|201|
+|/api/comments/{id}|PUT|CommentController|Envoi à l'API les données à modifier le commentaire sélectionné en rapport avec l'identifiant|200|
+|/api/comments/{id}|DELETE|CommentController|envoi à l'api une demande de suppression du commentaire l'identifiant|204|
+|/api/service-categories|GET|ServiceCategoryController|Renvoi la liste des catégories|200|
+|/api/service-categories/{id}|GET|ServiceCategoryController|Renvoi le catégories demandé via l'id|200|
+|/api/service-categories|POST|ServiceCategoryController|Envoi à l'API les données à ajouter en BDD pour la création d'une catégories|201|
+|/api/service-categories/{id}|PUT|ServiceCategoryController|Envoi à l'API les données à modifier le catégories sélectionné en rapport avec l'identifiant|200|
+|/api/service-categories/{id}|DELETE|ServiceCategoryController|envoi à l'api une demande de suppression du catégories l'identifiant|204|
 ---
 ## Back
 ### Administration
 |Route|Method|Controller|Description|
 |-|-|-|-|
-|/admin|GET|MainController|Permet l'accès et l'affichage du panneau d'administration|
+|/login|GET|SecurityController|Redirige vers le formulaire de login du panneau d'administration|
+|/logout|GET|SecurityController|Redirige vers le formulaire de login du panneau d'administration|
+|/admin/|GET|EasyAdminController|Permet l'accès et l'affichage du panneau d'administration une fois le login passé|
 ---
-### Administration des utilisateurs, modérateurs et super-utilisateurs
-|Route|Method|Controller|Description|
-|-|-|-|-|
-|/admin/user|GET|UserController|Affichage des utilisateurs, modérateurs, et super-utilisateurs|
-|/admin/add|POST|UserController|Permet l'ajout d'un utilisateur, modérateur, super-user|
-|/admin/{user}/update|POST|UserController|Permet de modifier un utilisateur, modérateur|
-|/admin/{user}/delete|POST|UserController|Permet de supprimer un utilisateur, modérateur|
----
-### Administration des services
-|Route|Method|Controller|Description|
-|-|-|-|-|
-|/admin/services|GET|ServiceController|Permet l'affichage de la liste des services pour modération|
-|/admin/service/add|POST|ServiceController|Permet l'ajout d'un service pour modération|
-|/admin/service/{slug}/update|POST|ServiceController|Permet la modification d'un service pour modération|
-|/admin/service/{slug}/delete|POST|ServiceController|Permet la suppression d'un service pour modération|
----
-### Administration des catégories
-|Route|Method|Controller|Description|
-|-|-|-|-|
-|/admin/categories|GET|CategoryController|Permet l'affichage de la liste des catégories pour modération|
-|/admin/category/add|POST|CategoryController|Permet l'ajout d'une catégorie pour modération|
-|/admin/category/{slug}/update|POST|CategoryController|Permet la modification d'une catégorie pour modération|
-|/admin/category/{slug}/delete|POST|CategoryController|Permet la suppression d'une catégorie pour modération|
----
-### Administration des tags
-|Route|Method|Controller|Description|
-|-|-|-|-|
-|/admin/tags|GET|TagController|Permet l'affichage de la liste des tags pour modération|
-|/admin/tag/add|POST|TagController|Permet l'ajout d'un tag pour modération|
-|/admin/tag/{slug}/update|POST|TagController|Permet la modification d'un tag pour modération|
-|/admin/tag/{slug}/delete|POST|TagController|Permet la suppression d'un tag pour modération|
 
 ## __Partie VIII : Arborescence du projet__ <a id="arborescence"></a>
 

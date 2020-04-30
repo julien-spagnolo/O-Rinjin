@@ -25,7 +25,7 @@ const Register = ({
               header="Inscription réussi !"
               content="Votre compte a bien été créé !"
             />
-            <Link to="/login">Aller sur la page de connexion</Link>
+            <Link className="redirection__link" to="/login">Aller sur la page de connexion</Link>
           </>
         )
       }
@@ -65,7 +65,6 @@ const Register = ({
                   name="firstname"
                   onChange={(evt) => {
                     onChangeField(evt.target.name, evt.target.value);
-                    console.log(Validator.checkName(evt.target.value));
                   }}
                   value={form.firstname}
                 />
@@ -82,7 +81,6 @@ const Register = ({
                   name="lastname"
                   onChange={(evt) => {
                     onChangeField(evt.target.name, evt.target.value);
-                    console.log(Validator.checkName(evt.target.value));
                   }}
                   value={form.lastname}
                 />
@@ -101,7 +99,6 @@ const Register = ({
                   name="email"
                   onChange={(evt) => {
                     onChangeField(evt.target.name, evt.target.value);
-                    console.log(Validator.checkEmail(evt.target.value));
                   }}
                   value={form.email}
                 />
@@ -119,7 +116,6 @@ const Register = ({
                   name="birthdate"
                   onChange={(evt) => {
                     onChangeField(evt.target.name, evt.target.value);
-                    console.log(Validator.checkBirthDate(evt.target.value));
                   }}
                   value={form.birthdate}
                 />
@@ -137,12 +133,11 @@ const Register = ({
                 name="plainPassword"
                 onChange={(evt) => {
                   onChangeField(evt.target.name, evt.target.value);
-                  console.log(Validator.checkPassword(evt.target.value));
                 }}
                 value={form.plainPassword}
               />
               {
-                form.plainPassword !== '' && !Validator.checkPassword(form.plainPassword) ? <Label basic color="red" pointing>Doit contenir au moins 6 caractères, dont 1 majuscule, 1 chiffre et 1 caractère spécial</Label> : null
+                form.plainPassword !== '' && !Validator.checkPassword(form.plainPassword) ? <Label basic color="red" pointing>Doit contenir au moins 6 caractères, dont 1 majuscule, 1 chiffre et 1 caractère spécial (*!@#$%^&)</Label> : null
               }
             </Form.Field>
             <Form.Field>

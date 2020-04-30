@@ -42,7 +42,7 @@ const registerMiddleware = (store) => (next) => (action) => {
             })
             .catch((err) => {
               // console.log(err);
-              store.dispatch(handleSubmitError([err.message]));
+              store.dispatch(handleSubmitError([err.response.data.message]));
             });
         })
         .catch(() => {

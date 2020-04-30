@@ -57,7 +57,7 @@ const HomeVisitor = ({
         </Divider>
         <Container className="visitor__intro">
           <p className="main__paragraph">Bienvenue sur <em className="main__em">o'Rinjin</em>, le site d'entraide entre particuliers .</p>
-          <p className="main__paragraph">o'Rinjin vous offre un choix de services variés dans plusieurs domaines : <em className="main__em">{serviceWords[wordToDisplay]}</em></p>
+          <p className="main__paragraph">o'Rinjin vous offre un choix de services variés dans plusieurs domaines : <em className="main__carousel__words">{serviceWords[wordToDisplay]}</em></p>
           <p className="main__paragraph">Ici, vous trouverez forcement un rinjin pour vous aider !</p>
           <p className="main__paragraph">Inscrivez vous et bénéficiez <em className="main__em">gratuitement</em> d'un réseau de personnes pour proposer votre aide ou bien en recevoir .</p>
           <p className="main__paragraph">Un <em className="main__em">rinjin</em>, quésaquo ? C'est une personne près de chez vous prête à vous rendre service et juste pour vos beaux yeux !</p>
@@ -70,7 +70,7 @@ const HomeVisitor = ({
         <Segment>
           <Carousel
             elements={elements}
-            // duration={4000}
+            duration={5000}
             animation="fade right"
             showNextPrev={false}
             showIndicators
