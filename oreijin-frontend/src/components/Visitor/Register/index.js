@@ -25,7 +25,7 @@ const Register = ({
               header="Inscription réussi !"
               content="Votre compte a bien été créé !"
             />
-            <Link to="/login">Aller sur la page de connexion</Link>
+            <Link className="redirection__link" to="/login">Aller sur la page de connexion</Link>
           </>
         )
       }

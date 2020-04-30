@@ -152,7 +152,7 @@ const ServiceDetails = ({
         </Grid.Row>
       </Grid>
       <Container>
-        <Link to="/home">Retour à l'accueil</Link>
+        <Link className="redirection__link" to="/home">Retour à l'accueil</Link>
       </Container>
     </Segment>
   );
