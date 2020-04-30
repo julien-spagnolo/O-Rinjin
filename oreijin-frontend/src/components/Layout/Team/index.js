@@ -27,7 +27,7 @@ const Team = () => (
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a href="https://fr.linkedin.com/">
+          <a href="https://www.linkedin.com/in/h%C3%A9l%C3%A8ne-david-6146939/">
             <Icon name="linkedin" />
             Me contacter
           </a>
@@ -46,7 +46,7 @@ const Team = () => (
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a href="https://fr.linkedin.com/">
+          <a href="https://www.linkedin.com/in/julienspagnolo/">
             <Icon name="linkedin" />
             Me contacter
           </a>
@@ -65,7 +65,7 @@ const Team = () => (
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a href="https://fr.linkedin.com/">
+          <a href="https://www.linkedin.com/in/bryan-magalong/">
             <Icon name="linkedin" />
             Me contacter
           </a>
@@ -84,7 +84,7 @@ const Team = () => (
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a href="https://fr.linkedin.com/">
+          <a href="https://www.linkedin.com/in/jonathanraso/">
             <Icon name="linkedin" />
             Me contacter
           </a>
