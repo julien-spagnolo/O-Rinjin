@@ -30,8 +30,13 @@
 
 .ui.button.service__details__button {
   margin-top: 0.5em;
-  background-color: #423E37;
-  color: #f2c00f;
+  background-color: #f2c00f;
+  color: #423E37;
+
+  &:hover {
+    background-color: #423E37;
+    color: #f2c00f;
+  }
 }
 
 

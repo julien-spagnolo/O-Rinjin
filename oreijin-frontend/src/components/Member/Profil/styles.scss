@@ -26,21 +26,19 @@
   margin-bottom: 2em;
 }
 
+.ui.button.profil__change__button,
+button.ui.primary.button,
 .ui.button.profil__import__button {
-  background-color: #423E37;
-  color: #f2c00f;
-}
+  background-color: #f2c00f;
+  color: #423E37;
 
-.ui.button.profil__change__button {
-  background-color: #423E37;
-  color: #f2c00f;
+  &:hover {
+    background-color: #423E37;
+    color: #f2c00f;
+  }
 }
 
 .ui.button.profil__delete__button {
   margin-top: 2em;
 }
 
-button.ui.primary.button {
-  background-color: #423E37;
-  color: #f2c00f;
-}

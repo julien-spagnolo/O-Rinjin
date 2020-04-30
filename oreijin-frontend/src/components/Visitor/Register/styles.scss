@@ -1,6 +1,11 @@
 .ui.button.register__form__button {
-  background-color: #423E37;
-  color: #f2c00f;
+  background-color: #f2c00f;
+  color: #423E37;
+
+  &:hover {
+    background-color: #423E37;
+    color: #f2c00f;
+  }
 }
 
 .ui.form .field>label {
