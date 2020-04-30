@@ -31,6 +31,7 @@ const Service = ({
           <Header as="h4">
             <Image size="mini" src={user.avatar ? user.avatar : logo} circular />
             <Header.Content
+              className="service__creator"
               as={Link}
               to={`/user/${slugify(`${user.firstName} ${user.lastName} ${user.id}`, { lower: true })}`}
             >
@@ -40,6 +41,7 @@ const Service = ({
           <Feed.Event
             as={Link}
             to={auth.isAuthenticated() ? `/service/${slug}` : '/'}
+            className="service__feed"
           >
             <Feed.Content>
               <Feed.Summary style={{ fontSize: '1.1em', fontWeight: 'bold' }}>

@@ -31,7 +31,7 @@ const HomeConnected = ({
     <Grid>
       <Grid.Row divided>
         <Grid.Column mobile={16} tablet={16} computer={8}>
-          <Segment className="home__connected__services" raised>
+          <Segment style={{ height: '814px' }} className="home__connected__services" raised>
             <Header as="h2" dividing textAlign="center" className="home__connected__services__title">SERVICES</Header>
             <div className="home__connected__services__filter">
               <Select
@@ -66,7 +66,7 @@ const HomeConnected = ({
                 Ma zone
               </Button>
             </Button.Group>
-            <Segment style={{ height: '100vh', overflowY: 'scroll' }}>
+            <Segment style={{ height: '594px', overflowY: 'scroll' }}>
               {
                 // Render a Service component for each service in data
                 !selectedList && (services.length > 0 ? services.map((service) => (
@@ -82,7 +82,7 @@ const HomeConnected = ({
           </Segment>
         </Grid.Column>
         <Grid.Column mobile={16} tablet={16} computer={8}>
-          <Segment style={{ width: '1OO%', height: '100vh', padding: '0' }} className="home__connected__map" raised>
+          <Segment style={{ width: '1OO%', height: '814px', padding: '0' }} className="home__connected__map" raised>
             <Map />
           </Segment>
         </Grid.Column>
