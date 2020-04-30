@@ -22,9 +22,9 @@ const ServiceVisitor = ({
     <Grid stackable>
       {/* If we are in user services page : column will take width: 12 */}
       {/* Else, column will take all the width  */}
-      <Grid.Column width={16}>
+      <Grid.Column width={16} textAlign="center">
         <Header as="h4">
-          <Image size="mini" src={logo} circular />
+          <Image size="mini" src={user.avatar || logo} circular />
           <Header.Content>
             {user.firstName}
           </Header.Content>
@@ -39,7 +39,7 @@ const ServiceVisitor = ({
               <Label color={type ? 'teal' : 'purple'}>
                 {type ? 'Proposition' : 'Demande'}
               </Label>
-              <Label>
+              <Label style={{ color: '#f2c00f', backgroundColor: '#423E37' }}>
                 { serviceCategory.title }
               </Label>
             </Feed.Extra>
@@ -62,6 +62,7 @@ const ServiceVisitor = ({
 ServiceVisitor.propTypes = {
   user: PropTypes.shape({
     firstName: PropTypes.string,
+    avatar: PropTypes.string,
   }).isRequired,
   serviceCategory: PropTypes.shape({
     title: PropTypes.string,

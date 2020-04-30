@@ -10,17 +10,22 @@ import './styles.scss';
 import logo from '../../../assets/images/logo.png';
 
 // == Component
-const UserCard = ({ firstName }) => (
+const UserCard = ({ firstName, avatar }) => (
   <Card
-    image={logo}
+    image={avatar || logo}
     header={firstName}
     description="Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat."
   />
 );
 
+UserCard.defaultProps = {
+  avatar: '',
+};
+
 // == Props types validation
 UserCard.propTypes = {
   firstName: PropTypes.string.isRequired,
+  avatar: PropTypes.string,
 };
 
 // == Export
