@@ -14,20 +14,19 @@ import './styles.scss';
 const Footer = () => (
   <div className="footer">
     <Container>
-      <Divider />
       <Grid columns={3}>
         <Grid.Column>
           <Menu secondary text vertical>
             <Menu.Item>
-              <NavLink exact to="/team">Notre équipe</NavLink>
+              <NavLink className="footer__navlink" exact to="/team">Notre équipe</NavLink>
             </Menu.Item>
             <Menu.Item>
-              <NavLink exact to="/legal-mentions">Mentions Légales</NavLink>
+              <NavLink className="footer__navlink" exact to="/legal-mentions">Mentions Légales</NavLink>
             </Menu.Item>
           </Menu>
         </Grid.Column>
         <Grid.Column textAlign="center">
-          Copyright © - All rights reserved ...
+          o'Rinjin.com. Tous droits réservés © 2019 - 2020
         </Grid.Column>
         <Grid.Column verticalAlign="middle">
           <Menu className="footer__networks" secondary icon stackable>

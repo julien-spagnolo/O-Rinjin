@@ -7,7 +7,7 @@ import {
 // == Import
 
 import './styles.scss';
-import logo from '../../../assets/images/logo.png';
+// import logo from '../../../assets/images/logo.png';
 
 // == Composant
 const Team = () => (
@@ -15,7 +15,7 @@ const Team = () => (
     <Header as="h2" textAlign="center">Notre équipe</Header>
     <Card.Group centered itemsPerRow={2}>
       <Card style={{ width: '250px' }} raised>
-        <Image src={logo} wrapped ui={false} />
+        <Image style={{ height: '250px' }} src="https://res.cloudinary.com/orinjin/image/upload/v1588237092/assets/team/tofhln_akxobv.jpg" ui={false} />
         <Card.Content>
           <Card.Header>Hélène</Card.Header>
           <Card.Meta>
@@ -34,7 +34,7 @@ const Team = () => (
         </Card.Content>
       </Card>
       <Card style={{ width: '250px' }} raised>
-        <Image src={logo} wrapped ui={false} />
+        <Image style={{ height: '250px' }} src="https://res.cloudinary.com/orinjin/image/upload/v1588237080/assets/team/20180927_130222_bvmwhv.jpg" ui={false} />
         <Card.Content>
           <Card.Header>Julien</Card.Header>
           <Card.Meta>
@@ -53,7 +53,7 @@ const Team = () => (
         </Card.Content>
       </Card>
       <Card style={{ width: '250px' }} raised>
-        <Image src={logo} wrapped ui={false} />
+        <Image style={{ height: '250px' }} src="https://res.cloudinary.com/orinjin/image/upload/v1588237116/assets/team/90512568_567504274120685_2782522535835598848_n_kyrvpy.jpg" ui={false} />
         <Card.Content>
           <Card.Header>Bryan</Card.Header>
           <Card.Meta>
@@ -72,7 +72,7 @@ const Team = () => (
         </Card.Content>
       </Card>
       <Card style={{ width: '250px' }} raised>
-        <Image src={logo} wrapped ui={false} />
+        <Image style={{ height: '250px' }} src="https://res.cloudinary.com/orinjin/image/upload/v1588237100/assets/team/photo_linkedin_jitwfn.jpg" ui={false} />
         <Card.Content>
           <Card.Header>Jonathan</Card.Header>
           <Card.Meta>

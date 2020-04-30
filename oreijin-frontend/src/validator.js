@@ -27,6 +27,7 @@ const validator = {
   checkPassword: (password) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{6,15})/;
     // console.log(regex);
+    if (password.includes(';') || password.includes('-') || password.includes('<') || password.includes('>')) return false;
     return regex.test(password);
   },
 
@@ -116,8 +117,7 @@ const validator = {
    * @return {bool} true if it matches
    */
   checkServiceTitle: (title) => {
-
-    const regex = /^[a-zA-Z0-9-!?'.,ÉÈéèàÀôÔïîÏëçÇ ]{10,60}$/;
+    const regex = /^[a-zA-Z0-9-!?'.,ÉÈéèàâÂÀôÔïîÏëçÇ ]{10,60}$/;
 
     return regex.test(title);
   },
@@ -129,8 +129,7 @@ const validator = {
    * @return {bool} true if it matches
    */
   checkServiceDescription: (description) => {
-
-    const regex = /^[a-zA-Z0-9-!?'.",+;:@_#&/=éèàÏïîÎ$*¥€ôÔÉÈëË%çùÇÙ ]{50,280}$/;
+    const regex = /^[a-zA-Z0-9-!?'.",+;:@_#&/=éèàâÀÂÏïîÎ$*¥€ôÔÉÈëË%çùÇÙ ]{50,280}$/;
 
     return regex.test(description);
   },
@@ -150,7 +149,6 @@ const validator = {
   checkServiceType: (value) => typeof value === 'boolean',
 
   checkReply: (value) => {
-
     const regex = /^[a-zA-Z0-9-!?'.()",+;:@_#&/=éèàÏïôÔÉÈëË%çùÇÙ ]{1,140}$/;
 
     return regex.test(value);

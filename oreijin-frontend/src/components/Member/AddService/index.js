@@ -70,7 +70,7 @@ const AddService = ({
           </Message>
           <Form.Field width={16}>
             {
-              form.title !== '' && !Validator.checkServiceTitle(form.title) ? <Label basic color="red" pointing="below">Indiquez un titre valide. caractères spéciaux autorisés : -!?'.,</Label> : null
+              form.title !== '' && !Validator.checkServiceTitle(form.title) ? <Label basic color="red" pointing="below">Indiquez un titre valide (entre 10 et 60 caractères). Caractères spéciaux autorisés : -!?'.,</Label> : null
             }
             <Form.Input
               required

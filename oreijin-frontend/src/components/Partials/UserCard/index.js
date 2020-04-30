@@ -10,7 +10,7 @@ import './styles.scss';
 import logo from '../../../assets/images/logo.png';
 
 // == Component
-const UserCard = ({ userName, pc }) => (
+const UserCard = ({ userName, pc}) => (
   <Card
     image={logo}
     header={userName}

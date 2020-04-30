@@ -24,7 +24,6 @@ const uploadsMiddleware = (store) => (next) => (action) => {
     case UPLOAD_IMAGE:
       uploadImage(action.payload, AVATAR_PRESET)
         .then((res) => {
-          console.log(res.data);
           axios({
             method: 'put',
             url: `${baseURL}/api/users/${store.getState().user.profile.id}`,
@@ -41,7 +40,7 @@ const uploadsMiddleware = (store) => (next) => (action) => {
               store.dispatch(updateProfileSuccess());
               store.dispatch(getUser(store.getState().user.profile.id));
             })
-            .catch((err) => {
+            .catch(() => {
               // console.log(err);
               store.dispatch(updateProfileError(['Erreur serveur !']));
             });
@@ -51,7 +50,6 @@ const uploadsMiddleware = (store) => (next) => (action) => {
         });
       break;
     case UPLOAD_SERVICE_IMAGE:
-      console.log('//== middleware upload image');
       uploadImage(action.payload, IMAGE_PRESET)
         .then((res) => {
           store.dispatch(addService({
@@ -62,9 +60,10 @@ const uploadsMiddleware = (store) => (next) => (action) => {
         .catch((err) => {
           console.log(err);
         });
+      break;
     default:
       return next(action);
   }
 };
-  
-  export default uploadsMiddleware;
+
+export default uploadsMiddleware;

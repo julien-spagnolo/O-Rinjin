@@ -21,6 +21,12 @@
     }
   }
 
+  &__carousel__words {
+    background-color: #423E37;
+    color: #fff;
+    padding: 0.3rem;
+  }
+
   &__usercard__header{
     margin-bottom: 0.5em;
   }
@@ -33,4 +39,7 @@ div.content.carousel {
 
 div.carousel-indicators {
   align-self: center;
+  & a {
+    margin: 0 0.2rem;
+  }
 }

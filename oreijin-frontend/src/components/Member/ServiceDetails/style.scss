@@ -30,8 +30,34 @@
 
 .ui.button.service__details__button {
   margin-top: 0.5em;
-  background-color: #423E37;
-  color: #f2c00f;
+  background-color: #f2c00f;
+  color: #423E37;
+
+  &:hover {
+    background-color: #423E37;
+    color: #f2c00f;
+  }
+}
+
+a.redirection__link {
+  font-weight: bold;
+  margin: 0.5em;
+  background:
+    linear-gradient(
+      to bottom, #f2c00f 0%,
+      #f2c00f 100%
+    );
+  background-position: 0 100%;
+  background-repeat: repeat-x;
+  background-size: 3px 3px;
+  color: #423E37;
+  text-decoration: none;
+  transition: background-size .5s;
+
+  &:hover {
+    background-size: 4px 50px;
+    color: #423E37;
+  }
 }
 
 

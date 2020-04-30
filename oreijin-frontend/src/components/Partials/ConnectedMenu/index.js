@@ -29,7 +29,7 @@ const ConnectedMenu = ({ logout, userSlug, isAdmin }) => (
         {
           isAdmin && (
             <Button className="header__button__connected__admin" size="small">
-              <a href="http://ec2-54-166-216-117.compute-1.amazonaws.com/login">Admin</a>
+              <a href="http://ec2-54-166-216-117.compute-1.amazonaws.com/login" target="_blank" rel="noopener noreferrer">Admin</a>
             </Button>
           )
         }
@@ -47,6 +47,7 @@ const ConnectedMenu = ({ logout, userSlug, isAdmin }) => (
     </Grid.Row>
   </Grid>
 );
+
 
 ConnectedMenu.propTypes = {
   logout: PropTypes.func.isRequired,
